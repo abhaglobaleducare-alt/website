@@ -1,0 +1,226 @@
+import { NextRequest, NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
+import { z } from 'zod';
+
+// Validation schema for contact form
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(2, 'Name must be at least 2 characters')
+    .max(100, 'Name must be less than 100 characters'),
+  email: z.string().email('Please enter a valid email address').optional().or(z.literal('')),
+  phone: z
+    .string()
+    .min(10, 'Phone number must be at least 10 digits')
+    .max(15, 'Phone number must be less than 15 digits')
+    .regex(/^[\d\s\-+()]+$/, 'Please enter a valid phone number'),
+  city: z.string().max(100).optional().or(z.literal('')),
+  course: z.string().max(100).optional().or(z.literal('')),
+  neetStatus: z.string().max(100).optional().or(z.literal('')),
+  neetScore: z.string().max(20).optional().or(z.literal('')),
+  preferredCountry: z.string().max(100).optional().or(z.literal('')),
+  message: z.string().max(2000).optional().or(z.literal('')),
+  source: z.string().max(50).optional().or(z.literal('')),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
+
+// Create reusable transporter
+function createTransporter() {
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    port: Number(process.env.SMTP_PORT) || 587,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  });
+}
+
+// Build the admin notification email
+function buildAdminEmail(data: ContactFormData): string {
+  const fields = [
+    { label: 'Name', value: data.name },
+    { label: 'Phone', value: data.phone },
+    { label: 'Email', value: data.email },
+    { label: 'City', value: data.city },
+    { label: 'Course', value: data.course },
+    { label: 'NEET Status', value: data.neetStatus },
+    { label: 'NEET Score', value: data.neetScore },
+    { label: 'Preferred Country', value: data.preferredCountry },
+    { label: 'Message', value: data.message },
+    { label: 'Form Source', value: data.source },
+  ].filter((f) => f.value);
+
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #0B1A35, #1a3a5c); color: #fff; padding: 24px 32px; }
+        .header h1 { margin: 0; font-size: 22px; color: #C6962E; }
+        .header p { margin: 8px 0 0; font-size: 14px; color: #fff; opacity: 0.9; }
+        .body { padding: 32px; }
+        .field { margin-bottom: 16px; }
+        .field-label { font-size: 12px; color: #666; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .field-value { font-size: 16px; color: #333; font-weight: 500; }
+        .footer { background: #f8f9fa; padding: 16px 32px; text-align: center; font-size: 12px; color: #999; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>New Enquiry Received</h1>
+          <p>A new student enquiry has been submitted on the website</p>
+        </div>
+        <div class="body">
+          ${fields
+            .map(
+              (f) => `
+            <div class="field">
+              <div class="field-label">${f.label}</div>
+              <div class="field-value">${f.value}</div>
+            </div>
+          `
+            )
+            .join('')}
+        </div>
+        <div class="footer">
+          ABHA Global Educare LLP | ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+}
+
+// Build the auto-reply email for the student
+function buildAutoReplyEmail(name: string): string {
+  return `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #0B1A35, #1a3a5c); color: #fff; padding: 32px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; color: #C6962E; }
+        .body { padding: 32px; color: #333; line-height: 1.6; }
+        .body h2 { color: #0B1A35; }
+        .highlight { background: #f0f7ff; border-left: 4px solid #C6962E; padding: 16px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .cta { display: inline-block; background: #C6962E; color: #fff; padding: 12px 32px; border-radius: 25px; text-decoration: none; font-weight: bold; margin: 16px 0; }
+        .footer { background: #f8f9fa; padding: 20px 32px; text-align: center; font-size: 12px; color: #999; }
+        .footer a { color: #C6962E; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>ABHA Global Educare</h1>
+        </div>
+        <div class="body">
+          <h2>Thank you, ${name}!</h2>
+          <p>We have received your enquiry and our experienced counselor will contact you within <strong>24 hours</strong>.</p>
+
+          <div class="highlight">
+            <strong>What happens next?</strong>
+            <ul>
+              <li>Our counselor will review your profile</li>
+              <li>We'll call you to discuss the best options</li>
+              <li>You'll receive a personalized university recommendation</li>
+            </ul>
+          </div>
+
+          <p>In the meantime, feel free to reach us at:</p>
+          <p>
+            <strong>Phone:</strong> +91 76207 07088<br>
+            <strong>Email:</strong> info@abhaglobaleducare.com<br>
+            <strong>WhatsApp:</strong> <a href="https://wa.me/917620707088" style="color: #C6962E;">Chat with us</a>
+          </p>
+
+          <p>Best regards,<br><strong>Team ABHA Global Educare</strong></p>
+        </div>
+        <div class="footer">
+          <p>ABHA Global Educare LLP | <a href="https://abhaglobaleducare.com">abhaglobaleducare.com</a></p>
+          <p>203, Lotus Plaza, Shahupuri, Kolhapur - 416001, Maharashtra</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+
+    // Validate input
+    const result = contactSchema.safeParse(body);
+    if (!result.success) {
+      const errors: Record<string, string[]> = {};
+      result.error.issues.forEach((issue) => {
+        const path = issue.path.join('.');
+        if (!errors[path]) errors[path] = [];
+        errors[path].push(issue.message);
+      });
+
+      return NextResponse.json(
+        { success: false, message: 'Validation failed', errors },
+        { status: 400 }
+      );
+    }
+
+    const data = result.data;
+
+    // Check if SMTP is configured
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+      // In development or when SMTP is not configured, just log the data
+      console.log('[Contact Form] New enquiry received:', data);
+      return NextResponse.json({
+        success: true,
+        message: 'Thank you! Our counselor will contact you within 24 hours.',
+      });
+    }
+
+    // Send emails
+    const transporter = createTransporter();
+
+    // Send admin notification
+    await transporter.sendMail({
+      from: `"ABHA Website" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+      to: process.env.SMTP_TO || 'info@abhaglobaleducare.com',
+      subject: `New Enquiry: ${data.name} — ${data.phone}`,
+      html: buildAdminEmail(data),
+      replyTo: data.email || undefined,
+    });
+
+    // Send auto-reply to the student (only if email is provided)
+    if (data.email) {
+      await transporter.sendMail({
+        from: `"ABHA Global Educare" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+        to: data.email,
+        subject: 'Thank you for your enquiry — ABHA Global Educare',
+        html: buildAutoReplyEmail(data.name),
+      });
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Thank you! Our counselor will contact you within 24 hours.',
+    });
+  } catch (error) {
+    console.error('[Contact Form] Error:', error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Something went wrong. Please try again or call us directly.',
+      },
+      { status: 500 }
+    );
+  }
+}

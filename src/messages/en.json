@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "title": "ABHA Global Educare - MBBS Abroad Consultancy",
+    "description": "Study MBBS abroad with expert guidance from ABHA Global Educare. Admissions to NMC-approved universities in Russia, Georgia, Kazakhstan & more.",
+    "keywords": "MBBS abroad, study MBBS in Russia, MBBS in Georgia, medical education abroad, NEET counseling"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "destinations": "Destinations",
+    "services": "Services",
+    "universities": "Universities",
+    "blog": "Blog",
+    "contact": "Contact",
+    "apply": "Apply Now",
+    "callNow": "Call Now"
+  },
+  "hero": {
+    "badge": "Trusted by 1000+ Students",
+    "title": "Your Gateway to",
+    "titleHighlight": "Global Medical Education",
+    "subtitle": "Start your journey to become a doctor with MBBS programs at world-renowned, NMC-approved universities abroad",
+    "cta": "Get Free Counseling",
+    "ctaSecondary": "Explore Destinations",
+    "stats": {
+      "students": "Students Placed",
+      "universities": "Partner Universities",
+      "countries": "Countries",
+      "successRate": "Visa Success Rate"
+    }
+  },
+  "about": {
+    "badge": "About ABHA Global Educare",
+    "title": "Your Trusted Partner for",
+    "titleHighlight": "MBBS Abroad",
+    "description": "ABHA Global Educare LLP is a leading overseas education consultancy specializing in medical education. We help Indian students achieve their dream of becoming doctors by guiding them to top-ranked, NMC-approved medical universities abroad.",
+    "mission": "Our Mission",
+    "missionText": "To make quality medical education accessible and affordable for every aspiring doctor in India by providing transparent, ethical, and comprehensive guidance for MBBS abroad.",
+    "vision": "Our Vision",
+    "visionText": "To be the most trusted name in overseas medical education consultancy, known for our integrity, student success, and continuous support.",
+    "whyChooseUs": "Why Choose Us",
+    "features": {
+      "experience": {
+        "title": "Years of Experience",
+        "description": "Expert team with extensive knowledge of international medical education systems"
+      },
+      "universities": {
+        "title": "NMC Approved Universities",
+        "description": "We only recommend universities recognized by NMC, WHO, and WFME"
+      },
+      "support": {
+        "title": "End-to-End Support",
+        "description": "From counseling to post-arrival assistance, we're with you every step"
+      },
+      "transparent": {
+        "title": "Transparent Process",
+        "description": "No hidden charges, clear communication, and ethical practices"
+      },
+      "success": {
+        "title": "High Success Rate",
+        "description": "98% visa success rate with proper documentation guidance"
+      },
+      "network": {
+        "title": "Global Network",
+        "description": "Direct partnerships with universities and local support offices"
+      }
+    }
+  },
+  "services": {
+    "badge": "Our Services",
+    "title": "Complete Support for Your",
+    "titleHighlight": "Medical Journey",
+    "subtitle": "From your first consultation to your graduation, we provide comprehensive services to ensure your success in studying MBBS abroad",
+    "list": {
+      "counseling": {
+        "title": "Free Career Counseling",
+        "description": "Get expert guidance on choosing the right country and university based on your profile, budget, and career goals."
+      },
+      "universitySelection": {
+        "title": "University Selection",
+        "description": "We help you choose from our partner universities that are NMC approved and recognized worldwide."
+      },
+      "admission": {
+        "title": "Admission Processing",
+        "description": "Complete end-to-end admission support including documentation, application submission, and follow-up."
+      },
+      "visa": {
+        "title": "Visa Assistance",
+        "description": "Expert guidance for visa application, documentation, and interview preparation with high success rate."
+      },
+      "travel": {
+        "title": "Travel & Accommodation",
+        "description": "We arrange your travel, airport pickup, and comfortable accommodation near your university."
+      },
+      "postArrival": {
+        "title": "Post-Arrival Support",
+        "description": "Continuous support even after you reach - from registration to settling down in a new country."
+      }
+    },
+    "cta": "Get Started Today"
+  },
+  "destinations": {
+    "badge": "Study Destinations",
+    "title": "Choose Your",
+    "titleHighlight": "Dream Destination",
+    "subtitle": "Explore top countries for MBBS abroad with affordable fees, world-class education, and NMC-approved universities",
+    "viewAll": "View All Destinations",
+    "universities": "Universities",
+    "duration": "Duration",
+    "totalFees": "Total Fees",
+    "recognition": "Recognition",
+    "highlights": "Highlights",
+    "learnMore": "Learn More",
+    "applyNow": "Apply Now",
+    "countries": {
+      "russia": {
+        "name": "Russia",
+        "description": "Study MBBS in Russia with world-class medical education at affordable fees. Russia offers excellent infrastructure, experienced faculty, and globally recognized degrees."
+      },
+      "georgia": {
+        "name": "Georgia",
+        "description": "Georgia offers European-standard medical education with English-medium programs. Safe, friendly environment with affordable living costs."
+      },
+      "kazakhstan": {
+        "name": "Kazakhstan",
+        "description": "Kazakhstan provides quality medical education with modern infrastructure. Strong Indian community and direct flight connectivity."
+      },
+      "kyrgyzstan": {
+        "name": "Kyrgyzstan",
+        "description": "Most affordable MBBS destination with quality education. English medium available with pleasant climate."
+      },
+      "philippines": {
+        "name": "Philippines",
+        "description": "English-speaking country with US-based curriculum. Excellent clinical exposure and familiar culture."
+      },
+      "bangladesh": {
+        "name": "Bangladesh",
+        "description": "Similar culture and no language barrier. Close to home with good clinical training facilities."
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Student Testimonials",
+    "title": "What Our",
+    "titleHighlight": "Students Say",
+    "subtitle": "Hear from our students who are now pursuing their dreams of becoming doctors at prestigious universities abroad"
+  },
+  "contact": {
+    "badge": "Get in Touch",
+    "title": "Start Your",
+    "titleHighlight": "MBBS Journey Today",
+    "subtitle": "Fill out the form below and our counselors will get back to you within 24 hours",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "Enter your email",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Enter your phone number",
+      "city": "City",
+      "cityPlaceholder": "Enter your city",
+      "course": "Interested Course",
+      "coursePlaceholder": "Select course",
+      "neetScore": "NEET Score (if available)",
+      "neetScorePlaceholder": "Enter your NEET score",
+      "preferredCountry": "Preferred Country",
+      "preferredCountryPlaceholder": "Select country",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your requirements...",
+      "submit": "Submit Enquiry",
+      "submitting": "Submitting...",
+      "successMessage": "Thank you! We'll contact you within 24 hours.",
+      "errorMessage": "Something went wrong. Please try again."
+    },
+    "info": {
+      "title": "Contact Information",
+      "subtitle": "Reach out to us through any of these channels",
+      "offices": "Our Offices",
+      "kolhapur": "Kolhapur (Head Office)",
+      "csn": "Chhatrapati Sambhajinagar",
+      "georgia": "Georgia (International)",
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "timings": "Working Hours"
+    }
+  },
+  "faq": {
+    "badge": "FAQs",
+    "title": "Frequently Asked",
+    "titleHighlight": "Questions",
+    "subtitle": "Find answers to common questions about studying MBBS abroad",
+    "questions": {
+      "eligibility": {
+        "question": "What is the eligibility for MBBS abroad?",
+        "answer": "Students must have completed 10+2 with Physics, Chemistry, and Biology with minimum 50% marks (40% for reserved categories). NEET qualification is mandatory for Indian students."
+      },
+      "neet": {
+        "question": "Is NEET required for MBBS abroad?",
+        "answer": "Yes, as per NMC guidelines, NEET qualification is mandatory for Indian students seeking MBBS admission abroad. However, there is no minimum cutoff - just qualifying NEET is enough."
+      },
+      "recognition": {
+        "question": "Are foreign medical degrees recognized in India?",
+        "answer": "Yes, degrees from NMC-approved universities are recognized in India. Students need to clear the FMGE/NEXT exam to practice medicine in India after completing MBBS abroad."
+      },
+      "cost": {
+        "question": "What is the total cost of MBBS abroad?",
+        "answer": "The total cost varies by country - ranging from ₹18-45 Lakhs for the entire course including tuition, hostel, food, and other expenses. This is significantly lower than private medical colleges in India."
+      },
+      "medium": {
+        "question": "Is the medium of instruction English?",
+        "answer": "Yes, most universities recommended by us offer MBBS programs in English medium. Some universities also offer preparatory language courses."
+      },
+      "support": {
+        "question": "What support do you provide after admission?",
+        "answer": "We provide comprehensive post-arrival support including airport pickup, hostel arrangement, university registration, bank account opening, SIM card, and continuous guidance throughout your stay."
+      }
+    }
+  },
+  "cta": {
+    "title": "Ready to Start Your Medical Journey?",
+    "subtitle": "Get free counseling from our experts and take the first step towards your dream of becoming a doctor",
+    "button": "Book Free Consultation",
+    "phone": "Or Call Us"
+  },
+  "footer": {
+    "description": "ABHA Global Educare LLP is a premier overseas education consultancy helping Indian students pursue MBBS at top-ranked, NMC-approved universities abroad.",
+    "quickLinks": "Quick Links",
+    "destinations": "Popular Destinations",
+    "legal": "Legal",
+    "newsletter": {
+      "title": "Stay Updated",
+      "subtitle": "Subscribe to our newsletter for latest updates on admissions and scholarships",
+      "placeholder": "Enter your email",
+      "button": "Subscribe"
+    },
+    "copyright": "© {year} ABHA Global Educare LLP. All rights reserved.",
+    "llpInfo": "Reg No: ACO-8092"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try Again",
+    "close": "Close",
+    "readMore": "Read More",
+    "viewAll": "View All",
+    "applyNow": "Apply Now",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "backToHome": "Back to Home",
+    "noResults": "No results found",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "share": "Share",
+    "download": "Download"
+  },
+  "blog": {
+    "title": "Blog & Updates",
+    "subtitle": "Latest news, tips, and insights about studying MBBS abroad",
+    "readTime": "min read",
+    "categories": "Categories",
+    "recentPosts": "Recent Posts",
+    "relatedPosts": "Related Posts",
+    "sharePost": "Share this post",
+    "backToBlog": "Back to Blog"
+  },
+  "errors": {
+    "404": {
+      "title": "Page Not Found",
+      "description": "The page you are looking for doesn't exist or has been moved."
+    },
+    "500": {
+      "title": "Server Error",
+      "description": "Something went wrong on our end. Please try again later."
+    }
+  }
+}
