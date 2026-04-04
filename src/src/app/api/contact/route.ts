@@ -138,9 +138,9 @@ function buildAutoReplyEmail(name: string): string {
 
           <p>In the meantime, feel free to reach us at:</p>
           <p>
-            <strong>Phone:</strong> +91 76207 07088<br>
+            <strong>Phone:</strong> +91 74475 52878<br>
             <strong>Email:</strong> info@abhaglobaleducare.com<br>
-            <strong>WhatsApp:</strong> <a href="https://wa.me/917620707088" style="color: #C6962E;">Chat with us</a>
+            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878" style="color: #C6962E;">Chat with us</a>
           </p>
 
           <p>Best regards,<br><strong>Team ABHA Global Educare</strong></p>
