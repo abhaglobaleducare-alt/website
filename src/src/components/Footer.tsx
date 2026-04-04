@@ -83,19 +83,19 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-sm">
               <li>
                 <a
-                  href="tel:+917620707088"
+                  href="tel:+917447552878"
                   className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
                 >
-                  +91 76207 07088{" "}
+                  +91 74475 52878{" "}
                   <span className="text-white/50">(Kolhapur)</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+917447552878"
+                  href="tel:+917620707088"
                   className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
                 >
-                  +91 74475 52878{" "}
+                  +91 76207 07088{" "}
                   <span className="text-white/50">(CSN)</span>
                 </a>
               </li>
@@ -109,7 +109,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://wa.me/917620707088"
+                  href="https://wa.me/917447552878"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-white/70 transition-colors duration-200 hover:text-[#C6962E]"

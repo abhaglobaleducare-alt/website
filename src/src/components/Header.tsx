@@ -47,16 +47,16 @@ export default function Header() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 flex flex-wrap justify-between items-center gap-2 text-sm">
           <div className="flex flex-wrap gap-4 lg:gap-8 items-center">
             <a
-              href="tel:+917620707088"
-              className="flex items-center gap-1.5 text-white hover:text-primary-gold transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <Phone size={14} /> Kolhapur: +91 76207 07088
-            </a>
-            <a
               href="tel:+917447552878"
               className="flex items-center gap-1.5 text-white hover:text-primary-gold transition-all duration-300 hover:-translate-y-0.5"
             >
-              <Phone size={14} /> CSN: +91 74475 52878
+              <Phone size={14} /> Kolhapur: +91 74475 52878
+            </a>
+            <a
+              href="tel:+917620707088"
+              className="flex items-center gap-1.5 text-white hover:text-primary-gold transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <Phone size={14} /> CSN: +91 76207 07088
             </a>
             <a
               href="mailto:info@abhaglobaleducare.com"

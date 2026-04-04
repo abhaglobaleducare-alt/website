@@ -18,16 +18,16 @@ const offices = [
     icon: Building2,
     title: 'Kolhapur — Head Office',
     address: '203, Lotus Plaza, Shahupuri, Kolhapur — 416001, Maharashtra',
-    phone: '+91 76207 07088',
-    phoneHref: 'tel:+917620707088',
+    phone: '+91 74475 52878',
+    phoneHref: 'tel:+917447552878',
     hours: 'Mon–Sat, 10 AM – 7 PM',
   },
   {
     icon: Building2,
     title: 'Chhatrapati Sambhajinagar',
     address: 'Office No. 01, Plot B-1, Aliza Mazil, Osmanpura, CSN, Maharashtra',
-    phone: '+91 74475 52878',
-    phoneHref: 'tel:+917447552878',
+    phone: '+91 76207 07088',
+    phoneHref: 'tel:+917620707088',
     hours: 'Mon–Sat, 10 AM – 7 PM',
   },
   {
@@ -256,8 +256,8 @@ export default function Contact() {
                 WhatsApp messages are answered even on Sundays.
               </p>
               <div className="flex flex-col gap-2">
-                <a href="tel:+917620707088" className="inline-flex items-center gap-2 text-[#C6962E] font-semibold text-sm hover:underline">
-                  <Phone size={14} /> +91 76207 07088
+                <a href="tel:+917447552878" className="inline-flex items-center gap-2 text-[#C6962E] font-semibold text-sm hover:underline">
+                  <Phone size={14} /> +91 74475 52878
                 </a>
                 <a href="mailto:info@abhaglobaleducare.com" className="inline-flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors">
                   <Mail size={14} /> info@abhaglobaleducare.com

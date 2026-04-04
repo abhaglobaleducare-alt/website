@@ -168,7 +168,7 @@ export default async function RootLayout({
               url: SITE_CONFIG.url,
               logo: `${SITE_CONFIG.url}/images/logo.png`,
               email: SITE_CONFIG.email,
-              telephone: '+91-76207-07088',
+              telephone: '+91-74475-52878',
               address: [
                 {
                   '@type': 'PostalAddress',

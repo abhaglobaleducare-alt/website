@@ -25,8 +25,8 @@ export const CONTACT_INFO = {
   kolhapur: {
     label: 'Kolhapur Office (Head Office)',
     address: '203, Lotus Plaza, Shahupuri, Kolhapur - 416001, Maharashtra, India',
-    phone: '+91 76207 07088',
-    phoneRaw: '+917620707088',
+    phone: '+91 74475 52878',
+    phoneRaw: '+917447552878',
     email: 'kolhapur@abhaglobaleducare.com',
     mapUrl: 'https://maps.google.com/?q=203,+Lotus+Plaza,+Shahupuri,+Kolhapur',
     timings: 'Mon - Sat: 10:00 AM - 7:00 PM',
@@ -34,8 +34,8 @@ export const CONTACT_INFO = {
   csn: {
     label: 'Chhatrapati Sambhajinagar Office',
     address: 'Office No. 01, Plot No. B-1, Aliza Mazil, Osmanpura, Chhatrapati Sambhajinagar, Maharashtra, India',
-    phone: '+91 74475 52878',
-    phoneRaw: '+917447552878',
+    phone: '+91 76207 07088',
+    phoneRaw: '+917620707088',
     email: 'csn@abhaglobaleducare.com',
     mapUrl: 'https://maps.google.com/?q=Aliza+Mazil,+Osmanpura,+Chhatrapati+Sambhajinagar',
     timings: 'Mon - Sat: 10:00 AM - 7:00 PM',
@@ -58,7 +58,7 @@ export const SOCIAL_LINKS = {
   linkedin: 'https://linkedin.com/company/abhaglobaleducare',
   youtube: 'https://youtube.com/@abhaglobaleducare',
   twitter: 'https://twitter.com/abhaeducare',
-  whatsapp: 'https://wa.me/917620707088',
+  whatsapp: 'https://wa.me/917447552878',
 };
 
 export const NAV_LINKS = [

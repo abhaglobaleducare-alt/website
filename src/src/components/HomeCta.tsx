@@ -41,10 +41,10 @@ export default function HomeCta() {
             Book Free Consultation <ArrowRight size={18} />
           </Link>
           <a
-            href="tel:+917620707088"
+            href="tel:+917447552878"
             className="inline-flex items-center gap-2 text-white/70 font-semibold text-base hover:text-white transition-colors"
           >
-            <Phone size={18} /> or call +91 76207 07088
+            <Phone size={18} /> or call +91 74475 52878
           </a>
         </motion.div>
       </div>
