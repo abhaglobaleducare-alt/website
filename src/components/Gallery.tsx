@@ -64,7 +64,15 @@ const reviews = [
 
 /* ── Gallery categories ──────────────────────────────────────── */
 const galleryItems = [
-  { id: 1, category: 'hostel', label: 'Sterling Study & Stay Suites', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🏨', desc: 'Modern 200+ bed hostel in Tbilisi' },
+  {
+    id: 1,
+    category: 'hostel',
+    label: 'Sterling Study & Stay Suites',
+    bg: 'from-[#C6962E]/20 to-[#C6962E]/5',
+    icon: '🏨',
+    desc: 'Modern 200+ bed hostel in Tbilisi',
+    image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F1%2520sterlingg%2520welcome.jpg',
+  },
   { id: 2, category: 'campus', label: 'East West University Campus', bg: 'from-[#1B7C9E]/20 to-[#1B7C9E]/5', icon: '🏛️', desc: 'State-of-the-art medical campus' },
   { id: 3, category: 'workshop', label: 'Clinical Workshop Session', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🩺', desc: 'Hands-on cadaver lab training' },
   { id: 4, category: 'food', label: 'Indian Mess Hall', bg: 'from-[#1B7C9E]/20 to-[#1B7C9E]/5', icon: '🍛', desc: 'Daily home-style Indian cuisine' },
@@ -222,10 +230,20 @@ export default function Gallery() {
                 transition={{ delay: i * 0.06 }}
                 className="group relative rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-400 cursor-pointer"
               >
-                {/* Placeholder image area */}
-                <div className={`h-52 bg-gradient-to-br ${item.bg} flex flex-col items-center justify-center relative`}>
-                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
-                  <div className="w-16 h-0.5 bg-[#C6962E]/30 rounded-full" />
+                {/* Image / placeholder area */}
+                <div className="h-52 relative overflow-hidden">
+                  {'image' in item && item.image ? (
+                    <img
+                      src={item.image as string}
+                      alt={item.label}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className={`h-full bg-gradient-to-br ${item.bg} flex flex-col items-center justify-center`}>
+                      <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                      <div className="w-16 h-0.5 bg-[#C6962E]/30 rounded-full" />
+                    </div>
+                  )}
                   {/* Overlay on hover */}
                   <div className="absolute inset-0 bg-[#0B1A35]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
