@@ -79,6 +79,7 @@ const galleryItems = [
   { id: 5, category: 'events', label: 'Orientation Day 2024', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎓', desc: 'Pre-departure orientation event' },
   { id: 6, category: 'campus', label: 'SEU Medical Library', bg: 'from-[#1B7C9E]/20 to-[#1B7C9E]/5', icon: '📚', desc: 'Fully equipped medical library' },
   { id: 7, category: 'hostel', label: 'Student Common Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🛋️', desc: 'Recreation & relaxation space' },
+  { id: 10, category: 'hostel', label: 'Sterling 3-Share Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🛏️', desc: 'Comfortable shared student accommodation', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F2%2520strling%25203%2520share.jpg' },
   { id: 8, category: 'workshop', label: 'Anatomy Lab – Kolhapur', bg: 'from-[#1B7C9E]/20 to-[#1B7C9E]/5', icon: '🔬', desc: 'Pre-departure clinical training' },
   { id: 9, category: 'events', label: 'Diwali Celebrations', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎆', desc: 'Cultural events for Indian students' },
 ];
