@@ -70,7 +70,9 @@ export default function Hero() {
       <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-[#C6962E]/[0.07] to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-[40%] bg-gradient-to-t from-[#0B1A35] to-transparent" />
 
+      <div
           className="relative z-10 max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-20 items-center px-4 sm:px-8 py-12 sm:py-16 lg:py-0"
+        >
         {/* Left Content */}
         <div>
           <motion.div
