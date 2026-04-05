@@ -15,6 +15,8 @@ import {
   FileText,
   Stethoscope,
   HelpCircle,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 
 /* ── FAQ data ────────────────────────────────────────────────── */
@@ -161,6 +163,101 @@ const comparisonRows = [
   { aspect: 'Safety', india: 'Varies', georgia: '✅ Among Europe\'s safest', kyrgyzstan: '✅ Large Indian community' },
 ];
 
+/* ── Video Section ───────────────────────────────────────────── */
+function VideoSection() {
+  const [muted, setMuted] = useState(true);
+  const [hintDismissed, setHintDismissed] = useState(false);
+  const src = muted
+    ? 'https://www.youtube.com/embed/Myu_a4Wg2MI?autoplay=1&mute=1&rel=0&modestbranding=1&color=white'
+    : 'https://www.youtube.com/embed/Myu_a4Wg2MI?autoplay=1&mute=0&rel=0&modestbranding=1&color=white';
+
+  return (
+    <section className="bg-[#0B1A35] py-14 px-4 sm:px-8">
+      <div className="max-w-[860px] mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
+          className="text-center mb-7"
+        >
+          <span className="inline-flex items-center gap-2 bg-red-600 text-white text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+            Must Watch
+          </span>
+          <h2 className="font-playfair text-2xl sm:text-3xl text-white">
+            Watch This Before You Decide
+          </h2>
+          <p className="text-white/55 mt-2 text-sm sm:text-base max-w-lg mx-auto">
+            A complete overview of everything you need to know about MBBS abroad — don&apos;t skip this.
+          </p>
+        </motion.div>
+
+        {/* Unmute nudge */}
+        <AnimatePresence>
+          {muted && !hintDismissed && (
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ delay: 1, duration: 0.4 }}
+              className="flex items-center justify-between gap-3 bg-[#C6962E]/15 border border-[#C6962E]/40 rounded-xl px-5 py-3 mb-4"
+            >
+              <div className="flex items-center gap-2.5 text-white/90 text-sm">
+                <VolumeX size={18} className="flex-shrink-0 text-[#C6962E]" />
+                <span>Video is playing muted. <strong className="text-white">Tap the button to unmute</strong> for the full experience.</span>
+              </div>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <button
+                  onClick={() => setMuted(false)}
+                  className="flex items-center gap-1.5 bg-[#C6962E] hover:bg-[#DFB761] text-[#0B1A35] text-xs font-bold px-3.5 py-1.5 rounded-full transition-colors duration-200"
+                >
+                  <Volume2 size={14} />
+                  Unmute
+                </button>
+                <button
+                  onClick={() => setHintDismissed(true)}
+                  className="text-white/40 hover:text-white/70 text-lg leading-none transition-colors duration-200"
+                  aria-label="Dismiss"
+                >
+                  ×
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.45 }}
+          className="relative w-full rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] border border-white/10"
+          style={{ paddingBottom: '56.25%' }}
+        >
+          <iframe
+            key={src}
+            className="absolute inset-0 w-full h-full"
+            src={src}
+            title="Must Watch — MBBS Abroad Complete Guide"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </motion.div>
+
+        {/* Unmute / mute toggle below video */}
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={() => setMuted((m) => !m)}
+            className="flex items-center gap-2 text-sm text-white/60 hover:text-white border border-white/20 hover:border-white/50 px-4 py-2 rounded-full transition-all duration-200"
+          >
+            {muted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+            {muted ? 'Video is muted — click to unmute' : 'Click to mute'}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── FAQ Item ────────────────────────────────────────────────── */
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
@@ -268,6 +365,11 @@ export default function Educate() {
           </motion.div>
         </div>
       </section>
+
+      {/* ══════════════════════════════════════
+          MUST WATCH VIDEO
+      ══════════════════════════════════════ */}
+      <VideoSection />
 
       {/* ══════════════════════════════════════
           IMPORTANT NOTE

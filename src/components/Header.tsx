@@ -11,11 +11,11 @@ import { cn } from '@/lib/utils';
 const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'AGEST Scholarship', href: '/scholarship' },
+  { label: 'Educate Yourself', href: '/educate' },
   { label: 'Clinical Workshops', href: '/praxis' },
   { label: 'Destinations', href: '/destinations' },
   { label: 'Services', href: '/services' },
   { label: 'Gallery & Reviews', href: '/gallery' },
-  { label: 'Educate Yourself', href: '/educate' },
   { label: 'Contact', href: '/contact' },
 ];
 
