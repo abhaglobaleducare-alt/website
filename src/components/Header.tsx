@@ -117,7 +117,7 @@ export default function Header() {
             <li>
               <Link
                 href="/contact"
-                className="bg-gradient-to-r from-primary-gold to-gold-400 text-primary-navy px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(198,150,46,0.5)] shadow-[0_5px_20px_rgba(198,150,46,0.3)]"
+                className="bg-gradient-to-r from-primary-gold to-gold-400 text-primary-navy px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(198,150,46,0.5)] shadow-[0_5px_20px_rgba(198,150,46,0.3)] whitespace-nowrap"
               >
                 Book Counselling →
               </Link>
