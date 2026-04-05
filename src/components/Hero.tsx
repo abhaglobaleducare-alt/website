@@ -136,12 +136,6 @@ export default function Hero() {
           >
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] to-[#d4a73a] text-[#0B1A35] px-7 py-3.5 rounded-xl font-bold text-base transition-all duration-300 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(198,150,46,0.3)] hover:shadow-[0_8px_30px_rgba(198,150,46,0.45)]"
-              >
-                Book ONLINE / OFFLINE FREE Counselling <ArrowRight size={18} />
-              </Link>
-              <Link
                 href="/destinations"
                 className="inline-flex items-center gap-2.5 text-white border border-white/25 px-7 py-3.5 rounded-xl font-semibold text-base transition-all duration-300 hover:bg-white/10 hover:border-white/40"
               >
@@ -246,7 +240,7 @@ export default function Hero() {
             <button
               type="submit"
               disabled={formState === 'loading'}
-              className="w-full bg-[#0B1A35] text-white py-3.5 rounded-xl font-bold text-base transition-all duration-300 hover:bg-[#152d54] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-[#C6962E] to-[#d4a73a] text-[#0B1A35] py-3.5 rounded-xl font-bold text-base transition-all duration-300 hover:brightness-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(198,150,46,0.3)]"
             >
               {formState === 'loading' ? (
                 <>
@@ -254,7 +248,7 @@ export default function Hero() {
                   Submitting…
                 </>
               ) : (
-                <>Get Free Counselling <ArrowRight size={18} /></>
+                <>Book ONLINE / OFFLINE FREE Counselling <ArrowRight size={18} /></>
               )}
             </button>
           </form>
