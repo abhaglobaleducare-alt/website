@@ -1,8 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Star, Quote, Play, Users, Camera, MessageSquare } from 'lucide-react';
-import { useState } from 'react';
+import { Star, Quote, Play, Users, Camera, MessageSquare, Expand, X } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
 
 /* ── Review data ─────────────────────────────────────────────── */
 const reviews = [
@@ -105,6 +105,15 @@ function StarRating({ rating }: { rating: number }) {
 ═══════════════════════════════════════════════════════════════ */
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
+
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeLightbox(); };
+    if (lightbox) document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [lightbox, closeLightbox]);
 
   const filtered = activeCategory === 'all'
     ? galleryItems
@@ -228,7 +237,12 @@ export default function Gallery() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className="group relative rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-400 cursor-pointer"
+                onClick={() => {
+                  if ('image' in item && item.image) {
+                    setLightbox({ src: item.image as string, label: item.label });
+                  }
+                }}
+                className={`group relative rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-400 ${'image' in item && item.image ? 'cursor-zoom-in' : 'cursor-default'}`}
               >
                 {/* Image / placeholder area */}
                 <div className="h-52 relative overflow-hidden">
@@ -247,7 +261,9 @@ export default function Gallery() {
                   {/* Overlay on hover */}
                   <div className="absolute inset-0 bg-[#0B1A35]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-                      <Play size={20} className="text-white fill-white" />
+                      {'image' in item && item.image
+                        ? <Expand size={20} className="text-white" />
+                        : <Play size={20} className="text-white fill-white" />}
                     </div>
                   </div>
                 </div>
@@ -420,6 +436,39 @@ export default function Gallery() {
           </div>
         </motion.div>
       </section>
+
+      {/* ══════════════════════════════════════
+          LIGHTBOX
+      ══════════════════════════════════════ */}
+      {lightbox && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+          onClick={closeLightbox}
+        >
+          <button
+            onClick={closeLightbox}
+            aria-label="Close preview"
+            className="absolute top-5 right-5 bg-white/10 hover:bg-white/25 backdrop-blur-sm rounded-full p-2.5 transition-colors"
+          >
+            <X size={22} className="text-white" />
+          </button>
+          <motion.img
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 25 }}
+            src={lightbox.src}
+            alt={lightbox.label}
+            className="max-w-full max-h-[90vh] rounded-xl object-contain shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white text-sm px-4 py-1.5 rounded-full">
+            {lightbox.label}
+          </div>
+        </motion.div>
+      )}
 
     </div>
   );
