@@ -80,6 +80,10 @@ const galleryItems = [
   { id: 6, category: 'campus', label: 'SEU Medical Library', bg: 'from-[#1B7C9E]/20 to-[#1B7C9E]/5', icon: '📚', desc: 'Fully equipped medical library' },
   { id: 7, category: 'hostel', label: 'Student Common Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🛋️', desc: 'Recreation & relaxation space' },
   { id: 10, category: 'hostel', label: 'Sterling 3-Share Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🛏️', desc: 'Comfortable shared student accommodation', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F2%2520strling%25203%2520share.jpg' },
+  { id: 11, category: 'hostel', label: 'Sterling Hostel Exterior', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🏢', desc: 'Sterling Study & Stay Suites building', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F3%2520Sterling.jpg' },
+  { id: 12, category: 'hostel', label: 'Sterling Bathrooms', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🚿', desc: 'Clean modern bathroom facilities', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F5%2520sterling%2520bath.jpg' },
+  { id: 13, category: 'hostel', label: 'Sterling Study Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '📖', desc: 'Dedicated study room for students', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F6%2520Sterling%2520Studyroom.jpg' },
+  { id: 14, category: 'hostel', label: 'Sterling Gaming Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎮', desc: 'Gaming & recreation lounge', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F7%2520Sterling%2520gaming%2520room.jpg' },
   { id: 8, category: 'workshop', label: 'Anatomy Lab – Kolhapur', bg: 'from-[#1B7C9E]/20 to-[#1B7C9E]/5', icon: '🔬', desc: 'Pre-departure clinical training' },
   { id: 9, category: 'events', label: 'Diwali Celebrations', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎆', desc: 'Cultural events for Indian students' },
 ];
