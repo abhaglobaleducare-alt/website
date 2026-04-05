@@ -52,10 +52,10 @@ const reasons = [
 
 export default function WhyAbha() {
   return (
-    <section className="bg-[#F8F9FA] py-24 sm:py-28 px-4 sm:px-8">
+    <section className="bg-[#F8F9FA] py-16 sm:py-20 lg:py-28 px-4 sm:px-8">
       <div className="max-w-[1200px] mx-auto">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-8 sm:mb-12 lg:mb-14">
           <div className="max-w-[560px]">
             <motion.span
               initial={{ opacity: 0, y: 16 }}

@@ -308,7 +308,7 @@ export default function Educate() {
       {/* ══════════════════════════════════════
           HERO
       ══════════════════════════════════════ */}
-      <section className="relative bg-[#0B1A35] py-28 px-5 sm:px-10 overflow-hidden">
+      <section className="relative bg-[#0B1A35] py-16 sm:py-20 lg:py-28 px-5 sm:px-10 overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{

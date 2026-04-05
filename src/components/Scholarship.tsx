@@ -71,7 +71,7 @@ export default function Scholarship() {
       {/* ══════════════════════════════════════
           HERO
       ══════════════════════════════════════ */}
-      <section className="relative bg-[#0B1A35] min-h-[92vh] flex flex-col justify-center overflow-hidden px-5 sm:px-10 py-24">
+      <section className="relative bg-[#0B1A35] min-h-[92vh] flex flex-col justify-center overflow-hidden px-5 sm:px-10 py-16 sm:py-20">
 
         {/* Grid texture */}
         <div

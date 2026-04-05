@@ -64,10 +64,10 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-white py-24 sm:py-28 px-4 sm:px-8">
+    <section id="services" className="bg-white py-16 sm:py-20 lg:py-28 px-4 sm:px-8">
       <div className="max-w-[1200px] mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-14 lg:mb-16">
           <motion.span
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}

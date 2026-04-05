@@ -14,11 +14,25 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   body {
     @apply font-sans text-primary-navy bg-white;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Remove tap highlight on mobile for cleaner interactions */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent iOS auto-zoom on input focus (requires font-size >= 16px) */
+  @media (max-width: 768px) {
+    input, select, textarea {
+      font-size: 16px !important;
+    }
   }
 
   /* Custom selection color */

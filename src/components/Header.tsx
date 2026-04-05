@@ -41,13 +41,14 @@ export default function Header() {
           transition={{ duration: 2, repeat: Infinity }}
           className="inline-block"
         >
-          🎓 NEW! Hands-On Clinical Workshops — Our Own Training Platform | AGEST 2026 - send AGEST to WhatsApp +91 7447552878
+          <span className="sm:hidden">🎓 AGEST 2026 Scholarship — WhatsApp +91 7447552878</span>
+          <span className="hidden sm:inline">🎓 NEW! Hands-On Clinical Workshops — Our Own Training Platform | AGEST 2026 - send AGEST to WhatsApp +91 7447552878</span>
         </motion.span>
       </div>
 
       {/* Top Contact Bar */}
       <div className="bg-primary-navy text-white py-2.5">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 flex flex-wrap justify-between items-center gap-2 text-sm">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 flex flex-wrap justify-between items-center gap-1.5 sm:gap-2 text-sm">
           <div className="flex flex-wrap gap-4 lg:gap-8 items-center">
             <a
               href="tel:+917447552878"

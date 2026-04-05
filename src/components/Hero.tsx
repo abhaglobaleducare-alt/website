@@ -70,7 +70,7 @@ export default function Hero() {
       <div className="absolute top-0 right-0 w-[50%] h-full bg-gradient-to-l from-[#C6962E]/[0.07] to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-[40%] bg-gradient-to-t from-[#0B1A35] to-transparent" />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center px-4 sm:px-8 py-16 lg:py-0">
+          className="relative z-10 max-w-[1400px] mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-20 items-center px-4 sm:px-8 py-12 sm:py-16 lg:py-0"
         {/* Left Content */}
         <div>
           <motion.div
@@ -87,7 +87,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-playfair text-[2.5rem] sm:text-5xl lg:text-[3.75rem] xl:text-[4.25rem] text-white leading-[1.15] mb-6"
+            className="font-playfair text-[1.75rem] sm:text-[2.5rem] lg:text-[3.75rem] xl:text-[4.25rem] text-white leading-[1.15] mb-6"
           >
             Study MBBS Abroad with{' '}
             <span className="relative">
@@ -103,7 +103,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25 }}
-            className="text-white/80 text-lg sm:text-xl leading-relaxed mb-10 max-w-[600px]"
+            className="text-white/80 text-base sm:text-lg lg:text-xl leading-relaxed mb-8 sm:mb-10 max-w-[600px]"
           >
             ABHA Global Educare helps Indian students get admitted to NMC guidelines Eligible
             medical universities in Georgia & Kyrgyzstan — with our own hostels,
@@ -115,7 +115,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10"
+            className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10"
           >
             {highlights.map((item, i) => (
               <div key={i} className="flex items-start gap-3">
@@ -161,7 +161,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="bg-white rounded-2xl p-7 sm:p-9 shadow-[0_25px_60px_rgba(0,0,0,0.4)]"
+          className="bg-white rounded-2xl p-5 sm:p-7 lg:p-9 shadow-[0_25px_60px_rgba(0,0,0,0.4)]"
         >
           <div className="mb-6">
             <h3 className="font-playfair text-[#0B1A35] text-2xl font-bold mb-1.5">
@@ -240,7 +240,7 @@ export default function Hero() {
             <button
               type="submit"
               disabled={formState === 'loading'}
-              className="w-full bg-gradient-to-r from-[#C6962E] to-[#d4a73a] text-[#0B1A35] py-3.5 rounded-xl font-bold text-base transition-all duration-300 hover:brightness-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(198,150,46,0.3)]"
+              className="w-full bg-gradient-to-r from-[#C6962E] to-[#d4a73a] text-[#0B1A35] py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 hover:brightness-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(198,150,46,0.3)]"
             >
               {formState === 'loading' ? (
                 <>

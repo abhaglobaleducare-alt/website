@@ -15,7 +15,7 @@ export default function HomeCta() {
       <div className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_360px] items-end">
 
         {/* Left – text + CTAs */}
-        <div className="py-20 sm:py-24 px-4 sm:px-8 text-center lg:text-left relative z-10">
+        <div className="py-14 sm:py-20 lg:py-24 px-4 sm:px-8 text-center lg:text-left relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -42,10 +42,10 @@ export default function HomeCta() {
             transition={{ delay: 0.1 }}
             className="flex flex-col items-center lg:items-start gap-4"
           >
-            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3 sm:gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#C6962E] text-[#0B1A35] px-7 py-3.5 rounded-xl font-bold text-base transition-all duration-300 hover:bg-[#d4a73a]"
+                className="inline-flex items-center justify-center gap-2 bg-[#C6962E] text-[#0B1A35] px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 hover:bg-[#d4a73a] w-full sm:w-auto"
               >
                 Book ONLINE / OFFLINE FREE Counselling <ArrowRight size={18} />
               </Link>

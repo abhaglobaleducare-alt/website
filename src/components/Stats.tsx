@@ -32,9 +32,9 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="relative bg-white py-16 sm:py-20 px-4 sm:px-8">
+    <section className="relative bg-white py-12 sm:py-16 lg:py-20 px-4 sm:px-8">
       <div className="max-w-[1200px] mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -42,12 +42,12 @@ export default function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative text-center p-6 sm:p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:border-[#C6962E]/20 hover:bg-[#C6962E]/[0.03] transition-all duration-300"
+              className="relative text-center p-4 sm:p-6 lg:p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:border-[#C6962E]/20 hover:bg-[#C6962E]/[0.03] transition-all duration-300"
             >
               <div className="mx-auto mb-4 w-12 h-12 rounded-xl bg-[#0B1A35] flex items-center justify-center">
                 <stat.icon size={22} className="text-[#C6962E]" />
               </div>
-              <div className="font-playfair text-3xl sm:text-4xl font-black text-[#0B1A35] mb-1">
+              <div className="font-playfair text-2xl sm:text-3xl lg:text-4xl font-black text-[#0B1A35] mb-1">
                 {stat.value}
               </div>
               <div className="text-[#0B1A35] font-semibold text-sm sm:text-base mb-1">
