@@ -114,10 +114,10 @@ const topics = [
     bg: 'bg-[#1B7C9E]/10',
     points: [
       'Tuition: ₹3–6L per year depending on country/university',
-      'Accommodation: ₹1.5–3L per year (ABHA-managed hostels)',
+      'Accommodation: ₹2–3L per year (ABHA-managed hostels)',
       'Food: ₹60K–1.2L per year (Indian mess)',
       'Travel & misc: ₹1–1.5L per year',
-      'Total 6-year cost: ₹25–50L (vs ₹80L–1.2Cr in India private)',
+      'Total 6-year cost: ₹25–50L (vs ₹80L–1.5Cr : Accommodation and food expences Extra in India private)',
       'AGEST Scholarship can offset $6,000 from tuition',
     ],
   },
@@ -561,7 +561,7 @@ export default function Educate() {
               {
                 icon: CheckCircle2,
                 title: 'Pass Rate',
-                desc: 'ABHA students who complete Clinical Workshops report significantly higher NEXT/FMGE pass rates than the national average.',
+                desc: 'ABHA students completing the Clinical Workshops & Hands-On Programme are expected to achieve significantly higher NEXT/FMGE pass rates compared to the national average.',
               },
             ].map((item, i) => (
               <motion.div

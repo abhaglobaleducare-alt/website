@@ -49,14 +49,16 @@ const ticker = [
   '💰 JUST ₹111',
   '🏆 TOP 300 WIN',
   '💵 $6,000 SCHOLARSHIP',
-  '📅 EXAM: 26 APR & 14 MAY',
+  '� Multiple Attempts',
+  '📊 Final Result on NEET Result Day',
   '🇬🇪 MBBS IN GEORGIA',
   '⚡ REGISTER NOW',
   '🔥 NEET PATTERN',
   '💰 JUST ₹111',
   '🏆 TOP 300 WIN',
   '💵 $6,000 SCHOLARSHIP',
-  '📅 EXAM: 26 APR & 14 MAY',
+  '🔄 Multiple Attempts',
+  '📊 Final Result on NEET Result Day',
   '🇬🇪 MBBS IN GEORGIA',
   '⚡ REGISTER NOW',
 ];
@@ -173,7 +175,7 @@ export default function Scholarship() {
             className="flex flex-wrap gap-4 justify-center"
           >
             <a
-              href="https://wa.me/917447552878?text=AGEST"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeJFiEYL7KjZ9cS0s9KRdZrdhzLMjpGmGZkwp8yWh4s54lpsA/viewform?usp=header"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base sm:text-lg overflow-hidden shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
@@ -647,7 +649,7 @@ export default function Scholarship() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {[
               {
                 label: 'Last Date to Register',
@@ -658,24 +660,31 @@ export default function Scholarship() {
               },
               {
                 label: 'Attempt 1',
-                date: '26 April',
-                year: '2026',
+                date: 'from 3rd day of registration',
+                year: '',
                 urgent: false,
                 emoji: '📝',
               },
               {
-                label: 'Attempt 2',
-                date: '14 May',
-                year: '2026',
+                label: 'Multiple Attempts',
+                date: 'As your Demand dates',
+                year: '',
                 urgent: false,
                 emoji: '📝',
               },
               {
                 label: 'Result Declared',
-                date: 'Next Day',
+                date: 'Same Attempt Day',
                 year: '',
                 urgent: false,
                 emoji: '📊',
+              },
+              {
+                label: 'Final Announcement',
+                date: 'On the NEET Result Day',
+                year: '',
+                urgent: false,
+                emoji: '📢',
               },
             ].map(({ label, date, year, urgent, emoji }, i) => (
               <motion.div
@@ -715,7 +724,7 @@ export default function Scholarship() {
           </div>
           <p className="text-center text-gray-400 text-sm mt-6">
             <CalendarDays size={14} className="inline mr-1" />
-            Results declared the very next day after each attempt
+            Results declared on the same day after each attempt
           </p>
         </div>
       </section>
