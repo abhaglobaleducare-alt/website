@@ -208,7 +208,7 @@ export default function Scholarship() {
             <span className="text-gray-600">·</span>
             <span>
               ⏳ Last date:{' '}
-              <strong className="text-white">25 April 2026</strong>
+              <strong className="text-white">10 days before NEET result</strong>
             </span>
             <span className="text-gray-600">·</span>
             <span>Only top 300 win</span>
@@ -347,7 +347,7 @@ export default function Scholarship() {
                 { emoji: '📚', text: 'PCB — 180 Questions' },
                 { emoji: '⏱️', text: '3 Hour Duration' },
                 { emoji: '🖥️', text: 'Online Mode' },
-                { emoji: '🔄', text: '2 Attempts' },
+                { emoji: '🔄', text: 'Multiple Attempts' },
               ].map(({ emoji, text }) => (
                 <span
                   key={text}
@@ -651,8 +651,8 @@ export default function Scholarship() {
             {[
               {
                 label: 'Last Date to Register',
-                date: '25 April',
-                year: '2026',
+                date: '10 days before NEET result',
+                year: '',
                 urgent: true,
                 emoji: '⚠️',
               },

@@ -8,57 +8,102 @@ import { useState, useEffect, useCallback } from 'react';
 const reviews = [
   {
     id: 1,
-    name: 'Dr. Priya Sharma',
-    course: 'MBBS – Georgia (2023)',
+    name: 'Hiren',
+    course: 'MBBS Student — Tbilisi, Georgia',
     rating: 5,
-    avatar: 'PS',
+    avatar: 'H',
     color: '#C6962E',
-    text: 'ABHA Global made my dream of becoming a doctor a reality. From the visa process to settling in Tbilisi, they supported me at every step. The Sterling Study & Stay Suites felt like home — Indian food, friendly staff, and 24/7 support. Cleared FMGE in 1st attempt!',
+    text: '"Living in Tbilisi as a first-year was scary to think about. But ABHA arranged everything — from airport pickup to my room at Sterling hostel. The hostel is clean, safe, and full of Indian students so you never feel alone. Even after arriving, the team in Georgia is just a call away. They didn\'t disappear after taking the fees — which is rare."',
   },
   {
     id: 2,
-    name: 'Rahul Desai',
-    course: 'MBBS – Kyrgyzstan (2022)',
+    name: 'Varun',
+    course: '1st Year MBBS — Alte University, Georgia',
     rating: 5,
-    avatar: 'RD',
+    avatar: 'V',
     color: '#1B7C9E',
-    text: 'I was confused about MBBS abroad until ABHA\'s counsellors explained everything clearly — NMC guidelines, cost breakdown, hostel facilities. Choosing Kyrgyzstan was the best decision. The managed hostel and Indian mess saved me thousands. Highly recommend!',
+    text: '"Coming to Tbilisi alone was nerve-wracking, but Sterling hostel made it feel like home within days. Clean rooms, Indian meals, fast Wi-Fi — everything a student needs. ABHA arranged my airport pickup and I was settled in before I even realised I\'d landed in a new country. Couldn\'t have asked for a smoother start."',
   },
   {
     id: 3,
-    name: 'Anjali Patil',
-    course: 'MBBS – Georgia (2024)',
+    name: 'Vrishabh',
+    course: '2nd Year MBBS — European University, Georgia',
     rating: 5,
-    avatar: 'AP',
+    avatar: 'V',
     color: '#C6962E',
-    text: 'The Clinical Workshops by ABHA were a game-changer for my FMGE prep. Hands-on cadaver sessions and actual clinical exposure that no coaching center offers. The ABHA team in Tbilisi is always reachable — they genuinely care about students.',
+    text: '"The best thing about Sterling is the community. You\'re surrounded by Indian students so there\'s zero culture shock. The location is safe, the warden is responsive, and the facilities are well-maintained. My parents were worried about me living abroad — one video call showing them the hostel and all their worries disappeared. ABHA really thought this through."',
   },
   {
     id: 4,
-    name: 'Siddharth Nair',
-    course: 'MBBS – Georgia (2023)',
+    name: 'Harshvardhan',
+    course: '1st Year MBBS — SEU Georgia',
     rating: 5,
-    avatar: 'SN',
+    avatar: 'H',
     color: '#1B7C9E',
-    text: 'I was nervous about moving abroad at 18, but ABHA\'s pre-departure orientation prepared me mentally and practically. The accommodation is amazing — clean rooms, gym, study hall, and home-cooked meals. My parents were relieved seeing how well looked after I am.',
+    text: '"I was most stressed about food and accommodation before coming. Sterling hostel solved both. Ghar jaisa khana milta hai — seriously. The rooms are spacious, beds are comfortable, and the study area is quiet when you need to focus. ABHA bundled the hostel with admission so there was zero running around — everything came in one clean package."',
   },
   {
     id: 5,
-    name: 'Meera Joshi',
-    course: 'MBBS – Kyrgyzstan (2022)',
+    name: 'Vishwajeet',
+    course: '3rd Year MBBS — East West University, Georgia',
     rating: 5,
-    avatar: 'MJ',
+    avatar: 'V',
     color: '#C6962E',
-    text: 'ABHA helped with everything — NEET counselling, university selection, documentation, visa, airport pickup, and even setting up my bank account in Bishkek. I never felt alone. The IEU university has great faculty and ABHA\'s ground team is always there.',
+    text: '"I\'ve been at Sterling for 3 years now and it keeps getting better. The management actually listens to student feedback. Any issue — maintenance, internet, meals — gets resolved quickly. Living here has let me focus entirely on my studies without worrying about life logistics. ABHA running their own hostel is what separates them from every other consultancy."',
   },
   {
     id: 6,
-    name: 'Arjun Verma',
-    course: 'MBBS – Georgia (2024)',
+    name: 'Hiren',
+    course: '1st Year MBBS — Alte University, Georgia',
     rating: 5,
-    avatar: 'AV',
+    avatar: 'H',
     color: '#1B7C9E',
-    text: 'Can\'t recommend ABHA enough. Got the AGEST scholarship which saved me $6,000! The counselling sessions helped me understand exactly what FMGE requires and how Georgian universities align with it. Best investment for my medical career.',
+    text: '"Honestly, I chose ABHA partly because of the hostel. Other consultancies just refer you somewhere random — ABHA has their own place in Tbilisi. When I arrived, the room was ready, bedding was there, and a senior student showed me around. That first day set the tone for everything — organised, warm, and genuinely caring. Very happy with this decision."',
+  },
+  {
+    id: 7,
+    name: 'Yashraj',
+    course: 'Student — SEU Georgia',
+    rating: 5,
+    avatar: 'Y',
+    color: '#C6962E',
+    text: '"Before ABHA: confused, no idea which country or university, scared of scams. After ABHA: I\'m in my second year at SEU Georgia, loving every bit of it. The counsellor understood my NEET score and budget and gave honest options — not just the most expensive ones. They matched me to the right university, not just any university. That made all the difference."',
+  },
+  {
+    id: 8,
+    name: 'Sufiyan',
+    course: 'Student — Avicenna University, Kyrgyzstan',
+    rating: 5,
+    avatar: 'S',
+    color: '#1B7C9E',
+    text: '"I applied late in the season and was worried I\'d miss enrollment. The ABHA team moved so fast — offer letter, visa documents, university registration, all done in under two weeks. Other consultancies had told me it would take 2 months minimum. ABHA made what felt impossible seem completely routine. Highly recommend to anyone serious about MBBS abroad."',
+  },
+  {
+    id: 9,
+    name: 'Shantanu',
+    course: 'Student — Alte University, Georgia',
+    rating: 5,
+    avatar: 'S',
+    color: '#C6962E',
+    text: '"Before contacting ABHA I was completely lost — too many consultancies, too many confusing promises. The moment I spoke to the team, everything felt different. They explained every step clearly and never pushed me. And the documentation process was unbelievably fast — my offer letter and visa paperwork were sorted in days, not weeks. Didn\'t expect this level of efficiency from any consultancy."',
+  },
+  {
+    id: 10,
+    name: 'Nitika',
+    course: 'Student — IEU, Kyrgyzstan',
+    rating: 5,
+    avatar: 'N',
+    color: '#1B7C9E',
+    text: '"So many consultancies just want to close the deal and move on. ABHA was different from the very first call — they were patient, answered every question, and never made me feel rushed. The entire documentation was handled so quickly and cleanly. By the time I landed in Bishkek, everything was already in place. Zero last-minute panic. Really grateful for this team."',
+  },
+  {
+    id: 11,
+    name: 'Shifa',
+    course: 'Student — East West University, Georgia',
+    rating: 5,
+    avatar: 'S',
+    color: '#C6962E',
+    text: '"I had spoken to 4–5 consultancies before ABHA, and all of them were just trying to close the deal. ABHA was the only one that told me what to realistically expect — the good and the not-so-good. That honesty built my trust completely. From first call to landing in Georgia, they were with me every single step. If you\'re serious about MBBS abroad, start and end with ABHA."',
   },
 ];
 
@@ -160,26 +205,6 @@ export default function Gallery() {
             Real photos, real testimonials — from students who chose ABHA Global Educare for their MBBS journey abroad.
           </motion.p>
 
-          {/* Stats strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-8 sm:gap-14"
-          >
-            {[
-              { icon: Users, value: '500+', label: 'Students Sent' },
-              { icon: Star, value: '4.9/5', label: 'Average Rating' },
-              { icon: Camera, value: '200+', label: 'Gallery Photos' },
-              { icon: MessageSquare, value: '300+', label: 'Written Reviews' },
-            ].map(({ icon: Icon, value, label }) => (
-              <div key={label} className="text-center">
-                <Icon size={20} className="mx-auto mb-1.5 text-[#C6962E]" />
-                <div className="text-2xl font-bold text-white">{value}</div>
-                <div className="text-xs text-white/50 uppercase tracking-wide">{label}</div>
-              </div>
-            ))}
-          </motion.div>
         </div>
       </section>
 
@@ -284,12 +309,12 @@ export default function Gallery() {
           >
             📸 Full photo gallery coming soon — follow us on{' '}
             <a
-              href="https://www.instagram.com/abhaglobaleducare"
+              href="https://www.instagram.com/abhaglobaleducare369"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#C6962E] hover:underline font-medium"
             >
-              @abhaglobaleducare
+              @abhaglobaleducare369
             </a>{' '}
             for daily updates.
           </motion.p>
@@ -326,42 +351,9 @@ export default function Gallery() {
               transition={{ delay: 0.1 }}
               className="text-gray-500 max-w-xl mx-auto"
             >
-              Over 500 students have trusted ABHA Global Educare. Here&apos;s what some of them have to say.
+              Here are the latest student testimonials from ABHA Global Educare.
             </motion.p>
           </div>
-
-          {/* Overall rating bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-r from-[#0B1A35] to-[#193769] rounded-2xl p-8 mb-12 flex flex-col sm:flex-row items-center justify-around gap-6 text-center"
-          >
-            <div>
-              <div className="text-6xl font-bold text-[#C6962E] mb-1">4.9</div>
-              <div className="flex justify-center mb-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={18} className="fill-[#C6962E] text-[#C6962E]" />
-                ))}
-              </div>
-              <div className="text-white/60 text-sm">Overall Rating</div>
-            </div>
-            <div className="hidden sm:block w-px h-20 bg-white/10" />
-            <div>
-              <div className="text-4xl font-bold text-white mb-1">300+</div>
-              <div className="text-white/60 text-sm">Verified Reviews</div>
-            </div>
-            <div className="hidden sm:block w-px h-20 bg-white/10" />
-            <div>
-              <div className="text-4xl font-bold text-white mb-1">98%</div>
-              <div className="text-white/60 text-sm">Would Recommend</div>
-            </div>
-            <div className="hidden sm:block w-px h-20 bg-white/10" />
-            <div>
-              <div className="text-4xl font-bold text-white mb-1">500+</div>
-              <div className="text-white/60 text-sm">Students Enrolled</div>
-            </div>
-          </motion.div>
 
           {/* Review grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -413,7 +405,7 @@ export default function Gallery() {
             Ready to Write Your Own Success Story?
           </h2>
           <p className="text-[#0B1A35]/80 mb-8 text-lg">
-            Join 500+ students who trusted ABHA Global Educare for their MBBS journey.
+            Join students who trusted ABHA Global Educare for their MBBS journey.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a

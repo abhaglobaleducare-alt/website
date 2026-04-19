@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Link from 'next/link';
 import { Inter, Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
@@ -152,6 +153,15 @@ export default async function RootLayout({
             </a>
             
             {children}
+
+            <div className="fixed left-4 bottom-6 z-50">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary-gold to-gold-400 px-4 py-3 text-sm font-bold text-primary-navy shadow-[0_12px_40px_rgba(198,150,46,0.35)] transition-transform duration-300 hover:-translate-y-0.5"
+              >
+                Book Counselling →
+              </Link>
+            </div>
           </Providers>
         </NextIntlClientProvider>
         

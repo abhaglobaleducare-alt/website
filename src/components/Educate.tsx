@@ -159,7 +159,7 @@ const comparisonRows = [
   { aspect: 'NEET Required', india: '✅ Yes', georgia: '✅ Yes', kyrgyzstan: '✅ Yes' },
   { aspect: 'Weather', india: 'Tropical/Mixed', georgia: 'Mild European', kyrgyzstan: 'Continental' },
   { aspect: 'Indian Food Available', india: 'Everywhere', georgia: '✅ ABHA Indian Mess', kyrgyzstan: '✅ ABHA Indian Mess' },
-  { aspect: 'Own Hostel by Agent', india: '—', georgia: '✅ Sterling Suites', kyrgyzstan: '✅ Managed Hostels' },
+  { aspect: 'Own Hostel by Agent', india: '—', georgia: '✅', kyrgyzstan: '✅' },
   { aspect: 'Safety', india: 'Varies', georgia: '✅ Among Europe\'s safest', kyrgyzstan: '✅ Large Indian community' },
 ];
 
