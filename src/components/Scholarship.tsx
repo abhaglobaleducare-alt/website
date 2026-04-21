@@ -178,10 +178,19 @@ export default function Scholarship() {
               href="https://docs.google.com/forms/d/e/1FAIpQLSeJFiEYL7KjZ9cS0s9KRdZrdhzLMjpGmGZkwp8yWh4s54lpsA/viewform?usp=header"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault(); // stop instant redirect
+
                 if (typeof fbq !== 'undefined') {
                   fbq('track', 'InitiateCheckout');
                 }
+
+                setTimeout(() => {
+                  window.open(
+                    'https://docs.google.com/forms/d/e/1FAIpQLSeJFiEYL7KjZ9cS0s9KRdZrdhzLMjpGmGZkwp8yWh4s54lpsA/viewform?usp=header',
+                    '_blank'
+                  );
+                }, 500); // wait 0.5 sec
               }}
               className="group relative inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base sm:text-lg overflow-hidden shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
             >
