@@ -174,11 +174,9 @@ export default function Scholarship() {
             transition={{ duration: 0.5, delay: 0.46 }}
             className="flex flex-wrap gap-4 justify-center"
           >
-            <a              
-              onClick={(e) => {
-                e.preventDefault();
-
-                if (typeof fbq !== 'undefined') {
+            <button
+              onClick={() => {
+                if (typeof window !== 'undefined' && typeof fbq !== 'undefined') {
                   fbq('track', 'InitiateCheckout');
                 }
 
@@ -187,8 +185,8 @@ export default function Scholarship() {
                     'https://docs.google.com/forms/d/e/1FAIpQLSeJFiEYL7KjZ9cS0s9KRdZrdhzLMjpGmGZkwp8yWh4s54lpsA/viewform?usp=header',
                     '_blank'
                   );
-                }, 800);
-              }}
+                }, 1000);
+              }}  
               className="group relative inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base sm:text-lg overflow-hidden shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
             >
               <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 rounded-xl" />
