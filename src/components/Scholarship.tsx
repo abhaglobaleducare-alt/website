@@ -182,7 +182,7 @@ export default function Scholarship() {
 
                 setTimeout(() => {
                   window.open(
-                    'https://docs.google.com/forms/d/e/1FAIpQLSeJFiEYL7KjZ9cS0s9KRdZrdhzLMjpGmGZkwp8yWh4s54lpsA/viewform?usp=header',
+                    'https://agest-abha.netlify.app',
                     '_blank'
                   );
                 }, 1000);
