@@ -176,8 +176,8 @@ export default function Scholarship() {
           >
             <button
               onClick={() => {
-                if (typeof window !== 'undefined' && typeof fbq !== 'undefined') {
-                  fbq('track', 'InitiateCheckout');
+                if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
+                  (window as any).fbq('track', 'InitiateCheckout');
                 }
 
                 setTimeout(() => {
