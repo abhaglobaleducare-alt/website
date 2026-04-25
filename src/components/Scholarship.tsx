@@ -65,14 +65,14 @@ const ticker = [
 
 /* ═══════════════════════════════════════════════════════════════
    MAIN COMPONENT
-═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 export default function Scholarship() {
   return (
     <div className="overflow-x-hidden font-sans">
 
       {/* ══════════════════════════════════════
           HERO
-      ══════════════════════════════════════ */}
+          ══════════════════════════════════════ */}
       <section className="relative bg-[#0B1A35] min-h-[92vh] flex flex-col justify-center overflow-hidden px-5 sm:px-10 py-16 sm:py-20">
 
         {/* Grid texture */}
@@ -196,7 +196,7 @@ export default function Scholarship() {
                 size={17}
                 className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
               />
-            </a>
+            </button>
             <a
               href="tel:+917447552878"
               className="inline-flex items-center gap-2 border border-white/20 text-white/80 px-7 py-4 rounded-xl font-semibold text-base hover:border-[#C6962E]/60 hover:text-white transition-all duration-300"
