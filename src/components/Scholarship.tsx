@@ -191,7 +191,7 @@ export default function Scholarship() {
             >
               <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 rounded-xl" />
               <Zap size={20} className="shrink-0" />
-              Register — Only ₹111
+              Start Your AGEST Attempt 🚀
               <ArrowUpRight
                 size={17}
                 className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
