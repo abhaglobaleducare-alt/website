@@ -153,6 +153,15 @@ export default function Scholarship() {
             >
               In Dollars 💵
             </motion.p>
+            {/* Premium Sentence */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.28 }}
+              className="text-center text-lg sm:text-xl text-white font-semibold max-w-[600px] mx-auto mt-4"
+            >
+              India&apos;s First Consistancy-Based Scholarship Test for MBBS Abroad
+            </motion.p>
           </div>
 
           {/* SUBTITLE */}
@@ -270,7 +279,7 @@ export default function Scholarship() {
             <span className="block text-[#C6962E]">(AGEST) 2026</span>
           </h2>
           <p className="text-[#0B1A35]/60 font-semibold text-sm sm:text-base tracking-widest uppercase">
-            Bapusaheb Patil (Sagaon) Abroad Educational Grant
+            Bapusaheb Patil (Sagaon) Abroad Education support Grant
           </p>
         </motion.div>
       </section>
@@ -527,6 +536,178 @@ export default function Scholarship() {
       </section>
 
       {/* ══════════════════════════════════════
+          DUPLICATE CTA BUTTON - Below Is this for you?
+      ══════════════════════════════════════ */}
+      <section className="bg-[#0B1A35] py-12 px-5 sm:px-10 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <button
+            onClick={() => {
+              if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
+                (window as any).fbq('track', 'InitiateCheckout');
+              }
+
+              setTimeout(() => {
+                window.open(
+                  'https://agest-abha.netlify.app',
+                  '_blank'
+                );
+              }, 1000);
+            }}  
+            className="group relative inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base sm:text-lg overflow-hidden shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
+          >
+            <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 rounded-xl" />
+            <Zap size={20} className="shrink-0" />
+            Start Your AGEST Attempt 🚀
+            <ArrowUpRight
+              size={17}
+              className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+            />
+          </button>
+        </motion.div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          SCHOLARSHIP CLARITY SECTION
+      ══════════════════════════════════════ */}
+      <section className="bg-[#FFF8EE] py-20 sm:py-24 px-5 sm:px-10">
+        <div className="max-w-[900px] mx-auto">
+          {/* Power Statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-10 flex justify-center"
+          >
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 20px rgba(198,150,46,0.3)',
+                  '0 0 40px rgba(198,150,46,0.6)',
+                  '0 0 20px rgba(198,150,46,0.3)'
+                ]
+              }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="bg-gradient-to-r from-[#0B1A35] to-[#152d54] border-2 border-[#C6962E] px-6 py-3 rounded-xl"
+            >
+              <p className="text-[#FFD700] font-black text-sm sm:text-base text-center">
+                ⚡ We don&apos;t just say &apos;Scholarship&apos; — we explain it. ⚡
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="font-playfair font-bold text-[#0B1A35] text-2xl sm:text-3xl">
+              🎓 Scholarship Clarity – What You Should Know
+            </h2>
+          </motion.div>
+
+          <div className="space-y-8">
+            {/* Commonly Available Scholarships */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm"
+            >
+              <h3 className="font-bold text-[#0B1A35] text-lg mb-4">
+                📌 Commonly Available Scholarships
+              </h3>
+              <p className="text-gray-600 mb-4">
+                Most scholarships fall under:
+              </p>
+              <div className="space-y-4 ml-4">
+                <div className="flex gap-3">
+                  <span className="text-[#C6962E] font-bold">1.</span>
+                  <div>
+                    <p className="font-semibold text-[#0B1A35]">Government Scholarships</p>
+                    <p className="text-gray-500 text-sm">Offered by governments based on policies, eligibility, or bilateral agreements.</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-[#C6962E] font-bold">2.</span>
+                  <div>
+                    <p className="font-semibold text-[#0B1A35]">University-Specific Scholarships</p>
+                    <p className="text-gray-500 text-sm">Provided by universities based on merit, promotions, or institutional criteria.</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-gray-500 text-sm mt-4 border-t border-gray-100 pt-4">
+                👉 These scholarships are not created by consultancies, but are part of the existing education system.
+              </p>
+            </motion.div>
+
+            {/* The ABHA Advantage */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-[#0B1A35] to-[#152d54] rounded-2xl p-6 sm:p-8 shadow-lg"
+            >
+              <h3 className="font-bold text-white text-lg mb-4">
+                💡 The ABHA Advantage
+              </h3>
+              <p className="text-white/80 mb-4">
+                At ABHA Global Educare, we believe students deserve complete clarity.
+                Along with guiding you through existing scholarship opportunities, we also provide:
+              </p>
+              <div className="bg-[#C6962E]/10 border border-[#C6962E]/30 rounded-xl p-4">
+                <p className="font-black text-[#C6962E] text-xl">
+                  💰 Additional Scholarship Support of up to $1000 per year for 6 years
+                </p>
+                <p className="text-white/70 text-sm mt-2">
+                  👉 This is an extra benefit, designed to support students throughout their MBBS journey abroad.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Our Commitment */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-100 shadow-sm"
+            >
+              <h3 className="font-bold text-[#0B1A35] text-lg mb-4">
+                🤝 Our Commitment
+              </h3>
+              <p className="text-gray-600 mb-4">
+                We do not believe in creating confusion through unclear claims.
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 size={20} className="text-[#22C55E]" />
+                  <p className="text-[#0B1A35]">We explain every component clearly</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 size={20} className="text-[#22C55E]" />
+                  <p className="text-[#0B1A35]">We guide you with transparency</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 size={20} className="text-[#22C55E]" />
+                  <p className="text-[#0B1A35]">We support you throughout your journey</p>
+                </div>
+              </div>
+              <p className="text-gray-500 text-sm mt-4 border-t border-gray-100 pt-4 font-semibold">
+                Because choosing your medical career deserves clarity, not confusion.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
           WHY AGEST — numbered cards
       ══════════════════════════════════════ */}
       <section className="bg-[#0B1A35] py-20 sm:py-24 px-5 sm:px-10 overflow-hidden">
@@ -735,6 +916,35 @@ export default function Scholarship() {
             <CalendarDays size={14} className="inline mr-1" />
             Results declared on the same day after each attempt
           </p>
+          {/* Flashing Box - Don't Wait */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="mt-6 flex justify-center"
+          >
+            <motion.div
+              animate={{
+                background: [
+                  'linear-gradient(90deg,#C6962E,#f5a623)',
+                  'linear-gradient(90deg,#f5a623,#FFD770)',
+                  'linear-gradient(90deg,#FFD770,#C6962E)',
+                  'linear-gradient(90deg,#C6962E,#f5a623)'
+                ],
+                boxShadow: [
+                  '0 0 20px rgba(198,150,46,0.4)',
+                  '0 0 40px rgba(198,150,46,0.7)',
+                  '0 0 20px rgba(198,150,46,0.4)'
+                ]
+              }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="px-8 py-4 rounded-xl"
+            >
+              <p className="text-[#0B1A35] font-black text-base sm:text-lg text-center">
+                DON&apos;T WAIT FOR THE LAST DATE. 111 RUPEES CAN OPEN DOORS OF YOUR DREAM
+              </p>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 

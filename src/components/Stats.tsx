@@ -44,6 +44,9 @@ export default function Stats() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="relative text-center p-4 sm:p-6 lg:p-8 rounded-2xl border border-gray-100 bg-gray-50/50 hover:border-[#C6962E]/20 hover:bg-[#C6962E]/[0.03] transition-all duration-300"
             >
+              {/* Golden light gradient overlay */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#FFD700]/10 via-[#F5A623]/5 to-transparent pointer-events-none" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-20 bg-gradient-to-b from-[#FFD700]/20 to-transparent rounded-full blur-xl" />
               <div className="mx-auto mb-4 w-12 h-12 rounded-xl bg-[#0B1A35] flex items-center justify-center">
                 <stat.icon size={22} className="text-[#C6962E]" />
               </div>

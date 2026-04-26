@@ -185,10 +185,10 @@ function VideoSection() {
             Must Watch
           </span>
           <h2 className="font-playfair text-2xl sm:text-3xl text-white">
-            Watch This Before You Decide
+            Understand MBBS Journey: From NEET to Admission Abroad
           </h2>
           <p className="text-white/55 mt-2 text-sm sm:text-base max-w-lg mx-auto">
-            A complete overview of everything you need to know about MBBS abroad — don&apos;t skip this.
+            A complete overview of everything you need to know about MBBS Admissions Journey — don&apos;t skip this.
           </p>
         </motion.div>
 

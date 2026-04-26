@@ -88,6 +88,30 @@ export default function Destinations() {
           </motion.p>
         </div>
 
+        {/* Power Statement - Flashing Vertical Box */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-10 flex justify-center"
+        >
+          <motion.div
+            animate={{
+              boxShadow: [
+                '0 0 20px rgba(198,150,46,0.3)',
+                '0 0 40px rgba(198,150,46,0.6)',
+                '0 0 20px rgba(198,150,46,0.3)'
+              ]
+            }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="bg-gradient-to-r from-[#0B1A35] to-[#152d54] border-2 border-[#C6962E] px-6 py-3 rounded-xl"
+          >
+            <p className="text-[#FFD700] font-black text-sm sm:text-base text-center">
+              ⚡ We don&apos;t just say &apos;Scholarship&apos; — we explain it. ⚡
+            </p>
+          </motion.div>
+        </motion.div>
+
         {/* Destination Cards */}
         <div className="space-y-10">
           {destinations.map((dest, i) => (
