@@ -13,8 +13,8 @@ const stats = [
   {
     icon: Award,
     value: '$6,000',
-    label: 'AGEST 2026 Scholarship',
-    detail: 'merit scholarship for top students',
+    label: 'NEET Excellence Pathway',
+    detail: 'Merit scholarship for top students',
   },
   {
     icon: BookOpen,

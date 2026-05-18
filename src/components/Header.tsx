@@ -4,13 +4,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'AGEST Scholarship', href: '/scholarship' },
+  { label: 'NEET Excellence Pathway', href: '/scholarship' },
   { label: 'Educate Yourself', href: '/educate' },
   { label: 'Clinical Workshops', href: '/praxis' },
   { label: 'Destinations', href: '/destinations' },
@@ -41,8 +41,8 @@ export default function Header() {
           transition={{ duration: 2, repeat: Infinity }}
           className="inline-block"
         >
-          <span className="sm:hidden">🎓 AGEST 2026 Scholarship — WhatsApp +91 7447552878</span>
-          <span className="hidden sm:inline">🎓 NEW! Hands-On Clinical Workshops — Our Own Training Platform | AGEST 2026 - send AGEST to WhatsApp +91 7447552878</span>
+          <span className="sm:hidden">🎓 NEET Excellence Pathway — WhatsApp +91 74475 52878 · Georgia: +995 591 717122</span>
+          <span className="hidden sm:inline">🎓 NEET Excellence Pathway 2026 — Scholarship + NEET Practice Tests | WhatsApp +91 74475 52878 · Georgia: +995 591 717122</span>
         </motion.span>
       </div>
 

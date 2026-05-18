@@ -1,21 +1,22 @@
 import Script from 'next/script';
 import type { Metadata, Viewport } from 'next';
 import Link from 'next/link';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Manrope, Cormorant_Garamond } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Providers } from '@/providers';
 import { SITE_CONFIG } from '@/lib/constants';
 import './globals.css';
 
-const inter = Inter({
+const inter = Manrope({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
 });
 
-const playfair = Playfair_Display({
+const playfair = Cormorant_Garamond({
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-playfair',
 });
@@ -33,7 +34,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
   title: {
-    default: 'ABHA Global Educare - Your Gateway to MBBS Abroad',
+    default: 'ABHA Global Educare — Dreams Have No Borders',
     template: '%s | ABHA Global Educare',
   },
   description: SITE_CONFIG.description,

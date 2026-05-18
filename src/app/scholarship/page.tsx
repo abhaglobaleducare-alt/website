@@ -3,9 +3,9 @@ import Scholarship from '@/components/Scholarship';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'AGEST 2026 — ABHA Global Educare Scholarship Test',
+  title: 'NEET Excellence Pathway 2026 — Scholarship for MBBS Abroad',
   description:
-    'Win up to $6,000 scholarship for MBBS abroad! Register for AGEST 2026 — Bapusaheb Patil (Sagaon) Abroad Educational Grant. Just ₹111 entry. NEET pattern. Top 300 win.',
+    'Win up to $6,000 scholarship for MBBS abroad! ABHA NEET Excellence Pathway — Bapusaheb Patil (Sagaon) Abroad Educational Grant. Just ₹111 entry. NEET pattern. Top 300 win.',
 };
 
 export default function ScholarshipPage() {

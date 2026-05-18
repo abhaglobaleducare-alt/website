@@ -5,7 +5,7 @@
 export const SITE_CONFIG = {
   name: 'ABHA Global Educare LLP',
   shortName: 'ABHA Educare',
-  tagline: 'Your Gateway to Global Medical Education',
+  tagline: 'Dreams Have No Borders',
   description:
     'ABHA Global Educare LLP is a premier MBBS abroad consultancy helping Indian students pursue medical education in top universities across Russia, Georgia, Kazakhstan, Kyrgyzstan, and more.',
   url: 'https://abhaglobaleducare.com',
@@ -44,8 +44,8 @@ export const CONTACT_INFO = {
     label: 'Georgia Office (International)',
     companyName: 'ABHA Global Services LLC',
     address: '37 Raphael Agladze Street, Tbilisi, Georgia',
-    phone: '+995 599 123456',
-    phoneRaw: '+995599123456',
+    phone: '+995 591 717122',
+    phoneRaw: '+995591717122',
     email: 'georgia@abhaglobaleducare.com',
     mapUrl: 'https://maps.google.com/?q=37+Raphael+Agladze+Street,+Tbilisi,+Georgia',
     timings: 'Mon - Fri: 10:00 AM - 6:00 PM (Georgia Time)',

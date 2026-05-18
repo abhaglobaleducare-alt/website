@@ -103,6 +103,15 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href="tel:+995591717122"
+                  className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
+                >
+                  +995 591 717122{" "}
+                  <span className="text-white/50">(Georgia)</span>
+                </a>
+              </li>
+              <li>
+                <a
                   href="mailto:connect@abhaglobaleducare.com"
                   className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
                 >

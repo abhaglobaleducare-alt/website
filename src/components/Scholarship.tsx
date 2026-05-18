@@ -7,9 +7,6 @@ import {
   CheckCircle2,
   Globe,
   BookOpen,
-  Plane,
-  Home as HomeIcon,
-  Utensils,
   Phone,
   Zap,
   ArrowUpRight,
@@ -200,7 +197,7 @@ export default function Scholarship() {
             >
               <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 rounded-xl" />
               <Zap size={20} className="shrink-0" />
-              Start Your AGEST Attempt 🚀
+              Start Scholarship Test 🚀
               <ArrowUpRight
                 size={17}
                 className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
@@ -275,11 +272,11 @@ export default function Scholarship() {
             className="font-playfair font-bold text-[#0B1A35] leading-tight mb-3"
             style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
           >
-            🎓 ABHA Global Educare Scholarship Test
-            <span className="block text-[#C6962E]">(AGEST) 2026</span>
+            🎓 ABHA NEET Excellence Pathway
+            <span className="block text-[#C6962E]">2026</span>
           </h2>
           <p className="text-[#0B1A35]/60 font-semibold text-sm sm:text-base tracking-widest uppercase">
-            Bapusaheb Patil (Sagaon) Abroad Education support Grant
+            Bapusaheb Patil (Sagaon) Abroad Education Support Grant
           </p>
         </motion.div>
       </section>
@@ -358,7 +355,7 @@ export default function Scholarship() {
               All online. 💥
             </h2>
             <p className="text-gray-600 leading-relaxed mb-8 text-[1.05rem]">
-              AGEST isn&apos;t a random MCQ test. It&apos;s designed exactly like NEET — Physics,
+              This isn&apos;t a random MCQ test. It&apos;s designed exactly like NEET — Physics,
               Chemistry &amp; Biology, 3 hours, 180 questions. You get sharper going into
               NEET. And you could win big.
             </p>
@@ -393,7 +390,7 @@ export default function Scholarship() {
                 <span className="text-[#0B1A35] font-black text-sm uppercase tracking-widest">
                   🏆 Top 300 Win
                 </span>
-                <span className="text-[#0B1A35] font-black text-sm">AGEST 2026</span>
+                <span className="text-[#0B1A35] font-black text-sm">Pathway 2026</span>
               </div>
 
               {/* Dashed rule */}
@@ -722,7 +719,7 @@ export default function Scholarship() {
               The double advantage
             </span>
             <h2 className="font-playfair font-bold text-white text-3xl sm:text-4xl mt-2">
-              Why write AGEST?
+              Why take the Pathway Test?
             </h2>
           </motion.div>
 
