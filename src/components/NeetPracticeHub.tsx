@@ -352,6 +352,10 @@ export default function NeetPracticeHub() {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-[#C6962E]/60 transition-colors">
             <Mail className="w-4 h-4" /> connect@abhaglobaleducare.com
           </a>
+          <a href="mailto:abhaglobaleducare@gmail.com"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-[#C6962E]/60 transition-colors">
+            <Mail className="w-4 h-4" /> abhaglobaleducare@gmail.com
+          </a>
         </div>
       </section>
     </div>

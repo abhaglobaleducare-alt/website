@@ -34,15 +34,17 @@ const offices = [
     icon: Building2,
     title: 'Boisar — Branch Office',
     address: 'Mahavir Nischay, A6, Flat no 201, Mahavir Nagar, Boisar, pin 401501, Maharashtra',
-    phone: '+91 74475 52878',
-    phoneHref: 'tel:+917447552878',
+    phone: '+91 72494 09376',
+    phoneHref: 'tel:+917249409376',
     hours: 'Mon–Sat, 10 AM – 7 PM',
   },
   {
     icon: Globe,
     title: 'Tbilisi, Georgia — Abroad Office',
     address: 'ABHA Global Services LLC, 37 Raphael Agladze Street, Tbilisi',
-    note: 'On-ground support + Sterling Study & Stay Suites hostel',
+    phone: '+995 57 910 4926 / +995 591 717122',
+    phoneHref: 'tel:+995579104926',
+    note: 'On-ground support + OneWindow Services hostel',
   },
 ];
 
@@ -278,6 +280,9 @@ export default function Contact() {
                 </a>
                 <a href="mailto:connect@abhaglobaleducare.com" className="inline-flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors">
                   <Mail size={14} /> connect@abhaglobaleducare.com
+                </a>
+                <a href="mailto:abhaglobaleducare@gmail.com" className="inline-flex items-center gap-2 text-white/70 text-sm hover:text-white transition-colors">
+                  <Mail size={14} /> abhaglobaleducare@gmail.com
                 </a>
               </div>
             </div>

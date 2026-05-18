@@ -24,7 +24,7 @@ const destinations = [
     duration: '6 years',
     universities: ['East West University', 'East European University', 'SEU', 'Alte University'],
     keyFacts: [
-      { icon: HomeIcon, text: 'Sterling Study & Stay Suites — our own 200+ bed hostel in Tbilisi' },
+      { icon: HomeIcon, text: 'One Window Services — our own 200+ bed (NOT BUNK BED) hostel in Tbilisi' },
       { icon: Utensils, text: 'Daily Indian veg & non-veg meals prepared by Indian cooks' },
       { icon: Globe2, text: 'Full English-medium curriculum at all partner universities' },
       { icon: Shield, text: 'WHO, NMC & WFME Eligible Degrees' },
@@ -42,7 +42,7 @@ const destinations = [
     universities: ['International European University (IEU)', 'Avicenna International Medical University'],
     keyFacts: [
       { icon: IndianRupee, text: 'Lowest total cost among all MBBS-abroad countries' },
-      { icon: HomeIcon, text: 'Managed student housing with 24/7 security and warden' },
+      { icon: HomeIcon, text: 'One Window Services — our own 200+ bed (NOT BUNK BED) hostel in Bishkek' },
       { icon: Utensils, text: 'Dedicated Indian mess — home-style meals every day' },
       { icon: Users, text: '5,000+ Indian medical students already studying here' },
       { icon: Globe2, text: 'English-medium instruction with optional Russian language prep' },
@@ -107,7 +107,7 @@ export default function Destinations() {
             className="bg-gradient-to-r from-[#0B1A35] to-[#152d54] border-2 border-[#C6962E] px-6 py-3 rounded-xl"
           >
             <p className="text-[#FFD700] font-black text-sm sm:text-base text-center">
-              ⚡ We don&apos;t just say &apos;Scholarship&apos; — we explain it. ⚡
+              ⚡ We don&apos;t just send You — Our On ground support Team will be with you. ⚡
             </p>
           </motion.div>
         </motion.div>

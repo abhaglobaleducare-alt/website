@@ -10,6 +10,8 @@ const quickLinks = [
 ];
 
 const programs = [
+  { label: "NEET Preparation Portal", href: "/neet-preparation" },
+  { label: "NEET Practice Hub", href: "/neet-practice-hub" },
   { label: "CLINICAL Workshops", href: "/praxis" },
   { label: "MBBS in Georgia", href: "/destinations" },
   { label: "MBBS in Kyrgyzstan", href: "/destinations" },
@@ -116,6 +118,14 @@ export default function Footer() {
                   className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
                 >
                   connect@abhaglobaleducare.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:abhaglobaleducare@gmail.com"
+                  className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
+                >
+                  abhaglobaleducare@gmail.com
                 </a>
               </li>
               <li>

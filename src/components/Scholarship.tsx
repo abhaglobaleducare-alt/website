@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   Globe,
   BookOpen,
+  Brain,
   Phone,
   Zap,
   ArrowUpRight,
@@ -171,7 +172,7 @@ export default function Scholarship() {
           >
             Every NEET mark matters. Our structured revision portal and real-exam practice
             hub give every serious student the tools to prepare with confidence —{' '}
-            <span className="text-white font-bold">and top performers win a scholarship toward MBBS abroad.</span>
+            <span className="text-white font-bold">and High-performing candidates can secure a government MBBS seat in India, or, if not, qualify for a scholarship to study medicine abroad,</span>
           </motion.p>
 
           {/* CTAs */}
@@ -217,6 +218,24 @@ export default function Scholarship() {
               ⏳ Last date:{' '}
               <strong className="text-white">Don&apos;t wait for the Last Date</strong>
             </span>
+          </motion.div>
+
+          {/* Student Login Button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.85 }}
+            className="mt-5 flex justify-center"
+          >
+            <a
+              href="https://abha-neet-prepportal.vercel.app/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold text-sm shadow-lg hover:opacity-90 transition-all duration-200"
+              style={{ background: '#16A34A', color: '#fff' }}
+            >
+              🎓 Student Login — NEET Portal
+            </a>
           </motion.div>
         </div>
       </section>
@@ -712,24 +731,31 @@ export default function Scholarship() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               {
                 num: '01',
+                heading: 'Real NEET Revision',
+                body: 'Get access to all the finest NEET revision tools and material at an unbelievable cost of ₹999 for a year. Introductory Offer.',
+                accent: '#FFD770',
+                icon: <Brain size={22} />,
+              },
+              {
+                num: '02',
                 heading: 'Real NEET Practice',
                 body: 'Same pattern, same pressure. Write AGEST and walk into NEET sharper than anyone else in the room.',
                 accent: '#C6962E',
                 icon: <BookOpen size={22} />,
               },
               {
-                num: '02',
+                num: '03',
                 heading: 'Earn Your Scholarship',
                 body: "This isn't charity. Top 300 rankers earn up to $1,000/year off their MBBS fees. Pure merit.",
                 accent: '#22C55E',
                 icon: <Flame size={22} />,
               },
               {
-                num: '03',
+                num: '04',
                 heading: 'Secure Your MBBS Path',
                 body: "ABHA's counsellors guide you on university choice, visa, and every step — no guesswork.",
                 accent: '#60A5FA',
@@ -821,7 +847,7 @@ export default function Scholarship() {
             className="text-center mb-12"
           >
             <h2 className="font-playfair font-bold text-[#0B1A35] text-3xl sm:text-4xl">
-              ⏳ Mark Your Calendar
+              ⏳ 2026 NEET Aspirants — Mark Your Calendar
             </h2>
           </motion.div>
 
@@ -955,7 +981,7 @@ export default function Scholarship() {
             transition={{ duration: 2.5, repeat: Infinity }}
             className="inline-block bg-red-500/20 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-7"
           >
-            ⚡ Limited Seats · Only Top 300 Win
+            ⚡ Limited Seats · But YOU can Win
           </motion.div>
 
           <h2

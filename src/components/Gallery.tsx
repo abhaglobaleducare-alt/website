@@ -112,17 +112,17 @@ const galleryItems = [
   {
     id: 1,
     category: 'hostel',
-    label: 'Sterling Study & Stay Suites',
+    label: 'OneWindow Services',
     bg: 'from-[#C6962E]/20 to-[#C6962E]/5',
     icon: '🏨',
     desc: 'Modern 200+ bed hostel in Tbilisi',
     image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F1%2520sterlingg%2520welcome.jpg',
   },
-  { id: 10, category: 'hostel', label: 'Sterling 3-Share Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🛏️', desc: 'Comfortable shared student accommodation', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F2%2520strling%25203%2520share.jpg' },
-  { id: 11, category: 'hostel', label: 'Sterling Hostel Exterior', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🏢', desc: 'Sterling Study & Stay Suites building', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F3%2520Sterling.jpg' },
-  { id: 12, category: 'hostel', label: 'Sterling Bathrooms', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🚿', desc: 'Clean modern bathroom facilities', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F5%2520sterling%2520bath.jpg' },
-  { id: 13, category: 'hostel', label: 'Sterling Study Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '📖', desc: 'Dedicated study room for students', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F6%2520Sterling%2520Studyroom.jpg' },
-  { id: 14, category: 'hostel', label: 'Sterling Gaming Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎮', desc: 'Gaming & recreation lounge', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F7%2520Sterling%2520gaming%2520room.jpg' },
+  { id: 10, category: 'hostel', label: 'OneWindow 3-Share Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🛏️', desc: 'Comfortable shared student accommodation', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F2%2520strling%25203%2520share.jpg' },
+  { id: 11, category: 'hostel', label: 'OneWindow Hostel Exterior', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🏢', desc: 'OneWindow Services building', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F3%2520Sterling.jpg' },
+  { id: 12, category: 'hostel', label: 'OneWindow Bathrooms', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🚿', desc: 'Clean modern bathroom facilities', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F5%2520sterling%2520bath.jpg' },
+  { id: 13, category: 'hostel', label: 'OneWindow Study Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '📖', desc: 'Dedicated study room for students', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F6%2520Sterling%2520Studyroom.jpg' },
+  { id: 14, category: 'hostel', label: 'OneWindow Gaming Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎮', desc: 'Gaming & recreation lounge', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F7%2520Sterling%2520gaming%2520room.jpg' },
 ];
 
 const categories = ['all', 'hostel'];

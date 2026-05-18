@@ -101,8 +101,71 @@ function buildAdminEmail(data: ContactFormData): string {
   `;
 }
 
-// Build the auto-reply email for the student
-function buildAutoReplyEmail(name: string): string {
+// Build the auto-reply email for the student — tailored by registration source
+function buildAutoReplyEmail(name: string, source?: string): string {
+  const isNeetPrep = source === 'neet-preparation-registration';
+  const isNeetHub = source === 'neet-practice-hub-registration';
+
+  const subject = isNeetPrep
+    ? 'NEET Preparation Portal'
+    : isNeetHub
+    ? 'NEET Practice Hub'
+    : 'ABHA Global Educare';
+
+  const bodyContent = isNeetPrep
+    ? `
+          <h2>Registration Received, ${name}!</h2>
+          <p>Thank you for registering for the <strong>ABHA NEET Preparation Portal (₹999/year)</strong>.</p>
+          <div class="highlight">
+            <strong>What happens next?</strong>
+            <ul>
+              <li>Our team will verify your UPI payment (UTR) within 24 hours</li>
+              <li>Your account will be activated and login credentials sent via WhatsApp &amp; Email</li>
+              <li>You'll get full access to all 4 subjects — Physics, Chemistry, Botany &amp; Zoology</li>
+            </ul>
+          </div>
+          <p>For faster activation, send your payment screenshot on WhatsApp:</p>
+          <p>
+            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878?text=Hi+I+just+registered+for+NEET+Preparation+Portal" style="color: #C6962E;">+91 74475 52878</a><br>
+            <strong>Phone:</strong> +91 74475 52878<br>
+            <strong>Email:</strong> connect@abhaglobaleducare.com / abhaglobaleducare@gmail.com
+          </p>`
+    : isNeetHub
+    ? `
+          <h2>Registration Received, ${name}!</h2>
+          <p>Thank you for registering for the <strong>ABHA NEET Practice Hub (₹1,111/year)</strong>.</p>
+          <div class="highlight">
+            <strong>What happens next?</strong>
+            <ul>
+              <li>Our team will verify your UPI payment (UTR) within 24 hours</li>
+              <li>Your Practice Hub account will be activated and login credentials sent via WhatsApp &amp; Email</li>
+              <li>You'll get access to Full NEET Mock Tests, Weekly Tests, Daily MCQs, and performance analytics</li>
+            </ul>
+          </div>
+          <p>For faster activation, send your payment screenshot on WhatsApp:</p>
+          <p>
+            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878?text=Hi+I+just+registered+for+NEET+Practice+Hub" style="color: #C6962E;">+91 74475 52878</a><br>
+            <strong>Phone:</strong> +91 74475 52878<br>
+            <strong>Email:</strong> connect@abhaglobaleducare.com / abhaglobaleducare@gmail.com
+          </p>`
+    : `
+          <h2>Thank you, ${name}!</h2>
+          <p>We have received your enquiry and our experienced counselor will contact you within <strong>24 hours</strong>.</p>
+          <div class="highlight">
+            <strong>What happens next?</strong>
+            <ul>
+              <li>Our counselor will review your profile</li>
+              <li>We'll call you to discuss the best options</li>
+              <li>You'll receive a personalized university recommendation</li>
+            </ul>
+          </div>
+          <p>In the meantime, feel free to reach us at:</p>
+          <p>
+            <strong>Phone:</strong> +91 74475 52878<br>
+            <strong>Email:</strong> connect@abhaglobaleducare.com / abhaglobaleducare@gmail.com<br>
+            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878" style="color: #C6962E;">Chat with us</a>
+          </p>`;
+
   return `
     <!DOCTYPE html>
     <html>
@@ -113,10 +176,10 @@ function buildAutoReplyEmail(name: string): string {
         .container { max-width: 600px; margin: 0 auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .header { background: linear-gradient(135deg, #0B1A35, #1a3a5c); color: #fff; padding: 32px; text-align: center; }
         .header h1 { margin: 0; font-size: 24px; color: #C6962E; }
+        .header p { margin: 6px 0 0; font-size: 14px; color: rgba(255,255,255,0.8); }
         .body { padding: 32px; color: #333; line-height: 1.6; }
         .body h2 { color: #0B1A35; }
         .highlight { background: #f0f7ff; border-left: 4px solid #C6962E; padding: 16px; margin: 20px 0; border-radius: 0 8px 8px 0; }
-        .cta { display: inline-block; background: #C6962E; color: #fff; padding: 12px 32px; border-radius: 25px; text-decoration: none; font-weight: bold; margin: 16px 0; }
         .footer { background: #f8f9fa; padding: 20px 32px; text-align: center; font-size: 12px; color: #999; }
         .footer a { color: #C6962E; }
       </style>
@@ -125,27 +188,10 @@ function buildAutoReplyEmail(name: string): string {
       <div class="container">
         <div class="header">
           <h1>ABHA Global Educare</h1>
+          <p>${subject}</p>
         </div>
         <div class="body">
-          <h2>Thank you, ${name}!</h2>
-          <p>We have received your enquiry and our experienced counselor will contact you within <strong>24 hours</strong>.</p>
-
-          <div class="highlight">
-            <strong>What happens next?</strong>
-            <ul>
-              <li>Our counselor will review your profile</li>
-              <li>We'll call you to discuss the best options</li>
-              <li>You'll receive a personalized university recommendation</li>
-            </ul>
-          </div>
-
-          <p>In the meantime, feel free to reach us at:</p>
-          <p>
-            <strong>Phone:</strong> +91 74475 52878<br>
-            <strong>Email:</strong> connect@abhaglobaleducare.com<br>
-            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878" style="color: #C6962E;">Chat with us</a>
-          </p>
-
+          ${bodyContent}
           <p>Best regards,<br><strong>Team ABHA Global Educare</strong></p>
         </div>
         <div class="footer">
@@ -204,11 +250,18 @@ export async function POST(request: NextRequest) {
 
     // Send auto-reply to the student (only if email is provided)
     if (data.email) {
+      const isNeetPrep = data.source === 'neet-preparation-registration';
+      const isNeetHub = data.source === 'neet-practice-hub-registration';
+      const replySubject = isNeetPrep
+        ? 'NEET Preparation Portal — Registration Received'
+        : isNeetHub
+        ? 'NEET Practice Hub — Registration Received'
+        : 'Thank you for your enquiry — ABHA Global Educare';
       await transporter.sendMail({
         from: process.env.SMTP_FROM || `"ABHA Global Educare" <${process.env.SMTP_USER}>`,
         to: data.email,
-        subject: 'Thank you for your enquiry — ABHA Global Educare',
-        html: buildAutoReplyEmail(data.name),
+        subject: replySubject,
+        html: buildAutoReplyEmail(data.name, data.source),
       });
     }
 

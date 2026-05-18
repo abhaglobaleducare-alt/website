@@ -68,6 +68,12 @@ export default function Header() {
             >
               <Mail size={14} /> connect@abhaglobaleducare.com
             </a>
+            <a
+              href="mailto:abhaglobaleducare@gmail.com"
+              className="hidden lg:flex items-center gap-1.5 text-white hover:text-primary-gold transition-all duration-300 hover:-translate-y-0.5"
+            >
+              <Mail size={14} /> abhaglobaleducare@gmail.com
+            </a>
           </div>
           <div className="hidden md:block">
             <strong className="text-xs lg:text-sm">Reg No: ACO-8092 </strong>
