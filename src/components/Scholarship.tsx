@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import {
   CalendarDays,
   CheckCircle2,
@@ -178,36 +179,29 @@ export default function Scholarship() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.46 }}
-            className="flex flex-wrap gap-4 justify-center"
+            className="flex flex-col items-center gap-5"
           >
-            <button
-              onClick={() => {
-                if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
-                  (window as any).fbq('track', 'InitiateCheckout');
-                }
-
-                setTimeout(() => {
-                  window.open(
-                    'https://agest-abha.netlify.app',
-                    '_blank'
-                  );
-                }, 1000);
-              }}  
-              className="group relative inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base sm:text-lg overflow-hidden shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 rounded-xl" />
-              <Zap size={20} className="shrink-0" />
-              Start Scholarship Test 🚀
-              <ArrowUpRight
-                size={17}
-                className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-              />
-            </button>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                href="/neet-preparation"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-7 py-4 rounded-xl font-black text-base sm:text-lg shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
+              >
+                📚 NEET Preparation
+                <ArrowUpRight size={17} className="shrink-0" />
+              </Link>
+              <Link
+                href="/neet-practice-hub"
+                className="inline-flex items-center gap-2.5 border-2 border-[#C6962E]/60 text-white px-7 py-4 rounded-xl font-black text-base sm:text-lg hover:bg-[#C6962E]/10 hover:border-[#C6962E] transition-all duration-300 hover:-translate-y-0.5"
+              >
+                🎯 NEET Practice Hub
+                <ArrowUpRight size={17} className="shrink-0" />
+              </Link>
+            </div>
             <a
               href="tel:+917447552878"
-              className="inline-flex items-center gap-2 border border-white/20 text-white/80 px-7 py-4 rounded-xl font-semibold text-base hover:border-[#C6962E]/60 hover:text-white transition-all duration-300"
+              className="inline-flex items-center gap-2 border border-white/20 text-white/70 px-6 py-2.5 rounded-xl font-semibold text-sm hover:border-[#C6962E]/60 hover:text-white transition-all duration-300"
             >
-              <Phone size={16} /> +91 74475 52878
+              <Phone size={14} /> +91 74475 52878
             </a>
           </motion.div>
 
@@ -533,38 +527,33 @@ export default function Scholarship() {
       </section>
 
       {/* ══════════════════════════════════════
-          DUPLICATE CTA BUTTON - Below Is this for you?
+          DUAL CTA — NEET Preparation + NEET Practice Hub
       ══════════════════════════════════════ */}
-      <section className="bg-[#0B1A35] py-12 px-5 sm:px-10 text-center">
+      <section className="bg-[#0B1A35] py-14 px-5 sm:px-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          className="flex flex-col items-center gap-4"
         >
-          <button
-            onClick={() => {
-              if (typeof window !== 'undefined' && typeof (window as any).fbq !== 'undefined') {
-                (window as any).fbq('track', 'InitiateCheckout');
-              }
-
-              setTimeout(() => {
-                window.open(
-                  'https://agest-abha.netlify.app',
-                  '_blank'
-                );
-              }, 1000);
-            }}  
-            className="group relative inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base sm:text-lg overflow-hidden shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
-          >
-            <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors duration-300 rounded-xl" />
-            <Zap size={20} className="shrink-0" />
-            Start Your AGEST Attempt 🚀
-            <ArrowUpRight
-              size={17}
-              className="shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-            />
-          </button>
+          <p className="text-white/50 text-xs uppercase tracking-widest font-semibold mb-2">Choose Your Pathway</p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link
+              href="/neet-preparation"
+              className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-7 py-4 rounded-xl font-black text-base sm:text-lg shadow-[0_0_40px_rgba(198,150,46,0.4)] hover:shadow-[0_0_60px_rgba(198,150,46,0.6)] transition-all duration-300 hover:-translate-y-0.5"
+            >
+              📚 NEET Preparation
+              <ArrowUpRight size={17} className="shrink-0" />
+            </Link>
+            <Link
+              href="/neet-practice-hub"
+              className="inline-flex items-center gap-2.5 border-2 border-[#C6962E]/60 text-white px-7 py-4 rounded-xl font-black text-base sm:text-lg hover:bg-[#C6962E]/10 hover:border-[#C6962E] transition-all duration-300 hover:-translate-y-0.5"
+            >
+              🎯 NEET Practice Hub
+              <ArrowUpRight size={17} className="shrink-0" />
+            </Link>
+          </div>
         </motion.div>
       </section>
 
