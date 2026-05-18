@@ -275,27 +275,25 @@ export default function Scholarship() {
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
           {[
             {
-              number: 111,
-              prefix: '₹',
-              label: 'Registration Fee',
-              sub: 'Less than a pizza 🍕',
+              display: '₹999 & ₹1111',
+              label: 'Registration Fee for NEET Excellence Program',
+              sub: 'Less than a Family Dinner 🍕',
               color: '#C6962E',
             },
             {
               number: 300,
-              prefix: 'Top ',
+              prefix: '',
               label: 'Scholars Selected',
               sub: 'Nationwide merit list 🏆',
               color: '#22C55E',
             },
             {
-              number: 6000,
-              prefix: '$',
-              label: 'Max Scholarship',
+              display: 'up to $6,000',
+              label: 'Rewards / Gifts / Scholarship',
               sub: '≈ ₹5+ Lakhs over 6 yrs 💵',
               color: '#60A5FA',
             },
-          ].map(({ number, prefix, label, sub, color }, i) => (
+          ].map(({ number, prefix, display, label, sub, color }: { number?: number; prefix?: string; display?: string; label: string; sub: string; color: string }, i) => (
             <motion.div
               key={label}
               initial={{ opacity: 0, y: 30 }}
@@ -305,11 +303,13 @@ export default function Scholarship() {
               className="py-10 sm:py-0 sm:px-12 text-center"
             >
               <p
-                className="font-black text-5xl sm:text-6xl leading-none mb-2"
+                className={`font-black leading-none mb-2 ${display ? 'text-3xl sm:text-4xl' : 'text-5xl sm:text-6xl'}`}
                 style={{ color }}
               >
-                {prefix}
-                <CountUp target={number} />
+                {display
+                  ? display
+                  : <>{prefix}<CountUp target={number ?? 0} /></>
+                }
               </p>
               <p className="text-white font-bold text-lg mb-1">{label}</p>
               <p className="text-gray-500 text-sm">{sub}</p>
@@ -372,12 +372,19 @@ export default function Scholarship() {
             className="relative"
           >
             <div className="bg-[#0B1A35] rounded-3xl overflow-hidden shadow-2xl">
-              {/* Top gold band */}
-              <div className="bg-gradient-to-r from-[#C6962E] to-[#f5a623] p-5 flex items-center justify-between">
-                <span className="text-[#0B1A35] font-black text-sm uppercase tracking-widest">
-                  🏆 Top 300 Win
-                </span>
-                <span className="text-[#0B1A35] font-black text-sm">Pathway 2026</span>
+              {/* UPPER PART: Title + Introductory offer pricing */}
+              <div className="bg-gradient-to-r from-[#C6962E] to-[#f5a623] p-4 text-center">
+                <p className="text-[#0B1A35] font-black text-xs sm:text-sm uppercase tracking-widest mb-2">
+                  🏆 Only for 2026 NEET Aspirants : Introductory Offer
+                </p>
+                <div className="flex items-center justify-center gap-3">
+                  <span className="font-black text-2xl" style={{ color: '#dc2626', textDecoration: 'line-through' }}>
+                    ₹1111
+                  </span>
+                  <span className="font-black text-3xl" style={{ color: '#14532d' }}>
+                    ₹111
+                  </span>
+                </div>
               </div>
 
               {/* Dashed rule */}
@@ -385,38 +392,38 @@ export default function Scholarship() {
                 <div className="border-t border-dashed border-white/10" />
               </div>
 
-              {/* Prize amount */}
-              <div className="px-8 py-8 text-center">
-                <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-2">
-                  Scholarship Per Year
-                </p>
-                <p
-                  className="text-[#FFD770] font-black"
-                  style={{ fontSize: 'clamp(3rem, 8vw, 5rem)', lineHeight: 1 }}
-                >
-                  $1,000
-                </p>
-                <p className="text-white/60 text-base mt-1">× 6 years of MBBS</p>
-
-                <div className="my-6 border-t border-dashed border-white/10" />
-
-                <p className="text-white/50 text-sm font-semibold uppercase tracking-widest mb-1">
-                  Total Value
-                </p>
-                <p className="text-[#C6962E] font-black text-4xl">$6,000</p>
-                <p className="text-white/50 text-sm mt-1">≈ ₹5,00,000+</p>
+              {/* MIDDLE PART: Two vertical columns */}
+              <div className="px-6 py-6 grid grid-cols-2">
+                {/* Column 1: iPad / Tablet Reward */}
+                <div className="text-center pr-3 border-r border-white/10">
+                  <p className="text-4xl mb-2">📱</p>
+                  <p className="text-white font-bold text-sm">iPad / Tablet</p>
+                  <p className="text-[#C6962E] font-black text-sm mt-0.5">Reward</p>
+                  <p className="text-white/60 text-xs mt-2 leading-relaxed">Learn, Practice &amp; Win</p>
+                </div>
+                {/* Column 2: Scholarship range */}
+                <div className="text-center pl-3">
+                  <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-1">
+                    Scholarship Per Year
+                  </p>
+                  <p className="text-[#FFD770] font-black text-base leading-tight">
+                    From $500 to $1,000
+                  </p>
+                  <p className="text-white/60 text-sm mt-1">× 6 years of MBBS</p>
+                  <div className="my-3 border-t border-dashed border-white/10" />
+                  <p className="text-white/50 text-xs font-semibold uppercase tracking-wider mb-1">
+                    Total Value
+                  </p>
+                  <p className="text-[#C6962E] font-black text-base">$3,000 to $6,000</p>
+                  <p className="text-white/50 text-xs mt-1">≈ ₹2,70,000 to ₹5,40,000</p>
+                </div>
               </div>
 
-              {/* Bottom details */}
-              <div className="bg-white/5 px-8 py-5 flex items-center justify-between">
-                <div>
-                  <p className="text-white/40 text-xs mb-0.5">Valid for</p>
-                  <p className="text-white font-semibold text-sm">MBBS in Georgia 🇬🇪</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-white/40 text-xs mb-0.5">Entry fee</p>
-                  <p className="text-[#C6962E] font-black text-2xl">₹111</p>
-                </div>
+              {/* LOWER PART: Bold limited period notice */}
+              <div className="bg-white/5 px-6 py-4 text-center border-t border-white/10">
+                <p className="text-white font-black text-xs sm:text-sm uppercase tracking-wide">
+                  ⚡ ONLY FOR LIMITED PERIOD FOR NEET 2026 ASPIRANTS ⚡
+                </p>
               </div>
             </div>
 
