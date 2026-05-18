@@ -330,6 +330,18 @@ export default function NeetPracticeHub() {
 
       {/* FOOTER CTA */}
       <section className="py-10 px-4 sm:px-8 text-center" style={{ background: '#0B1A35' }}>
+        <div className="mb-6">
+          <p className="text-white/70 text-sm mb-3">Already registered? Access your portal here.</p>
+          <a
+            href="https://abha-neet-prepportal.vercel.app/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90"
+            style={{ background: '#C6962E', color: '#0B1A35' }}
+          >
+            🎓 Login to NEET Portal
+          </a>
+        </div>
         <p className="text-white/50 text-sm mb-4">Questions? We&apos;re here to help.</p>
         <div className="flex flex-wrap gap-3 justify-center">
           <a href="tel:+917447552878"

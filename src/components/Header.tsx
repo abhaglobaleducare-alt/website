@@ -114,6 +114,17 @@ export default function Header() {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href="https://abha-neet-prepportal.vercel.app/login"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-4 py-2 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5"
+                style={{ background: '#0B1A35', border: '2px solid #C6962E' }}
+              >
+                Student Login
+              </a>
+            </li>
           </ul>
 
           {/* Mobile Menu Button */}
@@ -150,6 +161,16 @@ export default function Header() {
                     {link.label}
                   </Link>
                 ))}
+                <a
+                  href="https://abha-neet-prepportal.vercel.app/login"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block py-3 px-4 font-bold text-center rounded-xl text-white mt-2"
+                  style={{ background: '#0B1A35', border: '2px solid #C6962E' }}
+                >
+                  🎓 Student Login — NEET Portal
+                </a>
               </div>
             </motion.div>
           )}
