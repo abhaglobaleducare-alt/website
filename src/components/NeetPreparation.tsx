@@ -164,21 +164,34 @@ export default function NeetPreparation() {
               ))}
             </div>
             <div className="rounded-2xl p-6" style={{ background: '#0B1A35' }}>
-              <p className="font-bold text-sm mb-4" style={{ color: '#C6962E' }}>💳 Pay ₹999 via UPI</p>
+              <p className="font-bold text-sm mb-4" style={{ color: '#C6962E' }}>💳 Scan & Pay ₹999 via UPI</p>
+              <div className="flex justify-center mb-4">
+                <div className="bg-white p-3 rounded-xl">
+                  <img
+                    src="/images/qr-neet-prep-999.png.jpeg"
+                    alt="UPI QR Code — ₹999 NEET Preparation Portal"
+                    width={180}
+                    height={180}
+                    style={{ display: 'block' }}
+                  />
+                </div>
+              </div>
+              <p className="text-white/50 text-xs text-center mb-4">Scan with any UPI app — Google Pay, PhonePe, Paytm, BHIM</p>
               <div className="space-y-2">
                 {[
-                  { label: 'UPI ID', value: 'connect@abhaglobaleducare' },
+                  { label: 'UPI ID', value: 'yespay.mabs0043270ikit0245@yesbankltd' },
+                  { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
                   { label: 'Amount', value: '₹999 / year' },
                   { label: 'WhatsApp', value: '+91 74475 52878' },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
                     <span className="text-white/50 text-xs">{label}</span>
-                    <span className="text-white font-bold text-sm">{value}</span>
+                    <span className="text-white font-bold text-xs">{value}</span>
                   </div>
                 ))}
               </div>
               <p className="text-white/40 text-xs mt-4 leading-relaxed">
-                After payment, share your screenshot on WhatsApp and enter your UTR in the form.
+                After payment, enter your UTR (transaction ID) in the form below and share your screenshot on WhatsApp.
               </p>
             </div>
           </div>

@@ -125,7 +125,7 @@ export default function Scholarship() {
               transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
               className="inline-block text-[#0B1A35] font-black text-sm sm:text-base px-5 py-2.5 rounded-full shadow-[0_4px_24px_rgba(198,150,46,0.45)] tracking-wide"
             >
-              ☕ You spend more on chai in a week than this exam costs
+              📚 Start Right. Prepare Smart. Score High.
             </motion.span>
           </motion.div>
 
@@ -138,27 +138,27 @@ export default function Scholarship() {
               className="font-playfair font-bold leading-[1.08] text-white"
               style={{ fontSize: 'clamp(2.4rem, 6vw, 4.2rem)' }}
             >
-              🚨 NEET Level Paper.
+              Your NEET Score Decides
               <br />
-              <span className="text-[#C6962E]">But the reward?</span>
+              <span className="text-[#C6962E]">Your MBBS Future.</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
               className="font-playfair font-bold text-[#FFD770] leading-tight mt-2"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3.6rem)' }}
+              style={{ fontSize: 'clamp(1.6rem, 4vw, 2.8rem)' }}
             >
-              In Dollars 💵
+              Let&apos;s Build That Score — Together. 🎓
             </motion.p>
             {/* Premium Sentence */}
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.28 }}
-              className="text-center text-lg sm:text-xl text-white font-semibold max-w-[600px] mx-auto mt-4"
+              className="text-center text-lg sm:text-xl text-white font-semibold max-w-[640px] mx-auto mt-4"
             >
-              India&apos;s First Consistancy-Based Scholarship Test for MBBS Abroad
+              India&apos;s Most Trusted NEET Excellence Program — Structured, Affordable &amp; Rewarding
             </motion.p>
           </div>
 
@@ -169,9 +169,9 @@ export default function Scholarship() {
             transition={{ duration: 0.55, delay: 0.32 }}
             className="text-center text-lg sm:text-xl text-gray-300 max-w-[600px] mx-auto mb-10 leading-relaxed"
           >
-            Study MBBS Abroad at a{' '}
-            <span className="text-white font-bold">much lower cost.</span>{' '}
-            One ₹111 test. A shot at ₹5,00,000+ off your fees.
+            Every NEET mark matters. Our structured revision portal and real-exam practice
+            hub give every serious student the tools to prepare with confidence —{' '}
+            <span className="text-white font-bold">and top performers win a scholarship toward MBBS abroad.</span>
           </motion.p>
 
           {/* CTAs */}
@@ -213,16 +213,10 @@ export default function Scholarship() {
             className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm text-gray-400"
           >
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              Limited seats
-            </span>
-            <span className="text-gray-600">·</span>
-            <span>
+              <span className="w-2 h-2 rounded-full bg-[#C6962E] animate-pulse" />
               ⏳ Last date:{' '}
-              <strong className="text-white">10 days before NEET result</strong>
+              <strong className="text-white">Don&apos;t wait for the Last Date</strong>
             </span>
-            <span className="text-gray-600">·</span>
-            <span>Only top 300 win</span>
           </motion.div>
         </div>
       </section>
@@ -267,7 +261,6 @@ export default function Scholarship() {
             style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
           >
             🎓 ABHA NEET Excellence Pathway
-            <span className="block text-[#C6962E]">2026</span>
           </h2>
           <p className="text-[#0B1A35]/60 font-semibold text-sm sm:text-base tracking-widest uppercase">
             Bapusaheb Patil (Sagaon) Abroad Education Support Grant

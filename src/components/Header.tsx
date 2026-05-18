@@ -42,7 +42,7 @@ export default function Header() {
           className="inline-block"
         >
           <span className="sm:hidden">🎓 NEET Excellence Pathway — WhatsApp +91 74475 52878 · Georgia: +995 591 717122</span>
-          <span className="hidden sm:inline">🎓 NEET Excellence Pathway 2026 — Scholarship + NEET Practice Tests | WhatsApp +91 74475 52878 · Georgia: +995 591 717122</span>
+          <span className="hidden sm:inline">🎓 NEET Excellence Pathway — Scholarships / Gifts / Rewards + NEET Practice Tests | WhatsApp +91 74475 52878 · Georgia: +995 591 717122 · UNIQUE Hands-On Clinical Workshops</span>
         </motion.span>
       </div>
 

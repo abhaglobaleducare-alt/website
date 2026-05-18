@@ -12,7 +12,7 @@ const stats = [
   },
   {
     icon: Award,
-    value: '$6,000',
+    value: 'Up to $6,000',
     label: 'NEET Excellence Pathway',
     detail: 'Merit scholarship for top students',
   },

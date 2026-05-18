@@ -196,7 +196,7 @@ export async function POST(request: NextRequest) {
     // Send admin notification
     await transporter.sendMail({
       from: process.env.SMTP_FROM || `"ABHA Website" <${process.env.SMTP_USER}>`,
-      to: process.env.SMTP_TO || 'connect@abhaglobaleducare.com',
+      to: process.env.SMTP_TO || 'abhaglobaleducare@gmail.com',
       subject: `New Enquiry: ${data.name} — ${data.phone}`,
       html: buildAdminEmail(data),
       replyTo: data.email || undefined,
