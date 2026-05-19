@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   shortName: 'ABHA Educare',
   tagline: 'Dreams Have No Borders',
   description:
-    'ABHA Global Educare LLP is a premier MBBS abroad consultancy helping Indian students pursue medical education in top universities across Russia, Georgia, Kazakhstan, Kyrgyzstan, and more.',
+    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia, Russia, Kazakhstan & Kyrgyzstan. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
   url: 'https://abhaglobaleducare.com',
   email: 'connect@abhaglobaleducare.com',
   logo: '/images/logo.png',
@@ -126,11 +126,11 @@ export const DESTINATIONS = [
     universities: 50,
     duration: '6 years',
     fees: '₹25-35 Lakhs (Total)',
-    recognition: 'NMC, WHO, WFME',
+    recognition: 'NMC & WHO Eligible',
     highlights: [
       'Top-ranked medical universities',
       'English medium programs',
-      'NMC approved universities',
+      'NMC & WHO Eligible universities',
       'Rich cultural experience',
     ],
   },
@@ -142,7 +142,7 @@ export const DESTINATIONS = [
     universities: 10,
     duration: '6 years',
     fees: '₹30-40 Lakhs (Total)',
-    recognition: 'NMC, WHO, WFME',
+    recognition: 'NMC & WHO Eligible',
     highlights: [
       'European standard education',
       'Safe and friendly environment',
@@ -158,7 +158,7 @@ export const DESTINATIONS = [
     universities: 15,
     duration: '5 years',
     fees: '₹20-30 Lakhs (Total)',
-    recognition: 'NMC, WHO, WFME',
+    recognition: 'NMC & WHO Eligible',
     highlights: [
       'Affordable education',
       'Modern infrastructure',
@@ -174,7 +174,7 @@ export const DESTINATIONS = [
     universities: 8,
     duration: '6 years',
     fees: '₹18-25 Lakhs (Total)',
-    recognition: 'NMC, WHO',
+    recognition: 'NMC & WHO Eligible',
     highlights: [
       'Most affordable option',
       'English medium available',
@@ -190,7 +190,7 @@ export const DESTINATIONS = [
     universities: 12,
     duration: '5.5 years',
     fees: '₹25-35 Lakhs (Total)',
-    recognition: 'NMC, WHO',
+    recognition: 'NMC & WHO Eligible',
     highlights: [
       'English speaking country',
       'US-based curriculum',
@@ -206,7 +206,7 @@ export const DESTINATIONS = [
     universities: 20,
     duration: '5 years',
     fees: '₹35-45 Lakhs (Total)',
-    recognition: 'NMC, WHO',
+    recognition: 'NMC & WHO Eligible',
     highlights: [
       'Similar culture and food',
       'No language barrier',
@@ -226,7 +226,7 @@ export const SERVICES = [
   {
     id: 'university-selection',
     title: 'University Selection',
-    description: 'We help you choose from our partner universities that are NMC approved and recognized worldwide.',
+    description: 'We help you choose from our partner universities that are NMC & WHO Eligible and recognized worldwide.',
     icon: 'GraduationCap',
   },
   {
@@ -312,7 +312,7 @@ export const FAQS = [
   },
   {
     question: 'Are foreign medical degrees recognized in India?',
-    answer: 'Yes, degrees from NMC guidelines Eligible universities are recognized in India. Students need to clear the FMGE/NEXT exam to practice medicine in India after completing MBBS abroad.',
+    answer: 'Yes, degrees from NMC & WHO Eligible universities are recognized in India. Students need to clear the FMGE/NEXT exam to practice medicine in India after completing MBBS abroad.',
   },
   {
     question: 'What is the total cost of MBBS abroad?',

@@ -3,9 +3,14 @@ import NeetPracticeHub from '@/components/NeetPracticeHub';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'NEET Practice Hub — Register Now',
+  title: 'ABHA NEET Practice Hub 2026 — Full NEET Mock Tests & Score Analysis',
   description:
-    'Register for ABHA NEET Practice Hub. Full NEET mock tests (180 questions, 3 hours), weekly tests, daily MCQ practice, and performance analytics. ₹1,111/year.',
+    'ABHA NEET Practice Hub — full-length 180-question NEET mock tests with +4/−1 marking, personalised subject-wise score analysis, and MCQ practice sets. AGEST introductory offer ₹111. NEET 2026 aspirants only. Register now.',
+  keywords: [
+    'NEET full mock test online 2026', 'NEET practice test 180 questions', 'NEET score analysis',
+    'AGEST NEET mock test', 'NEET practice hub India', 'NEET MCQ practice online',
+    'full length NEET mock test free', 'NEET 2026 practice test',
+  ],
 };
 
 export default function NeetPracticeHubPage() {

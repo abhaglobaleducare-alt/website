@@ -40,16 +40,32 @@ export const metadata: Metadata = {
   description: SITE_CONFIG.description,
   keywords: [
     'MBBS abroad',
-    'study MBBS in Russia',
     'MBBS in Georgia',
+    'MBBS in Tbilisi Georgia',
+    'MBBS in Russia',
     'MBBS in Kazakhstan',
     'MBBS in Kyrgyzstan',
-    'medical education abroad',
-    'NMC approved universities',
-    'NEET counseling',
-    'overseas education consultancy',
-    'ABHA Global Educare',
+    'medical education abroad for Indian students',
+    'NMC and WHO eligible universities',
+    'affordable MBBS abroad',
+    'MBBS without donation India',
+    'NEET 2026 preparation',
+    'NEET mock test online',
+    'NEET practice hub',
+    'NEET coaching Maharashtra',
+    'NEET preparation Kolhapur',
+    'AGEST exam NEET',
+    'NEET Excellence Pathway',
+    'overseas education consultancy India',
+    'study abroad consultancy India',
     'MBBS abroad consultancy Kolhapur',
+    'MBBS abroad consultancy Maharashtra',
+    'ABHA Global Educare',
+    'ABHA NEET Prep Portal',
+    'Bapusaheb Patil Sagaon education grant',
+    'best MBBS countries for Indians',
+    'MBBS Europe for Indian students',
+    'hostel accommodation MBBS abroad',
   ],
   authors: [{ name: 'ABHA Global Educare LLP' }],
   creator: 'ABHA Global Educare LLP',
@@ -183,7 +199,7 @@ export default async function RootLayout({
           </Providers>
         </NextIntlClientProvider>
         
-        {/* Structured Data */}
+        {/* Structured Data — Organization */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -191,7 +207,7 @@ export default async function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'EducationalOrganization',
               name: 'ABHA Global Educare LLP',
-              alternateName: 'ABHA Educare',
+              alternateName: ['ABHA Educare', 'ABHA NEET Prep Portal'],
               description: SITE_CONFIG.description,
               url: SITE_CONFIG.url,
               logo: `${SITE_CONFIG.url}/images/logo.png`,
@@ -219,12 +235,55 @@ export default async function RootLayout({
                 'https://instagram.com/abhaglobaleducare',
                 'https://linkedin.com/company/abhaglobaleducare',
                 'https://youtube.com/@abhaglobaleducare',
+                'https://abha-neet-prepportal.vercel.app',
               ],
-              areaServed: {
-                '@type': 'Country',
-                name: 'India',
+              areaServed: [
+                { '@type': 'Country', name: 'India' },
+                { '@type': 'Country', name: 'Georgia' },
+              ],
+              hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'ABHA Education Services',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'MBBS Abroad Admission Guidance',
+                      description: 'End-to-end MBBS abroad admission support for NMC & WHO Eligible universities in Georgia, Russia, Kazakhstan, Kyrgyzstan.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Course',
+                      name: 'ABHA NEET Preparation Portal',
+                      description: 'Online NEET preparation portal with chapter-wise animated PPTs, quick notes, MCQ practice, and weekly tests.',
+                      url: 'https://abha-neet-prepportal.vercel.app',
+                      provider: { '@type': 'Organization', name: 'ABHA Global Educare LLP' },
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Course',
+                      name: 'ABHA NEET Practice Hub — AGEST Mock Tests',
+                      description: 'Full 180-question NEET mock tests with +4/−1 marking and personalised score analysis.',
+                      url: 'https://abha-neet-prepportal.vercel.app',
+                      provider: { '@type': 'Organization', name: 'ABHA Global Educare LLP' },
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Scholarship',
+                      name: 'Bapusaheb Patil (Sagaon) Abroad Education Support Grant',
+                      description: 'Merit-based education support grant for NEET aspirants pursuing MBBS abroad through ABHA Global Educare.',
+                      provider: { '@type': 'Organization', name: 'ABHA Global Educare LLP' },
+                    },
+                  },
+                ],
               },
-              serviceType: ['Educational Consulting', 'MBBS Abroad Admission', 'Visa Assistance'],
             }),
           }}
         />

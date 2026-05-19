@@ -3,9 +3,14 @@ import NeetPreparation from '@/components/NeetPreparation';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'NEET Preparation Portal — Register Now',
+  title: 'ABHA NEET Preparation Portal 2026 — Animated PPTs, Quick Notes, MCQ Practice',
   description:
-    'Register for ABHA NEET Preparation Portal. Chapterwise revision with animated PPTs, quick notes, and MCQ practice for Physics, Chemistry, Botany & Zoology. ₹999/year.',
+    'Join ABHA NEET Preparation Portal for NEET 2026 — chapter-wise animated PPT revision, quick notes with memory joggers, daily MCQ practice, and weekly assessment tests for Physics, Chemistry, Botany & Zoology. Just ₹999/year. Register now.',
+  keywords: [
+    'NEET 2026 preparation portal', 'NEET preparation online India', 'NEET study material online',
+    'NCERT notes NEET', 'NEET MCQ practice', 'NEET animated PPT revision',
+    'NEET preparation Kolhapur', 'NEET coaching Maharashtra', 'ABHA NEET portal',
+  ],
 };
 
 export default function NeetPreparationPage() {
