@@ -13,6 +13,12 @@ import {
   Zap,
   ArrowUpRight,
   Flame,
+  Repeat2,
+  Clock,
+  GraduationCap,
+  Star,
+  Trophy,
+  MapPin,
 } from 'lucide-react';
 
 /* ── Animated count-up number ─────────────────────────────────── */
@@ -368,6 +374,345 @@ export default function Scholarship() {
             Bapusaheb Patil (Sagaon) Abroad Education Support Grant
           </p>
         </motion.div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          AGEST 2026 — FULL DETAILS
+      ══════════════════════════════════════ */}
+      <section className="bg-white py-20 sm:py-28 px-5 sm:px-10 overflow-hidden">
+        <div className="max-w-[1100px] mx-auto">
+
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="text-center mb-14"
+          >
+            <span className="inline-block bg-[#0B1A35] text-[#C6962E] text-xs font-black uppercase tracking-[0.3em] px-4 py-2 rounded-full mb-5">
+              India&apos;s First Consistency-Based Scholarship Test
+            </span>
+            <h2
+              className="font-playfair font-bold text-[#0B1A35] leading-tight mb-3"
+              style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)' }}
+            >
+              🏆 AGEST 2026
+              <span className="block text-[#C6962E]">MBBS Abroad Scholarship Test</span>
+            </h2>
+            <p className="text-[#0B1A35]/60 text-lg sm:text-xl font-semibold italic mt-2">
+              &ldquo;Where consistency wins, not luck&rdquo;
+            </p>
+          </motion.div>
+
+          {/* Core Offer — 3 highlight cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-16">
+            {[
+              {
+                icon: <Trophy size={28} />,
+                value: '$6,000',
+                label: 'Total Scholarship',
+                sub: '$1,000/year × 6 years ≈ ₹5,00,000 per student',
+                color: '#C6962E',
+                bg: '#FFF8EE',
+                border: '#C6962E',
+              },
+              {
+                icon: <Star size={28} />,
+                value: 'Top 300',
+                label: 'Scholars Selected',
+                sub: 'Open to top 300 NEET 2026 aspirants on merit',
+                color: '#22C55E',
+                bg: '#F0FDF4',
+                border: '#22C55E',
+              },
+              {
+                icon: <Zap size={28} />,
+                value: '₹111',
+                label: 'One-Time Fee',
+                sub: 'Covers ALL attempts — no extra cost per attempt',
+                color: '#6366F1',
+                bg: '#EEF2FF',
+                border: '#6366F1',
+              },
+            ].map(({ icon, value, label, sub, color, bg, border }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="rounded-2xl p-7 text-center shadow-sm border-2"
+                style={{ background: bg, borderColor: `${border}30` }}
+              >
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                  style={{ background: `${color}18`, color }}
+                >
+                  {icon}
+                </div>
+                <p className="font-black text-4xl leading-none mb-2" style={{ color }}>
+                  {value}
+                </p>
+                <p className="font-bold text-[#0B1A35] text-base mb-2">{label}</p>
+                <p className="text-gray-500 text-sm leading-relaxed">{sub}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Two-column: What Makes It Unique + Key Dates */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14">
+
+            {/* What Makes It Unique */}
+            <motion.div
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="bg-[#0B1A35] rounded-2xl p-8 shadow-xl"
+            >
+              <h3 className="font-playfair font-bold text-white text-xl mb-7 flex items-center gap-3">
+                <span className="w-9 h-9 rounded-xl bg-[#C6962E]/20 flex items-center justify-center text-[#C6962E]">
+                  <Star size={18} />
+                </span>
+                What Makes It Unique
+              </h3>
+              <ul className="space-y-5">
+                {[
+                  {
+                    icon: <Repeat2 size={18} />,
+                    title: 'Multiple Attempts, One Registration',
+                    desc: 'Appear as many times as you want — no extra cost ever',
+                    accent: '#C6962E',
+                  },
+                  {
+                    icon: <Star size={18} />,
+                    title: 'Best-3-Average Merit Formula',
+                    desc: 'Your final score = average of your top 3 highest attempts',
+                    accent: '#FFD770',
+                  },
+                  {
+                    icon: <Clock size={18} />,
+                    title: 'Same-Day Results',
+                    desc: 'Every attempt delivers your result on the very same day',
+                    accent: '#60A5FA',
+                  },
+                  {
+                    icon: <CalendarDays size={18} />,
+                    title: 'On-Demand Scheduling',
+                    desc: 'Appear whenever you feel prepared — first attempt from Day 3 after registration',
+                    accent: '#34D399',
+                  },
+                  {
+                    icon: <Trophy size={18} />,
+                    title: 'Instant Plan B on NEET Result Day',
+                    desc: 'Final merit list announced on NEET 2026 result day — no waiting',
+                    accent: '#F472B6',
+                  },
+                ].map(({ icon, title, desc, accent }, idx) => (
+                  <li key={idx} className="flex gap-4">
+                    <span
+                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ background: `${accent}22`, color: accent }}
+                    >
+                      {icon}
+                    </span>
+                    <div>
+                      <p className="font-bold text-white text-sm">{title}</p>
+                      <p className="text-white/50 text-xs mt-0.5 leading-relaxed">{desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Key Dates */}
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col gap-5"
+            >
+              <div className="bg-[#FFF8EE] rounded-2xl p-8 border-2 border-[#C6962E]/20 flex-1">
+                <h3 className="font-playfair font-bold text-[#0B1A35] text-xl mb-7 flex items-center gap-3">
+                  <span className="w-9 h-9 rounded-xl bg-[#C6962E]/15 flex items-center justify-center text-[#C6962E]">
+                    <CalendarDays size={18} />
+                  </span>
+                  Key Dates &amp; Rules
+                </h3>
+                <div className="space-y-5">
+                  {[
+                    {
+                      label: 'First Attempt Available',
+                      value: 'From Day 3 after registration',
+                      emoji: '🚀',
+                      accent: '#22C55E',
+                    },
+                    {
+                      label: 'Last Attempt Deadline',
+                      value: '10 days before NEET 2026 result',
+                      emoji: '⏰',
+                      accent: '#EF4444',
+                    },
+                    {
+                      label: 'Final Merit List',
+                      value: 'On NEET 2026 result day',
+                      emoji: '🏆',
+                      accent: '#C6962E',
+                    },
+                  ].map(({ label, value, emoji, accent }) => (
+                    <div
+                      key={label}
+                      className="flex items-start gap-4 p-4 rounded-xl bg-white border border-gray-100 shadow-sm"
+                    >
+                      <span className="text-2xl shrink-0">{emoji}</span>
+                      <div>
+                        <p className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: accent }}>
+                          {label}
+                        </p>
+                        <p className="font-bold text-[#0B1A35] text-sm">{value}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Registration fee highlight */}
+              <div
+                className="rounded-2xl p-6 text-center"
+                style={{ background: 'linear-gradient(135deg, #0B1A35 0%, #152d54 100%)' }}
+              >
+                <p className="text-white/60 text-xs font-black uppercase tracking-widest mb-2">
+                  One-time Registration Fee
+                </p>
+                <p className="font-black text-[#FFD700] leading-none mb-1" style={{ fontSize: 'clamp(3rem, 8vw, 4.5rem)' }}>
+                  ₹111
+                </p>
+                <p className="text-white/60 text-sm">Covers every single attempt you take</p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Universities & Support */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="bg-gradient-to-br from-[#0B1A35] to-[#152d54] rounded-3xl p-8 sm:p-10 mb-10"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-10 h-10 rounded-xl bg-[#C6962E]/20 flex items-center justify-center text-[#C6962E]">
+                <GraduationCap size={20} />
+              </span>
+              <h3 className="font-playfair font-bold text-white text-xl">
+                Partner Universities &amp; Full Support
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Universities */}
+              <div>
+                <p className="text-[#C6962E] text-xs font-black uppercase tracking-[0.25em] mb-4 flex items-center gap-2">
+                  <MapPin size={13} /> NMC &amp; WHO Eligible Universities — Georgia 🇬🇪
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    'European University',
+                    'Alte University',
+                    'SEU Georgia',
+                    'East West University',
+                  ].map((uni) => (
+                    <div
+                      key={uni}
+                      className="flex items-center gap-2.5 bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3"
+                    >
+                      <span className="text-[#C6962E] shrink-0">
+                        <CheckCircle2 size={15} />
+                      </span>
+                      <p className="text-white text-sm font-semibold leading-tight">{uni}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* End-to-end support */}
+              <div>
+                <p className="text-[#60A5FA] text-xs font-black uppercase tracking-[0.25em] mb-4">
+                  End-to-End Support Included
+                </p>
+                <div className="space-y-3">
+                  {[
+                    { emoji: '🎓', text: 'Free counselling &amp; admission guidance' },
+                    { emoji: '✈️', text: 'Visa assistance &amp; airport pickup' },
+                    { emoji: '🏠', text: 'ABHA-managed hostel in Tbilisi' },
+                    { emoji: '🍛', text: 'Indian food available' },
+                  ].map(({ emoji, text }) => (
+                    <div key={text} className="flex items-center gap-3">
+                      <span className="text-xl shrink-0">{emoji}</span>
+                      <p
+                        className="text-white/70 text-sm"
+                        dangerouslySetInnerHTML={{ __html: text }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <p className="text-gray-500 text-sm mb-5">
+              WhatsApp <strong className="text-[#0B1A35]">&ldquo;AGEST&rdquo;</strong> to register, or visit our website
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <a
+                href="https://wa.me/917447552878?text=AGEST"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base shadow-[0_0_40px_rgba(198,150,46,0.35)] hover:shadow-[0_0_60px_rgba(198,150,46,0.55)] hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <Zap size={18} /> WhatsApp &ldquo;AGEST&rdquo; — +91 74475 52878
+              </a>
+              <a
+                href="https://wa.me/917249409376?text=AGEST"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 border-2 border-[#C6962E]/60 text-[#0B1A35] px-7 py-4 rounded-xl font-black text-base hover:bg-[#C6962E]/10 hover:border-[#C6962E] transition-all duration-300 hover:-translate-y-0.5"
+              >
+                <Phone size={17} /> +91 72494 09376
+              </a>
+            </div>
+            <div className="flex flex-wrap gap-3 justify-center mt-4">
+              <a
+                href="https://abhaglobaleducare.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[#C6962E] font-bold text-sm hover:underline"
+              >
+                <Globe size={14} /> abhaglobaleducare.com <ArrowUpRight size={13} />
+              </a>
+              <span className="text-gray-300 text-sm">·</span>
+              <a
+                href="https://abhaglobal.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[#C6962E] font-bold text-sm hover:underline"
+              >
+                <Globe size={14} /> abhaglobal.in <ArrowUpRight size={13} />
+              </a>
+            </div>
+          </motion.div>
+
+        </div>
       </section>
 
       {/* ══════════════════════════════════════
