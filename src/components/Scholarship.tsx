@@ -481,7 +481,7 @@ export default function Scholarship() {
                 </p>
                 <div className="flex items-center justify-center gap-3">
                   <span className="font-black text-2xl" style={{ color: '#dc2626', textDecoration: 'line-through' }}>
-                    ₹1111
+                    ₹2,110
                   </span>
                   <span className="font-black text-3xl" style={{ color: '#14532d' }}>
                     ₹111
