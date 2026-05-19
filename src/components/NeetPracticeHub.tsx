@@ -24,7 +24,7 @@ const included = [
 
 const steps = [
   { n: '01', t: 'Fill the registration form', d: 'Enter your details below. Takes under 2 minutes.' },
-  { n: '02', t: 'Pay ₹1,111 via UPI', d: 'Send payment to the UPI ID shown. Screenshot your transaction.' },
+  { n: '02', t: 'Pay ₹111 via UPI (Introductory Offer)', d: 'Send ₹111 to the UPI ID shown. Regular price ₹2,110. Screenshot your transaction.' },
   { n: '03', t: 'Enter your UTR number', d: 'Add your UPI Transaction ID in the form so our team can verify payment.' },
   { n: '04', t: 'Admin verifies & activates', d: 'We verify your payment and set up your account within 24 hours.' },
   { n: '05', t: 'Start practising immediately', d: 'Receive login credentials via WhatsApp/Email. Full portal access begins.' },
@@ -50,8 +50,8 @@ export default function NeetPracticeHub() {
           city: fd.get('city'),
           neetStatus: fd.get('neetStatus'),
           neetScore: fd.get('neetScore'),
-          course: 'NEET Practice Hub — ₹1,111/year',
-          message: `NEET Practice Hub Registration. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
+          course: 'NEET Practice Hub — ₹111 Introductory Offer (AGEST 2026)',
+          message: `NEET Practice Hub Registration — ₹111 Introductory Offer. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
           source: 'neet-practice-hub-registration',
         }),
       });
@@ -72,6 +72,26 @@ export default function NeetPracticeHub() {
 
   return (
     <div style={{ background: '#F5F6FA' }}>
+
+      {/* INTRODUCTORY OFFER BANNER */}
+      <div className="py-3 px-4 text-center" style={{ background: 'linear-gradient(90deg, #5B21B6, #7C3AED, #6D28D9)' }}>
+        <p className="text-white text-sm font-bold">
+          <span className="inline-block bg-yellow-400 text-purple-900 text-xs font-black px-2 py-0.5 rounded-full mr-2 uppercase tracking-wide">Introductory Offer</span>
+          AGEST 2026 — Full Mock Tests at{' '}
+          <span className="line-through text-purple-200 mr-1">₹2,110</span>
+          <span className="text-yellow-300 text-base">₹111 only</span>
+          {' '}·{' '}
+          <span className="text-purple-200">NEET 2026 Aspirants Only</span>
+          {' '}·{' '}
+          <a
+            href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20at%20%E2%82%B9111%20offer"
+            target="_blank" rel="noopener noreferrer"
+            className="underline text-yellow-300 hover:text-yellow-100 transition-colors"
+          >
+            Claim via WhatsApp →
+          </a>
+        </p>
+      </div>
 
       {/* HERO */}
       <section className="py-20 sm:py-28 px-4 sm:px-8" style={{ background: 'linear-gradient(135deg, #0B1A35 0%, #1a3160 100%)' }}>
@@ -98,11 +118,16 @@ export default function NeetPracticeHub() {
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
-            className="inline-flex items-center gap-3 rounded-2xl px-6 py-3"
-            style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(198,150,46,0.25)' }}
+            className="inline-flex flex-col items-center gap-2 rounded-2xl px-8 py-5"
+            style={{ background: 'rgba(124,58,237,0.2)', border: '2px solid rgba(124,58,237,0.5)' }}
           >
-            <span className="font-playfair font-black text-3xl" style={{ color: '#C6962E' }}>₹1,111</span>
-            <span className="text-slate-400 text-sm">/ year · Unlimited Tests · Full Portal Access</span>
+            <div className="flex items-center gap-3">
+              <span className="text-slate-400 line-through text-xl">₹2,110</span>
+              <span className="font-playfair font-black text-5xl" style={{ color: '#C6962E' }}>₹111</span>
+              <span className="text-xs font-black px-2.5 py-1 rounded-full" style={{ background: '#7C3AED', color: '#FDE68A' }}>90% OFF</span>
+            </div>
+            <span className="text-purple-300 text-xs font-semibold uppercase tracking-widest">Introductory Offer · NEET 2026 Aspirants Only</span>
+            <span className="text-slate-400 text-xs">Unlimited Tests · Full Portal Access · 1 Year</span>
           </motion.div>
         </div>
       </section>
@@ -136,9 +161,14 @@ export default function NeetPracticeHub() {
       <section className="py-12 px-4 sm:px-8 bg-[#F5F6FA]">
         <div className="max-w-3xl mx-auto">
           <div className="rounded-2xl p-8 bg-white shadow-sm" style={{ border: '1px solid rgba(0,0,0,0.05)' }}>
-            <p className="text-xs font-bold uppercase tracking-widest mb-6 text-center" style={{ color: '#C6962E' }}>
-              Everything Included at ₹1,111/year
+            <p className="text-xs font-bold uppercase tracking-widest mb-2 text-center" style={{ color: '#C6962E' }}>
+              Everything Included
             </p>
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <span className="text-gray-400 line-through text-sm">₹2,110/year</span>
+              <span className="font-black text-lg" style={{ color: '#7C3AED' }}>₹111</span>
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: '#7C3AED' }}>Introductory Offer</span>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {included.map((item) => (
                 <div key={item} className="flex items-start gap-3">
@@ -190,7 +220,14 @@ export default function NeetPracticeHub() {
               ))}
             </div>
             <div className="rounded-2xl p-6" style={{ background: '#0B1A35' }}>
-              <p className="font-bold text-sm mb-4" style={{ color: '#C6962E' }}>💳 Scan & Pay ₹1,111 via UPI</p>
+              <div className="mb-4">
+                <p className="font-bold text-sm" style={{ color: '#C6962E' }}>💳 Scan & Pay via UPI</p>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="text-white/40 text-xs line-through">₹2,110</span>
+                  <span className="text-yellow-300 font-black text-lg">₹111</span>
+                  <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: '#7C3AED', color: '#FDE68A' }}>Introductory Offer</span>
+                </div>
+              </div>
               <div className="flex justify-center mb-4">
                 <div className="bg-white p-3 rounded-xl">
                   <img
@@ -207,7 +244,7 @@ export default function NeetPracticeHub() {
                 {[
                   { label: 'UPI ID', value: 'yespay.bizsbiz175213@yesbankltd' },
                   { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
-                  { label: 'Amount', value: '₹1,111 / year' },
+                  { label: 'Amount', value: '₹111 (Intro Offer)' },
                   { label: 'WhatsApp', value: '+91 74475 52878' },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
@@ -249,7 +286,7 @@ export default function NeetPracticeHub() {
                   <h3 className="font-playfair font-bold text-2xl mb-1" style={{ color: '#0B1A35' }}>
                     Register Now
                   </h3>
-                  <p className="text-gray-400 text-xs mb-6">NEET Practice Hub · ₹1,111/year · Unlimited access</p>
+                  <p className="text-gray-400 text-xs mb-6">NEET Practice Hub · <span className="font-bold" style={{ color: '#7C3AED' }}>₹111 Introductory Offer</span> · NEET 2026 Aspirants Only</p>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -302,7 +339,7 @@ export default function NeetPracticeHub() {
                       <label className="block text-xs font-semibold mb-1.5" style={{ color: '#0B1A35' }}>
                         UPI Transaction ID (UTR) *
                       </label>
-                      <input name="utr" type="text" required placeholder="Enter UTR after paying ₹1,111" disabled={formState === 'loading'}
+                      <input name="utr" type="text" required placeholder="Enter UTR after paying ₹111" disabled={formState === 'loading'}
                         className="w-full px-3 py-2.5 rounded-xl border text-sm focus:outline-none focus:border-[#C6962E] transition-colors"
                         style={{ borderColor: '#E2E8F0', color: '#0B1A35' }} />
                       <p className="text-gray-400 text-xs mt-1">Found in your UPI app under transaction history</p>
