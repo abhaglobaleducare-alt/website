@@ -258,9 +258,10 @@ export default function NeetPreparation() {
                           className="w-full px-3 py-2.5 rounded-xl border text-sm focus:outline-none focus:border-[#C6962E] transition-colors"
                           style={{ borderColor: '#E2E8F0', color: '#0B1A35' }}>
                           <option value="">Select</option>
-                          <option>Preparing — NEET 2025</option>
-                          <option>Dropper — NEET 2026</option>
-                          <option>Appeared, awaiting result</option>
+                          <option>Re-NEET Attempt</option>
+                          <option>Appearing Re-NEET 2026</option>
+                          <option>Appearing NEET 2027</option>
+                          <option>Appearing NEET 2028</option>
                         </select>
                       </div>
                     </div>
