@@ -18,17 +18,17 @@ export const COMPANY_INFO = {
   name: 'ABHA Global Educare LLP',
   llpNumber: 'ACO-8092',
   foundedYear: 2020,
-  registeredAddress: '203, Lotus Plaza, Shahupuri, Kolhapur - 416001, Maharashtra, India',
+  registeredAddress: '203, Lotus Plaza, Venus Corner, Shahupuri, Kolhapur - 416001, Maharashtra, India',
 };
 
 export const CONTACT_INFO = {
   kolhapur: {
     label: 'Kolhapur Office (Head Office)',
-    address: '203, Lotus Plaza, Shahupuri, Kolhapur - 416001, Maharashtra, India',
+    address: '203, Lotus Plaza, Venus Corner, Shahupuri, Kolhapur - 416001, Maharashtra, India',
     phone: '+91 74475 52878',
     phoneRaw: '+917447552878',
     email: 'kolhapur@abhaglobaleducare.com',
-    mapUrl: 'https://maps.google.com/?q=203,+Lotus+Plaza,+Shahupuri,+Kolhapur',
+    mapUrl: 'https://maps.google.com/?q=203,+Lotus+Plaza,+Venus+Corner,+Shahupuri,+Kolhapur',
     timings: 'Mon - Sat: 10:00 AM - 7:00 PM',
   },
   csn: {

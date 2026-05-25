@@ -1,0 +1,20 @@
+{
+  "name": "ABHA Global Educare LLP",
+  "short_name": "ABHA Educare",
+  "description": "MBBS Abroad Consultancy — Dreams Have No Borders. NMC & WHO Eligible universities in Georgia, Russia, Kazakhstan & Kyrgyzstan.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0B1A35",
+  "theme_color": "#0B1A35",
+  "lang": "en-IN",
+  "categories": ["education", "business"],
+  "icons": [
+    { "src": "/favicon.ico", "sizes": "64x64", "type": "image/x-icon" },
+    { "src": "/icon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

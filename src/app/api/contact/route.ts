@@ -128,7 +128,7 @@ function buildAutoReplyEmail(name: string, source?: string): string {
           <p>
             <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878?text=Hi+I+just+registered+for+NEET+Preparation+Portal" style="color: #C6962E;">+91 74475 52878</a><br>
             <strong>Phone:</strong> +91 74475 52878<br>
-            <strong>Email:</strong> connect@abhaglobaleducare.com / abhaglobaleducare@gmail.com
+            <strong>Email:</strong> abhaglobaleducare@gmail.com
           </p>`
     : isNeetHub
     ? `
@@ -146,7 +146,7 @@ function buildAutoReplyEmail(name: string, source?: string): string {
           <p>
             <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878?text=Hi+I+just+registered+for+NEET+Practice+Hub" style="color: #C6962E;">+91 74475 52878</a><br>
             <strong>Phone:</strong> +91 74475 52878<br>
-            <strong>Email:</strong> connect@abhaglobaleducare.com / abhaglobaleducare@gmail.com
+            <strong>Email:</strong> abhaglobaleducare@gmail.com
           </p>`
     : `
           <h2>Thank you, ${name}!</h2>
@@ -162,7 +162,7 @@ function buildAutoReplyEmail(name: string, source?: string): string {
           <p>In the meantime, feel free to reach us at:</p>
           <p>
             <strong>Phone:</strong> +91 74475 52878<br>
-            <strong>Email:</strong> connect@abhaglobaleducare.com / abhaglobaleducare@gmail.com<br>
+            <strong>Email:</strong> abhaglobaleducare@gmail.com<br>
             <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878" style="color: #C6962E;">Chat with us</a>
           </p>`;
 
@@ -196,7 +196,7 @@ function buildAutoReplyEmail(name: string, source?: string): string {
         </div>
         <div class="footer">
           <p>ABHA Global Educare LLP | <a href="https://abhaglobaleducare.com">abhaglobaleducare.com</a></p>
-          <p>203, Lotus Plaza, Shahupuri, Kolhapur - 416001, Maharashtra</p>
+          <p>203, Lotus Plaza, Venus Corner, Shahupuri, Kolhapur - 416001, Maharashtra</p>
         </div>
       </div>
     </body>

@@ -17,6 +17,10 @@ node_modules/
 .DS_Store
 *.pem
 
+# macOS archive cruft
+__MACOSX/
+._*
+
 # debug
 npm-debug.log*
 yarn-debug.log*

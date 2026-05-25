@@ -216,7 +216,7 @@ export default async function RootLayout({
               address: [
                 {
                   '@type': 'PostalAddress',
-                  streetAddress: '203, Lotus Plaza, Shahupuri',
+                  streetAddress: '203, Lotus Plaza, Venus Corner, Shahupuri',
                   addressLocality: 'Kolhapur',
                   addressRegion: 'Maharashtra',
                   postalCode: '416001',

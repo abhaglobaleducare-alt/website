@@ -17,7 +17,7 @@ const offices = [
   {
     icon: Building2,
     title: 'Kolhapur — Head Office',
-    address: '203, Lotus Plaza, Shahupuri, Kolhapur — 416001, Maharashtra',
+    address: '203, Lotus Plaza, Venus Corner, Shahupuri, Kolhapur — 416001, Maharashtra',
     phone: '+91 74475 52878',
     phoneHref: 'tel:+917447552878',
     hours: 'Mon–Sat, 10 AM – 7 PM',
