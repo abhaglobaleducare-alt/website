@@ -1,0 +1,21 @@
+CREATE TABLE users (
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  email TEXT UNIQUE NOT NULL,
+  full_name TEXT NOT NULL,
+  phone TEXT,
+  role TEXT NOT NULL CHECK (role IN ('director','admin','staff','hostel_manager')),
+  designation TEXT,
+  office_id UUID REFERENCES offices(id),
+  is_bonus_eligible BOOLEAN DEFAULT false,
+  bonus_type TEXT CHECK (bonus_type IN ('admission','reference_distribution','none')),
+  joining_date DATE,
+  base_salary DECIMAL(10,2) DEFAULT 0,
+  status TEXT DEFAULT 'active' CHECK (status IN ('active','inactive','on_leave','pending_invite')),
+  invite_token TEXT UNIQUE,
+  invite_sent_at TIMESTAMPTZ,
+  invite_expires_at TIMESTAMPTZ,
+  avatar_url TEXT,
+  created_by UUID REFERENCES users(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);

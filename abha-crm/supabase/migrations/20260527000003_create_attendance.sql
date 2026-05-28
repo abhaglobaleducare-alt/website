@@ -1,0 +1,21 @@
+CREATE TABLE attendance (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES users(id),
+  date DATE NOT NULL,
+  check_in_time TIMESTAMPTZ,
+  check_in_lat DECIMAL(10,8),
+  check_in_lng DECIMAL(11,8),
+  check_in_address TEXT,
+  check_in_selfie_url TEXT,
+  is_within_geofence BOOLEAN DEFAULT false,
+  check_out_time TIMESTAMPTZ,
+  check_out_lat DECIMAL(10,8),
+  check_out_lng DECIMAL(11,8),
+  daily_summary TEXT,
+  goals_accomplished JSONB DEFAULT '[]',
+  work_hours DECIMAL(4,2),
+  work_type TEXT DEFAULT 'office' CHECK (work_type IN ('office','field','remote','leave')),
+  admin_note TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, date)
+);

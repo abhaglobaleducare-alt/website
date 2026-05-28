@@ -1,0 +1,22 @@
+CREATE TABLE b2b_partners (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  partner_name TEXT NOT NULL,
+  partner_type TEXT CHECK (partner_type IN ('coaching_class','consultant','agent','school','other')),
+  contact_person TEXT,
+  contact_phone TEXT,
+  contact_email TEXT,
+  city TEXT,
+  state TEXT,
+  address TEXT,
+  commission_percent DECIMAL(5,2) DEFAULT 0,
+  agreement_url TEXT,
+  total_referrals INT DEFAULT 0,
+  total_conversions INT DEFAULT 0,
+  preferred_country TEXT CHECK (preferred_country IN ('Georgia','Kyrgyzstan','Both','Any')),
+  status TEXT DEFAULT 'active' CHECK (status IN ('active','inactive','blacklisted')),
+  added_by UUID REFERENCES users(id),
+  office_id UUID REFERENCES offices(id),
+  notes TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);

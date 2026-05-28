@@ -1,0 +1,20 @@
+CREATE TABLE goals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID NOT NULL REFERENCES users(id),
+  parent_goal_id UUID REFERENCES goals(id),
+  title TEXT NOT NULL,
+  description TEXT,
+  goal_type TEXT NOT NULL CHECK (goal_type IN ('yearly','quarterly','monthly','weekly','daily')),
+  priority TEXT DEFAULT 'medium' CHECK (priority IN ('critical','high','medium','low')),
+  priority_score INT DEFAULT 50 CHECK (priority_score BETWEEN 1 AND 100),
+  start_date DATE,
+  due_date DATE,
+  reminder_time TIME,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending','in_progress','completed','overdue','cancelled')),
+  completion_notes TEXT,
+  completed_at TIMESTAMPTZ,
+  created_by UUID REFERENCES users(id),
+  assigned_by UUID REFERENCES users(id),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);

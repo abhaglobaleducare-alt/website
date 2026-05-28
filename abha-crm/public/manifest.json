@@ -1,0 +1,16 @@
+{
+  "name": "ABHA Global Educare",
+  "short_name": "ABHA CRM",
+  "description": "Staff CRM and productivity system for ABHA Global Educare LLP.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B2545",
+  "theme_color": "#F5A623",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
