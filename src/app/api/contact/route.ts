@@ -1,26 +1,31 @@
-import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import { z } from "zod";
+import { sendLeadToCRM } from "@/lib/crm";
 
 // Validation schema for contact form
 const contactSchema = z.object({
   name: z
     .string()
-    .min(2, 'Name must be at least 2 characters')
-    .max(100, 'Name must be less than 100 characters'),
-  email: z.string().email('Please enter a valid email address').optional().or(z.literal('')),
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters"),
+  email: z
+    .string()
+    .email("Please enter a valid email address")
+    .optional()
+    .or(z.literal("")),
   phone: z
     .string()
-    .min(10, 'Phone number must be at least 10 digits')
-    .max(15, 'Phone number must be less than 15 digits')
-    .regex(/^[\d\s\-+()]+$/, 'Please enter a valid phone number'),
-  city: z.string().max(100).optional().or(z.literal('')),
-  course: z.string().max(100).optional().or(z.literal('')),
-  neetStatus: z.string().max(100).optional().or(z.literal('')),
-  neetScore: z.string().max(20).optional().or(z.literal('')),
-  preferredCountry: z.string().max(100).optional().or(z.literal('')),
-  message: z.string().max(2000).optional().or(z.literal('')),
-  source: z.string().max(50).optional().or(z.literal('')),
+    .min(10, "Phone number must be at least 10 digits")
+    .max(15, "Phone number must be less than 15 digits")
+    .regex(/^[\d\s\-+()]+$/, "Please enter a valid phone number"),
+  city: z.string().max(100).optional().or(z.literal("")),
+  course: z.string().max(100).optional().or(z.literal("")),
+  neetStatus: z.string().max(100).optional().or(z.literal("")),
+  neetScore: z.string().max(20).optional().or(z.literal("")),
+  preferredCountry: z.string().max(100).optional().or(z.literal("")),
+  message: z.string().max(2000).optional().or(z.literal("")),
+  source: z.string().max(50).optional().or(z.literal("")),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -28,7 +33,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 // Create reusable transporter
 function createTransporter() {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
+    host: process.env.SMTP_HOST || "smtp.gmail.com",
     port: Number(process.env.SMTP_PORT) || 587,
     secure: false,
     auth: {
@@ -44,16 +49,16 @@ function createTransporter() {
 // Build the admin notification email
 function buildAdminEmail(data: ContactFormData): string {
   const fields = [
-    { label: 'Name', value: data.name },
-    { label: 'Phone', value: data.phone },
-    { label: 'Email', value: data.email },
-    { label: 'City', value: data.city },
-    { label: 'Course', value: data.course },
-    { label: 'NEET Status', value: data.neetStatus },
-    { label: 'NEET Score', value: data.neetScore },
-    { label: 'Preferred Country', value: data.preferredCountry },
-    { label: 'Message', value: data.message },
-    { label: 'Form Source', value: data.source },
+    { label: "Name", value: data.name },
+    { label: "Phone", value: data.phone },
+    { label: "Email", value: data.email },
+    { label: "City", value: data.city },
+    { label: "Course", value: data.course },
+    { label: "NEET Status", value: data.neetStatus },
+    { label: "NEET Score", value: data.neetScore },
+    { label: "Preferred Country", value: data.preferredCountry },
+    { label: "Message", value: data.message },
+    { label: "Form Source", value: data.source },
   ].filter((f) => f.value);
 
   return `
@@ -88,12 +93,12 @@ function buildAdminEmail(data: ContactFormData): string {
               <div class="field-label">${f.label}</div>
               <div class="field-value">${f.value}</div>
             </div>
-          `
+          `,
             )
-            .join('')}
+            .join("")}
         </div>
         <div class="footer">
-          ABHA Global Educare LLP | ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+          ABHA Global Educare LLP | ${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}
         </div>
       </div>
     </body>
@@ -103,14 +108,14 @@ function buildAdminEmail(data: ContactFormData): string {
 
 // Build the auto-reply email for the student — tailored by registration source
 function buildAutoReplyEmail(name: string, source?: string): string {
-  const isNeetPrep = source === 'neet-preparation-registration';
-  const isNeetHub = source === 'neet-practice-hub-registration';
+  const isNeetPrep = source === "neet-preparation-registration";
+  const isNeetHub = source === "neet-practice-hub-registration";
 
   const subject = isNeetPrep
-    ? 'NEET Preparation Portal'
+    ? "NEET Preparation Portal"
     : isNeetHub
-    ? 'NEET Practice Hub'
-    : 'ABHA Global Educare';
+      ? "NEET Practice Hub"
+      : "ABHA Global Educare";
 
   const bodyContent = isNeetPrep
     ? `
@@ -131,7 +136,7 @@ function buildAutoReplyEmail(name: string, source?: string): string {
             <strong>Email:</strong> abhaglobaleducare@gmail.com
           </p>`
     : isNeetHub
-    ? `
+      ? `
           <h2>Registration Received, ${name}!</h2>
           <p>Thank you for registering for the <strong>ABHA NEET Practice Hub (₹1,111/year)</strong>.</p>
           <div class="highlight">
@@ -148,7 +153,7 @@ function buildAutoReplyEmail(name: string, source?: string): string {
             <strong>Phone:</strong> +91 74475 52878<br>
             <strong>Email:</strong> abhaglobaleducare@gmail.com
           </p>`
-    : `
+      : `
           <h2>Thank you, ${name}!</h2>
           <p>We have received your enquiry and our experienced counselor will contact you within <strong>24 hours</strong>.</p>
           <div class="highlight">
@@ -213,26 +218,52 @@ export async function POST(request: NextRequest) {
     if (!result.success) {
       const errors: Record<string, string[]> = {};
       result.error.issues.forEach((issue) => {
-        const path = issue.path.join('.');
+        const path = issue.path.join(".");
         if (!errors[path]) errors[path] = [];
         errors[path].push(issue.message);
       });
 
       return NextResponse.json(
-        { success: false, message: 'Validation failed', errors },
-        { status: 400 }
+        { success: false, message: "Validation failed", errors },
+        { status: 400 },
       );
     }
 
     const data = result.data;
 
+    // Build the CRM lead payload once. This is forwarded server-side on every
+    // successful submission — it is fully non-blocking and never throws, so it
+    // can never change the response the visitor receives.
+    const extraDetails: Record<string, string> = {};
+    for (const [key, value] of Object.entries({
+      city: data.city,
+      course: data.course,
+      neetStatus: data.neetStatus,
+      neetScore: data.neetScore,
+      preferredCountry: data.preferredCountry,
+      message: data.message,
+    })) {
+      if (value) extraDetails[key] = value;
+    }
+    const crmLead = {
+      name: data.name,
+      email: data.email || undefined,
+      phone: data.phone,
+      // Which domain the lead came from (abhaglobaleducare.com vs abhaglobal.in).
+      source_platform: request.headers.get("host") || "unknown",
+      // The form's existing discriminator (contact-page-form, etc.).
+      trigger_action: data.source || undefined,
+      extra_details: extraDetails,
+    };
+
     // Check if SMTP is configured
     if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
       // In development or when SMTP is not configured, just log the data
-      console.log('[Contact Form] New enquiry received:', data);
+      console.log("[Contact Form] New enquiry received:", data);
+      await sendLeadToCRM(crmLead).catch(() => {});
       return NextResponse.json({
         success: true,
-        message: 'Thank you! Our counselor will contact you within 24 hours.',
+        message: "Thank you! Our counselor will contact you within 24 hours.",
       });
     }
 
@@ -241,8 +272,11 @@ export async function POST(request: NextRequest) {
 
     // Send admin notification
     await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"ABHA Website" <${process.env.SMTP_USER}>`,
-      to: process.env.SMTP_TO || 'abhaglobaleducare@gmail.com, connect@abhaglobaleducare.com',
+      from:
+        process.env.SMTP_FROM || `"ABHA Website" <${process.env.SMTP_USER}>`,
+      to:
+        process.env.SMTP_TO ||
+        "abhaglobaleducare@gmail.com, connect@abhaglobaleducare.com",
       subject: `New Enquiry: ${data.name} — ${data.phone}`,
       html: buildAdminEmail(data),
       replyTo: data.email || undefined,
@@ -250,33 +284,39 @@ export async function POST(request: NextRequest) {
 
     // Send auto-reply to the student (only if email is provided)
     if (data.email) {
-      const isNeetPrep = data.source === 'neet-preparation-registration';
-      const isNeetHub = data.source === 'neet-practice-hub-registration';
+      const isNeetPrep = data.source === "neet-preparation-registration";
+      const isNeetHub = data.source === "neet-practice-hub-registration";
       const replySubject = isNeetPrep
-        ? 'NEET Preparation Portal — Registration Received'
+        ? "NEET Preparation Portal — Registration Received"
         : isNeetHub
-        ? 'NEET Practice Hub — Registration Received'
-        : 'Thank you for your enquiry — ABHA Global Educare';
+          ? "NEET Practice Hub — Registration Received"
+          : "Thank you for your enquiry — ABHA Global Educare";
       await transporter.sendMail({
-        from: process.env.SMTP_FROM || `"ABHA Global Educare" <${process.env.SMTP_USER}>`,
+        from:
+          process.env.SMTP_FROM ||
+          `"ABHA Global Educare" <${process.env.SMTP_USER}>`,
         to: data.email,
         subject: replySubject,
         html: buildAutoReplyEmail(data.name, data.source),
       });
     }
 
+    // Forward to CRM after email has sent. Non-blocking and never throws — the
+    // response below is unchanged whether the CRM succeeds, is slow, or is down.
+    await sendLeadToCRM(crmLead).catch(() => {});
+
     return NextResponse.json({
       success: true,
-      message: 'Thank you! Our counselor will contact you within 24 hours.',
+      message: "Thank you! Our counselor will contact you within 24 hours.",
     });
   } catch (error) {
-    console.error('[Contact Form] Error:', error);
+    console.error("[Contact Form] Error:", error);
     return NextResponse.json(
       {
         success: false,
-        message: 'Something went wrong. Please try again or call us directly.',
+        message: "Something went wrong. Please try again or call us directly.",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
