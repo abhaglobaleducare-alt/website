@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import LeadGate from '@/components/LeadGate';
 import {
   Zap,
   ArrowUpRight,
@@ -127,6 +128,7 @@ export default function AgestOfferBanner() {
 
           {/* Right: CTAs */}
           <div className="flex flex-col gap-3 items-center lg:items-start flex-shrink-0">
+            <LeadGate action="claim_111" mode="newTab">
             <a
               href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20%E2%80%94%20ABHA%20NEET%20Scholarship%20Test%20%28%E2%82%B9111%20registration%20fee%29"
               target="_blank"
@@ -137,15 +139,18 @@ export default function AgestOfferBanner() {
               <Zap size={18} />
               Register for AGEST 2026
             </a>
+            </LeadGate>
             <p className="text-purple-200 text-xs text-center lg:text-left max-w-[15rem]">
               Open to all 2026 NEET aspirants · No minimum score to register
             </p>
+            <LeadGate action="know_agest" mode="sameTab">
             <Link
               href="/scholarship"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-white/50 hover:bg-white/5 transition-all"
             >
               Know More about AGEST <ArrowUpRight size={15} />
             </Link>
+            </LeadGate>
           </div>
         </motion.div>
 

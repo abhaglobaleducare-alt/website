@@ -3,6 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import LeadGate from '@/components/LeadGate';
 import {
   CalendarDays,
   CheckCircle2,
@@ -360,6 +361,7 @@ export default function Scholarship() {
 
             {/* Right */}
             <div className="flex flex-col gap-3 items-center lg:items-start flex-shrink-0 lg:w-56">
+              <LeadGate action="claim_111" mode="newTab">
               <a
                 href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20%E2%80%94%20ABHA%20NEET%20Scholarship%20Test%20%28%E2%82%B9111%20registration%20fee%29"
                 target="_blank"
@@ -370,6 +372,7 @@ export default function Scholarship() {
                 <Zap size={18} />
                 Register for AGEST 2026
               </a>
+              </LeadGate>
               <a
                 href="https://abha-neet-prepportal.vercel.app/login"
                 target="_blank"
@@ -760,6 +763,7 @@ export default function Scholarship() {
               WhatsApp <strong className="text-[#0B1A35]">&ldquo;AGEST&rdquo;</strong> to register, or visit our website
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
+              <LeadGate action="claim_111" mode="newTab">
               <a
                 href="https://wa.me/917447552878?text=AGEST"
                 target="_blank"
@@ -768,6 +772,8 @@ export default function Scholarship() {
               >
                 <Zap size={18} /> WhatsApp &ldquo;AGEST&rdquo; — +91 74475 52878
               </a>
+              </LeadGate>
+              <LeadGate action="claim_111" mode="newTab">
               <a
                 href="https://wa.me/917249409376?text=AGEST"
                 target="_blank"
@@ -776,6 +782,7 @@ export default function Scholarship() {
               >
                 <Phone size={17} /> +91 72494 09376
               </a>
+              </LeadGate>
             </div>
             <div className="flex flex-wrap gap-3 justify-center mt-4">
               <a
@@ -1520,6 +1527,7 @@ export default function Scholarship() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <LeadGate action="claim_111" mode="newTab">
             <a
               href="https://wa.me/917447552878?text=AGEST"
               target="_blank"
@@ -1533,6 +1541,7 @@ export default function Scholarship() {
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
               />
             </a>
+            </LeadGate>
             <a
               href="tel:+917447552878"
               className="inline-flex items-center justify-center gap-2 border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-base hover:border-[#C6962E]/50 hover:text-[#C6962E] transition-all duration-300"

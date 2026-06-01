@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LeadGate from '@/components/LeadGate';
 import { Target, BarChart3, Clock, Trophy, CheckCircle2, ArrowRight, Loader2, Phone, Mail, Zap } from 'lucide-react';
 
 const features = [
@@ -83,6 +84,7 @@ export default function NeetPracticeHub() {
           {' '}·{' '}
           <span className="text-purple-200">NEET 2026 Aspirants</span>
           {' '}·{' '}
+          <LeadGate action="claim_111" mode="newTab">
           <a
             href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20the%20NEET%20Practice%20Hub%20at%20%E2%82%B9111%20%28introductory%20offer%29"
             target="_blank" rel="noopener noreferrer"
@@ -90,6 +92,7 @@ export default function NeetPracticeHub() {
           >
             Claim via WhatsApp →
           </a>
+          </LeadGate>
         </p>
       </div>
 
