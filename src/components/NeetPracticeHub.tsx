@@ -50,7 +50,7 @@ export default function NeetPracticeHub() {
           city: fd.get('city'),
           neetStatus: fd.get('neetStatus'),
           neetScore: fd.get('neetScore'),
-          course: 'NEET Practice Hub — ₹111 Introductory Offer (AGEST 2026)',
+          course: 'NEET Practice Hub — ₹111 Introductory Offer',
           message: `NEET Practice Hub Registration — ₹111 Introductory Offer. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
           source: 'neet-practice-hub-registration',
         }),
@@ -77,14 +77,14 @@ export default function NeetPracticeHub() {
       <div className="py-3 px-4 text-center" style={{ background: 'linear-gradient(90deg, #5B21B6, #7C3AED, #6D28D9)' }}>
         <p className="text-white text-sm font-bold">
           <span className="inline-block bg-yellow-400 text-purple-900 text-xs font-black px-2 py-0.5 rounded-full mr-2 uppercase tracking-wide">Introductory Offer</span>
-          AGEST 2026 — Full Mock Tests at{' '}
+          NEET Practice Hub — Full Mock Tests at{' '}
           <span className="line-through text-purple-200 mr-1">₹2,110</span>
           <span className="text-yellow-300 text-base">₹111 only</span>
           {' '}·{' '}
-          <span className="text-purple-200">NEET 2026 Aspirants Only</span>
+          <span className="text-purple-200">NEET 2026 Aspirants</span>
           {' '}·{' '}
           <a
-            href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20at%20%E2%82%B9111%20offer"
+            href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20the%20NEET%20Practice%20Hub%20at%20%E2%82%B9111%20%28introductory%20offer%29"
             target="_blank" rel="noopener noreferrer"
             className="underline text-yellow-300 hover:text-yellow-100 transition-colors"
           >

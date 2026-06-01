@@ -20,6 +20,8 @@ import {
   Trophy,
   MapPin,
   Users,
+  ChevronDown,
+  ShieldCheck,
 } from 'lucide-react';
 
 /* ── Animated count-up number ─────────────────────────────────── */
@@ -73,6 +75,8 @@ const ticker = [
    MAIN COMPONENT
    ═══════════════════════════════════════════════════════════════ */
 export default function Scholarship() {
+  const [showTerms, setShowTerms] = useState(false);
+
   return (
     <div className="overflow-x-hidden font-sans">
 
@@ -375,23 +379,60 @@ export default function Scholarship() {
                 🎓 Student Login — NEET Portal
               </a>
               <p className="text-purple-300 text-xs text-center">
-                WhatsApp to register. NEET 2026 only.
+                Open to all 2026 NEET aspirants · No minimum score to register
               </p>
             </div>
           </motion.div>
 
-          {/* Disclaimer */}
-          <motion.p
+          {/* Trust strip — who funds this & that ABHA is a registered entity */}
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.15 }}
-            className="text-purple-300/80 text-[11px] leading-relaxed mt-7 max-w-3xl mx-auto text-center"
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-purple-100/90 text-xs"
           >
-            Scholarship awards are subject to AGEST ranking, eligibility criteria, admission through
-            ABHA Global Educare, scholarship policy, and continued academic performance. Scholarship
-            support may be distributed across the duration of the eligible MBBS program.
-          </motion.p>
+            <span className="inline-flex items-center gap-1.5">
+              <GraduationCap size={14} style={{ color: '#FDE68A' }} />
+              Funded by the Bapusaheb Patil (Sagaon) Abroad Education Support Grant
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <ShieldCheck size={14} style={{ color: '#FDE68A' }} />
+              ABHA Global Educare LLP — Registered
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <MapPin size={14} style={{ color: '#FDE68A' }} />
+              Offices in Kolhapur &amp; Tbilisi, Georgia
+            </span>
+          </motion.div>
+
+          {/* Collapsible scholarship terms */}
+          <div className="mt-4 max-w-3xl mx-auto text-center">
+            <button
+              type="button"
+              onClick={() => setShowTerms((v) => !v)}
+              className="inline-flex items-center gap-1.5 text-purple-200 hover:text-white text-xs font-semibold transition-colors"
+              aria-expanded={showTerms}
+            >
+              Scholarship terms
+              <ChevronDown
+                size={14}
+                className="transition-transform"
+                style={{ transform: showTerms ? 'rotate(180deg)' : 'none' }}
+              />
+            </button>
+            {showTerms && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                className="text-purple-300/80 text-[11px] leading-relaxed mt-2 overflow-hidden"
+              >
+                Scholarship awards are subject to AGEST ranking, eligibility criteria, admission through
+                ABHA Global Educare, scholarship policy, and continued academic performance. Scholarship
+                support may be distributed across the duration of the eligible MBBS program.
+              </motion.p>
+            )}
+          </div>
         </div>
       </section>
 
