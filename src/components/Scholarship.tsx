@@ -19,6 +19,7 @@ import {
   Star,
   Trophy,
   MapPin,
+  Users,
 } from 'lucide-react';
 
 /* ── Animated count-up number ─────────────────────────────────── */
@@ -292,47 +293,78 @@ export default function Scholarship() {
                   className="inline-block text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full"
                   style={{ background: 'rgba(198,150,46,0.25)', color: '#f5e6c8' }}
                 >
-                  Introductory Offer
+                  Scholarship Program
                 </span>
                 <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-white/10 text-white/80">
-                  NEET 2026 Aspirants Only
+                  300 Scholarships Available
                 </span>
               </div>
               <h2
-                className="font-playfair font-bold text-white leading-tight mb-3"
+                className="font-playfair font-bold text-white leading-tight mb-2"
                 style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.6rem)' }}
               >
-                🏆 ABHA Full NEET Mock Test
+                🏆 ABHA NEET Scholarship Test
                 <span className="block" style={{ color: '#FDE68A' }}>AGEST 2026</span>
               </h2>
-              <p className="text-purple-200 text-sm sm:text-base mb-5 max-w-lg mx-auto lg:mx-0">
-                Full 180-question NEET pattern test with +4/−1 marking, personalised subject-wise score analysis, and WhatsApp feedback. One test could change everything.
+              <p className="text-purple-200 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-5">
+                Bapusaheb Patil, Sagaon Abroad Education Support Grant
               </p>
+
+              {/* Scholarship benefit highlights */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 max-w-xl mx-auto lg:mx-0">
+                <div className="flex items-center gap-2.5 rounded-xl bg-white/10 border border-white/10 px-3 py-2.5">
+                  <GraduationCap size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
+                  <div className="text-left">
+                    <div className="text-white font-black text-sm leading-none">Up to $1,000</div>
+                    <div className="text-purple-200 text-[11px] mt-0.5">per year</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2.5 rounded-xl bg-white/10 border border-white/10 px-3 py-2.5">
+                  <Trophy size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
+                  <div className="text-left">
+                    <div className="text-white font-black text-sm leading-none">Up to $6,000</div>
+                    <div className="text-purple-200 text-[11px] mt-0.5">total per student</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2.5 rounded-xl bg-white/10 border border-white/10 px-3 py-2.5">
+                  <Users size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
+                  <div className="text-left">
+                    <div className="text-white font-black text-sm leading-none">300 students</div>
+                    <div className="text-purple-200 text-[11px] mt-0.5">scholarship seats</div>
+                  </div>
+                </div>
+              </div>
+
               <div className="flex items-center gap-4 justify-center lg:justify-start flex-wrap">
-                <div className="flex items-baseline gap-3">
-                  <span className="text-purple-300 line-through text-2xl font-semibold">₹2,110</span>
-                  <span className="font-playfair font-black text-6xl" style={{ color: '#FDE68A' }}>₹111</span>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="text-xs font-black px-3 py-1.5 rounded-full bg-red-500/25 text-red-300 border border-red-500/30">
-                    90% OFF
+                <div className="flex flex-col items-center lg:items-start">
+                  <span className="text-purple-300 text-[11px] font-semibold uppercase tracking-wide">
+                    Original Value
                   </span>
-                  <span className="text-xs text-purple-300">Limited time only</span>
+                  <span className="text-purple-300 line-through text-2xl font-semibold">₹2,110</span>
                 </div>
+                <div className="flex flex-col items-center lg:items-start">
+                  <span className="text-yellow-200 text-[11px] font-semibold uppercase tracking-wide">
+                    Only for 2026 NEET Aspirants · Registration Fee
+                  </span>
+                  <span className="font-playfair font-black text-6xl leading-none" style={{ color: '#FDE68A' }}>₹111</span>
+                </div>
+                <span className="text-xs font-black px-3 py-1.5 rounded-full bg-red-500/25 text-red-300 border border-red-500/30">
+                  90% OFF
+                </span>
               </div>
             </div>
 
             {/* Right */}
             <div className="flex flex-col gap-3 items-center lg:items-start flex-shrink-0 lg:w-56">
               <a
-                href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20at%20%E2%82%B9111%20offer"
+                href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20%E2%80%94%20ABHA%20NEET%20Scholarship%20Test%20%28%E2%82%B9111%20registration%20fee%29"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-black text-base transition-all hover:-translate-y-0.5 hover:shadow-2xl text-center"
                 style={{ background: '#FDE68A', color: '#1a1a2e' }}
               >
                 <Zap size={18} />
-                Claim ₹111 Offer
+                Register for AGEST 2026
               </a>
               <a
                 href="https://abha-neet-prepportal.vercel.app/login"
@@ -347,6 +379,19 @@ export default function Scholarship() {
               </p>
             </div>
           </motion.div>
+
+          {/* Disclaimer */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+            className="text-purple-300/80 text-[11px] leading-relaxed mt-7 max-w-3xl mx-auto text-center"
+          >
+            Scholarship awards are subject to AGEST ranking, eligibility criteria, admission through
+            ABHA Global Educare, scholarship policy, and continued academic performance. Scholarship
+            support may be distributed across the duration of the eligible MBBS program.
+          </motion.p>
         </div>
       </section>
 
@@ -819,10 +864,10 @@ export default function Scholarship() {
             className="relative"
           >
             <div className="bg-[#0B1A35] rounded-3xl overflow-hidden shadow-2xl">
-              {/* UPPER PART: Title + Introductory offer pricing */}
+              {/* UPPER PART: Title + registration fee pricing */}
               <div className="bg-gradient-to-r from-[#C6962E] to-[#f5a623] p-4 text-center">
                 <p className="text-[#0B1A35] font-black text-xs sm:text-sm uppercase tracking-widest mb-2">
-                  🏆 Only for 2026 NEET Aspirants : Introductory Offer
+                  🏆 Only for 2026 NEET Aspirants · Registration Fee
                 </p>
                 <div className="flex items-center justify-center gap-3">
                   <span className="font-black text-2xl" style={{ color: '#dc2626', textDecoration: 'line-through' }}>
