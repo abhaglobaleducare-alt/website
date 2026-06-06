@@ -130,7 +130,7 @@ export default function AgestOfferBanner() {
           <div className="flex flex-col gap-3 items-center lg:items-start flex-shrink-0">
             <LeadGate action="claim_111" mode="newTab">
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSeJFiEYL7KjZ9cS0s9KRdZrdhzLMjpGmGZkwp8yWh4s54lpsA/viewform?usp=header"
+              href="https://docs.google.com/forms/d/e/1FAIpQLScfLV7uW_1gEoxj8y8yc_1aVYfZ32k22NcPxwn0fax6ZwPh-g/viewform"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-black text-base transition-all hover:-translate-y-0.5 hover:shadow-2xl"

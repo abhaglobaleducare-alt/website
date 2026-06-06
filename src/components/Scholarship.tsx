@@ -363,7 +363,7 @@ export default function Scholarship() {
             <div className="flex flex-col gap-3 items-center lg:items-start flex-shrink-0 lg:w-56">
               <LeadGate action="claim_111" mode="newTab">
               <a
-                href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20%E2%80%94%20ABHA%20NEET%20Scholarship%20Test%20%28%E2%82%B9111%20registration%20fee%29"
+                href="https://docs.google.com/forms/d/e/1FAIpQLScfLV7uW_1gEoxj8y8yc_1aVYfZ32k22NcPxwn0fax6ZwPh-g/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-black text-base transition-all hover:-translate-y-0.5 hover:shadow-2xl text-center"
@@ -765,12 +765,12 @@ export default function Scholarship() {
             <div className="flex flex-wrap gap-4 justify-center">
               <LeadGate action="claim_111" mode="newTab">
               <a
-                href="https://wa.me/917447552878?text=AGEST"
+                href="https://docs.google.com/forms/d/e/1FAIpQLScfLV7uW_1gEoxj8y8yc_1aVYfZ32k22NcPxwn0fax6ZwPh-g/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base shadow-[0_0_40px_rgba(198,150,46,0.35)] hover:shadow-[0_0_60px_rgba(198,150,46,0.55)] hover:-translate-y-0.5 transition-all duration-300"
               >
-                <Zap size={18} /> WhatsApp &ldquo;AGEST&rdquo; — +91 74475 52878
+                <Zap size={18} /> Register for AGEST 2026
               </a>
               </LeadGate>
               <LeadGate action="claim_111" mode="newTab">
@@ -1529,13 +1529,13 @@ export default function Scholarship() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <LeadGate action="claim_111" mode="newTab">
             <a
-              href="https://wa.me/917447552878?text=AGEST"
+              href="https://docs.google.com/forms/d/e/1FAIpQLScfLV7uW_1gEoxj8y8yc_1aVYfZ32k22NcPxwn0fax6ZwPh-g/viewform"
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-9 py-5 rounded-xl font-black text-lg shadow-[0_0_50px_rgba(198,150,46,0.35)] hover:shadow-[0_0_70px_rgba(198,150,46,0.55)] hover:-translate-y-1 transition-all duration-300"
             >
               <Zap size={22} />
-              Send &ldquo;AGEST&rdquo; on WhatsApp
+              Register for AGEST 2026
               <ArrowUpRight
                 size={18}
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
