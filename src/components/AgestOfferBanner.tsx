@@ -130,7 +130,7 @@ export default function AgestOfferBanner() {
           <div className="flex flex-col gap-3 items-center lg:items-start flex-shrink-0">
             <LeadGate action="claim_111" mode="newTab">
             <a
-              href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20AGEST%202026%20%E2%80%94%20ABHA%20NEET%20Scholarship%20Test%20%28%E2%82%B9111%20registration%20fee%29"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSeJFiEYL7KjZ9cS0s9KRdZrdhzLMjpGmGZkwp8yWh4s54lpsA/viewform?usp=header"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-black text-base transition-all hover:-translate-y-0.5 hover:shadow-2xl"
