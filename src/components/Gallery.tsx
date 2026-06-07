@@ -139,8 +139,8 @@ const galleryItems: GalleryItem[] = [
   /* Videos — "ABHA in Action" */
   { id: 20, category: 'videos', label: 'India MBBS vs Georgia MBBS', desc: 'An honest side-by-side comparison.', videoId: 'IDCKRjILCRk' },
   { id: 21, category: 'videos', label: 'ABHA with: MBBS @ Indian Private College??', desc: 'Is a private Indian seat worth it?', videoId: '1FRwXbOPJ0g' },
-  { id: 22, category: 'videos', label: "Listen in Gulf — Students' Words", desc: 'Gulf students, in their own words.', videoId: 'l9VXNE1Ernc', isShort: true },
-  { id: 23, category: 'videos', label: 'ABHA Welcomes You @ Geo', desc: 'A warm welcome to Georgia.', videoId: 'sSleJPFLCGs', isShort: true },
+  { id: 22, category: 'videos', label: "A Gulf Student's Honest Review", desc: 'A Kuwaiti student on our hostel & services.', videoId: 'l9VXNE1Ernc', isShort: true },
+  { id: 23, category: 'videos', label: 'ABHA Welcomes You @ Georgia', desc: 'A warm welcome to Georgia.', videoId: 'sSleJPFLCGs', isShort: true },
   { id: 24, category: 'videos', label: 'ABHA with: Home Outside India', desc: 'A real home away from home.', videoId: '6hH8pVb6hVk', isShort: true },
   { id: 25, category: 'videos', label: 'ABHA with You @ Every Step', desc: 'By your side, every single step.', videoId: '39TXPRXXVv4', isShort: true },
   { id: 26, category: 'videos', label: 'Not Only Admission — With You on Ground', desc: 'We stay with you after you land.', videoId: '4bO-Gu7MyQo', isShort: true },
