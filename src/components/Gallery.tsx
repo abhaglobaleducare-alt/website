@@ -138,7 +138,7 @@ const galleryItems: GalleryItem[] = [
 
   /* Videos — "ABHA in Action" */
   { id: 20, category: 'videos', label: 'India MBBS vs Georgia MBBS', desc: 'An honest side-by-side comparison.', videoId: 'IDCKRjILCRk' },
-  { id: 21, category: 'videos', label: 'ABHA with: MBBS @ Indian Private College??', desc: 'Is a private Indian seat worth it?', videoId: '1FRwXbOPJ0g' },
+  { id: 21, category: 'videos', label: 'MBBS @ Indian Private College??', desc: 'Is a private Indian seat worth it?', videoId: '1FRwXbOPJ0g' },
   { id: 22, category: 'videos', label: "A Gulf Student's Honest Review", desc: 'A Kuwaiti student on our hostel & services.', videoId: 'l9VXNE1Ernc', isShort: true },
   { id: 23, category: 'videos', label: 'ABHA Welcomes You @ Georgia', desc: 'A warm welcome to Georgia.', videoId: 'sSleJPFLCGs', isShort: true },
   { id: 24, category: 'videos', label: 'ABHA with: Home Outside India', desc: 'A real home away from home.', videoId: '6hH8pVb6hVk', isShort: true },
