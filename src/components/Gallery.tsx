@@ -137,14 +137,14 @@ const galleryItems: GalleryItem[] = [
   { id: 14, category: 'hostel', label: 'OneWindow Gaming Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎮', desc: 'Gaming & recreation lounge', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F7%2520Sterling%2520gaming%2520room.jpg' },
 
   /* Videos — "ABHA in Action" */
-  { id: 20, category: 'videos', label: 'ABHA Global Educare', desc: 'Watch our full story', videoId: 'IDCKRjILCRk' },
-  { id: 21, category: 'videos', label: 'MBBS Abroad with ABHA', desc: 'Your journey, guided end-to-end', videoId: '1FRwXbOPJ0g' },
-  { id: 22, category: 'videos', label: 'Campus & Hostel Life', desc: 'A glimpse of student life', videoId: 'l9VXNE1Ernc', isShort: true },
-  { id: 23, category: 'videos', label: 'Student Voices', desc: 'Hear it from our students', videoId: 'sSleJPFLCGs', isShort: true },
-  { id: 24, category: 'videos', label: 'A Day with ABHA', desc: 'Moments from campus', videoId: '6hH8pVb6hVk', isShort: true },
-  { id: 25, category: 'videos', label: 'Behind the Scenes', desc: 'Life beyond the classroom', videoId: '39TXPRXXVv4', isShort: true },
-  { id: 26, category: 'videos', label: 'Student Diaries', desc: 'Real students, real journeys', videoId: '4bO-Gu7MyQo', isShort: true },
-  { id: 27, category: 'videos', label: 'ABHA Highlights', desc: 'Best moments with ABHA', videoId: '-9t0E_je3Is', isShort: true },
+  { id: 20, category: 'videos', label: 'India MBBS vs Georgia MBBS', desc: 'An honest side-by-side comparison.', videoId: 'IDCKRjILCRk' },
+  { id: 21, category: 'videos', label: 'ABHA with: MBBS @ Indian Private College??', desc: 'Is a private Indian seat worth it?', videoId: '1FRwXbOPJ0g' },
+  { id: 22, category: 'videos', label: "Listen in Gulf — Students' Words", desc: 'Gulf students, in their own words.', videoId: 'l9VXNE1Ernc', isShort: true },
+  { id: 23, category: 'videos', label: 'ABHA Welcomes You @ Geo', desc: 'A warm welcome to Georgia.', videoId: 'sSleJPFLCGs', isShort: true },
+  { id: 24, category: 'videos', label: 'ABHA with: Home Outside India', desc: 'A real home away from home.', videoId: '6hH8pVb6hVk', isShort: true },
+  { id: 25, category: 'videos', label: 'ABHA with You @ Every Step', desc: 'By your side, every single step.', videoId: '39TXPRXXVv4', isShort: true },
+  { id: 26, category: 'videos', label: 'Not Only Admission — With You on Ground', desc: 'We stay with you after you land.', videoId: '4bO-Gu7MyQo', isShort: true },
+  { id: 27, category: 'videos', label: 'Solution for Every Challenge', desc: 'Every challenge, a solution ready.', videoId: '-9t0E_je3Is', isShort: true },
 ];
 
 const categories = ['all', 'hostel', 'videos'];
