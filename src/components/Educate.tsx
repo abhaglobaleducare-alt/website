@@ -42,8 +42,8 @@ const faqs = [
     a: 'Key NMC guidelines include: (1) Degree must be from a WHO-listed & NMC-eligible university, (2) NEET qualified, (3) 54-month MBBS course duration + 12-month internship, (4) Mandatory attendance requirements, (5) Clear NEXT exam to practice in India.',
   },
   {
-    q: 'How does Georgia compare to Ukraine or Russia for MBBS?',
-    a: 'Georgia is considered one of the safest European countries, offers WHO/NMC-eligible universities with English-medium instruction, and costs are similar to Ukraine/Russia. Post-conflict concerns with Ukraine/Russia make Georgia a much more stable and recommended alternative.',
+    q: 'How does Georgia compare to other MBBS destinations like Ukraine?',
+    a: 'Georgia is considered one of the safest European countries, offers WHO/NMC-eligible universities with English-medium instruction, and costs are highly competitive. Post-conflict concerns with Ukraine make Georgia a much more stable and recommended alternative.',
   },
   {
     q: 'What is the total cost of MBBS in Georgia vs Kyrgyzstan?',

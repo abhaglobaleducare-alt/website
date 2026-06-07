@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "ABHA Global Educare - MBBS Abroad Consultancy",
-    "description": "Study MBBS abroad with expert guidance from ABHA Global Educare. Admissions to NMC-approved universities in Russia, Georgia, Kazakhstan & more.",
-    "keywords": "MBBS abroad, study MBBS in Russia, MBBS in Georgia, medical education abroad, NEET counseling"
+    "description": "Study MBBS abroad with expert guidance from ABHA Global Educare. Admissions to NMC-approved universities in Georgia, Kyrgyzstan & more.",
+    "keywords": "MBBS abroad, MBBS in Georgia, MBBS in Kyrgyzstan, medical education abroad, NEET counseling"
   },
   "nav": {
     "home": "Home",
@@ -113,17 +113,9 @@
     "learnMore": "Learn More",
     "applyNow": "Apply Now",
     "countries": {
-      "russia": {
-        "name": "Russia",
-        "description": "Study MBBS in Russia with world-class medical education at affordable fees. Russia offers excellent infrastructure, experienced faculty, and globally recognized degrees."
-      },
       "georgia": {
         "name": "Georgia",
         "description": "Georgia offers European-standard medical education with English-medium programs. Safe, friendly environment with affordable living costs."
-      },
-      "kazakhstan": {
-        "name": "Kazakhstan",
-        "description": "Kazakhstan provides quality medical education with modern infrastructure. Strong Indian community and direct flight connectivity."
       },
       "kyrgyzstan": {
         "name": "Kyrgyzstan",

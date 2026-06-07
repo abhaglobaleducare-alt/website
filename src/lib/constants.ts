@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   shortName: 'ABHA Educare',
   tagline: 'Dreams Have No Borders',
   description:
-    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia, Russia, Kazakhstan & Kyrgyzstan. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
+    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia & Kyrgyzstan. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
   url: 'https://abhaglobaleducare.com',
   email: 'connect@abhaglobaleducare.com',
   logo: '/images/logo.png',
@@ -68,9 +68,7 @@ export const NAV_LINKS = [
     label: 'Destinations',
     href: '/destinations',
     children: [
-      { label: 'Russia', href: '/destinations/russia' },
       { label: 'Georgia', href: '/destinations/georgia' },
-      { label: 'Kazakhstan', href: '/destinations/kazakhstan' },
       { label: 'Kyrgyzstan', href: '/destinations/kyrgyzstan' },
       { label: 'Philippines', href: '/destinations/philippines' },
       { label: 'Bangladesh', href: '/destinations/bangladesh' },
@@ -102,9 +100,7 @@ export const FOOTER_LINKS = {
     { label: 'FAQs', href: '/faqs' },
   ],
   destinations: [
-    { label: 'MBBS in Russia', href: '/destinations/russia' },
     { label: 'MBBS in Georgia', href: '/destinations/georgia' },
-    { label: 'MBBS in Kazakhstan', href: '/destinations/kazakhstan' },
     { label: 'MBBS in Kyrgyzstan', href: '/destinations/kyrgyzstan' },
     { label: 'MBBS in Philippines', href: '/destinations/philippines' },
     { label: 'MBBS in Bangladesh', href: '/destinations/bangladesh' },
@@ -119,22 +115,6 @@ export const FOOTER_LINKS = {
 
 export const DESTINATIONS = [
   {
-    id: 'russia',
-    name: 'Russia',
-    flag: '🇷🇺',
-    image: '/images/destinations/russia.jpg',
-    universities: 50,
-    duration: '6 years',
-    fees: '₹25-35 Lakhs (Total)',
-    recognition: 'NMC & WHO Eligible',
-    highlights: [
-      'Top-ranked medical universities',
-      'English medium programs',
-      'NMC & WHO Eligible universities',
-      'Rich cultural experience',
-    ],
-  },
-  {
     id: 'georgia',
     name: 'Georgia',
     flag: '🇬🇪',
@@ -148,22 +128,6 @@ export const DESTINATIONS = [
       'Safe and friendly environment',
       'Affordable living costs',
       'No entrance exam required',
-    ],
-  },
-  {
-    id: 'kazakhstan',
-    name: 'Kazakhstan',
-    flag: '🇰🇿',
-    image: '/images/destinations/kazakhstan.jpg',
-    universities: 15,
-    duration: '5 years',
-    fees: '₹20-30 Lakhs (Total)',
-    recognition: 'NMC & WHO Eligible',
-    highlights: [
-      'Affordable education',
-      'Modern infrastructure',
-      'Strong Indian community',
-      'Direct flights from India',
     ],
   },
   {
@@ -275,7 +239,7 @@ export const TESTIMONIALS = [
   {
     id: 2,
     name: 'Rahul Patil',
-    university: 'Kazan Federal University, Russia',
+    university: 'Avicenna International Medical University, Kyrgyzstan',
     batch: '2020-2026',
     image: '/images/testimonials/student-2.jpg',
     rating: 5,
@@ -284,7 +248,7 @@ export const TESTIMONIALS = [
   {
     id: 3,
     name: 'Sneha Kulkarni',
-    university: 'Kazakh National Medical University',
+    university: 'East European University, Georgia',
     batch: '2021-2026',
     image: '/images/testimonials/student-3.jpg',
     rating: 5,
