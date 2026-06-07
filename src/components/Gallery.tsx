@@ -107,8 +107,20 @@ const reviews = [
   },
 ];
 
-/* ── Gallery categories ──────────────────────────────────────── */
-const galleryItems = [
+/* ── Gallery items (photos + videos) ─────────────────────────── */
+type GalleryItem = {
+  id: number;
+  category: string;
+  label: string;
+  desc: string;
+  image?: string;
+  bg?: string;
+  icon?: string;
+  videoId?: string;
+  isShort?: boolean;
+};
+
+const galleryItems: GalleryItem[] = [
   {
     id: 1,
     category: 'hostel',
@@ -123,9 +135,29 @@ const galleryItems = [
   { id: 12, category: 'hostel', label: 'OneWindow Bathrooms', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🚿', desc: 'Clean modern bathroom facilities', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F5%2520sterling%2520bath.jpg' },
   { id: 13, category: 'hostel', label: 'OneWindow Study Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '📖', desc: 'Dedicated study room for students', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F6%2520Sterling%2520Studyroom.jpg' },
   { id: 14, category: 'hostel', label: 'OneWindow Gaming Room', bg: 'from-[#C6962E]/20 to-[#C6962E]/5', icon: '🎮', desc: 'Gaming & recreation lounge', image: '/api/blob-image?url=https%3A%2F%2Fsd0phdecfctmljdq.private.blob.vercel-storage.com%2F7%2520Sterling%2520gaming%2520room.jpg' },
+
+  /* Videos — "ABHA in Action" */
+  { id: 20, category: 'videos', label: 'ABHA Global Educare', desc: 'Watch our full story', videoId: 'IDCKRjILCRk' },
+  { id: 21, category: 'videos', label: 'MBBS Abroad with ABHA', desc: 'Your journey, guided end-to-end', videoId: '1FRwXbOPJ0g' },
+  { id: 22, category: 'videos', label: 'Campus & Hostel Life', desc: 'A glimpse of student life', videoId: 'l9VXNE1Ernc', isShort: true },
+  { id: 23, category: 'videos', label: 'Student Voices', desc: 'Hear it from our students', videoId: 'sSleJPFLCGs', isShort: true },
+  { id: 24, category: 'videos', label: 'A Day with ABHA', desc: 'Moments from campus', videoId: '6hH8pVb6hVk', isShort: true },
+  { id: 25, category: 'videos', label: 'Behind the Scenes', desc: 'Life beyond the classroom', videoId: '39TXPRXXVv4', isShort: true },
+  { id: 26, category: 'videos', label: 'Student Diaries', desc: 'Real students, real journeys', videoId: '4bO-Gu7MyQo', isShort: true },
+  { id: 27, category: 'videos', label: 'ABHA Highlights', desc: 'Best moments with ABHA', videoId: '-9t0E_je3Is', isShort: true },
 ];
 
-const categories = ['all', 'hostel'];
+const categories = ['all', 'hostel', 'videos'];
+
+const categoryLabels: Record<string, string> = {
+  all: 'All',
+  hostel: 'Hostel',
+  videos: 'ABHA in Action',
+};
+
+type Lightbox =
+  | { type: 'image'; src: string; label: string }
+  | { type: 'video'; videoId: string; isShort: boolean; label: string };
 
 /* ── Star rating ─────────────────────────────────────────────── */
 function StarRating({ rating }: { rating: number }) {
@@ -147,7 +179,7 @@ function StarRating({ rating }: { rating: number }) {
 ═══════════════════════════════════════════════════════════════ */
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('all');
-  const [lightbox, setLightbox] = useState<{ src: string; label: string } | null>(null);
+  const [lightbox, setLightbox] = useState<Lightbox | null>(null);
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
@@ -220,7 +252,7 @@ export default function Gallery() {
               viewport={{ once: true }}
               className="inline-block text-[#C6962E] font-semibold text-sm uppercase tracking-[0.2em] mb-3"
             >
-              Photo Gallery
+              Photos & Videos
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
@@ -239,20 +271,25 @@ export default function Gallery() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold capitalize transition-all duration-300 ${
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
                   activeCategory === cat
                     ? 'bg-gradient-to-r from-[#C6962E] to-[#DFB761] text-white shadow-lg shadow-[#C6962E]/30'
                     : 'bg-white text-[#0B1A35] border border-gray-200 hover:border-[#C6962E] hover:text-[#C6962E]'
                 }`}
               >
-                {cat === 'all' ? 'All Photos' : cat}
+                {categoryLabels[cat] ?? cat}
               </button>
             ))}
           </div>
 
           {/* Gallery grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((item, i) => (
+            {filtered.map((item, i) => {
+              const isVideo = !!item.videoId;
+              const thumb = isVideo
+                ? `https://i.ytimg.com/vi/${item.videoId}/hqdefault.jpg`
+                : item.image;
+              return (
               <motion.div
                 key={item.id}
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -260,17 +297,19 @@ export default function Gallery() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
                 onClick={() => {
-                  if ('image' in item && item.image) {
-                    setLightbox({ src: item.image as string, label: item.label });
+                  if (isVideo) {
+                    setLightbox({ type: 'video', videoId: item.videoId!, isShort: !!item.isShort, label: item.label });
+                  } else if (item.image) {
+                    setLightbox({ type: 'image', src: item.image, label: item.label });
                   }
                 }}
-                className={`group relative rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-400 ${'image' in item && item.image ? 'cursor-zoom-in' : 'cursor-default'}`}
+                className={`group relative rounded-2xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-400 ${isVideo ? 'cursor-pointer' : item.image ? 'cursor-zoom-in' : 'cursor-default'}`}
               >
-                {/* Image / placeholder area */}
+                {/* Image / video thumbnail / placeholder area */}
                 <div className="h-52 relative overflow-hidden">
-                  {'image' in item && item.image ? (
+                  {thumb ? (
                     <img
-                      src={item.image as string}
+                      src={thumb}
                       alt={item.label}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
@@ -283,9 +322,9 @@ export default function Gallery() {
                   {/* Overlay on hover */}
                   <div className="absolute inset-0 bg-[#0B1A35]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
-                      {'image' in item && item.image
-                        ? <Expand size={20} className="text-white" />
-                        : <Play size={20} className="text-white fill-white" />}
+                      {isVideo
+                        ? <Play size={20} className="text-white fill-white" />
+                        : <Expand size={20} className="text-white" />}
                     </div>
                   </div>
                 </div>
@@ -297,7 +336,8 @@ export default function Gallery() {
                   </span>
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Coming soon note */}
@@ -444,18 +484,43 @@ export default function Gallery() {
           >
             <X size={22} className="text-white" />
           </button>
-          <motion.img
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 25 }}
-            src={lightbox.src}
-            alt={lightbox.label}
-            className="max-w-full max-h-[90vh] rounded-xl object-contain shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white text-sm px-4 py-1.5 rounded-full">
-            {lightbox.label}
-          </div>
+          {lightbox.type === 'image' ? (
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 25 }}
+              src={lightbox.src}
+              alt={lightbox.label}
+              className="max-w-full max-h-[90vh] rounded-xl object-contain shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 25 }}
+              className="relative overflow-hidden rounded-xl shadow-2xl bg-black"
+              style={
+                lightbox.isShort
+                  ? { width: 'min(92vw, 400px)', aspectRatio: '9 / 16', maxHeight: '88vh' }
+                  : { width: 'min(94vw, 960px)', aspectRatio: '16 / 9', maxHeight: '85vh' }
+              }
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${lightbox.videoId}?autoplay=1&rel=0&playsinline=1`}
+                title={lightbox.label}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full border-0"
+              />
+            </motion.div>
+          )}
+          {lightbox.type === 'image' && (
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-sm text-white text-sm px-4 py-1.5 rounded-full">
+              {lightbox.label}
+            </div>
+          )}
         </motion.div>
       )}
 
