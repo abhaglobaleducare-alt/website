@@ -154,6 +154,14 @@ export default function Footer() {
         {/* Footer Bottom */}
         <div className="mt-12 border-t border-white/10 pt-6 text-center text-sm text-white/50">
           <p>
+            <Link
+              href="/privacy"
+              className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
+            >
+              Privacy Policy
+            </Link>
+          </p>
+          <p className="mt-2">
             &copy; 2026 ABHA Global Educare LLP. All Rights Reserved. |
             Designed with ❤️ for Global Medical Education
           </p>
