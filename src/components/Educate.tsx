@@ -46,12 +46,12 @@ const faqs = [
     a: 'Georgia is considered one of the safest European countries, offers WHO/NMC-eligible universities with English-medium instruction, and costs are highly competitive. Post-conflict concerns with Ukraine make Georgia a much more stable and recommended alternative.',
   },
   {
-    q: 'What is the total cost of MBBS in Georgia vs Kyrgyzstan?',
-    a: 'Georgia: approximately ₹30–50 lakh total (including tuition + accommodation + food over 6 years). Kyrgyzstan: approximately ₹25–35 lakh total. These are significantly lower than private medical colleges in India.',
+    q: 'What is the total cost of MBBS in Georgia?',
+    a: 'Georgia: approximately ₹30–50 lakh total (including tuition + accommodation + food over 6 years). This is significantly lower than private medical colleges in India.',
   },
   {
     q: 'Can I get a hostel with Indian food abroad?',
-    a: 'Yes! ABHA operates Sterling Study & Stay Suites in Tbilisi, Georgia — a 200+ bed hostel with daily Indian veg & non-veg meals cooked by Indian chefs. In Kyrgyzstan, we manage dedicated Indian mess facilities attached to our partner hostels.',
+    a: 'Yes! ABHA operates Sterling Study & Stay Suites in Tbilisi, Georgia — a 200+ bed hostel with daily Indian veg & non-veg meals cooked by Indian chefs.',
   },
   {
     q: 'What is the AGEST Scholarship?',
@@ -145,7 +145,7 @@ const topics = [
       'NMC (National Medical Commission) eligibility',
       'WFME (World Federation for Medical Education) recognition',
       'ECFMG eligibility (for those aiming for USA residency)',
-      'Check AVICENNA directory for updated status',
+      'Check university directory for updated status',
       'All ABHA partner universities meet these criteria',
     ],
   },
@@ -153,14 +153,14 @@ const topics = [
 
 /* ── Comparison table data ───────────────────────────────────── */
 const comparisonRows = [
-  { aspect: 'Total Cost (6 yrs)', india: '₹80L – 1.2 Cr (Private)', georgia: '₹30 – 50L', kyrgyzstan: '₹25 – 35L' },
-  { aspect: 'Medium of Instruction', india: 'English', georgia: 'English', kyrgyzstan: 'English' },
-  { aspect: 'NMC Eligible', india: '✅ Yes', georgia: '✅ Yes', kyrgyzstan: '✅ Yes' },
-  { aspect: 'NEET Required', india: '✅ Yes', georgia: '✅ Yes', kyrgyzstan: '✅ Yes' },
-  { aspect: 'Weather', india: 'Tropical/Mixed', georgia: 'Mild European', kyrgyzstan: 'Continental' },
-  { aspect: 'Indian Food Available', india: 'Everywhere', georgia: '✅ ABHA Indian Mess', kyrgyzstan: '✅ ABHA Indian Mess' },
-  { aspect: 'Own Hostel by Agent', india: '—', georgia: '✅', kyrgyzstan: '✅' },
-  { aspect: 'Safety', india: 'Varies', georgia: '✅ Among Europe\'s safest', kyrgyzstan: '✅ Large Indian community' },
+  { aspect: 'Total Cost (6 yrs)', india: '₹80L – 1.2 Cr (Private)', georgia: '₹30 – 50L' },
+  { aspect: 'Medium of Instruction', india: 'English', georgia: 'English' },
+  { aspect: 'NMC Eligible', india: '✅ Yes', georgia: '✅ Yes' },
+  { aspect: 'NEET Required', india: '✅ Yes', georgia: '✅ Yes' },
+  { aspect: 'Weather', india: 'Tropical/Mixed', georgia: 'Mild European' },
+  { aspect: 'Indian Food Available', india: 'Everywhere', georgia: '✅ ABHA Indian Mess' },
+  { aspect: 'Own Hostel by Agent', india: '—', georgia: '✅' },
+  { aspect: 'Safety', india: 'Varies', georgia: '✅ Among Europe\'s safest' },
 ];
 
 /* ── Video Section ───────────────────────────────────────────── */
@@ -466,7 +466,7 @@ export default function Educate() {
               transition={{ delay: 0.05 }}
               className="font-playfair text-3xl sm:text-4xl text-[#0B1A35]"
             >
-              India vs Georgia vs <span className="text-[#C6962E]">Kyrgyzstan</span>
+              India vs <span className="text-[#C6962E]">Georgia</span>
             </motion.h2>
           </div>
 
@@ -484,9 +484,6 @@ export default function Educate() {
                   <th className="px-5 py-4 text-center font-semibold bg-[#C6962E]/20">
                     🇬🇪 Georgia
                   </th>
-                  <th className="px-5 py-4 text-center font-semibold">
-                    🇰🇬 Kyrgyzstan
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -498,7 +495,6 @@ export default function Educate() {
                     <td className="px-5 py-3.5 font-medium text-[#0B1A35]">{row.aspect}</td>
                     <td className="px-5 py-3.5 text-center text-gray-600">{row.india}</td>
                     <td className="px-5 py-3.5 text-center font-medium text-[#0B1A35] bg-[#C6962E]/5">{row.georgia}</td>
-                    <td className="px-5 py-3.5 text-center text-gray-600">{row.kyrgyzstan}</td>
                   </tr>
                 ))}
               </tbody>

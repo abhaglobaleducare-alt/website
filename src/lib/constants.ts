@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   shortName: 'ABHA Educare',
   tagline: 'Dreams Have No Borders',
   description:
-    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia & Kyrgyzstan. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
+    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
   url: 'https://abhaglobaleducare.com',
   email: 'connect@abhaglobaleducare.com',
   logo: '/images/logo.png',
@@ -69,7 +69,6 @@ export const NAV_LINKS = [
     href: '/destinations',
     children: [
       { label: 'Georgia', href: '/destinations/georgia' },
-      { label: 'Kyrgyzstan', href: '/destinations/kyrgyzstan' },
       { label: 'Philippines', href: '/destinations/philippines' },
       { label: 'Bangladesh', href: '/destinations/bangladesh' },
     ],
@@ -101,7 +100,6 @@ export const FOOTER_LINKS = {
   ],
   destinations: [
     { label: 'MBBS in Georgia', href: '/destinations/georgia' },
-    { label: 'MBBS in Kyrgyzstan', href: '/destinations/kyrgyzstan' },
     { label: 'MBBS in Philippines', href: '/destinations/philippines' },
     { label: 'MBBS in Bangladesh', href: '/destinations/bangladesh' },
   ],
@@ -128,22 +126,6 @@ export const DESTINATIONS = [
       'Safe and friendly environment',
       'Affordable living costs',
       'No entrance exam required',
-    ],
-  },
-  {
-    id: 'kyrgyzstan',
-    name: 'Kyrgyzstan',
-    flag: '🇰🇬',
-    image: '/images/destinations/kyrgyzstan.jpg',
-    universities: 8,
-    duration: '6 years',
-    fees: '₹18-25 Lakhs (Total)',
-    recognition: 'NMC & WHO Eligible',
-    highlights: [
-      'Most affordable option',
-      'English medium available',
-      'Indian food available',
-      'Pleasant climate',
     ],
   },
   {
@@ -239,7 +221,7 @@ export const TESTIMONIALS = [
   {
     id: 2,
     name: 'Rahul Patil',
-    university: 'Avicenna International Medical University, Kyrgyzstan',
+    university: 'Alte University, Georgia',
     batch: '2020-2026',
     image: '/images/testimonials/student-2.jpg',
     rating: 5,
@@ -257,11 +239,11 @@ export const TESTIMONIALS = [
   {
     id: 4,
     name: 'Amit Deshmukh',
-    university: 'Osh State University, Kyrgyzstan',
+    university: 'SEU, Georgia',
     batch: '2020-2025',
     image: '/images/testimonials/student-4.jpg',
     rating: 5,
-    content: 'From NEET counseling to visa approval, ABHA handled everything smoothly. Their post-arrival support in Kyrgyzstan was also amazing.',
+    content: 'From NEET counseling to visa approval, ABHA handled everything smoothly. Their post-arrival support in Georgia was also amazing.',
   },
 ];
 

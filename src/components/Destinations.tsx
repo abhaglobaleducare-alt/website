@@ -10,9 +10,7 @@ import {
   Shield,
   MapPin,
   Users,
-  IndianRupee,
   ArrowRight,
-  CheckCircle2,
 } from 'lucide-react';
 
 const destinations = [
@@ -32,23 +30,6 @@ const destinations = [
       { icon: Users, text: "One of Europe's safest countries — ranked higher than many EU nations" },
     ],
     accent: '#C6962E',
-  },
-  {
-    country: 'Kyrgyzstan',
-    flag: '🇰🇬',
-    tagline: 'The most affordable MBBS destination with a large Indian community',
-    cost: '₹25–35L',
-    duration: '6 years',
-    universities: ['International European University (IEU)', 'Avicenna International Medical University'],
-    keyFacts: [
-      { icon: IndianRupee, text: 'Lowest total cost among all MBBS-abroad countries' },
-      { icon: HomeIcon, text: 'One Window Services — our own 200+ bed (NOT BUNK BED) hostel in Bishkek' },
-      { icon: Utensils, text: 'Dedicated Indian mess — home-style meals every day' },
-      { icon: Users, text: '5,000+ Indian medical students already studying here' },
-      { icon: Globe2, text: 'English-medium instruction with optional Russian language prep' },
-      { icon: Shield, text: 'WHO & NMC recognized — eligible for FMGE / NEXT' },
-    ],
-    accent: '#1B7C9E',
   },
 ];
 
@@ -73,8 +54,8 @@ export default function Destinations() {
             transition={{ delay: 0.05 }}
             className="font-playfair text-3xl sm:text-4xl lg:text-[2.75rem] text-[#0B1A35] mb-5 leading-tight"
           >
-            Georgia & Kyrgyzstan —{' '}
-            <span className="text-[#C6962E]">Our Focus Countries</span>
+            Georgia —{' '}
+            <span className="text-[#C6962E]">Our Focus Country</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -83,7 +64,7 @@ export default function Destinations() {
             transition={{ delay: 0.1 }}
             className="text-gray-500 text-lg max-w-[680px] mx-auto leading-relaxed"
           >
-            We don&apos;t spread thin across dozens of countries. We go deep in two — 
+            We don&apos;t spread thin across dozens of countries. We go deep in one —
             with our own hostels, food services, and on-ground offices.
           </motion.p>
         </div>

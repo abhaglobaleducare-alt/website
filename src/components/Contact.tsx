@@ -172,7 +172,6 @@ export default function Contact() {
                 >
                   <option value="">Not sure yet</option>
                   <option value="georgia">Georgia</option>
-                  <option value="kyrgyzstan">Kyrgyzstan</option>
                 </select>
               </div>
 

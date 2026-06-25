@@ -72,7 +72,7 @@ const reviews = [
   {
     id: 8,
     name: 'Sufiyan',
-    course: 'Student — Avicenna University, Kyrgyzstan',
+    course: 'Student — Georgia',
     rating: 5,
     avatar: 'S',
     color: '#1B7C9E',
@@ -90,11 +90,11 @@ const reviews = [
   {
     id: 10,
     name: 'Nitika',
-    course: 'Student — IEU, Kyrgyzstan',
+    course: 'Student — SEU, Georgia',
     rating: 5,
     avatar: 'N',
     color: '#1B7C9E',
-    text: '"So many consultancies just want to close the deal and move on. ABHA was different from the very first call — they were patient, answered every question, and never made me feel rushed. The entire documentation was handled so quickly and cleanly. By the time I landed in Bishkek, everything was already in place. Zero last-minute panic. Really grateful for this team."',
+    text: '"So many consultancies just want to close the deal and move on. ABHA was different from the very first call — they were patient, answered every question, and never made me feel rushed. The entire documentation was handled so quickly and cleanly. By the time I landed in Tbilisi, everything was already in place. Zero last-minute panic. Really grateful for this team."',
   },
   {
     id: 11,

@@ -36,7 +36,7 @@ const services = [
     icon: HomeIcon,
     title: 'Own Accommodation',
     description:
-      'Georgia: Abha Global Services managed own hostels in Tbilisi. Kyrgyzstan: Managed student housing with 24/7 security. Not third-party — ours.',
+      'Georgia: Abha Global Services managed own hostels in Tbilisi with 24/7 security. Not third-party — ours.',
     color: '#C6962E',
   },
   {
