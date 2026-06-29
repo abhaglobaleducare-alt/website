@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     'MBBS abroad',
     'MBBS in Georgia',
     'MBBS in Tbilisi Georgia',
+    'MBBS in Bosnia',
     'medical education abroad for Indian students',
     'NMC and WHO eligible universities',
     'affordable MBBS abroad',
@@ -247,7 +248,7 @@ export default async function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'MBBS Abroad Admission Guidance',
-                      description: 'End-to-end MBBS abroad admission support for NMC & WHO Eligible universities in Georgia.',
+                      description: 'End-to-end MBBS abroad admission support for NMC & WHO Eligible universities in Georgia & Bosnia.',
                     },
                   },
                   {

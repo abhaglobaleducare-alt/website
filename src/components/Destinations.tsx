@@ -31,6 +31,23 @@ const destinations = [
     ],
     accent: '#C6962E',
   },
+  {
+    country: 'Bosnia',
+    flag: '🇧🇦',
+    tagline: 'European medical education in the heart of the Balkans',
+    cost: 'Coming soon',
+    duration: '6 years',
+    universities: ['University of East Sarajevo', 'University of Banja Luka'],
+    keyFacts: [
+      { icon: Globe2, text: 'English-medium MBBS at recognized public universities' },
+      { icon: Shield, text: 'WHO & NMC recognized — eligible for FMGE / NEXT' },
+      { icon: MapPin, text: 'Campuses in Sarajevo (capital) & Banja Luka — safe European cities' },
+      { icon: Users, text: 'Welcoming environment with a growing Indian student presence' },
+      { icon: HomeIcon, text: 'ABHA-supported accommodation & settling-in guidance' },
+      { icon: Utensils, text: 'Indian food options available near campus' },
+    ],
+    accent: '#1B7C9E',
+  },
 ];
 
 export default function Destinations() {
@@ -54,8 +71,8 @@ export default function Destinations() {
             transition={{ delay: 0.05 }}
             className="font-playfair text-3xl sm:text-4xl lg:text-[2.75rem] text-[#0B1A35] mb-5 leading-tight"
           >
-            Georgia —{' '}
-            <span className="text-[#C6962E]">Our Focus Country</span>
+            Georgia & Bosnia —{' '}
+            <span className="text-[#C6962E]">Our Focus Countries</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -64,7 +81,7 @@ export default function Destinations() {
             transition={{ delay: 0.1 }}
             className="text-gray-500 text-lg max-w-[680px] mx-auto leading-relaxed"
           >
-            We don&apos;t spread thin across dozens of countries. We go deep in one —
+            We don&apos;t spread thin across dozens of countries. We go deep in two —
             with our own hostels, food services, and on-ground offices.
           </motion.p>
         </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const quickLinks = [
   { label: "Clinical Workshops", href: "/praxis" },
-  { label: "Georgia", href: "/destinations" },
+  { label: "Georgia & Bosnia", href: "/destinations" },
   { label: "Our Services", href: "/services" },
   { label: "Gallery & Reviews", href: "/gallery" },
   { label: "Educate Yourself", href: "/educate" },
@@ -14,6 +14,7 @@ const programs = [
   { label: "NEET Practice Hub", href: "/neet-practice-hub" },
   { label: "CLINICAL Workshops", href: "/praxis" },
   { label: "MBBS in Georgia", href: "/destinations" },
+  { label: "MBBS in Bosnia", href: "/destinations" },
   { label: "Accommodation Services", href: "/services" },
 ];
 
@@ -35,7 +36,7 @@ export default function Footer() {
               </li>
             </ul>
             <p className="mt-4 text-sm italic text-[#C6962E]/90">
-              &ldquo;Your Complete India + Georgia Support
+              &ldquo;Your Complete India + Georgia + Bosnia Support
               Partner&rdquo;
             </p>
           </div>

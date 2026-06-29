@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, ArrowRight, Loader2, Shield, GraduationCap, Globe, Utensils, Home as HomeIcon, BookOpen } from 'lucide-react';
 
 const highlights = [
-  { icon: HomeIcon, text: 'Own Accommodation in Georgia' },
+  { icon: HomeIcon, text: 'Own Accommodation in Georgia & Bosnia' },
   { icon: Utensils, text: 'Authentic Indian Food Services Daily' },
   { icon: BookOpen, text: "Abha's Clinical Experience Workshop" },
   { icon: Shield, text: 'NMC & WHO Eligible Degrees' },
@@ -109,7 +109,7 @@ export default function Hero() {
             className="text-white/80 text-base sm:text-lg lg:text-xl leading-relaxed mb-8 sm:mb-10 max-w-[600px]"
           >
             ABHA Global Educare helps Indian students get admitted to NMC guidelines Eligible
-            medical universities in Georgia — with our own hostels,
+            medical universities in Georgia & Bosnia — with our own hostels,
             Indian meals, and exclusive hands on experience.
           </motion.p>
 

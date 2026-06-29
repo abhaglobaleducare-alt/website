@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   shortName: 'ABHA Educare',
   tagline: 'Dreams Have No Borders',
   description:
-    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
+    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia & Bosnia. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
   url: 'https://abhaglobaleducare.com',
   email: 'connect@abhaglobaleducare.com',
   logo: '/images/logo.png',
@@ -69,6 +69,7 @@ export const NAV_LINKS = [
     href: '/destinations',
     children: [
       { label: 'Georgia', href: '/destinations/georgia' },
+      { label: 'Bosnia', href: '/destinations/bosnia' },
       { label: 'Philippines', href: '/destinations/philippines' },
       { label: 'Bangladesh', href: '/destinations/bangladesh' },
     ],
@@ -100,6 +101,7 @@ export const FOOTER_LINKS = {
   ],
   destinations: [
     { label: 'MBBS in Georgia', href: '/destinations/georgia' },
+    { label: 'MBBS in Bosnia', href: '/destinations/bosnia' },
     { label: 'MBBS in Philippines', href: '/destinations/philippines' },
     { label: 'MBBS in Bangladesh', href: '/destinations/bangladesh' },
   ],
@@ -126,6 +128,22 @@ export const DESTINATIONS = [
       'Safe and friendly environment',
       'Affordable living costs',
       'No entrance exam required',
+    ],
+  },
+  {
+    id: 'bosnia',
+    name: 'Bosnia',
+    flag: '🇧🇦',
+    image: '/images/destinations/bosnia.jpg',
+    universities: 2,
+    duration: '6 years',
+    fees: 'Coming soon',
+    recognition: 'NMC & WHO Eligible',
+    highlights: [
+      'European medical education',
+      'English-medium programs',
+      'Campuses in Sarajevo & Banja Luka',
+      'Safe, welcoming environment',
     ],
   },
   {
