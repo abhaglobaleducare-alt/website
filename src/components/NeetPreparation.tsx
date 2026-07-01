@@ -308,7 +308,7 @@ export default function NeetPreparation() {
         <div className="mb-6">
           <p className="text-white/70 text-sm mb-3">Already registered? Access your portal here.</p>
           <a
-            href="https://abha-neet-prepportal.vercel.app/login"
+            href="https://neet.abhaglobaleducare.com/login"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90"

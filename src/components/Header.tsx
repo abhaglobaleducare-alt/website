@@ -122,7 +122,7 @@ export default function Header() {
             ))}
             <li>
               <a
-                href="https://abha-neet-prepportal.vercel.app/login"
+                href="https://neet.abhaglobaleducare.com/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5"
@@ -168,7 +168,7 @@ export default function Header() {
                   </Link>
                 ))}
                 <a
-                  href="https://abha-neet-prepportal.vercel.app/login"
+                  href="https://neet.abhaglobaleducare.com/login"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}

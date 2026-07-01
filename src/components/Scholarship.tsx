@@ -240,7 +240,7 @@ export default function Scholarship() {
             className="mt-5 flex justify-center"
           >
             <a
-              href="https://abha-neet-prepportal.vercel.app/login"
+              href="https://neet.abhaglobaleducare.com/login"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-7 py-3 rounded-xl font-bold text-sm shadow-lg hover:opacity-90 transition-all duration-200"
@@ -374,7 +374,7 @@ export default function Scholarship() {
               </a>
               </LeadGate>
               <a
-                href="https://abha-neet-prepportal.vercel.app/login"
+                href="https://neet.abhaglobaleducare.com/login"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-white/50 hover:bg-white/5 transition-all text-center"
