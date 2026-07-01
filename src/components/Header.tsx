@@ -122,13 +122,13 @@ export default function Header() {
             ))}
             <li>
               <a
-                href="https://neet.abhaglobaleducare.com/login"
+                href="https://neet.abhaglobaleducare.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5"
                 style={{ background: '#0B1A35', border: '2px solid #C6962E' }}
               >
-                Student Login
+                🎓 NEET Portal
               </a>
             </li>
           </ul>
@@ -168,14 +168,14 @@ export default function Header() {
                   </Link>
                 ))}
                 <a
-                  href="https://neet.abhaglobaleducare.com/login"
+                  href="https://neet.abhaglobaleducare.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block py-3 px-4 font-bold text-center rounded-xl text-white mt-2"
                   style={{ background: '#0B1A35', border: '2px solid #C6962E' }}
                 >
-                  🎓 Student Login — NEET Portal
+                  🎓 NEET Portal
                 </a>
               </div>
             </motion.div>
