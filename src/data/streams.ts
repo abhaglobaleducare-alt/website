@@ -55,7 +55,7 @@ export const STREAMS: StreamMeta[] = [
       'Valid passport for international admission and visa processing.',
     ],
     disclaimer:
-      'For practice in India, FMGE/NExT qualification as per NMC norms is mandatory for foreign medical graduates.',
+      'For practice in India, foreign medical graduates must qualify FMGE/NExT as per NMC norms. Under the NMC, the National Exit Test (NExT) is being introduced as a common exit & licence exam for all MBBS graduates — including Indian college graduates — replacing FMGE and NEET-PG; its rollout is currently deferred, with FMGE applying to foreign medical graduates in the interim.',
     accreditation: 'NMC & WHO Eligible',
     seoTitle: 'MBBS / MD Abroad — Georgia & Timor-Leste | ABHA Global Educare',
     seoDescription:
