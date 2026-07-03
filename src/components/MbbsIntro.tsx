@@ -14,7 +14,7 @@ import {
 import EligibilityForm from '@/components/EligibilityForm';
 
 const highlights = [
-  { icon: HomeIcon, text: 'Own Accommodation in Georgia & Bosnia' },
+  { icon: HomeIcon, text: 'Own Accommodation in Tbilisi, Georgia' },
   { icon: Utensils, text: 'Authentic Indian Food Services Daily' },
   { icon: BookOpen, text: "ABHA's Clinical Experience Workshop" },
   { icon: Shield, text: 'NMC & WHO Eligible Degrees' },
