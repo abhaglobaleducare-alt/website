@@ -45,6 +45,20 @@ const nextConfig = {
       ],
     },
   ],
+  redirects: async () => [
+    {
+      // Clinical Workshops migrated into the Medicine course page.
+      source: '/praxis',
+      destination: '/courses/medicine#clinical-workshops',
+      permanent: true,
+    },
+    {
+      // Business Studies merged into the Business & Management course page.
+      source: '/business-management-georgia',
+      destination: '/courses/business-management',
+      permanent: true,
+    },
+  ],
   poweredByHeader: false,
   compress: true,
 };

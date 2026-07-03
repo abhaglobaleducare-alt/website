@@ -16,11 +16,22 @@ import {
 const destinations = [
   {
     country: 'Georgia',
+    slug: 'georgia',
     flag: '🇬🇪',
     tagline: 'European-standard medical education in a safe, welcoming country',
     cost: '₹30–50L',
     duration: '6 years',
-    universities: ['East West University', 'East European University', 'SEU', 'Alte University'],
+    universities: [
+      'European University',
+      'Alte University',
+      'SEU',
+      'East West University',
+      'East European University',
+      'Caucasus University',
+      'University of Georgia',
+      'CIU',
+      'IBSU',
+    ],
     keyFacts: [
       { icon: HomeIcon, text: 'One Window Services — our own 200+ bed (NOT BUNK BED) hostel in Tbilisi' },
       { icon: Utensils, text: 'Daily Indian veg & non-veg meals prepared by Indian cooks' },
@@ -33,6 +44,7 @@ const destinations = [
   },
   {
     country: 'Bosnia',
+    slug: 'bosnia',
     flag: '🇧🇦',
     tagline: 'European medical education in the heart of the Balkans',
     cost: 'Coming soon',
@@ -40,13 +52,31 @@ const destinations = [
     universities: ['University of East Sarajevo', 'University of Banja Luka'],
     keyFacts: [
       { icon: Globe2, text: 'English-medium MBBS at recognized public universities' },
-      { icon: Shield, text: 'WHO & NMC recognized — eligible for FMGE / NEXT' },
+      { icon: Shield, text: 'WHO & NMC Eligible — eligible for FMGE / NEXT' },
       { icon: MapPin, text: 'Campuses in Sarajevo (capital) & Banja Luka — safe European cities' },
       { icon: Users, text: 'Welcoming environment with a growing Indian student presence' },
       { icon: HomeIcon, text: 'ABHA-supported accommodation & settling-in guidance' },
       { icon: Utensils, text: 'Indian food options available near campus' },
     ],
     accent: '#1B7C9E',
+  },
+  {
+    country: 'Timor-Leste',
+    slug: 'timor-leste',
+    flag: '🇹🇱',
+    tagline: 'English-medium MBBS at Nalanda College of Medicine, Dili',
+    cost: 'Verified fees',
+    duration: '4.5 yrs + 1 yr internship',
+    universities: ['Nalanda College of Medicine, Dili'],
+    keyFacts: [
+      { icon: Globe2, text: '100% English-medium MBBS programme' },
+      { icon: Shield, text: 'Programme structured as per NMC FMGL 2021 norms' },
+      { icon: Users, text: 'Limited intake of 125 seats per year' },
+      { icon: HomeIcon, text: 'Hostel & food at $3,000 / year' },
+      { icon: MapPin, text: 'Located in Dili, the capital of Timor-Leste' },
+      { icon: Utensils, text: 'Verified all-inclusive fee structure via ABHA' },
+    ],
+    accent: '#C6962E',
   },
 ];
 
@@ -71,7 +101,7 @@ export default function Destinations() {
             transition={{ delay: 0.05 }}
             className="font-playfair text-3xl sm:text-4xl lg:text-[2.75rem] text-[#0B1A35] mb-5 leading-tight"
           >
-            Georgia & Bosnia —{' '}
+            Georgia, Bosnia & Timor-Leste —{' '}
             <span className="text-[#C6962E]">Our Focus Countries</span>
           </motion.h2>
           <motion.p
@@ -183,11 +213,11 @@ export default function Destinations() {
                     All universities are NMC guidelines Eligible and eligible for FMGE / NEXT after graduation.
                   </p>
                   <Link
-                    href="/contact"
+                    href={`/destinations/${dest.slug}`}
                     className="inline-flex items-center gap-2 font-semibold text-[0.9rem] transition-colors duration-200 hover:gap-3"
                     style={{ color: dest.accent }}
                   >
-                    Enquire about {dest.country} <ArrowRight size={16} />
+                    Explore {dest.country} <ArrowRight size={16} />
                   </Link>
                 </div>
               </div>

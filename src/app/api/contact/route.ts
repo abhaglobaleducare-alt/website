@@ -24,6 +24,8 @@ const contactSchema = z.object({
   neetStatus: z.string().max(100).optional().or(z.literal("")),
   neetScore: z.string().max(20).optional().or(z.literal("")),
   preferredCountry: z.string().max(100).optional().or(z.literal("")),
+  stream: z.string().max(120).optional().or(z.literal("")),
+  university: z.string().max(160).optional().or(z.literal("")),
   message: z.string().max(2000).optional().or(z.literal("")),
   source: z.string().max(50).optional().or(z.literal("")),
 });
@@ -52,6 +54,8 @@ function buildAdminEmail(data: ContactFormData): string {
     { label: "Name", value: data.name },
     { label: "Phone", value: data.phone },
     { label: "Email", value: data.email },
+    { label: "Stream", value: data.stream },
+    { label: "University", value: data.university },
     { label: "City", value: data.city },
     { label: "Course", value: data.course },
     { label: "NEET Status", value: data.neetStatus },
@@ -270,6 +274,15 @@ export async function POST(request: NextRequest) {
     // Send emails
     const transporter = createTransporter();
 
+    // Stream-aware enquiries (from the course-page EnquiryModal) use a
+    // structured subject; all other forms keep the legacy subject.
+    const adminSubject =
+      data.source === "enquiry-modal"
+        ? `Website Enquiry — ${data.stream || "General"} — ${
+            data.university || "Any / Not decided"
+          } — ${data.name}`
+        : `New Enquiry: ${data.name} — ${data.phone}`;
+
     // Send admin notification
     await transporter.sendMail({
       from:
@@ -277,7 +290,7 @@ export async function POST(request: NextRequest) {
       to:
         process.env.SMTP_TO ||
         "abhaglobaleducare@gmail.com, connect@abhaglobaleducare.com",
-      subject: `New Enquiry: ${data.name} — ${data.phone}`,
+      subject: adminSubject,
       html: buildAdminEmail(data),
       replyTo: data.email || undefined,
     });

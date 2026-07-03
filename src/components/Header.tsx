@@ -1,36 +1,151 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { STREAMS } from '@/data/streams';
 
-const navLinks = [
+type NavChild = { label: string; href: string; external?: boolean };
+type NavItem = { label: string; href?: string; children?: NavChild[] };
+
+const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'NEET Excellence Pathway', href: '/scholarship' },
-  { label: 'Educate Yourself', href: '/educate' },
-  { label: 'Clinical Workshops', href: '/praxis' },
-  { label: 'Destinations', href: '/destinations' },
-  { label: 'Business Studies', href: '/business-management-georgia' },
+  {
+    label: 'Courses',
+    children: STREAMS.map((s) => ({ label: s.navLabel, href: `/courses/${s.slug}` })),
+  },
+  {
+    label: 'Destinations',
+    children: [
+      { label: 'Georgia', href: '/destinations/georgia' },
+      { label: 'Bosnia', href: '/destinations/bosnia' },
+      { label: 'Timor-Leste', href: '/destinations/timor-leste' },
+    ],
+  },
+  {
+    label: 'NEET Zone',
+    children: [
+      { label: 'NEET Excellence Pathway', href: '/scholarship' },
+      { label: 'NEET Portal', href: 'https://neet.abhaglobaleducare.com', external: true },
+      { label: 'Educate Yourself', href: '/educate' },
+    ],
+  },
   { label: 'Services', href: '/services' },
   { label: 'Gallery & Reviews', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ];
 
+function DesktopDropdown({
+  item,
+  isOpen,
+  onOpen,
+  onClose,
+  pathname,
+}: {
+  item: NavItem;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  pathname: string;
+}) {
+  const active = item.children?.some((c) => !c.external && pathname.startsWith(c.href));
+
+  return (
+    <li className="relative" onMouseEnter={onOpen} onMouseLeave={onClose}>
+      <button
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        onClick={() => (isOpen ? onClose() : onOpen())}
+        className={cn(
+          'flex items-center gap-1 text-[0.95rem] font-semibold text-primary-navy transition-colors duration-300 hover:text-primary-gold',
+          active && 'text-primary-gold',
+        )}
+      >
+        {item.label}
+        <ChevronDown
+          size={15}
+          className={cn('transition-transform duration-200', isOpen && 'rotate-180')}
+        />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.ul
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.18 }}
+            role="menu"
+            className="absolute left-0 top-full z-50 mt-3 w-64 overflow-hidden rounded-2xl border border-gray-100 bg-white py-2 shadow-glass-lg"
+          >
+            {item.children!.map((child) =>
+              child.external ? (
+                <li key={child.href} role="none">
+                  <a
+                    role="menuitem"
+                    href={child.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="block px-5 py-2.5 text-sm font-medium text-primary-navy transition-colors hover:bg-primary-gold/5 hover:text-primary-gold"
+                  >
+                    {child.label} ↗
+                  </a>
+                </li>
+              ) : (
+                <li key={child.href} role="none">
+                  <Link
+                    role="menuitem"
+                    href={child.href}
+                    onClick={onClose}
+                    className={cn(
+                      'block px-5 py-2.5 text-sm font-medium text-primary-navy transition-colors hover:bg-primary-gold/5 hover:text-primary-gold',
+                      pathname === child.href && 'text-primary-gold',
+                    )}
+                  >
+                    {child.label}
+                  </Link>
+                </li>
+              ),
+            )}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </li>
+  );
+}
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close menus on route change.
+  useEffect(() => {
+    setOpenDropdown(null);
+    setIsMobileMenuOpen(false);
+    setMobileExpanded(null);
+  }, [pathname]);
+
+  // Escape closes the desktop dropdown.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenDropdown(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   return (
@@ -86,10 +201,10 @@ export default function Header() {
       <header
         className={cn(
           'bg-white/98 backdrop-blur-md sticky top-0 z-50 transition-all duration-300',
-          isScrolled ? 'shadow-lg' : 'shadow-soft'
+          isScrolled ? 'shadow-lg' : 'shadow-soft',
         )}
       >
-        <nav className="max-w-[1400px] mx-auto px-4 sm:px-8 py-4 flex justify-between items-center">
+        <nav className="max-w-[1400px] mx-auto px-4 sm:px-8 py-4 flex justify-between items-center gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <Image
@@ -103,34 +218,44 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <ul className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={cn(
-                    'text-primary-navy font-semibold text-[0.95rem] relative hover:text-primary-gold transition-colors duration-300 group',
-                    pathname === link.href && 'text-primary-gold'
-                  )}
-                >
-                  {link.label}
-                  <span className={cn(
-                    'absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-gold to-gold-400 transition-all duration-300',
-                    pathname === link.href ? 'w-full' : 'w-0 group-hover:w-full'
-                  )} />
-                </Link>
-              </li>
-            ))}
+          <ul className="hidden lg:flex items-center gap-6 xl:gap-7">
+            {navItems.map((item) =>
+              item.children ? (
+                <DesktopDropdown
+                  key={item.label}
+                  item={item}
+                  isOpen={openDropdown === item.label}
+                  onOpen={() => setOpenDropdown(item.label)}
+                  onClose={() => setOpenDropdown(null)}
+                  pathname={pathname}
+                />
+              ) : (
+                <li key={item.href}>
+                  <Link
+                    href={item.href!}
+                    className={cn(
+                      'relative text-[0.95rem] font-semibold text-primary-navy transition-colors duration-300 hover:text-primary-gold group',
+                      pathname === item.href && 'text-primary-gold',
+                    )}
+                  >
+                    {item.label}
+                    <span
+                      className={cn(
+                        'absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary-gold to-gold-400 transition-all duration-300',
+                        pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full',
+                      )}
+                    />
+                  </Link>
+                </li>
+              ),
+            )}
             <li>
-              <a
-                href="https://neet.abhaglobaleducare.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 py-2 rounded-xl font-bold text-sm text-white transition-all duration-300 hover:opacity-90 hover:-translate-y-0.5"
-                style={{ background: '#0B1A35', border: '2px solid #C6962E' }}
+              <Link
+                href="/contact"
+                className="rounded-xl bg-gradient-to-r from-primary-gold to-gold-400 px-4 py-2.5 text-sm font-bold text-primary-navy shadow-gold transition-transform duration-300 hover:-translate-y-0.5"
               >
-                🎓 NEET Portal
-              </a>
+                Book Counselling
+              </Link>
             </li>
           </ul>
 
@@ -139,6 +264,7 @@ export default function Header() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="lg:hidden p-2 text-primary-navy hover:text-primary-gold transition-colors"
             aria-label="Toggle mobile menu"
+            aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -154,30 +280,87 @@ export default function Header() {
               transition={{ duration: 0.3 }}
               className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
             >
-              <div className="px-6 py-4 space-y-1">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn(
-                      'block py-3 px-4 text-primary-navy font-semibold hover:text-primary-gold hover:bg-primary-gold/5 rounded-xl transition-all duration-200',
-                      pathname === link.href && 'text-primary-gold bg-primary-gold/5'
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <a
-                  href="https://neet.abhaglobaleducare.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <div className="px-6 py-4 space-y-1 max-h-[70vh] overflow-y-auto custom-scrollbar">
+                {navItems.map((item) =>
+                  item.children ? (
+                    <div key={item.label} className="border-b border-gray-50 last:border-0">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setMobileExpanded(mobileExpanded === item.label ? null : item.label)
+                        }
+                        aria-expanded={mobileExpanded === item.label}
+                        className="flex w-full items-center justify-between py-3 px-4 text-primary-navy font-semibold"
+                      >
+                        {item.label}
+                        <ChevronDown
+                          size={18}
+                          className={cn(
+                            'transition-transform duration-200',
+                            mobileExpanded === item.label && 'rotate-180',
+                          )}
+                        />
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {mobileExpanded === item.label && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden pb-2"
+                          >
+                            {item.children.map((child) =>
+                              child.external ? (
+                                <a
+                                  key={child.href}
+                                  href={child.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className="block py-2.5 pl-8 pr-4 text-sm font-medium text-primary-navy hover:text-primary-gold"
+                                >
+                                  {child.label} ↗
+                                </a>
+                              ) : (
+                                <Link
+                                  key={child.href}
+                                  href={child.href}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                  className={cn(
+                                    'block py-2.5 pl-8 pr-4 text-sm font-medium text-primary-navy hover:text-primary-gold',
+                                    pathname === child.href && 'text-primary-gold',
+                                  )}
+                                >
+                                  {child.label}
+                                </Link>
+                              ),
+                            )}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    <Link
+                      key={item.href}
+                      href={item.href!}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        'block py-3 px-4 text-primary-navy font-semibold hover:text-primary-gold hover:bg-primary-gold/5 rounded-xl transition-all duration-200',
+                        pathname === item.href && 'text-primary-gold bg-primary-gold/5',
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  ),
+                )}
+                <Link
+                  href="/contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-3 px-4 font-bold text-center rounded-xl text-white mt-2"
-                  style={{ background: '#0B1A35', border: '2px solid #C6962E' }}
+                  className="mt-2 block rounded-xl bg-gradient-to-r from-primary-gold to-gold-400 py-3 px-4 text-center font-bold text-primary-navy"
                 >
-                  🎓 NEET Portal
-                </a>
+                  Book Counselling
+                </Link>
               </div>
             </motion.div>
           )}

@@ -45,8 +45,8 @@
         "description": "Expert team with extensive knowledge of international medical education systems"
       },
       "universities": {
-        "title": "NMC Approved Universities",
-        "description": "We only recommend universities recognized by NMC, WHO, and WFME"
+        "title": "NMC & WHO Eligible Universities",
+        "description": "We only recommend NMC & WHO Eligible universities"
       },
       "support": {
         "title": "End-to-End Support",
@@ -78,7 +78,7 @@
       },
       "universitySelection": {
         "title": "University Selection",
-        "description": "We help you choose from our partner universities that are NMC approved and recognized worldwide."
+        "description": "We help you choose from NMC & WHO Eligible partner universities recognized worldwide."
       },
       "admission": {
         "title": "Admission Processing",
