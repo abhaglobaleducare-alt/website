@@ -308,11 +308,11 @@ export default function Scholarship() {
                 className="font-playfair font-bold text-white leading-tight mb-2"
                 style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.6rem)' }}
               >
-                🏆 ABHA NEET Scholarship Test
+                🏆 Bapusaheb Patil (Sagaon) Global Education Support Grant
                 <span className="block" style={{ color: '#FDE68A' }}>AGEST 2026</span>
               </h2>
               <p className="text-purple-200 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-5">
-                Bapusaheb Patil (Sagaon) Global Education Support Grant
+                Merit-based grant · MBBS in Tbilisi, Georgia
               </p>
 
               {/* Scholarship benefit highlights */}
@@ -493,7 +493,7 @@ export default function Scholarship() {
               style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)' }}
             >
               🏆 AGEST 2026
-              <span className="block text-[#C6962E]">MBBS Abroad Scholarship Test</span>
+              <span className="block text-[#C6962E]">Bapusaheb Patil (Sagaon) Global Education Support Grant</span>
             </h2>
             <p className="text-[#0B1A35]/60 text-lg sm:text-xl font-semibold italic mt-2">
               &ldquo;Where consistency wins, not luck&rdquo;

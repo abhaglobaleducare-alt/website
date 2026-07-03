@@ -59,12 +59,12 @@ export default function AgestOfferBanner() {
               className="font-playfair font-bold text-white leading-tight mb-2"
               style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)' }}
             >
-              🏆 ABHA NEET Scholarship Test
+              🏆 Bapusaheb Patil (Sagaon) Global Education Support Grant
               <span className="block" style={{ color: '#FDE68A' }}>AGEST 2026</span>
             </h2>
 
             <p className="text-purple-200 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-5">
-              Bapusaheb Patil (Sagaon) Global Education Support Grant
+              Merit-based grant · MBBS in Tbilisi, Georgia
             </p>
 
             {/* Hero value — lead with the assured floor, not the maximum */}
