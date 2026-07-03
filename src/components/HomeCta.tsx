@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import Image from 'next/image';
 import LeadGate from '@/components/LeadGate';
 import { ArrowRight, Phone } from 'lucide-react';
 
@@ -13,10 +12,10 @@ export default function HomeCta() {
       <div className="absolute top-0 left-0 w-80 h-80 rounded-full bg-[#C6962E]/8 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 right-60 w-64 h-64 rounded-full bg-[#1B7C9E]/10 blur-[80px] pointer-events-none" />
 
-      <div className="max-w-[1300px] mx-auto grid grid-cols-1 lg:grid-cols-[1fr_360px] items-end">
+      <div className="max-w-[900px] mx-auto">
 
-        {/* Left – text + CTAs */}
-        <div className="py-14 sm:py-20 lg:py-24 px-4 sm:px-8 text-center lg:text-left relative z-10">
+        {/* Text + CTAs */}
+        <div className="py-14 sm:py-20 lg:py-24 px-4 sm:px-8 text-center relative z-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -31,7 +30,7 @@ export default function HomeCta() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.05 }}
-            className="text-white/60 text-lg mb-10 max-w-[520px] lg:mx-0 mx-auto leading-relaxed"
+            className="text-white/60 text-lg mb-10 max-w-[560px] mx-auto leading-relaxed"
           >
             Get a free, no-obligation counselling session with our experts.
             We&apos;ll assess your profile and recommend the best path forward.
@@ -41,9 +40,9 @@ export default function HomeCta() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="flex flex-col items-center lg:items-start gap-4"
+            className="flex flex-col items-center gap-4"
           >
-            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-[#C6962E] text-[#0B1A35] px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all duration-300 hover:bg-[#d4a73a] w-full sm:w-auto"
@@ -57,7 +56,7 @@ export default function HomeCta() {
                 <Phone size={18} /> or call +91 74475 52878
               </a>
             </div>
-            <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <LeadGate action="whatsapp_appointment" mode="newTab">
               <a
                 href="https://wa.me/917447552878?text=Hi%2C+I'm+interested+in+booking+a+FREE+counseling+appointment+for+MBBS+Abroad."
@@ -72,26 +71,6 @@ export default function HomeCta() {
             </div>
           </motion.div>
         </div>
-
-        {/* Right – Doctor image, hidden on mobile */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="hidden lg:flex items-end justify-center relative self-end"
-        >
-          {/* Warm glow behind the doctor */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-56 h-56 rounded-full bg-[#C6962E]/15 blur-3xl pointer-events-none" />
-          <Image
-            src="/images/doctor.png"
-            alt="MBBS Doctor graduate"
-            width={360}
-            height={480}
-            className="relative z-10 object-contain object-bottom w-full h-auto drop-shadow-[0_0_40px_rgba(198,150,46,0.2)]"
-            priority
-          />
-        </motion.div>
 
       </div>
     </section>
