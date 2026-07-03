@@ -86,8 +86,9 @@ export const STREAM_EXTRAS: Record<StreamSlug, StreamExtra> = {
         { path: 'MBBS Duration', left: '4.5 years + 1 year internship', right: 'Georgia 5–6 yrs (incl. internship); Timor-Leste 4.5 yrs + 1 yr internship' },
         { path: 'Entrance', left: 'NEET + very high cut-offs for limited seats', right: 'NEET qualified (no high cut-off)' },
         { path: 'Admission basis', left: '12th + NEET rank', right: '12th + NEET + documents' },
+        { path: 'Tuition Cost', left: '₹80 lakh – ₹2.5 crore (private / management / NRI quota)', right: '≈ ₹18–35 lakh total tuition (see fee chart above)' },
         { path: 'Medium', left: 'English', right: 'English' },
-        { path: 'To practise in India', left: 'Direct', right: 'Clear FMGE / NExT (mandatory for foreign graduates)' },
+        { path: 'To practise in India', left: 'Must clear NExT — the NMC’s common MBBS exit & licence exam for all graduates (being phased in)', right: 'Must clear FMGE / NExT as per NMC norms (mandatory for foreign medical graduates)' },
       ],
     },
     faq: {
