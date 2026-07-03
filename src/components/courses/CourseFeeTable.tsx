@@ -75,7 +75,9 @@ export default function CourseFeeTable({ courses }: { courses: Course[] }) {
                       + Compare
                     </label>
                     {c.notes && (
-                      <p className="mt-1.5 text-[0.7rem] leading-snug text-gray-500">{c.notes}</p>
+                      <p className="mt-1.5 text-[0.7rem] leading-snug text-gray-500">
+                        {formatFee(c.notes, currency)}
+                      </p>
                     )}
                   </td>
                   <td className="px-4 py-4 align-top text-gray-700">{c.university}</td>

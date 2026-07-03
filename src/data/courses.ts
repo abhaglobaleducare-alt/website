@@ -167,7 +167,7 @@ export const COURSES: Course[] = [
     feePerYearUSD: 5500,
     totalTuitionUSD: 33000,
     firstYearSchedule: { part1: 'As per university schedule', part2: '' },
-    notes: 'ABHA partner university',
+    notes: 'Special ABHA partner rate: $3,900/yr (subject to eligibility)',
     source: 'eastwest.edu.ge official',
   },
   {

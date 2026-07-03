@@ -69,7 +69,7 @@ export default function ComparisonView() {
         </div>
       ),
     },
-    { label: 'Notes', render: (c) => c.notes || '—' },
+    { label: 'Notes', render: (c) => (c.notes ? fmt(c.notes) : '—') },
   ];
 
   return (
