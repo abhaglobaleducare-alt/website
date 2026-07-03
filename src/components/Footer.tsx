@@ -1,21 +1,21 @@
 import Link from "next/link";
 
 const quickLinks = [
-  { label: "Clinical Workshops", href: "/praxis" },
-  { label: "Georgia & Bosnia", href: "/destinations" },
+  { label: "MBBS / MD Courses", href: "/courses/medicine" },
+  { label: "Clinical Workshops", href: "/courses/medicine#clinical-workshops" },
+  { label: "Destinations", href: "/destinations" },
   { label: "Our Services", href: "/services" },
   { label: "Gallery & Reviews", href: "/gallery" },
-  { label: "Educate Yourself", href: "/educate" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 const programs = [
-  { label: "NEET Preparation Portal", href: "/neet-preparation" },
-  { label: "NEET Practice Hub", href: "/neet-practice-hub" },
-  { label: "CLINICAL Workshops", href: "/praxis" },
-  { label: "MBBS in Georgia", href: "/destinations" },
-  { label: "MBBS in Bosnia", href: "/destinations" },
-  { label: "Accommodation Services", href: "/services" },
+  { label: "Medicine — MBBS / MD", href: "/courses/medicine" },
+  { label: "Dentistry (DMD)", href: "/courses/dentistry" },
+  { label: "Nursing & Health Sciences", href: "/courses/nursing-health-sciences" },
+  { label: "Business & Management", href: "/courses/business-management" },
+  { label: "IT, Data Science & AI", href: "/courses/it-data-science-ai" },
+  { label: "Masters, MBA & PhD", href: "/courses/masters-phd" },
 ];
 
 export default function Footer() {

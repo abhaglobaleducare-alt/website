@@ -584,7 +584,7 @@ export default function Educate() {
             className="text-center mt-10"
           >
             <a
-              href="/praxis"
+              href="/courses/medicine#clinical-workshops"
               className="inline-block bg-gradient-to-r from-[#C6962E] to-[#DFB761] text-[#0B1A35] px-8 py-3.5 rounded-full font-bold text-sm hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(198,150,46,0.5)] transition-all duration-300 shadow-[0_5px_20px_rgba(198,150,46,0.3)]"
             >
               Explore Clinical Workshops →
