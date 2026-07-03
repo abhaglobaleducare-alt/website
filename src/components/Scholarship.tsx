@@ -724,6 +724,11 @@ export default function Scholarship() {
                     'Alte University',
                     'SEU – Georgian National University',
                     'East West University',
+                    'IBSU',
+                    'East European University',
+                    'Caucasus University',
+                    'University of Georgia',
+                    'Caucasus International University (CIU)',
                   ].map((uni) => (
                     <div
                       key={uni}
