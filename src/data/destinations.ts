@@ -73,7 +73,7 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
     seoDescription:
       'Study MBBS, dentistry, nursing, business & IT in Georgia. English-medium, NMC & WHO Eligible medical universities in Tbilisi & Batumi, with ABHA’s own hostel, Indian food and on-ground office.',
     images: {
-      hero: '/images/destinations/destination-tbilisi-georgia.svg',
+      hero: '/images/destinations/photo-georgia-tbilisi.jpg',
       climate: '/images/destinations/climate-georgia.svg',
       gallery: [
         { src: '/images/destinations/destination-tbilisi-georgia.svg', label: 'Tbilisi — Landmarks & Skyline' },
@@ -113,7 +113,7 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
     seoDescription:
       'English-medium MBBS in Bosnia at accredited public universities in Sarajevo & Banja Luka — NMC & WHO Eligible, eligible for FMGE / NExT. ABHA guides your admission.',
     images: {
-      hero: '/images/destinations/destination-bosnia.svg',
+      hero: '/images/destinations/photo-bosnia-sarajevo.webp',
       climate: '/images/destinations/climate-bosnia.svg',
       gallery: [
         { src: '/images/destinations/destination-bosnia.svg', label: 'Sarajevo & Banja Luka — City Views' },
@@ -152,7 +152,7 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
     seoDescription:
       'English-medium MBBS at Nalanda College of Medicine, Dili, Timor-Leste — 4.5 years + 1 year internship, 125 seats/year, structured as per NMC FMGL 2021 norms. Verified fees via ABHA.',
     images: {
-      hero: '/images/destinations/destination-dili-timor-leste.svg',
+      hero: '/images/destinations/photo-timor-leste-dili.jpeg',
       climate: '/images/destinations/climate-timor-leste.svg',
       gallery: [
         { src: '/images/destinations/destination-dili-timor-leste.svg', label: 'Dili — City & Coast' },

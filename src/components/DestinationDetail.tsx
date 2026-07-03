@@ -34,11 +34,10 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
           alt={`${data.name} — cityscape`}
           fill
           priority
-          unoptimized
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A35] via-[#0B1A35]/85 to-[#0B1A35]/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A35] via-[#0B1A35]/70 to-[#0B1A35]/45" />
         <div className="relative mx-auto max-w-[1000px] text-center">
           <span className="mb-4 inline-block text-6xl drop-shadow-lg">{data.flag}</span>
           <h1 className="font-playfair text-3xl font-bold leading-tight text-white drop-shadow sm:text-4xl lg:text-5xl">
