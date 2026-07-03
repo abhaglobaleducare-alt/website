@@ -3,9 +3,9 @@ import Scholarship from '@/components/Scholarship';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'NEET Excellence Pathway 2026 — Scholarship for MBBS Abroad',
+  title: 'NEET Excellence Pathway — AGEST 2026 Grant for MBBS in Georgia',
   description:
-    'Win up to $6,000 scholarship for MBBS abroad! ABHA NEET Excellence Pathway — Bapusaheb Patil (Sagaon) Abroad Educational Grant. Just ₹111 entry. NEET pattern. Top 300 win.',
+    'ABHA NEET Excellence Pathway — AGEST 2026. Assured $3,000+ (up to $6,000 for top rankers) education grant for MBBS in Tbilisi, Georgia via the Bapusaheb Patil (Sagaon) Global Education Support Grant. Just ₹111. NEET pattern. Register by 15 July 2026.',
 };
 
 export default function ScholarshipPage() {

@@ -64,24 +64,24 @@ export default function AgestOfferBanner() {
             </h2>
 
             <p className="text-purple-200 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-5">
-              Bapusaheb Patil, Sagaon Abroad Education Support Grant
+              Bapusaheb Patil (Sagaon) Global Education Support Grant
             </p>
 
-            {/* Hero value — money the parent could win, shown biggest */}
+            {/* Hero value — lead with the assured floor, not the maximum */}
             <div className="flex items-end justify-center lg:justify-start gap-4 mb-2 flex-wrap">
               <div className="flex flex-col items-center lg:items-start">
                 <span
                   className="font-playfair font-black leading-none"
-                  style={{ color: '#FDE68A', fontSize: 'clamp(3rem, 8vw, 5rem)' }}
+                  style={{ color: '#FDE68A', fontSize: 'clamp(2.6rem, 7vw, 4.2rem)' }}
                 >
-                  $6,000
+                  $3,000+
                 </span>
                 <span className="text-purple-100 text-sm font-semibold mt-1">
-                  maximum total scholarship per student
+                  assured total grant · up to $6,000 for top rankers
                 </span>
               </div>
               <span className="inline-block text-sm font-bold px-3 py-1.5 rounded-full bg-white/10 text-white mb-2">
-                up to $1,000 / year
+                $500–$1,000 / year by rank
               </span>
             </div>
 
@@ -91,14 +91,14 @@ export default function AgestOfferBanner() {
                 <Users size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
                 <div className="text-left">
                   <div className="text-white font-black text-sm leading-none">{SEATS_TOTAL} students</div>
-                  <div className="text-purple-200 text-[11px] mt-0.5">scholarship seats</div>
+                  <div className="text-purple-200 text-[11px] mt-0.5">100 per ABHA office</div>
                 </div>
               </div>
               <div className="flex items-center gap-2.5 rounded-xl bg-white/10 border border-white/10 px-3 py-2.5">
-                <GraduationCap size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
+                <MapPin size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
                 <div className="text-left">
-                  <div className="text-white font-black text-sm leading-none">All 2026 aspirants</div>
-                  <div className="text-purple-200 text-[11px] mt-0.5">no minimum score</div>
+                  <div className="text-white font-black text-sm leading-none">MBBS in Tbilisi</div>
+                  <div className="text-purple-200 text-[11px] mt-0.5">Georgia · ABHA partners</div>
                 </div>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function AgestOfferBanner() {
             </a>
             </LeadGate>
             <p className="text-purple-200 text-xs text-center lg:text-left max-w-[15rem]">
-              Open to all 2026 NEET aspirants · No minimum score to register
+              Open to all 2026 NEET aspirants · No minimum score · Register by 15 July 2026
             </p>
             <LeadGate action="know_agest" mode="sameTab">
             <Link
@@ -164,15 +164,15 @@ export default function AgestOfferBanner() {
         >
           <span className="inline-flex items-center gap-1.5">
             <GraduationCap size={14} style={{ color: '#FDE68A' }} />
-            Funded by the Bapusaheb Patil (Sagaon) Abroad Education Support Grant
+            Grant funded &amp; disbursed by ABHA Global Services LLC, Tbilisi (in USD)
           </span>
           <span className="inline-flex items-center gap-1.5">
             <ShieldCheck size={14} style={{ color: '#FDE68A' }} />
-            ABHA Global Educare LLP — Registered
+            India partner: ABHA Global Educare LLP — Registered
           </span>
           <span className="inline-flex items-center gap-1.5">
             <MapPin size={14} style={{ color: '#FDE68A' }} />
-            Offices in Kolhapur &amp; Tbilisi, Georgia
+            Offices: Kolhapur · Chh. Sambhajinagar · Boisar · Tbilisi
           </span>
         </motion.div>
 
@@ -197,9 +197,13 @@ export default function AgestOfferBanner() {
               animate={{ opacity: 1, height: 'auto' }}
               className="text-purple-300/80 text-[11px] leading-relaxed mt-2 overflow-hidden"
             >
-              Scholarship awards are subject to AGEST ranking, eligibility criteria, admission through
-              ABHA Global Educare, scholarship policy, and continued academic performance. Scholarship
-              support may be distributed across the duration of the eligible MBBS program.
+              Grant funded and disbursed in USD by ABHA Global Services LLC, Tbilisi; ABHA Global Educare LLP
+              is the India implementation partner. Value $3,000–$6,000 over 6 years ($500–$1,000/year by
+              merit rank) — Year 1 assured on enrolment, Years 2–6 conditional on continued ABHA Package
+              enrolment. Each of the 3 ABHA offices (Kolhapur, Chh. Sambhajinagar, Boisar) holds its own
+              AGEST 2026 merit list of 100 seats; tier is by rank only, never by fee-payment order. Ranks
+              6–100 per office receive $500/year ($3,000); the top 5 per office up to $1,000/year ($6,000).
+              Available only for admission to an ABHA partner university in Tbilisi, Georgia.
             </motion.p>
           )}
         </div>

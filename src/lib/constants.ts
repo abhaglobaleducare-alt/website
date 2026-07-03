@@ -7,7 +7,7 @@ export const SITE_CONFIG = {
   shortName: 'ABHA Educare',
   tagline: 'Dreams Have No Borders',
   description:
-    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia & Bosnia. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Abroad Education Support Grant. Office in Kolhapur, Maharashtra.',
+    'ABHA Global Educare LLP — premier MBBS abroad consultancy for Indian students. NMC & WHO Eligible universities in Georgia & Bosnia. NEET preparation portal, full mock tests, and Bapusaheb Patil (Sagaon) Global Education Support Grant. Office in Kolhapur, Maharashtra.',
   url: 'https://abhaglobaleducare.com',
   email: 'connect@abhaglobaleducare.com',
   logo: '/images/logo.png',

@@ -60,7 +60,7 @@ const ticker = [
   '💵 $6,000 SCHOLARSHIP',
   '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
-  '🌍 MBBS: GEORGIA · BOSNIA · TIMOR-LESTE',
+  '🇬🇪 MBBS IN TBILISI, GEORGIA',
   '⚡ REGISTER NOW',
   '🔥 NEET PATTERN',
   '💰 JUST ₹111',
@@ -68,7 +68,7 @@ const ticker = [
   '💵 $6,000 SCHOLARSHIP',
   '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
-  '🌍 MBBS: GEORGIA · BOSNIA · TIMOR-LESTE',
+  '🇬🇪 MBBS IN TBILISI, GEORGIA',
   '⚡ REGISTER NOW',
 ];
 
@@ -227,8 +227,8 @@ export default function Scholarship() {
           >
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[#C6962E] animate-pulse" />
-              ⏳ Last date:{' '}
-              <strong className="text-white">Don&apos;t wait for the Last Date</strong>
+              ⏳ Last date to register:{' '}
+              <strong className="text-white">15 July 2026</strong>
             </span>
           </motion.div>
 
@@ -312,7 +312,7 @@ export default function Scholarship() {
                 <span className="block" style={{ color: '#FDE68A' }}>AGEST 2026</span>
               </h2>
               <p className="text-purple-200 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-5">
-                Bapusaheb Patil, Sagaon Abroad Education Support Grant
+                Bapusaheb Patil (Sagaon) Global Education Support Grant
               </p>
 
               {/* Scholarship benefit highlights */}
@@ -320,22 +320,22 @@ export default function Scholarship() {
                 <div className="flex items-center gap-2.5 rounded-xl bg-white/10 border border-white/10 px-3 py-2.5">
                   <GraduationCap size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
                   <div className="text-left">
-                    <div className="text-white font-black text-sm leading-none">Up to $1,000</div>
-                    <div className="text-purple-200 text-[11px] mt-0.5">per year</div>
+                    <div className="text-white font-black text-sm leading-none">$500–$1,000</div>
+                    <div className="text-purple-200 text-[11px] mt-0.5">per year, by rank</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2.5 rounded-xl bg-white/10 border border-white/10 px-3 py-2.5">
                   <Trophy size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
                   <div className="text-left">
-                    <div className="text-white font-black text-sm leading-none">Up to $6,000</div>
-                    <div className="text-purple-200 text-[11px] mt-0.5">total per student</div>
+                    <div className="text-white font-black text-sm leading-none">$3,000+ assured</div>
+                    <div className="text-purple-200 text-[11px] mt-0.5">up to $6,000 total</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2.5 rounded-xl bg-white/10 border border-white/10 px-3 py-2.5">
                   <Users size={20} style={{ color: '#FDE68A' }} className="flex-shrink-0" />
                   <div className="text-left">
                     <div className="text-white font-black text-sm leading-none">300 students</div>
-                    <div className="text-purple-200 text-[11px] mt-0.5">scholarship seats</div>
+                    <div className="text-purple-200 text-[11px] mt-0.5">100 per ABHA office</div>
                   </div>
                 </div>
               </div>
@@ -397,15 +397,15 @@ export default function Scholarship() {
           >
             <span className="inline-flex items-center gap-1.5">
               <GraduationCap size={14} style={{ color: '#FDE68A' }} />
-              Funded by the Bapusaheb Patil (Sagaon) Abroad Education Support Grant
+              Grant funded &amp; disbursed by ABHA Global Services LLC, Tbilisi (in USD)
             </span>
             <span className="inline-flex items-center gap-1.5">
               <ShieldCheck size={14} style={{ color: '#FDE68A' }} />
-              ABHA Global Educare LLP — Registered
+              India partner: ABHA Global Educare LLP — Registered
             </span>
             <span className="inline-flex items-center gap-1.5">
               <MapPin size={14} style={{ color: '#FDE68A' }} />
-              Offices in Kolhapur &amp; Tbilisi, Georgia
+              Offices: Kolhapur · Chh. Sambhajinagar · Boisar · Tbilisi
             </span>
           </motion.div>
 
@@ -430,9 +430,15 @@ export default function Scholarship() {
                 animate={{ opacity: 1, height: 'auto' }}
                 className="text-purple-300/80 text-[11px] leading-relaxed mt-2 overflow-hidden"
               >
-                Scholarship awards are subject to AGEST ranking, eligibility criteria, admission through
-                ABHA Global Educare, scholarship policy, and continued academic performance. Scholarship
-                support may be distributed across the duration of the eligible MBBS program.
+                The grant is funded and disbursed in USD by ABHA Global Services LLC, Tbilisi; ABHA Global
+                Educare LLP is the India implementation partner. Value: $3,000–$6,000 total over 6 years
+                ($500–$1,000 per year by merit rank) — Year 1 assured on enrolment, Years 2–6 conditional on
+                continued ABHA Package enrolment. Each of the three ABHA offices (Kolhapur, Chhatrapati
+                Sambhajinagar, Boisar) maintains its own AGEST 2026 merit list of 100 seats (300 total). The
+                grant tier is set by merit rank only — never by the order or date of fee payment. Ranks 6–100
+                per office receive $500/year ($3,000 total); the top 5 ranks per office receive higher tiers up
+                to $1,000/year ($6,000 total). Available only for admission to an ABHA partner university in
+                Tbilisi, Georgia (not Batumi/Kutaisi), where ABHA-managed hostel accommodation funds the grant.
               </motion.p>
             )}
           </div>
@@ -460,7 +466,7 @@ export default function Scholarship() {
             🎓 ABHA NEET Excellence Pathway
           </h2>
           <p className="text-[#0B1A35]/60 font-semibold text-sm sm:text-base tracking-widest uppercase">
-            Bapusaheb Patil (Sagaon) Abroad Education Support Grant
+            Bapusaheb Patil (Sagaon) Global Education Support Grant
           </p>
         </motion.div>
       </section>
@@ -499,9 +505,9 @@ export default function Scholarship() {
             {[
               {
                 icon: <Trophy size={28} />,
-                value: '$6,000',
-                label: 'Total Scholarship',
-                sub: '$1,000/year × 6 years ≈ ₹5,00,000 per student',
+                value: '$3,000+',
+                label: 'Assured Grant · up to $6,000',
+                sub: '$500/yr assured; up to $1,000/yr ($6,000 total) for top rankers, over 6 years',
                 color: '#C6962E',
                 bg: '#FFF8EE',
                 border: '#C6962E',
@@ -510,7 +516,7 @@ export default function Scholarship() {
                 icon: <Star size={28} />,
                 value: 'Top 300',
                 label: 'Scholars Selected',
-                sub: 'Open to top 300 NEET 2026 aspirants on merit',
+                sub: '100 seats each at Kolhapur, Chh. Sambhajinagar & Boisar — by merit rank',
                 color: '#22C55E',
                 bg: '#F0FDF4',
                 border: '#22C55E',
@@ -595,7 +601,7 @@ export default function Scholarship() {
                   {
                     icon: <Trophy size={18} />,
                     title: 'Instant Plan B on NEET Result Day',
-                    desc: 'Final merit list announced on NEET 2026 result day — no waiting',
+                    desc: 'On NEET 2026 result day you are informed by WhatsApp of your rank & grant amount',
                     accent: '#F472B6',
                   },
                 ].map(({ icon, title, desc, accent }, idx) => (
@@ -633,6 +639,12 @@ export default function Scholarship() {
                 <div className="space-y-5">
                   {[
                     {
+                      label: 'Registration Closes',
+                      value: '15 July 2026',
+                      emoji: '⚠️',
+                      accent: '#EF4444',
+                    },
+                    {
                       label: 'First Attempt Available',
                       value: 'From Day 3 after registration',
                       emoji: '🚀',
@@ -642,11 +654,11 @@ export default function Scholarship() {
                       label: 'Last Attempt Deadline',
                       value: '10 days before NEET 2026 result',
                       emoji: '⏰',
-                      accent: '#EF4444',
+                      accent: '#F59E0B',
                     },
                     {
-                      label: 'Final Merit List',
-                      value: 'On NEET 2026 result day',
+                      label: 'Merit & Grant Informed',
+                      value: 'By WhatsApp on NEET 2026 result day',
                       emoji: '🏆',
                       accent: '#C6962E',
                     },
@@ -704,7 +716,7 @@ export default function Scholarship() {
               {/* Universities */}
               <div>
                 <p className="text-[#C6962E] text-xs font-black uppercase tracking-[0.25em] mb-4 flex items-center gap-2">
-                  <MapPin size={13} /> NMC &amp; WHO Eligible Universities — Georgia 🇬🇪
+                  <MapPin size={13} /> NMC &amp; WHO Eligible Universities — Tbilisi, Georgia 🇬🇪
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -828,9 +840,9 @@ export default function Scholarship() {
               color: '#22C55E',
             },
             {
-              display: 'up to $6,000',
-              label: 'Rewards / Gifts / Scholarship',
-              sub: '≈ ₹5+ Lakhs over 6 yrs 💵',
+              display: '$3,000–$6,000',
+              label: 'Grant by Merit Rank',
+              sub: 'Assured $3,000+ · up to $6,000 for top rankers 💵',
               color: '#60A5FA',
             },
           ].map(({ number, prefix, display, label, sub, color }: { number?: number; prefix?: string; display?: string; label: string; sub: string; color: string }, i) => (
@@ -1013,7 +1025,7 @@ export default function Scholarship() {
                 {[
                   { t: '12th Science students', s: 'Preparing for NEET this year' },
                   { t: 'NEET Droppers', s: 'Retaking NEET or planning abroad' },
-                  { t: 'MBBS Abroad Aspirants', s: 'Want to study MBBS in Georgia, Bosnia or Timor-Leste' },
+                  { t: 'MBBS Abroad Aspirants', s: 'Planning MBBS at an ABHA partner university in Tbilisi, Georgia' },
                 ].map(({ t, s }) => (
                   <li key={t} className="flex gap-4">
                     <CheckCircle2
@@ -1045,9 +1057,9 @@ export default function Scholarship() {
               </div>
               <ul className="space-y-5">
                 {[
-                  { t: 'MBBS in Georgia, Bosnia & Timor-Leste 🌍', s: 'Applied against annual tuition fee' },
+                  { t: 'MBBS in Tbilisi, Georgia 🇬🇪', s: 'Grant applies to Tbilisi admissions only — not Batumi / Kutaisi' },
                   { t: 'NMC & WHO Eligible Universities', s: 'Eligible for FMGE / NExT after graduation' },
-                  { t: 'ABHA Partner Institutions', s: 'Only through ABHA Global Educare' },
+                  { t: 'ABHA Partner Institutions', s: 'Only through ABHA Global Educare, with the ABHA Package' },
                 ].map(({ t, s }) => (
                   <li key={t} className="flex gap-4">
                     <Globe
@@ -1189,10 +1201,10 @@ export default function Scholarship() {
               </p>
               <div className="bg-[#C6962E]/10 border border-[#C6962E]/30 rounded-xl p-4">
                 <p className="font-black text-[#C6962E] text-xl">
-                  💰 Additional Scholarship Support of up to $1000 per year for 6 years
+                  💰 Assured grant support from $500/year — up to $1,000/year for top rankers, across 6 years
                 </p>
                 <p className="text-white/70 text-sm mt-2">
-                  👉 This is an extra benefit, designed to support students throughout their MBBS journey abroad.
+                  👉 An extra benefit designed to support students throughout their MBBS journey in Tbilisi, Georgia.
                 </p>
               </div>
             </motion.div>
@@ -1376,7 +1388,7 @@ export default function Scholarship() {
             {[
               {
                 label: 'Last Date to Register',
-                date: '10 days before NEET result',
+                date: '15 July 2026',
                 year: '',
                 urgent: true,
                 emoji: '⚠️',

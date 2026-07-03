@@ -275,7 +275,7 @@ export default async function RootLayout({
                     '@type': 'Offer',
                     itemOffered: {
                       '@type': 'Scholarship',
-                      name: 'Bapusaheb Patil (Sagaon) Abroad Education Support Grant',
+                      name: 'Bapusaheb Patil (Sagaon) Global Education Support Grant',
                       description: 'Merit-based education support grant for NEET aspirants pursuing MBBS abroad through ABHA Global Educare.',
                       provider: { '@type': 'Organization', name: 'ABHA Global Educare LLP' },
                     },
