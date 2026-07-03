@@ -20,7 +20,7 @@ export default function HomeCta() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-playfair text-3xl sm:text-4xl lg:text-[2.5rem] text-white mb-5 leading-tight"
+            className="font-playfair font-bold tracking-tight text-4xl sm:text-5xl lg:text-[3rem] text-white mb-5 leading-[1.1]"
           >
             Ready to start your{' '}
             <span className="text-[#C6962E]">medical career abroad?</span>

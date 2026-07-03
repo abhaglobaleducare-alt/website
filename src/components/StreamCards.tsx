@@ -17,7 +17,7 @@ export default function StreamCards() {
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-[#C6962E]">
             Explore by Stream
           </span>
-          <h2 className="font-playfair text-3xl leading-tight text-[#0B1A35] sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="font-playfair font-bold tracking-tight text-4xl leading-[1.1] text-[#0B1A35] sm:text-5xl lg:text-[3.25rem]">
             Find Your <span className="text-[#C6962E]">Course Abroad</span>
           </h2>
           <p className="mx-auto mt-4 max-w-[640px] text-lg leading-relaxed text-gray-500">

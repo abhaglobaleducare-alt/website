@@ -720,7 +720,6 @@ export default function Scholarship() {
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    'European University',
                     'Alte University',
                     'SEU – Georgian National University',
                     'East West University',

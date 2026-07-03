@@ -40,7 +40,7 @@ export default function MbbsIntro() {
           <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-[#C6962E]">
             MBBS Abroad
           </span>
-          <h2 className="font-playfair text-3xl leading-tight text-[#0B1A35] sm:text-4xl">
+          <h2 className="font-playfair font-bold tracking-tight text-4xl leading-[1.1] text-[#0B1A35] sm:text-5xl">
             Study MBBS Abroad with <span className="text-[#C6962E]">Complete Support</span>
           </h2>
           <p className="mx-auto mt-5 text-base leading-relaxed text-gray-600 sm:text-lg">
