@@ -7,11 +7,12 @@ import { CheckCircle2, ShieldCheck, ArrowRight, Info } from 'lucide-react';
 import type { StreamSlug } from '@/data/courses';
 import { getCoursesByStream, getUniversitiesByStream, COURSES } from '@/data/courses';
 import { getStreamMeta } from '@/data/streams';
+import { STREAM_EXTRAS } from '@/data/streamExtras';
 import { useEnquiry } from './context';
 import CourseFeeTable from './CourseFeeTable';
 import UniversitiesList from './UniversitiesList';
 import ClinicalWorkshopsSection from './ClinicalWorkshopsSection';
-import BusinessExtraSection from './BusinessExtraSection';
+import StreamExtraSection from './StreamExtraSection';
 
 function SectionHeading({ kicker, title }: { kicker: string; title: string }) {
   return (
@@ -143,8 +144,8 @@ export default function CourseStreamContent({ stream }: { stream: StreamSlug }) 
         </div>
       </section>
 
-      {/* Business Studies migrated content */}
-      {stream === 'business-management' && <BusinessExtraSection />}
+      {/* Why · India-vs-Georgia comparison · FAQ — per stream */}
+      <StreamExtraSection extra={STREAM_EXTRAS[stream]} />
 
       {/* masters-phd cross-links */}
       {crossLinks.length > 0 && (
