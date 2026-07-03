@@ -34,7 +34,9 @@ export default function ComparisonView() {
   if (!isOpen) return null;
 
   const fmt = (v: string | number) => formatFee(v, currency);
-  const lowestTotal = Math.min(...selected.map((c) => c.totalTuitionUSD));
+  // Ignore courses whose total isn't published (sentinel 0) when finding the lowest.
+  const publishedTotals = selected.map((c) => c.totalTuitionUSD).filter((t) => t > 0);
+  const lowestTotal = publishedTotals.length ? Math.min(...publishedTotals) : -1;
 
   const rows: { label: string; render: (c: Course) => React.ReactNode }[] = [
     { label: 'University', render: (c) => c.university },
@@ -45,8 +47,10 @@ export default function ComparisonView() {
       label: 'Total Tuition',
       render: (c) => (
         <div>
-          <span className="font-bold text-[#0B1A35]">{fmt(c.totalTuitionUSD)}</span>
-          {c.totalTuitionUSD === lowestTotal && (
+          <span className="font-bold text-[#0B1A35]">
+            {c.totalTuitionUSD > 0 ? fmt(c.totalTuitionUSD) : 'As per university schedule'}
+          </span>
+          {c.totalTuitionUSD > 0 && c.totalTuitionUSD === lowestTotal && (
             <span className="mt-1 block text-xs font-semibold text-[#85611C]">Lowest total</span>
           )}
         </div>

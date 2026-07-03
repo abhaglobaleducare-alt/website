@@ -85,7 +85,9 @@ export default function CourseFeeTable({ courses }: { courses: Course[] }) {
                     {formatFee(c.feePerYearUSD, currency)}
                   </td>
                   <td className="px-4 py-4 align-top font-semibold text-[#0B1A35]">
-                    {formatFee(c.totalTuitionUSD, currency)}
+                    {c.totalTuitionUSD > 0
+                      ? formatFee(c.totalTuitionUSD, currency)
+                      : 'As per university schedule'}
                   </td>
                   <td className="px-4 py-4 align-top text-gray-600">
                     {parts.length ? (
