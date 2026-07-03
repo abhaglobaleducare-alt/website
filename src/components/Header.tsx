@@ -373,7 +373,14 @@ export default function Header() {
           <div className="max-w-[1400px] mx-auto flex items-center gap-2 px-4 sm:px-8 py-2">
             <button
               type="button"
-              onClick={() => router.back()}
+              onClick={() => {
+                // Go to the previous page if we have in-app history; otherwise Home.
+                if (typeof window !== 'undefined' && window.history.length > 1) {
+                  router.back();
+                } else {
+                  router.push('/');
+                }
+              }}
               className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold text-primary-navy transition-colors hover:bg-primary-gold/10 hover:text-primary-gold"
             >
               <ArrowLeft size={16} /> Back
