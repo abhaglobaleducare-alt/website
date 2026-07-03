@@ -58,9 +58,9 @@ const ticker = [
   '💰 JUST ₹111',
   '🏆 TOP 300 WIN',
   '💵 $6,000 SCHOLARSHIP',
-  '� Multiple Attempts',
+  '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
-  '🇬🇪 MBBS IN GEORGIA',
+  '🌍 MBBS: GEORGIA · BOSNIA · TIMOR-LESTE',
   '⚡ REGISTER NOW',
   '🔥 NEET PATTERN',
   '💰 JUST ₹111',
@@ -68,7 +68,7 @@ const ticker = [
   '💵 $6,000 SCHOLARSHIP',
   '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
-  '🇬🇪 MBBS IN GEORGIA',
+  '🌍 MBBS: GEORGIA · BOSNIA · TIMOR-LESTE',
   '⚡ REGISTER NOW',
 ];
 
@@ -184,7 +184,7 @@ export default function Scholarship() {
           >
             Every NEET mark matters. Our structured revision portal and real-exam practice
             hub give every serious student the tools to prepare with confidence —{' '}
-            <span className="text-white font-bold">and High-performing candidates can secure a government MBBS seat in India, or, if not, qualify for a scholarship to study medicine abroad,</span>
+            <span className="text-white font-bold">and high-performing candidates can aim for a government MBBS seat in India, or qualify for a scholarship to study medicine abroad.</span>
           </motion.p>
 
           {/* CTAs */}
@@ -710,7 +710,7 @@ export default function Scholarship() {
                   {[
                     'European University',
                     'Alte University',
-                    'SEU Georgia',
+                    'SEU – Georgian National University',
                     'East West University',
                   ].map((uni) => (
                     <div
@@ -1013,7 +1013,7 @@ export default function Scholarship() {
                 {[
                   { t: '12th Science students', s: 'Preparing for NEET this year' },
                   { t: 'NEET Droppers', s: 'Retaking NEET or planning abroad' },
-                  { t: 'MBBS Abroad Aspirants', s: 'Want to study in Georgia or similar' },
+                  { t: 'MBBS Abroad Aspirants', s: 'Want to study MBBS in Georgia, Bosnia or Timor-Leste' },
                 ].map(({ t, s }) => (
                   <li key={t} className="flex gap-4">
                     <CheckCircle2
@@ -1045,8 +1045,8 @@ export default function Scholarship() {
               </div>
               <ul className="space-y-5">
                 {[
-                  { t: 'MBBS in Georgia 🇬🇪', s: 'Applied against annual tuition fee' },
-                  { t: 'NMC Eligible Universities', s: 'WHO & NMC guideline compliant' },
+                  { t: 'MBBS in Georgia, Bosnia & Timor-Leste 🌍', s: 'Applied against annual tuition fee' },
+                  { t: 'NMC & WHO Eligible Universities', s: 'Eligible for FMGE / NExT after graduation' },
                   { t: 'ABHA Partner Institutions', s: 'Only through ABHA Global Educare' },
                 ].map(({ t, s }) => (
                   <li key={t} className="flex gap-4">
