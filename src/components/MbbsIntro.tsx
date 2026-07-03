@@ -92,14 +92,14 @@ export default function MbbsIntro() {
             <div className="absolute -bottom-8 -left-6 h-48 w-48 rounded-full bg-[#0B1A35]/10 blur-2xl" />
             <div className="absolute inset-x-6 bottom-4 top-6 rounded-[2.5rem] border border-[#C6962E]/30" />
 
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-white to-[#EFE7D6] shadow-[0_30px_70px_rgba(11,26,53,0.22)] ring-1 ring-black/5">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-gradient-to-b from-[#0B1A35] to-[#152d54] shadow-[0_30px_70px_rgba(11,26,53,0.22)] ring-1 ring-black/5">
               <Image
-                src="/images/doctor.png"
+                src="/images/doctor-clear.png"
                 alt="ABHA — MBBS abroad for Indian students"
-                width={640}
-                height={760}
+                fill
+                sizes="(max-width: 1024px) 100vw, 520px"
                 priority={false}
-                className="mx-auto h-auto w-full object-contain [filter:contrast(1.06)_saturate(1.08)]"
+                className="object-cover object-top [filter:contrast(1.04)_saturate(1.05)]"
               />
               {/* Floating designer badge */}
               <div className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full bg-[#0B1A35]/90 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-sm">
