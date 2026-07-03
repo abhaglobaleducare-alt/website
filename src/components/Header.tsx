@@ -61,7 +61,7 @@ function DesktopDropdown({
         aria-expanded={isOpen}
         onClick={() => (isOpen ? onClose() : onOpen())}
         className={cn(
-          'flex items-center gap-1 text-[0.95rem] font-semibold text-primary-navy transition-colors duration-300 hover:text-primary-gold',
+          'flex items-center gap-1 text-[1.05rem] font-bold tracking-tight text-primary-navy transition-colors duration-300 hover:text-primary-gold',
           active && 'text-primary-gold',
         )}
       >
@@ -218,7 +218,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <ul className="hidden lg:flex items-center gap-6 xl:gap-7">
+          <ul className="hidden lg:flex items-center gap-5 xl:gap-6">
             {navItems.map((item) =>
               item.children ? (
                 <DesktopDropdown
@@ -234,7 +234,7 @@ export default function Header() {
                   <Link
                     href={item.href!}
                     className={cn(
-                      'relative text-[0.95rem] font-semibold text-primary-navy transition-colors duration-300 hover:text-primary-gold group',
+                      'relative text-[1.05rem] font-bold tracking-tight text-primary-navy transition-colors duration-300 hover:text-primary-gold group',
                       pathname === item.href && 'text-primary-gold',
                     )}
                   >
@@ -252,7 +252,7 @@ export default function Header() {
             <li>
               <Link
                 href="/contact"
-                className="rounded-xl bg-gradient-to-r from-primary-gold to-gold-400 px-4 py-2.5 text-sm font-bold text-primary-navy shadow-gold transition-transform duration-300 hover:-translate-y-0.5"
+                className="rounded-xl bg-gradient-to-r from-primary-gold to-gold-400 px-5 py-2.5 text-[1.02rem] font-bold text-primary-navy shadow-gold transition-transform duration-300 hover:-translate-y-0.5"
               >
                 Book Counselling
               </Link>
@@ -290,7 +290,7 @@ export default function Header() {
                           setMobileExpanded(mobileExpanded === item.label ? null : item.label)
                         }
                         aria-expanded={mobileExpanded === item.label}
-                        className="flex w-full items-center justify-between py-3 px-4 text-primary-navy font-semibold"
+                        className="flex w-full items-center justify-between py-3 px-4 text-base font-bold text-primary-navy"
                       >
                         {item.label}
                         <ChevronDown
@@ -346,7 +346,7 @@ export default function Header() {
                       href={item.href!}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className={cn(
-                        'block py-3 px-4 text-primary-navy font-semibold hover:text-primary-gold hover:bg-primary-gold/5 rounded-xl transition-all duration-200',
+                        'block py-3 px-4 text-base font-bold text-primary-navy hover:text-primary-gold hover:bg-primary-gold/5 rounded-xl transition-all duration-200',
                         pathname === item.href && 'text-primary-gold bg-primary-gold/5',
                       )}
                     >
