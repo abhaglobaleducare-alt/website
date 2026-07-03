@@ -14,6 +14,7 @@ const navLinks = [
   { label: 'Educate Yourself', href: '/educate' },
   { label: 'Clinical Workshops', href: '/praxis' },
   { label: 'Destinations', href: '/destinations' },
+  { label: 'Business Studies', href: '/business-management-georgia' },
   { label: 'Services', href: '/services' },
   { label: 'Gallery & Reviews', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
