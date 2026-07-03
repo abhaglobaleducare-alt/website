@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ShieldCheck, ArrowRight, Info } from 'lucide-react';
 import type { StreamSlug } from '@/data/courses';
@@ -45,6 +46,16 @@ export default function CourseStreamContent({ stream }: { stream: StreamSlug }) 
     <>
       {/* 1. Hero */}
       <section className="relative overflow-hidden bg-[#0B1A35] px-4 py-12 sm:px-8 sm:py-16">
+        <Image
+          src={meta.image}
+          alt={meta.title}
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          className="object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A35] via-[#0B1A35]/85 to-[#0B1A35]/70" />
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-20 blur-3xl"
           style={{ background: 'radial-gradient(circle, #C6962E 0%, transparent 70%)' }}
@@ -94,9 +105,10 @@ export default function CourseStreamContent({ stream }: { stream: StreamSlug }) 
         </div>
       </section>
 
-      {/* 2. Fee chart */}
-      <section className="bg-[#F8F9FA] px-4 py-16 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-[1200px]">
+      {/* 2. Fee chart — widened container with reduced side margin so the last
+          column has room and rows stay compact */}
+      <section className="bg-[#F8F9FA] px-2 py-16 sm:px-4 sm:py-20">
+        <div className="mx-auto max-w-[1500px]">
           <SectionHeading kicker="Verified Fees" title="Course & Fee Chart" />
           <CourseFeeTable courses={courses} />
         </div>

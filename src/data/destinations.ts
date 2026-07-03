@@ -5,6 +5,11 @@ export interface DestinationFact {
   value: string;
 }
 
+export interface DestinationImage {
+  src: string;
+  label: string;
+}
+
 export interface DestinationDetailData {
   slug: string;
   name: string;
@@ -18,6 +23,11 @@ export interface DestinationDetailData {
   compliance: string;
   seoTitle: string;
   seoDescription: string;
+  images: {
+    hero: string;
+    climate: string;
+    gallery: DestinationImage[];
+  };
 }
 
 export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
@@ -62,6 +72,14 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
     seoTitle: 'Study in Georgia — MBBS & More in Tbilisi | ABHA Global Educare',
     seoDescription:
       'Study MBBS, dentistry, nursing, business & IT in Georgia. English-medium, NMC & WHO Eligible medical universities in Tbilisi & Batumi, with ABHA’s own hostel, Indian food and on-ground office.',
+    images: {
+      hero: '/images/destinations/destination-tbilisi-georgia.svg',
+      climate: '/images/destinations/climate-georgia.svg',
+      gallery: [
+        { src: '/images/destinations/destination-tbilisi-georgia.svg', label: 'Tbilisi — Landmarks & Skyline' },
+        { src: '/images/destinations/destination-batumi-georgia.svg', label: 'Batumi — Coastal City Life' },
+      ],
+    },
   },
   bosnia: {
     slug: 'bosnia',
@@ -94,6 +112,13 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
     seoTitle: 'Study MBBS in Bosnia | ABHA Global Educare',
     seoDescription:
       'English-medium MBBS in Bosnia at accredited public universities in Sarajevo & Banja Luka — NMC & WHO Eligible, eligible for FMGE / NExT. ABHA guides your admission.',
+    images: {
+      hero: '/images/destinations/destination-bosnia.svg',
+      climate: '/images/destinations/climate-bosnia.svg',
+      gallery: [
+        { src: '/images/destinations/destination-bosnia.svg', label: 'Sarajevo & Banja Luka — City Views' },
+      ],
+    },
   },
   'timor-leste': {
     slug: 'timor-leste',
@@ -126,5 +151,12 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
     seoTitle: 'Study MBBS in Timor-Leste — Nalanda College of Medicine, Dili | ABHA',
     seoDescription:
       'English-medium MBBS at Nalanda College of Medicine, Dili, Timor-Leste — 4.5 years + 1 year internship, 125 seats/year, structured as per NMC FMGL 2021 norms. Verified fees via ABHA.',
+    images: {
+      hero: '/images/destinations/destination-dili-timor-leste.svg',
+      climate: '/images/destinations/climate-timor-leste.svg',
+      gallery: [
+        { src: '/images/destinations/destination-dili-timor-leste.svg', label: 'Dili — City & Coast' },
+      ],
+    },
   },
 };

@@ -100,7 +100,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 5500,
     totalTuitionUSD: 33000,
     firstYearSchedule: { part1: 'As per university schedule', part2: '' },
-    otherFees: 'Hostel & mess extra (approx $3,000/yr)',
     source: 'portal + public verified',
   },
   {
@@ -114,7 +113,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 6000,
     totalTuitionUSD: 36000,
     firstYearSchedule: { part1: 'As per university schedule', part2: '' },
-    otherFees: 'Hostel & mess extra',
     source: 'portal + public verified',
   },
   {
@@ -159,8 +157,7 @@ export const COURSES: Course[] = [
       part1: '$4,600 (Sem 1)',
       part2: '$1,600 (Sem 2)',
     },
-    otherFees:
-      'Lab $250 + Medical Kit $200 + Visa & conversion $1,000 (full course); Hostel & food $3,000/yr',
+    otherFees: 'Lab $250 + Medical Kit $200 + Visa & conversion $1,000 (full course)',
     source: 'NVF fee structure',
   },
 
@@ -269,7 +266,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 4950,
     totalTuitionUSD: 14850,
     firstYearSchedule: { part1: '$2,475', part2: '$2,475 (after visa)' },
-    otherFees: 'Visa-document fee $2,000 fully waived',
     source: 'ATMIA',
   },
   {
@@ -283,7 +279,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 4950,
     totalTuitionUSD: 14850,
     firstYearSchedule: { part1: '$2,475', part2: '$2,475 (after visa)' },
-    otherFees: 'Visa-document fee $2,000 fully waived',
     source: 'ATMIA',
   },
   {
@@ -297,7 +292,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 4950,
     totalTuitionUSD: 14850,
     firstYearSchedule: { part1: '$2,475', part2: '$2,475 (after visa)' },
-    otherFees: 'Visa-document fee $2,000 fully waived',
     source: 'ATMIA',
   },
   {
@@ -339,7 +333,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 7450,
     totalTuitionUSD: 14900,
     firstYearSchedule: { part1: '$3,725', part2: '$3,725 (after visa)' },
-    otherFees: 'Visa-document fee waived',
     source: 'ATMIA',
   },
   {
@@ -353,7 +346,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 7450,
     totalTuitionUSD: 14900,
     firstYearSchedule: { part1: '$3,725', part2: '$3,725 (after visa)' },
-    otherFees: 'Visa-document fee waived',
     source: 'ATMIA',
   },
   {
@@ -367,7 +359,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 7450,
     totalTuitionUSD: 14900,
     firstYearSchedule: { part1: '$3,725', part2: '$3,725 (after visa)' },
-    otherFees: 'Visa-document fee waived',
     source: 'ATMIA',
   },
   {
@@ -381,7 +372,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 7450,
     totalTuitionUSD: 14900,
     firstYearSchedule: { part1: '$3,725', part2: '$3,725 (after visa)' },
-    otherFees: 'Visa-document fee waived',
     source: 'ATMIA',
   },
   {
@@ -424,7 +414,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 4950,
     totalTuitionUSD: 14850,
     firstYearSchedule: { part1: '$2,475', part2: '$2,475 (after visa)' },
-    otherFees: 'Visa-document fee waived',
     source: 'ATMIA',
   },
   {
@@ -438,7 +427,6 @@ export const COURSES: Course[] = [
     feePerYearUSD: 4950,
     totalTuitionUSD: 14850,
     firstYearSchedule: { part1: '$2,475', part2: '$2,475 (after visa)' },
-    otherFees: 'Visa-document fee waived',
     source: 'ATMIA',
   },
   {

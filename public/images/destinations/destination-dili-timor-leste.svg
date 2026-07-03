@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+<linearGradient id="tsky" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#123055"/><stop offset="0.55" stop-color="#2C5E8C"/>
+  <stop offset="0.85" stop-color="#B98A45"/><stop offset="1" stop-color="#E6C87F"/>
+</linearGradient>
+<linearGradient id="tsea" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#2F6D96"/><stop offset="1" stop-color="#173A5E"/>
+</linearGradient></defs>
+<rect width="1600" height="900" fill="url(#tsky)"/>
+<circle cx="620" cy="520" r="90" fill="#E6C87F"/>
+<circle cx="620" cy="520" r="160" fill="#E6C87F" opacity="0.18"/>
+<!-- sea -->
+<rect x="0" y="600" width="1600" height="300" fill="url(#tsea)"/>
+<g stroke="#E6C87F" stroke-width="3" opacity="0.5" fill="none">
+  <path d="M140 660 q40 -12 80 0 t80 0 t80 0"/>
+  <path d="M520 730 q40 -12 80 0 t80 0"/>
+  <path d="M240 810 q40 -12 80 0 t80 0"/>
+</g>
+<!-- Cristo Rei headland -->
+<path d="M980 900 L980 620 Q1120 470 1300 500 Q1470 530 1600 640 L1600 900 Z" fill="#10223F"/>
+<path d="M1040 900 L1040 660 Q1160 540 1320 566 Q1480 592 1600 700 L1600 900 Z" fill="#0B1730"/>
+<!-- statue: figure with open arms on globe pedestal -->
+<g fill="#0B1730">
+  <rect x="1288" y="430" width="12" height="26"/>
+  <rect x="1250" y="440" width="88" height="8" rx="4"/>
+  <circle cx="1294" cy="422" r="9"/>
+  <path d="M1284 456 h20 l6 60 h-32 Z"/>
+  <circle cx="1294" cy="530" r="22"/>
+  <rect x="1272" y="548" width="44" height="14"/>
+</g>
+<g stroke="#C9A24B" stroke-width="3" fill="none" opacity="0.9">
+  <circle cx="1294" cy="530" r="22"/>
+  <path d="M1272 530 h44 M1294 508 v44"/>
+</g>
+<!-- outrigger boat -->
+<g fill="#0B1730">
+  <path d="M360 700 q90 26 180 0 l-20 26 h-140 Z"/>
+  <rect x="446" y="630" width="6" height="72"/>
+  <path d="M452 632 L520 686 L452 686 Z" fill="#C9A24B"/>
+  <line x1="330" y1="716" x2="560" y2="716" stroke="#0B1730" stroke-width="6"/>
+</g>
+<!-- palms foreground -->
+<g fill="#0B1730">
+  <path d="M120 900 q-10 -170 26 -260 l30 8 q-32 100 -14 252 Z"/>
+  <path d="M158 646 q-96 -40 -170 4 q86 -78 178 -38 Z"/>
+  <path d="M160 642 q-36 -94 -122 -116 q100 -2 146 90 Z"/>
+  <path d="M166 640 q36 -94 128 -108 q-78 46 -102 122 Z"/>
+  <path d="M168 646 q100 -18 156 34 q-90 -62 -162 -2 Z"/>
+  <path d="M1520 900 q8 -120 -18 -186 l-26 8 q24 76 12 178 Z"/>
+  <path d="M1494 706 q-80 -30 -140 6 q70 -62 148 -34 Z"/>
+  <path d="M1498 702 q28 -76 104 -88 q-62 38 -82 100 Z"/>
+</g>
+
+  <text x="800" y="150" text-anchor="middle" font-family="'DejaVu Sans', Arial, sans-serif" font-size="22"
+        letter-spacing="6" fill="#E6C87F">SOUTHEAST ASIA</text>
+  <text x="800" y="202" text-anchor="middle" font-family="Georgia, 'DejaVu Serif', serif" font-size="58"
+        letter-spacing="2" fill="#FFFFFF">DILI · TIMOR-LESTE</text>
+  <rect x="740" y="224" width="120" height="3" fill="#C9A24B"/></svg>

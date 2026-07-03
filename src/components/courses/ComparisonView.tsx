@@ -57,15 +57,11 @@ export default function ComparisonView() {
       label: 'Other Fees & Expenses',
       render: (c) => (
         <div>
-          {c.otherFees && <p className="mb-2">{fmt(c.otherFees)}</p>}
-          <p className="text-[0.7rem] font-semibold uppercase tracking-wide text-[#85611C]">
-            ABHA charges (as applicable)
+          {c.otherFees && <p className="mb-1.5">{fmt(c.otherFees)}</p>}
+          <p className="text-[0.72rem] leading-snug text-gray-500">
+            <span className="font-semibold text-[#85611C]">+ ABHA charges (as applicable): </span>
+            {ABHA_SERVICE_CHARGES.join(', ')}
           </p>
-          <ul className="mt-1 space-y-0.5 text-xs text-gray-500">
-            {ABHA_SERVICE_CHARGES.map((charge) => (
-              <li key={charge}>• {charge}</li>
-            ))}
-          </ul>
         </div>
       ),
     },

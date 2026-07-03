@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#1B3358"/><stop offset="1" stop-color="#0B1730"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#g)"/>
+<circle cx="700" cy="60" r="180" fill="#C9A24B" opacity="0.07"/>
+<circle cx="80" cy="460" r="140" fill="#C9A24B" opacity="0.07"/>
+<circle cx="400" cy="210" r="110" fill="none" stroke="#C9A24B" stroke-width="3"/>
+<circle cx="400" cy="210" r="122" fill="none" stroke="#C9A24B" stroke-width="1" opacity="0.6"/>
+<g stroke="#E6C87F" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M366 168 q-18 26 -8 56 q8 24 16 48 q4 12 12 12 q8 0 9 -14 l3 -30 q1 -10 8 -10 q7 0 8 10 l3 30 q1 14 9 14 q8 0 12 -12 q8 -24 16 -48 q10 -30 -8 -56 q-16 -22 -40 -10 q-24 -12 -40 10 Z"/></g>
+<text x="400" y="414" text-anchor="middle" font-family="Georgia, 'DejaVu Serif', serif" font-size="34" fill="#FFFFFF">Dentistry (DMD)</text>
+
+<rect x="340" y="452" width="120" height="3" fill="#C9A24B"/>
+</svg>

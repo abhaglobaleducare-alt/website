@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+<defs>
+<linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#0B1730"/><stop offset="0.6" stop-color="#1D3A66"/>
+  <stop offset="1" stop-color="#3D6E9E"/>
+</linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#2C5580"/><stop offset="1" stop-color="#10223F"/>
+</linearGradient></defs>
+<rect width="1600" height="900" fill="url(#bsky)"/>
+<circle cx="380" cy="250" r="60" fill="#E6C87F"/>
+<circle cx="380" cy="250" r="110" fill="#E6C87F" opacity="0.15"/>
+<!-- skyline -->
+<g fill="#0B1730">
+  <rect x="560" y="380" width="70" height="240"/><rect x="650" y="330" width="56" height="290"/>
+  <rect x="726" y="420" width="88" height="200"/><rect x="836" y="360" width="60" height="260"/>
+  <path d="M920 620 v-220 l30 -40 l30 40 v220 Z"/>
+</g>
+<g fill="#C9A24B" opacity="0.85">
+  <rect x="575" y="400" width="10" height="14"/><rect x="600" y="400" width="10" height="14"/>
+  <rect x="575" y="440" width="10" height="14"/><rect x="662" y="352" width="9" height="13"/>
+  <rect x="684" y="352" width="9" height="13"/><rect x="662" y="392" width="9" height="13"/>
+  <rect x="848" y="382" width="9" height="13"/><rect x="870" y="382" width="9" height="13"/>
+</g>
+<!-- Alphabet Tower: double helix lattice with sphere -->
+<g stroke="#C9A24B" stroke-width="6" fill="none">
+  <path d="M1120 620 C1080 500 1160 420 1120 300 C1100 250 1110 210 1140 180"/>
+  <path d="M1160 620 C1200 500 1120 420 1160 300 C1180 250 1170 210 1140 180"/>
+  <line x1="1102" y1="560" x2="1178" y2="560" stroke-width="4"/>
+  <line x1="1128" y1="470" x2="1152" y2="470" stroke-width="4"/>
+  <line x1="1104" y1="380" x2="1176" y2="380" stroke-width="4"/>
+  <line x1="1122" y1="290" x2="1158" y2="290" stroke-width="4"/>
+</g>
+<circle cx="1140" cy="150" r="42" fill="none" stroke="#C9A24B" stroke-width="6"/>
+<circle cx="1140" cy="150" r="18" fill="#E6C87F"/>
+<!-- ferris wheel -->
+<g stroke="#0B1730" stroke-width="8" fill="none">
+  <circle cx="1400" cy="440" r="120"/>
+  <line x1="1400" y1="320" x2="1400" y2="560"/><line x1="1280" y1="440" x2="1520" y2="440"/>
+  <line x1="1316" y1="356" x2="1484" y2="524"/><line x1="1484" y1="356" x2="1316" y2="524"/>
+  <path d="M1352 620 L1400 448 L1448 620"/>
+</g>
+<circle cx="1400" cy="440" r="14" fill="#C9A24B"/>
+<!-- sea -->
+<rect x="0" y="620" width="1600" height="280" fill="url(#sea)"/>
+<g stroke="#E6C87F" stroke-width="3" opacity="0.5" fill="none">
+  <path d="M80 690 q40 -12 80 0 t80 0 t80 0"/>
+  <path d="M900 740 q40 -12 80 0 t80 0"/>
+  <path d="M300 800 q40 -12 80 0 t80 0 t80 0"/>
+</g>
+<!-- palm foreground -->
+<g fill="#0B1730">
+  <path d="M170 900 q-14 -140 6 -220 l26 4 q-16 90 0 216 Z"/>
+  <path d="M180 680 q-90 -30 -150 10 q80 -70 156 -34 Z"/>
+  <path d="M182 678 q-40 -86 -120 -100 q96 -8 138 82 Z"/>
+  <path d="M186 676 q30 -90 116 -104 q-70 44 -92 116 Z"/>
+  <path d="M188 680 q94 -22 148 26 q-84 -56 -154 -2 Z"/>
+</g>
+
+  <text x="800" y="160" text-anchor="middle" font-family="'DejaVu Sans', Arial, sans-serif" font-size="22"
+        letter-spacing="6" fill="#E6C87F">BLACK SEA COAST</text>
+  <text x="800" y="212" text-anchor="middle" font-family="Georgia, 'DejaVu Serif', serif" font-size="58"
+        letter-spacing="2" fill="#FFFFFF">BATUMI · GEORGIA</text>
+  <rect x="740" y="234" width="120" height="3" fill="#C9A24B"/></svg>

@@ -24,6 +24,8 @@ export interface StreamMeta {
   /** One-line value proposition (hero sub + card description). */
   valueProp: string;
   icon: LucideIcon;
+  /** Illustrative course image (public/images/destinations/course-*.svg). */
+  image: string;
   /** True only for MBBS/MD — gates "NMC & WHO Eligible" wording. */
   isMedical: boolean;
   eligibility: string[];
@@ -44,6 +46,7 @@ export const STREAMS: StreamMeta[] = [
     valueProp:
       'English-medium MBBS / M.D. at NMC & WHO Eligible universities in Georgia & Timor-Leste.',
     icon: Stethoscope,
+    image: '/images/destinations/course-medicine-mbbs.svg',
     isMedical: true,
     eligibility: [
       '10+2 with Physics, Chemistry & Biology (minimum 50%; 40% for reserved categories).',
@@ -66,6 +69,7 @@ export const STREAMS: StreamMeta[] = [
     valueProp:
       'Doctor of Dental Medicine (DMD) programmes at accredited universities in Tbilisi, Georgia.',
     icon: Activity,
+    image: '/images/destinations/course-dentistry-dmd.svg',
     isMedical: false,
     eligibility: [
       '10+2 with Physics, Chemistry & Biology.',
@@ -87,6 +91,7 @@ export const STREAMS: StreamMeta[] = [
     valueProp:
       'BSc Nursing, Pharmacy & allied health sciences at accredited Georgian universities.',
     icon: HeartPulse,
+    image: '/images/destinations/course-nursing-health.svg',
     isMedical: false,
     eligibility: [
       '10+2 with Physics, Chemistry & Biology (minimum 50%).',
@@ -108,6 +113,7 @@ export const STREAMS: StreamMeta[] = [
     valueProp:
       'English-medium BBA, MBA & Executive MBA in Tbilisi — no CAT-style entrance.',
     icon: Briefcase,
+    image: '/images/destinations/course-business-mgmt.svg',
     isMedical: false,
     eligibility: [
       'BBA: 10+2 (Higher Secondary) from any stream — Commerce, Science or Arts.',
@@ -129,6 +135,7 @@ export const STREAMS: StreamMeta[] = [
     valueProp:
       'Future-ready BSc / MSc in IT, Data Science, AI & Cybersecurity in Georgia.',
     icon: Cpu,
+    image: '/images/destinations/course-it-data-ai.svg',
     isMedical: false,
     eligibility: [
       '10+2 for Bachelor programmes (a background in Mathematics is preferred).',
@@ -150,6 +157,7 @@ export const STREAMS: StreamMeta[] = [
     valueProp:
       "Master's, MBA & PhD programmes across disciplines at Georgian universities.",
     icon: GraduationCap,
+    image: '/images/destinations/course-masters-mba-phd.svg',
     isMedical: false,
     eligibility: [
       "Master's / MA / MS: a recognised Bachelor's degree in a relevant field.",

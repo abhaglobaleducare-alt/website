@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import LeadGate from '@/components/LeadGate';
@@ -40,21 +41,33 @@ export default function StreamCards() {
                 <LeadGate action="explore_course" mode="sameTab" extra={{ stream: s.slug }}>
                 <Link
                   href={`/courses/${s.slug}`}
-                  className="group flex h-full flex-col rounded-2xl border border-white/10 bg-[#0B1A35] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-navy"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0B1A35] transition-all duration-300 hover:-translate-y-1 hover:shadow-navy"
                 >
-                  <div className="mb-5 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#C6962E]/15 text-[#C6962E]">
-                      <Icon size={24} />
-                    </div>
-                    <span className="rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-[#E0B85C]">
+                  {/* Course image banner */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={s.image}
+                      alt={s.cardTitle}
+                      fill
+                      unoptimized
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <span className="absolute right-3 top-3 rounded-full bg-[#0B1A35]/80 px-3 py-1 text-xs font-semibold text-[#E0B85C] backdrop-blur-sm">
                       {count} programme{count === 1 ? '' : 's'}
                     </span>
                   </div>
-                  <h3 className="font-playfair text-xl font-bold text-white">{s.cardTitle}</h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{s.valueProp}</p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#C6962E] transition-all group-hover:gap-2.5">
-                    Explore courses <ArrowRight size={16} />
-                  </span>
+
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#C6962E]/15 text-[#C6962E]">
+                      <Icon size={22} />
+                    </div>
+                    <h3 className="font-playfair text-xl font-bold text-white">{s.cardTitle}</h3>
+                    <p className="mt-2 flex-1 text-sm leading-relaxed text-white/60">{s.valueProp}</p>
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#C6962E] transition-all group-hover:gap-2.5">
+                      Explore courses <ArrowRight size={16} />
+                    </span>
+                  </div>
                 </Link>
                 </LeadGate>
               </motion.div>

@@ -1,18 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import {
-  CheckCircle2,
-  ArrowRight,
-  Info,
-  Phone,
-  Landmark,
-  Building2,
-  CloudSun,
-  Users,
-  MapPin,
-} from 'lucide-react';
+import { CheckCircle2, ArrowRight, Info, Phone, MapPin } from 'lucide-react';
 import type { DestinationDetailData } from '@/data/destinations';
 
 function initials(name: string): string {
@@ -36,18 +27,24 @@ const TILE_GRADIENTS = [
 export default function DestinationDetail({ data }: { data: DestinationDetailData }) {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0B1A35] px-4 py-12 sm:px-8 sm:py-16">
-        <div
-          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-20 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #C6962E 0%, transparent 70%)' }}
+      {/* Hero with destination image */}
+      <section className="relative overflow-hidden px-4 py-16 sm:px-8 sm:py-24">
+        <Image
+          src={data.images.hero}
+          alt={`${data.name} — cityscape`}
+          fill
+          priority
+          unoptimized
+          sizes="100vw"
+          className="object-cover"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A35] via-[#0B1A35]/85 to-[#0B1A35]/70" />
         <div className="relative mx-auto max-w-[1000px] text-center">
-          <span className="mb-4 inline-block text-6xl">{data.flag}</span>
-          <h1 className="font-playfair text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+          <span className="mb-4 inline-block text-6xl drop-shadow-lg">{data.flag}</span>
+          <h1 className="font-playfair text-3xl font-bold leading-tight text-white drop-shadow sm:text-4xl lg:text-5xl">
             Study in {data.name}
           </h1>
-          <p className="mx-auto mt-5 max-w-[700px] text-base leading-relaxed text-white/75 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-[700px] text-base leading-relaxed text-white/85 sm:text-lg">
             {data.tagline}
           </p>
         </div>
@@ -87,35 +84,56 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
               Life in {data.name}
             </h2>
           </div>
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {[
-              { icon: Landmark, label: 'Landmarks & Monuments', sub: 'Historic architecture' },
-              { icon: Building2, label: 'City Life', sub: 'Safe, student-friendly streets' },
-              { icon: CloudSun, label: 'Climate & Weather', sub: 'Distinct European seasons' },
-              { icon: Users, label: 'Student Community', sub: 'Growing Indian presence' },
-            ].map((tile, i) => (
+
+          <div
+            className={`grid gap-5 ${
+              data.images.gallery.length > 1 ? 'sm:grid-cols-2' : 'grid-cols-1'
+            }`}
+          >
+            {data.images.gallery.map((img, i) => (
               <motion.div
-                key={tile.label}
+                key={img.src}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
-                className={`relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl bg-gradient-to-br ${TILE_GRADIENTS[i]} p-5 shadow-card`}
+                className="group relative aspect-[16/9] overflow-hidden rounded-2xl shadow-card"
               >
-                <div
-                  className="absolute inset-0 opacity-[0.12]"
-                  style={{
-                    backgroundImage:
-                      'radial-gradient(circle at 20% 20%, #fff 1px, transparent 1px)',
-                    backgroundSize: '22px 22px',
-                  }}
+                <Image
+                  src={img.src}
+                  alt={img.label}
+                  fill
+                  unoptimized
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <tile.icon size={30} className="relative mb-3 text-white/90" />
-                <h3 className="relative text-sm font-bold leading-snug text-white">{tile.label}</h3>
-                <p className="relative mt-0.5 text-xs text-white/70">{tile.sub}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1A35]/80 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 p-5">
+                  <p className="flex items-center gap-1.5 text-sm font-semibold text-white">
+                    <MapPin size={14} className="text-[#E0B85C]" /> {img.label}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Climate & weather banner */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-5 overflow-hidden rounded-2xl border border-gray-100 shadow-card"
+          >
+            <Image
+              src={data.images.climate}
+              alt={`${data.name} — climate and weather`}
+              width={1200}
+              height={300}
+              unoptimized
+              sizes="(max-width: 1100px) 100vw, 1100px"
+              className="h-auto w-full"
+            />
+          </motion.div>
         </div>
       </section>
 

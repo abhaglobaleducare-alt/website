@@ -39,7 +39,7 @@ export default function CourseFeeTable({ courses }: { courses: Course[] }) {
               <th className="px-4 py-3.5 font-semibold">Per Year Fees</th>
               <th className="px-4 py-3.5 font-semibold">Total Tuition</th>
               <th className="px-4 py-3.5 font-semibold">1st Year Payment (P1 / P2 / P3)</th>
-              <th className="px-4 py-3.5 font-semibold">Other Fees &amp; Expenses</th>
+              <th className="min-w-[260px] px-4 py-3.5 font-semibold">Other Fees &amp; Expenses</th>
             </tr>
           </thead>
           <tbody>
@@ -98,18 +98,14 @@ export default function CourseFeeTable({ courses }: { courses: Course[] }) {
                       '—'
                     )}
                   </td>
-                  <td className="px-4 py-4 align-top text-gray-600">
+                  <td className="min-w-[260px] px-4 py-4 align-top text-gray-600">
                     {c.otherFees && (
-                      <p className="mb-2">{formatFee(c.otherFees, currency)}</p>
+                      <p className="mb-1.5">{formatFee(c.otherFees, currency)}</p>
                     )}
-                    <p className="text-[0.7rem] font-semibold uppercase tracking-wide text-[#85611C]">
-                      ABHA charges (as applicable)
+                    <p className="text-[0.72rem] leading-snug text-gray-500">
+                      <span className="font-semibold text-[#85611C]">+ ABHA charges (as applicable): </span>
+                      {ABHA_SERVICE_CHARGES.join(', ')}
                     </p>
-                    <ul className="mt-1 space-y-0.5 text-[0.75rem] text-gray-500">
-                      {ABHA_SERVICE_CHARGES.map((charge) => (
-                        <li key={charge}>• {charge}</li>
-                      ))}
-                    </ul>
                   </td>
                 </tr>
               );
