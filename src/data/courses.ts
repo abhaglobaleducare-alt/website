@@ -27,6 +27,9 @@ export interface Course {
   duration: string;
   feePerYearUSD: number | string;
   totalTuitionUSD: number;
+  /** Optional discounted price for ABHA students (e.g. after scholarship). */
+  feePerYearAfterUSD?: number;
+  totalTuitionAfterUSD?: number;
   firstYearSchedule: { part1: string; part2: string; part3?: string };
   otherFees?: string;
   notes?: string;
@@ -166,8 +169,10 @@ export const COURSES: Course[] = [
     duration: '6 Yrs (incl. Internship)',
     feePerYearUSD: 5500,
     totalTuitionUSD: 33000,
+    feePerYearAfterUSD: 3900,
+    totalTuitionAfterUSD: 23400,
     firstYearSchedule: { part1: 'As per university schedule', part2: '' },
-    notes: 'After scholarship: $3,900/yr for ABHA students (subject to eligibility)',
+    notes: 'ABHA partner university — scholarship price subject to eligibility',
     source: 'eastwest.edu.ge official',
   },
   {

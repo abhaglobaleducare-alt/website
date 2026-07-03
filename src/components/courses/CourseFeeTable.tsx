@@ -2,7 +2,7 @@
 
 import type { Course } from '@/data/courses';
 import { FEE_TABLE_FOOTER, RATE_NOTE, ABHA_SERVICE_CHARGES } from '@/data/config';
-import { useCurrency, useCompare, formatFee, MAX_COMPARE } from './context';
+import { useCurrency, useCompare, formatFee, formatMoney, MAX_COMPARE } from './context';
 import CurrencyToggle from './CurrencyToggle';
 import { cn } from '@/lib/utils';
 
@@ -85,11 +85,21 @@ export default function CourseFeeTable({ courses }: { courses: Course[] }) {
                   <td className="px-4 py-4 align-top text-gray-600">{c.duration}</td>
                   <td className="px-4 py-4 align-top text-gray-700">
                     {formatFee(c.feePerYearUSD, currency)}
+                    {c.feePerYearAfterUSD != null && (
+                      <span className="mt-1 block text-[0.72rem] font-semibold text-[#85611C]">
+                        → {formatMoney(c.feePerYearAfterUSD, currency)}/yr after ABHA scholarship
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-4 align-top font-semibold text-[#0B1A35]">
                     {c.totalTuitionUSD > 0
                       ? formatFee(c.totalTuitionUSD, currency)
                       : 'As per university schedule'}
+                    {c.totalTuitionAfterUSD != null && (
+                      <span className="mt-1 block text-[0.72rem] font-semibold text-[#85611C]">
+                        → {formatMoney(c.totalTuitionAfterUSD, currency)} after scholarship
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-4 align-top text-gray-600">
                     {parts.length ? (

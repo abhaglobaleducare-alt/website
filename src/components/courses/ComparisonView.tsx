@@ -9,6 +9,7 @@ import {
   useCompare,
   useCurrency,
   formatFee,
+  formatMoney,
   STREAM_LABELS,
 } from './context';
 import CurrencyToggle from './CurrencyToggle';
@@ -42,7 +43,19 @@ export default function ComparisonView() {
     { label: 'University', render: (c) => c.university },
     { label: 'Location', render: (c) => c.location },
     { label: 'Duration', render: (c) => c.duration },
-    { label: 'Per Year Fees', render: (c) => fmt(c.feePerYearUSD) },
+    {
+      label: 'Per Year Fees',
+      render: (c) => (
+        <div>
+          {fmt(c.feePerYearUSD)}
+          {c.feePerYearAfterUSD != null && (
+            <span className="mt-1 block text-xs font-semibold text-[#85611C]">
+              → {formatMoney(c.feePerYearAfterUSD, currency)}/yr after ABHA scholarship
+            </span>
+          )}
+        </div>
+      ),
+    },
     {
       label: 'Total Tuition',
       render: (c) => (
@@ -50,6 +63,11 @@ export default function ComparisonView() {
           <span className="font-bold text-[#0B1A35]">
             {c.totalTuitionUSD > 0 ? fmt(c.totalTuitionUSD) : 'As per university schedule'}
           </span>
+          {c.totalTuitionAfterUSD != null && (
+            <span className="mt-0.5 block text-xs font-semibold text-[#85611C]">
+              → {formatMoney(c.totalTuitionAfterUSD, currency)} after scholarship
+            </span>
+          )}
           {c.totalTuitionUSD > 0 && c.totalTuitionUSD === lowestTotal && (
             <span className="mt-1 block text-xs font-semibold text-[#85611C]">Lowest total</span>
           )}
