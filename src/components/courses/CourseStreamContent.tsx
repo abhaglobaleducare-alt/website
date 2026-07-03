@@ -44,7 +44,7 @@ export default function CourseStreamContent({ stream }: { stream: StreamSlug }) 
   return (
     <>
       {/* 1. Hero */}
-      <section className="relative overflow-hidden bg-[#0B1A35] px-4 py-20 sm:px-8 sm:py-24">
+      <section className="relative overflow-hidden bg-[#0B1A35] px-4 py-12 sm:px-8 sm:py-16">
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-20 blur-3xl"
           style={{ background: 'radial-gradient(circle, #C6962E 0%, transparent 70%)' }}

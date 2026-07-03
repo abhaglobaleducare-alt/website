@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import LeadGate from '@/components/LeadGate';
 import { STREAMS } from '@/data/streams';
 import { courseCount } from '@/data/courses';
 
@@ -36,6 +37,7 @@ export default function StreamCards() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
               >
+                <LeadGate action="explore_course" mode="sameTab" extra={{ stream: s.slug }}>
                 <Link
                   href={`/courses/${s.slug}`}
                   className="group flex h-full flex-col rounded-2xl border border-white/10 bg-[#0B1A35] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-navy"
@@ -54,6 +56,7 @@ export default function StreamCards() {
                     Explore courses <ArrowRight size={16} />
                   </span>
                 </Link>
+                </LeadGate>
               </motion.div>
             );
           })}

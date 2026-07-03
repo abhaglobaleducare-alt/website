@@ -4,14 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import LeadGate from '@/components/LeadGate';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, ArrowRight, Loader2, Shield, GraduationCap, Globe, Utensils, Home as HomeIcon, BookOpen } from 'lucide-react';
-
-const highlights = [
-  { icon: HomeIcon, text: 'Own Accommodation in Georgia & Bosnia' },
-  { icon: Utensils, text: 'Authentic Indian Food Services Daily' },
-  { icon: BookOpen, text: "Abha's Clinical Experience Workshop" },
-  { icon: Shield, text: 'NMC & WHO Eligible Degrees' },
-];
+import { ArrowRight, Loader2, Shield, GraduationCap, Globe } from 'lucide-react';
+import { COURSE_OPTIONS } from '@/data/streams';
 
 export default function Hero() {
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -29,6 +23,7 @@ export default function Hero() {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
+      course: formData.get('course') as string,
       neetStatus: formData.get('neetStatus') as string,
       source: 'hero-eligibility-form',
     };
@@ -62,7 +57,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[92vh] overflow-hidden flex items-center"
+      className="relative min-h-[88vh] overflow-hidden flex items-center"
       id="home"
     >
       {/* Layered Background */}
@@ -83,7 +78,7 @@ export default function Hero() {
             className="inline-flex items-center gap-2 bg-[#C6962E]/10 border border-[#C6962E]/20 px-4 py-2 rounded-full mb-8"
           >
             <GraduationCap size={16} className="text-[#C6962E]" />
-            <span className="text-[#C6962E] font-semibold text-sm tracking-wide">MBBS Abroad Consultancy</span>
+            <span className="text-[#C6962E] font-semibold text-sm tracking-wide">Study Abroad Consultancy</span>
           </motion.div>
 
           <motion.h1
@@ -92,7 +87,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="font-playfair text-[1.75rem] sm:text-[2.5rem] lg:text-[3.75rem] xl:text-[4.25rem] text-white leading-[1.15] mb-6"
           >
-            Study MBBS Abroad with{' '}
+            Study Abroad with{' '}
             <span className="relative">
               <span className="bg-gradient-to-r from-[#C6962E] to-[#e2b960] bg-clip-text text-transparent">
                 Complete Support
@@ -108,39 +103,22 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.25 }}
             className="text-white/80 text-base sm:text-lg lg:text-xl leading-relaxed mb-8 sm:mb-10 max-w-[600px]"
           >
-            ABHA Global Educare helps Indian students get admitted to NMC guidelines Eligible
-            medical universities in Georgia & Bosnia — with our own hostels,
-            Indian meals, and exclusive hands on experience.
+            ABHA Global Educare helps Indian students get admitted to universities in Georgia,
+            Bosnia &amp; Timor-Leste — across MBBS, dentistry, nursing, business, IT and
+            postgraduate studies — with our own hostels, Indian meals and on-ground support.
           </motion.p>
-
-          {/* Highlight Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 sm:mb-10"
-          >
-            {highlights.map((item, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <div className="mt-0.5 w-9 h-9 rounded-lg bg-[#C6962E]/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon size={18} className="text-[#C6962E]" />
-                </div>
-                <span className="text-white/90 text-[0.95rem] leading-snug font-medium">{item.text}</span>
-              </div>
-            ))}
-          </motion.div>
 
           {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.55 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
             className="flex flex-col gap-3"
           >
-            <div className="flex flex-wrap gap-3 mb-3">
+            <div className="flex flex-wrap gap-3 mb-1">
               <LeadGate action="whatsapp_appointment" mode="newTab">
               <a
-                href="https://wa.me/917447552878?text=Hi%2C+I'm+interested+in+booking+a+FREE+counseling+appointment+for+MBBS+Abroad."
+                href="https://wa.me/917447552878?text=Hi%2C+I'm+interested+in+booking+a+FREE+counseling+appointment+for+studying+abroad."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-[#1ebe5d]"
@@ -151,6 +129,12 @@ export default function Hero() {
               </LeadGate>
             </div>
             <div className="flex flex-wrap gap-4">
+              <a
+                href="#explore-by-stream"
+                className="inline-flex items-center gap-2.5 bg-[#C6962E] text-[#0B1A35] px-7 py-3.5 rounded-xl font-bold text-base transition-all duration-300 hover:bg-[#d4a73a]"
+              >
+                <GraduationCap size={18} /> Find Your Course Abroad
+              </a>
               <LeadGate action="explore_destination" mode="sameTab">
               <Link
                 href="/destinations"
@@ -213,17 +197,33 @@ export default function Hero() {
               />
             </div>
             <div>
-              <label className="block text-[#0B1A35] font-medium mb-1.5 text-sm">NEET Status</label>
+              <label className="block text-[#0B1A35] font-medium mb-1.5 text-sm">Field of Interest</label>
               <select
-                name="neetStatus"
-                required
+                name="course"
                 disabled={formState === 'loading'}
                 className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.95rem] bg-gray-50/50 text-[#0B1A35] focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 appearance-none disabled:opacity-50"
               >
-                <option value="">Select your NEET status</option>
+                <option value="">Select a course</option>
+                {COURSE_OPTIONS.map((c) => (
+                  <option key={c.value} value={c.value}>
+                    {c.label}
+                  </option>
+                ))}
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-[#0B1A35] font-medium mb-1.5 text-sm">NEET Status</label>
+              <select
+                name="neetStatus"
+                disabled={formState === 'loading'}
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.95rem] bg-gray-50/50 text-[#0B1A35] focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 appearance-none disabled:opacity-50"
+              >
+                <option value="">Select your NEET status (optional)</option>
                 <option value="appeared">Appeared in NEET 2026</option>
                 <option value="preparing">Preparing for NEET 2026</option>
                 <option value="qualified">NEET Qualified (Previous year)</option>
+                <option value="not-applicable">Not applicable / Non-medical course</option>
               </select>
             </div>
 

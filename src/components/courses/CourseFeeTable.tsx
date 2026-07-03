@@ -1,7 +1,7 @@
 'use client';
 
 import type { Course } from '@/data/courses';
-import { FEE_TABLE_FOOTER, RATE_NOTE } from '@/data/config';
+import { FEE_TABLE_FOOTER, RATE_NOTE, ABHA_SERVICE_CHARGES } from '@/data/config';
 import { useCurrency, useCompare, formatFee, MAX_COMPARE } from './context';
 import CurrencyToggle from './CurrencyToggle';
 import { cn } from '@/lib/utils';
@@ -39,7 +39,7 @@ export default function CourseFeeTable({ courses }: { courses: Course[] }) {
               <th className="px-4 py-3.5 font-semibold">Per Year Fees</th>
               <th className="px-4 py-3.5 font-semibold">Total Tuition</th>
               <th className="px-4 py-3.5 font-semibold">1st Year Payment (P1 / P2 / P3)</th>
-              <th className="px-4 py-3.5 font-semibold">Other Fees</th>
+              <th className="px-4 py-3.5 font-semibold">Other Fees &amp; Expenses</th>
             </tr>
           </thead>
           <tbody>
@@ -99,7 +99,17 @@ export default function CourseFeeTable({ courses }: { courses: Course[] }) {
                     )}
                   </td>
                   <td className="px-4 py-4 align-top text-gray-600">
-                    {c.otherFees ? formatFee(c.otherFees, currency) : '—'}
+                    {c.otherFees && (
+                      <p className="mb-2">{formatFee(c.otherFees, currency)}</p>
+                    )}
+                    <p className="text-[0.7rem] font-semibold uppercase tracking-wide text-[#85611C]">
+                      ABHA charges (as applicable)
+                    </p>
+                    <ul className="mt-1 space-y-0.5 text-[0.75rem] text-gray-500">
+                      {ABHA_SERVICE_CHARGES.map((charge) => (
+                        <li key={charge}>• {charge}</li>
+                      ))}
+                    </ul>
                   </td>
                 </tr>
               );

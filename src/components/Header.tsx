@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X, Phone, Mail, ChevronDown, ArrowLeft, Home as HomeIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { STREAMS } from '@/data/streams';
@@ -31,7 +31,6 @@ const navItems: NavItem[] = [
     children: [
       { label: 'NEET Excellence Pathway', href: '/scholarship' },
       { label: 'NEET Portal', href: 'https://neet.abhaglobaleducare.com', external: true },
-      { label: 'Educate Yourself', href: '/educate' },
     ],
   },
   { label: 'Services', href: '/services' },
@@ -125,6 +124,7 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -366,6 +366,27 @@ export default function Header() {
           )}
         </AnimatePresence>
       </header>
+
+      {/* Back / Home bar — shown on every page except the homepage */}
+      {pathname !== '/' && (
+        <div className="border-b border-gray-100 bg-white/95">
+          <div className="max-w-[1400px] mx-auto flex items-center gap-2 px-4 sm:px-8 py-2">
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold text-primary-navy transition-colors hover:bg-primary-gold/10 hover:text-primary-gold"
+            >
+              <ArrowLeft size={16} /> Back
+            </button>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold text-primary-navy transition-colors hover:bg-primary-gold/10 hover:text-primary-gold"
+            >
+              <HomeIcon size={16} /> Home
+            </Link>
+          </div>
+        </div>
+      )}
     </>
   );
 }

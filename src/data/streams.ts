@@ -167,6 +167,9 @@ export const STREAMS: StreamMeta[] = [
 
 export const STREAM_SLUGS: StreamSlug[] = STREAMS.map((s) => s.slug);
 
+/** Options for "Field of Interest" dropdowns (home eligibility + contact form). */
+export const COURSE_OPTIONS = STREAMS.map((s) => ({ value: s.navLabel, label: s.navLabel }));
+
 export function getStreamMeta(slug: string): StreamMeta | undefined {
   return STREAMS.find((s) => s.slug === slug);
 }

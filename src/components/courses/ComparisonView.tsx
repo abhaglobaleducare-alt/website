@@ -3,11 +3,11 @@
 import { X } from 'lucide-react';
 import type { Course } from '@/data/courses';
 import { courseId } from '@/data/courses';
-import { RATE_NOTE } from '@/data/config';
+import { RATE_NOTE, ABHA_SERVICE_CHARGES } from '@/data/config';
+import { MessageCircle } from 'lucide-react';
 import {
   useCompare,
   useCurrency,
-  useEnquiry,
   formatFee,
   STREAM_LABELS,
 } from './context';
@@ -20,10 +20,16 @@ function scheduleText(c: Course, format: (v: string | number) => string): string
   return parts.length ? parts.map(format).join('  /  ') : '—';
 }
 
+const WHATSAPP_NUMBER = '917447552878';
+
+function whatsappHref(course: Course): string {
+  const msg = `Namaste ABHA! I want details about ${course.name} at ${course.university} (${STREAM_LABELS[course.stream]}). Please share fees and admission guidance.`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
 export default function ComparisonView() {
   const { selected, isOpen, closeComparison, remove } = useCompare();
   const { currency } = useCurrency();
-  const { openEnquiry } = useEnquiry();
 
   if (!isOpen) return null;
 
@@ -47,7 +53,22 @@ export default function ComparisonView() {
       ),
     },
     { label: '1st Year Payment Schedule', render: (c) => scheduleText(c, fmt) },
-    { label: 'Other Fees', render: (c) => (c.otherFees ? fmt(c.otherFees) : '—') },
+    {
+      label: 'Other Fees & Expenses',
+      render: (c) => (
+        <div>
+          {c.otherFees && <p className="mb-2">{fmt(c.otherFees)}</p>}
+          <p className="text-[0.7rem] font-semibold uppercase tracking-wide text-[#85611C]">
+            ABHA charges (as applicable)
+          </p>
+          <ul className="mt-1 space-y-0.5 text-xs text-gray-500">
+            {ABHA_SERVICE_CHARGES.map((charge) => (
+              <li key={charge}>• {charge}</li>
+            ))}
+          </ul>
+        </div>
+      ),
+    },
     { label: 'Notes', render: (c) => c.notes || '—' },
   ];
 
@@ -133,19 +154,14 @@ export default function ComparisonView() {
               <th className="sticky left-0 z-10 bg-white px-4 py-4" />
               {selected.map((c) => (
                 <td key={courseId(c)} className="border-l border-gray-200 px-4 py-4 align-top">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      openEnquiry({
-                        stream: STREAM_LABELS[c.stream],
-                        university: c.university,
-                        course: c.name,
-                      })
-                    }
-                    className="w-full rounded-xl bg-gradient-to-r from-primary-gold to-gold-400 px-4 py-2.5 text-sm font-bold text-primary-navy transition-transform hover:-translate-y-0.5"
+                  <a
+                    href={whatsappHref(c)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
                   >
-                    Book Counselling
-                  </button>
+                    <MessageCircle size={16} /> Book Counselling
+                  </a>
                 </td>
               ))}
             </tr>

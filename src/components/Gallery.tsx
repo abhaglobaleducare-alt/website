@@ -159,6 +159,16 @@ type Lightbox =
   | { type: 'image'; src: string; label: string }
   | { type: 'video'; videoId: string; isShort: boolean; label: string };
 
+/* ── Educate Yourself — informative video per course ──────────── */
+const courseVideos: { label: string; videoId: string; note: string }[] = [
+  { label: 'Medicine — MBBS / MD', videoId: 'IDCKRjILCRk', note: 'India MBBS vs Georgia MBBS — an honest side-by-side comparison.' },
+  { label: 'Dentistry (DMD)', videoId: 'sSleJPFLCGs', note: 'A warm introduction to studying abroad with ABHA. Dentistry-specific video coming soon.' },
+  { label: 'Nursing & Health Sciences', videoId: 'sSleJPFLCGs', note: 'A warm introduction to studying abroad with ABHA. Nursing video coming soon.' },
+  { label: 'Business & Management', videoId: 'sSleJPFLCGs', note: 'A warm introduction to studying abroad with ABHA. Business video coming soon.' },
+  { label: 'IT, Data Science & AI', videoId: 'sSleJPFLCGs', note: 'A warm introduction to studying abroad with ABHA. IT video coming soon.' },
+  { label: 'Masters, MBA & PhD', videoId: 'sSleJPFLCGs', note: 'A warm introduction to studying abroad with ABHA. Postgraduate video coming soon.' },
+];
+
 /* ── Star rating ─────────────────────────────────────────────── */
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -180,6 +190,8 @@ function StarRating({ rating }: { rating: number }) {
 export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [lightbox, setLightbox] = useState<Lightbox | null>(null);
+  const [videoIdx, setVideoIdx] = useState(0);
+  const activeVideo = courseVideos[videoIdx];
 
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
@@ -199,7 +211,7 @@ export default function Gallery() {
       {/* ══════════════════════════════════════
           HERO
       ══════════════════════════════════════ */}
-      <section className="relative bg-[#0B1A35] py-16 sm:py-20 lg:py-28 px-5 sm:px-10 overflow-hidden">
+      <section className="relative bg-[#0B1A35] py-10 sm:py-14 lg:py-20 px-5 sm:px-10 overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
@@ -358,6 +370,79 @@ export default function Gallery() {
             </a>{' '}
             for daily updates.
           </motion.p>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          EDUCATE YOURSELF — COURSE VIDEOS
+      ══════════════════════════════════════ */}
+      <section id="educate-yourself" className="bg-[#0B1A35] py-16 sm:py-20 px-4 sm:px-8">
+        <div className="max-w-[860px] mx-auto text-center">
+          <motion.span
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block text-[#C6962E] font-semibold text-sm uppercase tracking-[0.2em] mb-3"
+          >
+            Educate Yourself
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="font-playfair text-3xl sm:text-4xl text-white mb-4"
+          >
+            Watch by <span className="text-[#C6962E]">Course</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-white/70 max-w-xl mx-auto mb-8"
+          >
+            Choose your course of interest to watch a short, informative video from ABHA.
+          </motion.p>
+
+          {/* Course selector */}
+          <div className="mx-auto mb-6 max-w-sm text-left">
+            <label htmlFor="course-video-select" className="mb-1.5 block text-sm font-medium text-white/80">
+              Select your course
+            </label>
+            <select
+              id="course-video-select"
+              value={videoIdx}
+              onChange={(e) => setVideoIdx(Number(e.target.value))}
+              className="w-full appearance-none rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none transition-colors focus:border-[#C6962E]"
+            >
+              {courseVideos.map((cv, i) => (
+                <option key={cv.label} value={i} className="text-[#0B1A35]">
+                  {cv.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Video player */}
+          <div className="relative mx-auto aspect-video w-full max-w-[720px] overflow-hidden rounded-2xl border border-white/10 bg-black shadow-2xl">
+            <iframe
+              key={activeVideo.videoId + videoIdx}
+              src={`https://www.youtube.com/embed/${activeVideo.videoId}?rel=0&playsinline=1`}
+              title={activeVideo.label}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0"
+            />
+          </div>
+          <p className="mt-4 text-sm text-white/60">{activeVideo.note}</p>
+
+          <a
+            href="/educate"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#C6962E] to-[#DFB761] px-7 py-3 text-sm font-bold text-[#0B1A35] transition-transform duration-300 hover:-translate-y-0.5"
+          >
+            Read the full MBBS abroad guide →
+          </a>
         </div>
       </section>
 

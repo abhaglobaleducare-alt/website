@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LeadGate from '@/components/LeadGate';
+import { COURSE_OPTIONS } from '@/data/streams';
 import {
   MapPin,
   Phone,
@@ -66,6 +67,7 @@ export default function Contact() {
       phone: formData.get('phone') as string,
       message: formData.get('message') as string,
       preferredCountry: formData.get('country') as string,
+      course: formData.get('course') as string,
       source: 'contact-page-form',
     };
 
@@ -112,7 +114,7 @@ export default function Contact() {
             transition={{ delay: 0.05 }}
             className="font-playfair text-3xl sm:text-4xl lg:text-[2.75rem] text-[#0B1A35] mb-5 leading-tight"
           >
-            Start Your <span className="text-[#C6962E]">MBBS Journey</span> Today
+            Start Your <span className="text-[#C6962E]">Abroad Journey</span> Today
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -163,17 +165,36 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">Preferred Country</label>
-                <select
-                  name="country"
-                  disabled={formState === 'loading'}
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.9rem] bg-gray-50/50 text-[#0B1A35] focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 appearance-none disabled:opacity-50"
-                >
-                  <option value="">Not sure yet</option>
-                  <option value="georgia">Georgia</option>
-                  <option value="bosnia">Bosnia</option>
-                </select>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">Field of Interest</label>
+                  <select
+                    name="course"
+                    disabled={formState === 'loading'}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.9rem] bg-gray-50/50 text-[#0B1A35] focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 appearance-none disabled:opacity-50"
+                  >
+                    <option value="">Select a course</option>
+                    {COURSE_OPTIONS.map((c) => (
+                      <option key={c.value} value={c.value}>
+                        {c.label}
+                      </option>
+                    ))}
+                    <option value="Not sure yet">Not sure yet</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">Preferred Country</label>
+                  <select
+                    name="country"
+                    disabled={formState === 'loading'}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.9rem] bg-gray-50/50 text-[#0B1A35] focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 appearance-none disabled:opacity-50"
+                  >
+                    <option value="">Not sure yet</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="bosnia">Bosnia</option>
+                    <option value="timor-leste">Timor-Leste</option>
+                  </select>
+                </div>
               </div>
 
               <div>

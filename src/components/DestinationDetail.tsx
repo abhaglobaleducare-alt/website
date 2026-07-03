@@ -2,14 +2,42 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { GraduationCap, CheckCircle2, ArrowRight, Info, Phone } from 'lucide-react';
+import {
+  CheckCircle2,
+  ArrowRight,
+  Info,
+  Phone,
+  Landmark,
+  Building2,
+  CloudSun,
+  Users,
+  MapPin,
+} from 'lucide-react';
 import type { DestinationDetailData } from '@/data/destinations';
+
+function initials(name: string): string {
+  return name
+    .replace(/\(.*?\)/g, '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('')
+    .toUpperCase();
+}
+
+const TILE_GRADIENTS = [
+  'from-[#0B1A35] to-[#1B7C9E]',
+  'from-[#152d54] to-[#C6962E]',
+  'from-[#1B7C9E] to-[#0B1A35]',
+  'from-[#C6962E] to-[#85611C]',
+];
 
 export default function DestinationDetail({ data }: { data: DestinationDetailData }) {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[#0B1A35] px-4 py-20 sm:px-8 sm:py-24">
+      <section className="relative overflow-hidden bg-[#0B1A35] px-4 py-12 sm:px-8 sm:py-16">
         <div
           className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-20 blur-3xl"
           style={{ background: 'radial-gradient(circle, #C6962E 0%, transparent 70%)' }}
@@ -48,6 +76,49 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
         </div>
       </section>
 
+      {/* Visual gallery — life in the destination */}
+      <section className="bg-white px-4 pb-16 sm:px-8">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mb-8 text-center">
+            <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-[#C6962E]">
+              A Glimpse
+            </span>
+            <h2 className="font-playfair text-2xl leading-tight text-[#0B1A35] sm:text-3xl">
+              Life in {data.name}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {[
+              { icon: Landmark, label: 'Landmarks & Monuments', sub: 'Historic architecture' },
+              { icon: Building2, label: 'City Life', sub: 'Safe, student-friendly streets' },
+              { icon: CloudSun, label: 'Climate & Weather', sub: 'Distinct European seasons' },
+              { icon: Users, label: 'Student Community', sub: 'Growing Indian presence' },
+            ].map((tile, i) => (
+              <motion.div
+                key={tile.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className={`relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl bg-gradient-to-br ${TILE_GRADIENTS[i]} p-5 shadow-card`}
+              >
+                <div
+                  className="absolute inset-0 opacity-[0.12]"
+                  style={{
+                    backgroundImage:
+                      'radial-gradient(circle at 20% 20%, #fff 1px, transparent 1px)',
+                    backgroundSize: '22px 22px',
+                  }}
+                />
+                <tile.icon size={30} className="relative mb-3 text-white/90" />
+                <h3 className="relative text-sm font-bold leading-snug text-white">{tile.label}</h3>
+                <p className="relative mt-0.5 text-xs text-white/70">{tile.sub}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Universities */}
       <section className="bg-[#F8F9FA] px-4 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-[1100px]">
@@ -59,18 +130,31 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
               Where ABHA Assists Admissions
             </h2>
           </div>
-          <div className="flex flex-wrap justify-center gap-3">
-            {data.universities.map((u) => (
-              <span
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {data.universities.map((u, i) => (
+              <motion.div
                 key={u}
-                className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-[#0B1A35] shadow-card"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 3) * 0.06 }}
+                className="flex items-center gap-4 rounded-2xl border border-gray-100 bg-white p-5 shadow-card transition-shadow hover:shadow-card-hover"
               >
-                <GraduationCap size={16} className="text-[#C6962E]" />
-                {u}
-              </span>
+                <div
+                  className={`flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${TILE_GRADIENTS[i % TILE_GRADIENTS.length]} font-playfair text-lg font-bold text-white`}
+                >
+                  {initials(u)}
+                </div>
+                <div className="min-w-0">
+                  <h3 className="font-semibold leading-snug text-[#0B1A35]">{u}</h3>
+                  <p className="mt-1 flex items-center gap-1.5 text-xs text-gray-500">
+                    <MapPin size={12} className="text-[#C6962E]" /> {data.name}
+                  </p>
+                </div>
+              </motion.div>
             ))}
           </div>
-          <p className="mx-auto mt-6 max-w-[720px] text-center text-sm leading-relaxed text-gray-500">
+          <p className="mx-auto mt-7 max-w-[720px] text-center text-sm leading-relaxed text-gray-500">
             {data.universitiesNote}
           </p>
         </div>
