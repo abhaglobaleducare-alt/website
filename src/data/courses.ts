@@ -157,7 +157,7 @@ export const COURSES: Course[] = [
       part1: '$4,600 (Sem 1)',
       part2: '$1,600 (Sem 2)',
     },
-    otherFees: 'Lab $250 + Medical Kit $200 + Visa & conversion $1,000 (full course)',
+    otherFees: 'Lab $250',
     source: 'NVF fee structure',
   },
 
