@@ -257,6 +257,8 @@ export async function POST(request: NextRequest) {
       source_platform: request.headers.get("host") || "unknown",
       // The form's existing discriminator (contact-page-form, etc.).
       trigger_action: data.source || undefined,
+      // Top-level city → the CRM auto-routes the lead to that district's office.
+      city: data.city || undefined,
       extra_details: extraDetails,
     };
 

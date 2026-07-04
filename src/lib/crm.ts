@@ -16,7 +16,9 @@ export interface LeadPayload {
   source_platform: string;
   /** The form's existing `source` discriminator, e.g. "contact-page-form". */
   trigger_action?: string;
-  /** Any remaining form fields (city, course, neetScore, message, …). */
+  /** Student's city/district — drives the CRM's district → office auto-routing. */
+  city?: string;
+  /** Any remaining form fields (course, neetScore, message, …). */
   extra_details?: Record<string, unknown>;
 }
 
@@ -53,6 +55,7 @@ export async function sendLeadToCRM(lead: LeadPayload): Promise<void> {
         phone: lead.phone,
         source_platform: lead.source_platform,
         trigger_action: lead.trigger_action,
+        city: lead.city,
         extra_details: lead.extra_details,
       }),
       signal: controller.signal,
