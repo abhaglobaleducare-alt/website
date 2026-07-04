@@ -20,6 +20,7 @@ const contactSchema = z.object({
     .max(15, "Phone number must be less than 15 digits")
     .regex(/^[\d\s\-+()]+$/, "Please enter a valid phone number"),
   city: z.string().max(100).optional().or(z.literal("")),
+  district: z.string().max(100).optional().or(z.literal("")),
   course: z.string().max(100).optional().or(z.literal("")),
   neetStatus: z.string().max(100).optional().or(z.literal("")),
   neetScore: z.string().max(20).optional().or(z.literal("")),
@@ -57,6 +58,7 @@ function buildAdminEmail(data: ContactFormData): string {
     { label: "Stream", value: data.stream },
     { label: "University", value: data.university },
     { label: "City", value: data.city },
+    { label: "District", value: data.district },
     { label: "Course", value: data.course },
     { label: "NEET Status", value: data.neetStatus },
     { label: "NEET Score", value: data.neetScore },
@@ -241,6 +243,7 @@ export async function POST(request: NextRequest) {
     const extraDetails: Record<string, string> = {};
     for (const [key, value] of Object.entries({
       city: data.city,
+      district: data.district,
       course: data.course,
       neetStatus: data.neetStatus,
       neetScore: data.neetScore,
@@ -257,8 +260,9 @@ export async function POST(request: NextRequest) {
       source_platform: request.headers.get("host") || "unknown",
       // The form's existing discriminator (contact-page-form, etc.).
       trigger_action: data.source || undefined,
-      // Top-level city → the CRM auto-routes the lead to that district's office.
-      city: data.city || undefined,
+      // Top-level routing value → the CRM auto-assigns the lead to the office for
+      // that district. Prefer the explicit district; fall back to city.
+      city: data.district || data.city || undefined,
       extra_details: extraDetails,
     };
 

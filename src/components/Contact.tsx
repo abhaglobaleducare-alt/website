@@ -65,8 +65,10 @@ export default function Contact() {
     const payload = {
       name: formData.get('name') as string,
       phone: formData.get('phone') as string,
+      city: formData.get('city') as string,
+      district: formData.get('district') as string,
+      neetStatus: formData.get('neetStatus') as string,
       message: formData.get('message') as string,
-      preferredCountry: formData.get('country') as string,
       course: formData.get('course') as string,
       source: 'contact-page-form',
     };
@@ -167,6 +169,32 @@ export default function Contact() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
+                  <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    placeholder="e.g. Kolhapur"
+                    disabled={formState === 'loading'}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.9rem] bg-gray-50/50 text-[#0B1A35] placeholder:text-gray-400 focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 disabled:opacity-50"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">District</label>
+                  <input
+                    type="text"
+                    name="district"
+                    placeholder="e.g. Kolhapur / Palghar"
+                    disabled={formState === 'loading'}
+                    className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.9rem] bg-gray-50/50 text-[#0B1A35] placeholder:text-gray-400 focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 disabled:opacity-50"
+                  />
+                </div>
+              </div>
+              <p className="-mt-2 text-xs text-gray-400">
+                Your district helps us route your enquiry to your nearest ABHA office.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
                   <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">Field of Interest</label>
                   <select
                     name="course"
@@ -183,16 +211,17 @@ export default function Contact() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">Preferred Country</label>
+                  <label className="block text-[#0B1A35] font-medium text-sm mb-1.5">NEET Status</label>
                   <select
-                    name="country"
+                    name="neetStatus"
                     disabled={formState === 'loading'}
                     className="w-full px-4 py-3 border border-gray-200 rounded-xl text-[0.9rem] bg-gray-50/50 text-[#0B1A35] focus:outline-none focus:border-[#C6962E] focus:ring-2 focus:ring-[#C6962E]/10 transition-all duration-200 appearance-none disabled:opacity-50"
                   >
-                    <option value="">Not sure yet</option>
-                    <option value="georgia">Georgia</option>
-                    <option value="bosnia">Bosnia</option>
-                    <option value="timor-leste">Timor-Leste</option>
+                    <option value="">Select your NEET status (optional)</option>
+                    <option value="appeared">Appeared in NEET 2026</option>
+                    <option value="preparing">Preparing for NEET 2026</option>
+                    <option value="qualified">NEET Qualified (Previous year)</option>
+                    <option value="not-applicable">Not applicable / Non-medical course</option>
                   </select>
                 </div>
               </div>
@@ -233,7 +262,7 @@ export default function Contact() {
                 {formState === 'loading' ? (
                   <><Loader2 size={18} className="animate-spin" /> Sending…</>
                 ) : (
-                  <>Send Enquiry <ArrowRight size={16} /></>
+                  <>Book ONLINE / OFFLINE FREE Counselling <ArrowRight size={16} /></>
                 )}
               </button>
             </form>
