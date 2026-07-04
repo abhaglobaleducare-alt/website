@@ -3,6 +3,11 @@ import Link from "next/link";
 const quickLinks = [
   { label: "MBBS / MD Courses", href: "/courses/medicine" },
   { label: "Clinical Workshops", href: "/courses/medicine#clinical-workshops" },
+  {
+    label: "MBBS Coaching",
+    href: "https://mbbsportal.abhaglobaleducare.com",
+    external: true,
+  },
   { label: "Destinations", href: "/destinations" },
   { label: "Our Services", href: "/services" },
   { label: "Gallery & Reviews", href: "/gallery" },
@@ -47,16 +52,30 @@ export default function Footer() {
               Quick Links
             </h3>
             <ul className="mt-4 space-y-2 text-sm">
-              {quickLinks.map(({ label, href }) => (
-                <li key={label}>
-                  <Link
-                    href={href}
-                    className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
+              {quickLinks.map(({ label, href, external }) =>
+                external ? (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-semibold text-[#C6962E] transition-colors duration-200 hover:text-white"
+                    >
+                      {label}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ) : (
+                  <li key={label}>
+                    <Link
+                      href={href}
+                      className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
 

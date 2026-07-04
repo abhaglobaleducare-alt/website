@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 import { STREAMS } from '@/data/streams';
 
 type NavChild = { label: string; href: string; external?: boolean };
-type NavItem = { label: string; href?: string; children?: NavChild[] };
+type NavItem = { label: string; href?: string; children?: NavChild[]; external?: boolean };
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
@@ -34,6 +34,11 @@ const navItems: NavItem[] = [
     ],
   },
   { label: 'Services', href: '/services' },
+  {
+    label: 'MBBS Coaching',
+    href: 'https://mbbsportal.abhaglobaleducare.com',
+    external: true,
+  },
   { label: 'Gallery & Reviews', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -229,6 +234,20 @@ export default function Header() {
                   onClose={() => setOpenDropdown(null)}
                   pathname={pathname}
                 />
+              ) : item.external ? (
+                <li key={item.href}>
+                  <a
+                    href={item.href!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 rounded-lg border border-primary-gold/40 bg-primary-gold/10 px-3 py-1.5 text-[1.05rem] font-bold tracking-tight text-primary-navy transition-all duration-300 hover:border-primary-gold hover:bg-primary-gold/20 hover:text-primary-gold"
+                  >
+                    {item.label}
+                    <span aria-hidden="true" className="text-primary-gold">
+                      ↗
+                    </span>
+                  </a>
+                </li>
               ) : (
                 <li key={item.href}>
                   <Link
@@ -340,6 +359,20 @@ export default function Header() {
                         )}
                       </AnimatePresence>
                     </div>
+                  ) : item.external ? (
+                    <a
+                      key={item.href}
+                      href={item.href!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-1 rounded-xl border border-primary-gold/40 bg-primary-gold/10 py-3 px-4 text-base font-bold text-primary-navy transition-all duration-200 hover:bg-primary-gold/20 hover:text-primary-gold"
+                    >
+                      {item.label}
+                      <span aria-hidden="true" className="text-primary-gold">
+                        ↗
+                      </span>
+                    </a>
                   ) : (
                     <Link
                       key={item.href}
