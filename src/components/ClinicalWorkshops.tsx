@@ -148,8 +148,92 @@ export default function ClinicalWorkshops() {
         </div>
       </section>
 
-      {/* Why + Praxis Method */}
+      {/* The science behind hands-on training */}
       <section className="bg-white px-4 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mb-10 text-center">
+            <Kicker>The Science Behind It</Kicker>
+            <h2 className="font-playfair text-3xl leading-tight text-[#0B1A35] sm:text-4xl">
+              Why Hands-On Specimens Matter
+            </h2>
+            <p className="mx-auto mt-4 max-w-[760px] leading-relaxed text-gray-600">
+              Medical education abroad has moved strongly toward simulation. Understanding{' '}
+              <span className="font-semibold text-[#0B1A35]">why</span> makes it clear how ABHA gives
+              students a realistic, hands-on edge that models alone cannot offer.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            <div className="rounded-2xl border border-gray-100 bg-[#F8F9FA] p-6 shadow-card">
+              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#1B7C9E]/12 text-[#1B7C9E]">
+                <Brain size={22} />
+              </div>
+              <h3 className="mb-2 font-bold text-[#0B1A35]">Simulation-First Anatomy</h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                Across many European universities, anatomy is taught largely through{' '}
+                <span className="font-semibold">simulation-based medical education</span> — high-fidelity
+                manikins, synthetic (&ldquo;dummy&rdquo;) bodies, plastinated and 3-D anatomical models,
+                and virtual anatomy — rather than routine dissection of human cadavers.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-gray-100 bg-[#F8F9FA] p-6 shadow-card">
+              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#C6962E]/15 text-[#C6962E]">
+                <ShieldCheck size={22} />
+              </div>
+              <h3 className="mb-2 font-bold text-[#0B1A35]">Why Human Cadavers Are Limited</h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                Human cadavers may be used only through strictly regulated, consent-based{' '}
+                <span className="font-semibold">body-donation (bequeathal) programmes</span>. Limited
+                donor availability, rigorous biosafety and embalming requirements, and ethical, cultural
+                and religious considerations lead universities to standardise on safe, reproducible
+                synthetic models.
+              </p>
+            </div>
+
+            <div className="rounded-2xl border border-gray-100 bg-[#F8F9FA] p-6 shadow-card">
+              <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#0B1A35]/8 text-[#0B1A35]">
+                <Microscope size={22} />
+              </div>
+              <h3 className="mb-2 font-bold text-[#0B1A35]">Realism Through Comparative Anatomy</h3>
+              <p className="text-sm leading-relaxed text-gray-600">
+                Synthetic models can lack the true{' '}
+                <span className="font-semibold">tactile (haptic)</span> feel of real tissue. Using{' '}
+                <span className="font-semibold">comparative anatomy</span>, ABHA trains students on
+                ethically sourced <span className="font-semibold">ex-vivo animal organ specimens</span> —
+                pig heart, sheep brain, goat kidney, goat eye, sheep lungs and pig liver — which closely
+                resemble the gross structure and tissue characteristics of their human counterparts.
+              </p>
+            </div>
+          </div>
+
+          {/* Procedural skills + parents note */}
+          <div className="mt-8 rounded-2xl border border-[#C6962E]/25 bg-[#C6962E]/5 p-6 sm:p-8">
+            <div className="flex items-start gap-3">
+              <Activity size={22} className="mt-0.5 flex-shrink-0 text-[#C6962E]" />
+              <p className="text-sm leading-relaxed text-gray-700">
+                <span className="font-semibold text-[#0B1A35]">Real procedural skills, safely learned. </span>
+                Beyond anatomy, the workshops develop core{' '}
+                <span className="font-semibold">psychomotor and procedural skills</span> under expert
+                faculty supervision — including{' '}
+                <span className="font-semibold">injection &amp; venipuncture technique, surgical incision
+                (cutting) and suturing (stitching)</span>, along with knot-tying and aseptic (sterile)
+                handling. Practising these on task-trainers and animal tissue builds confidence and
+                competence before real clinical exposure, and supports FMGE / NExT preparation.
+              </p>
+            </div>
+            <p className="mt-4 border-t border-[#C6962E]/20 pt-4 text-sm leading-relaxed text-gray-600">
+              <span className="font-semibold text-[#0B1A35]">For parents:</span> your child does not learn
+              medicine from textbooks alone. They gain supervised, hands-on experience that bridges
+              classroom theory and real clinical practice — delivered safely, ethically and
+              scientifically.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Why + Praxis Method */}
+      <section className="bg-[#F8F9FA] px-4 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-[1100px] grid-cols-1 gap-8 lg:grid-cols-2">
           <div className="rounded-2xl border border-gray-100 bg-[#F8F9FA] p-8 shadow-card">
             <h2 className="mb-6 flex items-center gap-3 font-playfair text-2xl font-bold text-[#0B1A35]">
@@ -187,7 +271,7 @@ export default function ClinicalWorkshops() {
       </section>
 
       {/* Workshop Components */}
-      <section className="bg-[#F8F9FA] px-4 py-16 sm:px-8 sm:py-20">
+      <section className="bg-white px-4 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-10 text-center">
             <Kicker>What&apos;s Inside</Kicker>
@@ -219,7 +303,7 @@ export default function ClinicalWorkshops() {
       </section>
 
       {/* Organ Specimens */}
-      <section className="bg-white px-4 py-16 sm:px-8 sm:py-20">
+      <section className="bg-[#F8F9FA] px-4 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-10 text-center">
             <Kicker>Training Programs · Organ Specimens</Kicker>
