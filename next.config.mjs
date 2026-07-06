@@ -58,6 +58,12 @@ const nextConfig = {
       destination: '/courses/business-management',
       permanent: true,
     },
+    {
+      // Services merged into the Destinations page.
+      source: '/services',
+      destination: '/destinations#services',
+      permanent: true,
+    },
   ],
   poweredByHeader: false,
   compress: true,

@@ -33,7 +33,6 @@ const navItems: NavItem[] = [
       { label: 'NEET Portal', href: 'https://neet.abhaglobaleducare.com', external: true },
     ],
   },
-  { label: 'Services', href: '/services' },
   {
     label: 'MBBS Coaching',
     href: 'https://mbbsportal.abhaglobaleducare.com',

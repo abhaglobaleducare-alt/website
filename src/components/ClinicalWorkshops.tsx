@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
   Microscope,
@@ -90,6 +91,9 @@ const outcomes = [
 
 const MBBS_PORTAL = 'https://mbbsportal.abhaglobaleducare.com';
 
+const heroPhotos = ['image-28', 'image-3', 'image-6'];
+const galleryPhotos = ['image-25', 'image-27', 'image-40', 'image-29'];
+
 function Kicker({ children }: { children: React.ReactNode }) {
   return (
     <span className="mb-3 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-[#C6962E]">
@@ -121,6 +125,26 @@ export default function ClinicalWorkshops() {
             “Practice. Master. Excel.”
           </p>
           <p className="mt-1 text-sm text-white/50">ABHA × Praxis | Powered Clinical Training</p>
+        </div>
+
+        {/* Hero photo strip */}
+        <div className="relative mx-auto mt-10 grid max-w-[1100px] grid-cols-3 gap-3 sm:gap-4">
+          {heroPhotos.map((img, i) => (
+            <div
+              key={img}
+              className={`relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 ${
+                i === 1 ? 'block' : 'hidden sm:block'
+              }`}
+            >
+              <Image
+                src={`/images/workshops/${img}.jpg`}
+                alt="ABHA hands-on clinical workshop"
+                fill
+                sizes="(max-width: 640px) 100vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
       </section>
 
@@ -278,6 +302,38 @@ export default function ClinicalWorkshops() {
               </a>
               <span className="text-sm text-white/40">Owned &amp; operated by ABHA</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Workshop Gallery */}
+      <section className="bg-white px-4 py-16 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mb-10 text-center">
+            <Kicker>From Our Labs</Kicker>
+            <h2 className="font-playfair text-3xl leading-tight text-[#0B1A35] sm:text-4xl">
+              Workshop Gallery
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {galleryPhotos.map((img, i) => (
+              <motion.div
+                key={img}
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-gray-100 shadow-card"
+              >
+                <Image
+                  src={`/images/workshops/${img}.jpg`}
+                  alt="ABHA hands-on clinical workshop"
+                  fill
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

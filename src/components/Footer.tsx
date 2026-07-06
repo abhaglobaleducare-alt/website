@@ -2,14 +2,14 @@ import Link from "next/link";
 
 const quickLinks = [
   { label: "MBBS / MD Courses", href: "/courses/medicine" },
-  { label: "Clinical Workshops", href: "/courses/medicine#clinical-workshops" },
+  { label: "Clinical Workshops", href: "/clinical-workshops" },
   {
     label: "MBBS Coaching",
     href: "https://mbbsportal.abhaglobaleducare.com",
     external: true,
   },
   { label: "Destinations", href: "/destinations" },
-  { label: "Our Services", href: "/services" },
+  { label: "Our Services", href: "/destinations#services" },
   { label: "Gallery & Reviews", href: "/gallery" },
   { label: "Contact Us", href: "/contact" },
 ];
