@@ -11,7 +11,9 @@ export const SITE_CONFIG = {
   url: 'https://abhaglobaleducare.com',
   email: 'connect@abhaglobaleducare.com',
   logo: '/images/logo.png',
-  ogImage: '/images/og-image.jpg',
+  // Dynamic social-preview image (see src/app/og-image/route.tsx). Replaces the
+  // old static /images/og-image.jpg that had outdated countries baked in.
+  ogImage: '/og-image',
 };
 
 export const COMPANY_INFO = {
