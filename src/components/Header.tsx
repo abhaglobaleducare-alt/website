@@ -26,6 +26,7 @@ const navItems: NavItem[] = [
       { label: 'Timor-Leste', href: '/destinations/timor-leste' },
     ],
   },
+  { label: 'Clinical Workshops', href: '/clinical-workshops' },
   {
     label: 'NEET Zone',
     children: [
@@ -65,7 +66,7 @@ function DesktopDropdown({
         aria-expanded={isOpen}
         onClick={() => (isOpen ? onClose() : onOpen())}
         className={cn(
-          'flex items-center gap-1 text-[1.05rem] font-bold tracking-tight text-primary-navy transition-colors duration-300 hover:text-primary-gold',
+          'flex items-center gap-1 text-[1rem] font-bold tracking-tight text-primary-navy transition-colors duration-300 hover:text-primary-gold',
           active && 'text-primary-gold',
         )}
       >
@@ -222,7 +223,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <ul className="hidden lg:flex items-center gap-5 xl:gap-6">
+          <ul className="hidden xl:flex items-center gap-4">
             {navItems.map((item) =>
               item.children ? (
                 <DesktopDropdown
@@ -239,7 +240,7 @@ export default function Header() {
                     href={item.href!}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded-lg border border-primary-gold/40 bg-primary-gold/10 px-3 py-1.5 text-[1.05rem] font-bold tracking-tight text-primary-navy transition-all duration-300 hover:border-primary-gold hover:bg-primary-gold/20 hover:text-primary-gold"
+                    className="inline-flex items-center gap-1 rounded-lg border border-primary-gold/40 bg-primary-gold/10 px-3 py-1.5 text-[1rem] font-bold tracking-tight text-primary-navy transition-all duration-300 hover:border-primary-gold hover:bg-primary-gold/20 hover:text-primary-gold"
                   >
                     {item.label}
                     <span aria-hidden="true" className="text-primary-gold">
@@ -252,7 +253,7 @@ export default function Header() {
                   <Link
                     href={item.href!}
                     className={cn(
-                      'relative text-[1.05rem] font-bold tracking-tight text-primary-navy transition-colors duration-300 hover:text-primary-gold group',
+                      'relative text-[1rem] font-bold tracking-tight text-primary-navy transition-colors duration-300 hover:text-primary-gold group',
                       pathname === item.href && 'text-primary-gold',
                     )}
                   >
@@ -280,7 +281,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-primary-navy hover:text-primary-gold transition-colors"
+            className="xl:hidden p-2 text-primary-navy hover:text-primary-gold transition-colors"
             aria-label="Toggle mobile menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -296,7 +297,7 @@ export default function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="lg:hidden overflow-hidden bg-white border-t border-gray-100"
+              className="xl:hidden overflow-hidden bg-white border-t border-gray-100"
             >
               <div className="px-6 py-4 space-y-1 max-h-[70vh] overflow-y-auto custom-scrollbar">
                 {navItems.map((item) =>
