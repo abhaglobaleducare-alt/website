@@ -112,6 +112,14 @@ export default function CourseStreamContent({ stream }: { stream: StreamSlug }) 
         <div className="mx-auto max-w-[1500px]">
           <SectionHeading kicker="Verified Fees" title="Course & Fee Chart" />
           <CourseFeeTable courses={courses} />
+          {stream === 'medicine' && (
+            <p className="mx-auto mt-4 max-w-[1100px] text-xs leading-relaxed text-gray-500">
+              <span className="font-semibold text-[#0B1A35]">Accommodation charges:</span> approx
+              USD 350/month — subject to change based on room-sharing preference, availability and
+              prevailing rates at the time of admission. ** Scholarship pricing is applied to the
+              per-semester fee for eligible ABHA students.
+            </p>
+          )}
         </div>
       </section>
 

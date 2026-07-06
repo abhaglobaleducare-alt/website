@@ -47,9 +47,9 @@ const nextConfig = {
   ],
   redirects: async () => [
     {
-      // Clinical Workshops migrated into the Medicine course page.
+      // Old Clinical Workshops URL → the dedicated Clinical Workshops page.
       source: '/praxis',
-      destination: '/courses/medicine#clinical-workshops',
+      destination: '/clinical-workshops',
       permanent: true,
     },
     {

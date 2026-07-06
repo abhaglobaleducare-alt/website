@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Destinations from '@/components/Destinations';
+import Services from '@/components/Services';
 import Footer from '@/components/Footer';
 
 export const metadata = {
@@ -19,6 +20,7 @@ export default function DestinationsPage() {
       <Header />
       <main id="main-content">
         <Destinations />
+        <Services />
       </main>
       <Footer />
     </>

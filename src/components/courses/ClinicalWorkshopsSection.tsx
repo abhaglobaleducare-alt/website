@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
   Microscope,
@@ -117,14 +118,12 @@ export default function ClinicalWorkshopsSection() {
             </ul>
           </div>
           <div className="flex flex-col items-start gap-3 lg:items-center">
-            <a
-              href="https://incredoc.com/demo/consultancy4.php"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/clinical-workshops"
               className="inline-flex items-center gap-2 rounded-xl bg-[#C6962E] px-7 py-3.5 text-base font-bold text-[#0B1A35] transition-all duration-300 hover:bg-[#d4a73a]"
             >
               Explore Clinical Workshops <ArrowRight size={18} />
-            </a>
+            </Link>
             <span className="text-sm text-white/40">Owned &amp; operated by ABHA</span>
           </div>
         </div>
