@@ -141,7 +141,7 @@ export default function AgestOfferBanner() {
             </a>
             </LeadGate>
             <p className="text-purple-200 text-xs text-center lg:text-left max-w-[15rem]">
-              Open to all 2026 NEET aspirants · No minimum score · Register by 15 July 2026
+              Open to all 2026 NEET aspirants · No minimum score · Register by 10 July 2026
             </p>
             <LeadGate action="know_agest" mode="sameTab">
             <Link

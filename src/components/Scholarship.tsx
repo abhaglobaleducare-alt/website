@@ -228,7 +228,7 @@ export default function Scholarship() {
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[#C6962E] animate-pulse" />
               ⏳ Last date to register:{' '}
-              <strong className="text-white">15 July 2026</strong>
+              <strong className="text-white">10 July 2026</strong>
             </span>
           </motion.div>
 
@@ -640,7 +640,7 @@ export default function Scholarship() {
                   {[
                     {
                       label: 'Registration Closes',
-                      value: '15 July 2026',
+                      value: '10 July 2026',
                       emoji: '⚠️',
                       accent: '#EF4444',
                     },
@@ -1392,7 +1392,7 @@ export default function Scholarship() {
             {[
               {
                 label: 'Last Date to Register',
-                date: '15 July 2026',
+                date: '10 July 2026',
                 year: '',
                 urgent: true,
                 emoji: '⚠️',
