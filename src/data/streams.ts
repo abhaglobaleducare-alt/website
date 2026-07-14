@@ -9,6 +9,7 @@ import {
   Briefcase,
   Cpu,
   GraduationCap,
+  Palette,
   type LucideIcon,
 } from 'lucide-react';
 import type { StreamSlug } from './courses';
@@ -170,6 +171,29 @@ export const STREAMS: StreamMeta[] = [
     seoTitle: "Master's, MBA & PhD Programmes in Georgia | ABHA Global Educare",
     seoDescription:
       "English-medium Bachelor's, Master's, MA, MS, MBA & PhD programmes across disciplines at IBSU and University of Georgia in Tbilisi. Verified fees.",
+  },
+  {
+    slug: 'humanities-design',
+    navLabel: 'Humanities, Design & Social Sciences',
+    cardTitle: 'Humanities, Design & Social Sciences',
+    title: 'Humanities, Design & Social Sciences',
+    valueProp:
+      'English-medium Architecture, Psychology & International Relations at Caucasus University, Tbilisi.',
+    icon: Palette,
+    // TODO Phase C: dedicated course-humanities-design.svg — reusing masters art for now.
+    image: '/images/destinations/course-masters-mba-phd.svg',
+    isMedical: false,
+    eligibility: [
+      '10+2 (Higher Secondary) from any stream for Bachelor programmes.',
+      'English proficiency (typically B1 for Bachelor) as assessed by the university at admission.',
+      'Valid passport for international admission and visa processing.',
+    ],
+    disclaimer:
+      'Universities are accredited by the Ministry of Education and Science of Georgia. These are internationally accredited European (ECTS-based) degrees; recognition for any specific job, licensing or further study depends on the requirements of the country or body concerned.',
+    accreditation: 'Accredited by the Ministry of Education and Science of Georgia',
+    seoTitle: 'Architecture, Psychology & International Relations in Georgia | ABHA Global Educare',
+    seoDescription:
+      'English-medium Bachelor programmes in Architecture, Psychology & International Relations at Caucasus University, Tbilisi. Verified tuition. ABHA guides your admission.',
   },
 ];
 

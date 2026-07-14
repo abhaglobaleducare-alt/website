@@ -233,4 +233,5 @@ export const STREAM_LABELS: Record<StreamSlug, string> = {
   'business-management': 'Business & Management',
   'it-data-science-ai': 'IT, Data Science & AI',
   'masters-phd': 'Masters, MBA & PhD',
+  'humanities-design': 'Humanities, Design & Social Sciences',
 };

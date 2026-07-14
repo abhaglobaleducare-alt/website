@@ -312,4 +312,45 @@ export const STREAM_EXTRAS: Record<StreamSlug, StreamExtra> = {
       ],
     },
   },
+
+  /* ── HUMANITIES, DESIGN & SOCIAL SCIENCES ─────────────────────── */
+  'humanities-design': {
+    why: {
+      kicker: 'Why Georgia',
+      title: 'Why Study Humanities & Design in',
+      titleAccent: 'Tbilisi',
+      cards: [
+        { icon: Globe2, title: '100% English-Medium', text: 'Architecture, Psychology and International Relations are taught fully in English at Caucasus University.' },
+        { icon: GraduationCap, title: 'European ECTS Credits', text: 'Degrees use the European ECTS system, with credits transferable across Europe.' },
+        { icon: FileCheck, title: 'No CUET-Style Exam', text: 'Admission is via documents plus an interview/English test — not a competitive entrance percentile.' },
+        { icon: Brain, title: 'Diverse Specializations', text: 'Design (Architecture), behavioural science (Psychology) and global affairs (International Relations).' },
+        { icon: Wallet, title: 'Lower Tuition', text: 'Verified year-wise fees, far lower than comparable degrees in Western Europe or the USA.' },
+        { icon: ShieldCheck, title: 'Safe, Student-Friendly Tbilisi', text: 'A welcoming capital city with a growing international student community.' },
+      ],
+    },
+    comparison: {
+      kicker: 'An Honest Comparison',
+      title: 'India vs Georgia — Duration & Path',
+      intro: 'Both routes lead to a valid degree. This is neutral information to help you decide what fits best.',
+      leftLabel: 'India (typical)',
+      rightLabel: 'Georgia (Tbilisi)',
+      rows: [
+        { path: 'Bachelor', left: '3–5 years (Architecture 5 yrs; Psychology/IR 3 yrs)', right: '4 years (Caucasus University)' },
+        { path: 'Admission basis', left: 'CUET / entrance percentile + cut-offs', right: '12th documents + interview + English proficiency' },
+        { path: 'Medium', left: 'English', right: 'English' },
+        { path: 'Recognition', left: 'UGC / council as applicable', right: 'Accredited by the Ministry of Education and Science of Georgia; recognition for a specific role depends on the requirements of that body' },
+      ],
+    },
+    faq: {
+      kicker: 'Questions & Answers',
+      title: 'Frequently Asked Questions',
+      items: [
+        { q: 'What is the eligibility?', a: '10+2 (Higher Secondary) from any stream for the Bachelor programmes. Final eligibility is confirmed by the university at admission.' },
+        { q: 'Are these degrees valid?', a: 'The programmes are offered by Caucasus University, accredited by the Ministry of Education and Science of Georgia, and are internationally accredited European (ECTS-based) degrees. Recognition for a specific job, licence or further study depends on the requirements of the country or body concerned.' },
+        { q: 'What English proficiency do I need?', a: 'Bachelor programmes generally require B1-level English, assessed through the university’s interview/English test.' },
+        { q: 'Which programmes are offered?', a: 'Architecture, Psychology and International Relations at Caucasus University — see the fee chart above for verified year-wise tuition.' },
+        { q: 'What are the fees?', a: 'Verified year-wise tuition is shown in the fee chart above. Hostel, food and living costs are extra unless stated.' },
+      ],
+    },
+  },
 };
