@@ -869,3 +869,41 @@ export function getUniversitiesByStream(
   }
   return Array.from(seen, ([university, location]) => ({ university, location }));
 }
+
+/** Country name from a "City, Country" location string (e.g. "Tbilisi, Georgia" → "Georgia"). */
+export function countryOf(location: string): string {
+  return location.split(',').pop()?.trim() ?? location.trim();
+}
+
+/**
+ * Distinct universities located in a country (derived from course data, not
+ * hardcoded), sorted alphabetically — used by the destination University Explorer.
+ */
+export function getUniversitiesByCountry(
+  country: string,
+): { university: string; location: string }[] {
+  const seen = new Map<string, string>();
+  for (const c of COURSES) {
+    if (countryOf(c.location) === country && !seen.has(c.university)) {
+      seen.set(c.university, c.location);
+    }
+  }
+  return Array.from(seen, ([university, location]) => ({ university, location })).sort((a, b) =>
+    a.university.localeCompare(b.university),
+  );
+}
+
+/** All courses offered by a given university (across every stream). */
+export function getCoursesByUniversity(university: string): Course[] {
+  return COURSES.filter((c) => c.university === university);
+}
+
+/** kebab-case slug for a university name — used for /images/universities/<slug>/ folders. */
+export function universitySlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[–—]/g, '-')
+    .replace(/[()]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}

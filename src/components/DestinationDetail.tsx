@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ArrowRight, Info, Phone, MapPin } from 'lucide-react';
 import type { DestinationDetailData } from '@/data/destinations';
+import UniversityExplorer from '@/components/UniversityExplorer';
 
 function initials(name: string): string {
   return name
@@ -71,6 +72,10 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
           ))}
         </div>
       </section>
+
+      {/* Interactive University Explorer — dropdown → gallery + per-course fee table.
+          Renders nothing for countries without universities in the course data. */}
+      <UniversityExplorer country={data.name} />
 
       {/* Visual gallery — life in the destination */}
       <section className="bg-white px-4 pb-16 sm:px-8">
