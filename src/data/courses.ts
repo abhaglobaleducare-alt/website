@@ -160,7 +160,7 @@ export const COURSES: Course[] = [
     feePerYearUSD: 5950,
     totalTuitionUSD: 35700,
     firstYearSchedule: { part1: '$2,975 / semester (12 semesters)', part2: '' },
-    notes: 'ABHA partner university · Maharashtra student majority',
+    notes: 'Maharashtra student majority',
     source: 'ABHA fee card',
   },
   {
@@ -176,7 +176,7 @@ export const COURSES: Course[] = [
     feePerYearAfterUSD: 3900,
     totalTuitionAfterUSD: 23400,
     firstYearSchedule: { part1: 'As per university schedule', part2: '' },
-    notes: 'ABHA partner university — scholarship price subject to eligibility',
+    notes: 'Scholarship price subject to eligibility',
     source: 'eastwest.edu.ge official',
   },
   {
@@ -220,7 +220,7 @@ export const COURSES: Course[] = [
   {
     stream: 'dentistry',
     name: 'Doctor of Dental Medicine (DMD)',
-    university: 'European University (ABHA Partner)',
+    university: 'European University',
     location: 'Tbilisi, Georgia',
     degree: 'Medical',
     durationYears: 5,
