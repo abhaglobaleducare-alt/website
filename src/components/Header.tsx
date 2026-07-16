@@ -8,6 +8,7 @@ import { Menu, X, Phone, Mail, ChevronDown, ArrowLeft, Home as HomeIcon } from '
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { STREAMS } from '@/data/streams';
+import AnnouncementBanner from '@/components/AnnouncementBanner';
 
 type NavChild = { label: string; href: string; external?: boolean };
 type NavItem = { label: string; href?: string; children?: NavChild[]; external?: boolean };
@@ -401,6 +402,9 @@ export default function Header() {
           )}
         </AnimatePresence>
       </header>
+
+      {/* Data-driven announcement banner — edit src/data/announcements.ts to publish */}
+      <AnnouncementBanner />
 
       {/* Back / Home bar — shown on every page except the homepage */}
       {pathname !== '/' && (

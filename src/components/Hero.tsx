@@ -21,29 +21,6 @@ export default function Hero() {
       <div className="absolute bottom-0 left-0 h-[35%] w-full bg-gradient-to-t from-[#0B1A35] to-transparent" />
 
       <div className="relative z-10 mx-auto max-w-[1000px] px-4 py-16 text-center sm:px-8 sm:py-20 lg:py-24">
-        {/* NEET 2026 Result announcement strip */}
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          <Link
-            href="/neet-zone/neet-2026-result-analysis"
-            className="group inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-[#C6962E]/50 bg-gradient-to-r from-[#C6962E]/15 to-[#C6962E]/5 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:border-[#C6962E] hover:bg-[#C6962E]/20"
-          >
-            <span className="rounded-full bg-[#C6962E] px-2 py-0.5 text-[0.65rem] font-black uppercase tracking-wider text-[#0B1A35]">
-              New
-            </span>
-            <span>
-              NEET 2026 निकाल जाहीर — तुमचा Score Analysis व पुढील मार्गदर्शन वाचा{' '}
-              <span className="inline-block text-[#C6962E] transition-transform duration-300 group-hover:translate-x-1">
-                →
-              </span>
-            </span>
-          </Link>
-        </motion.div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
