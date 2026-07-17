@@ -38,3 +38,7 @@ next-env.d.ts
 
 # Local Claude settings
 .claude/
+
+# Large source assets (videos/PDFs/zips + lead CSV) — not web-served; keep out
+# of git. Belongs in Supabase Storage / a CDN, or the MBBS portal repo.
+/public/images/university-info/
