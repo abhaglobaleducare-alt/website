@@ -28,20 +28,27 @@ const navItems: NavItem[] = [
       { label: 'Services', href: '/destinations#services' },
     ],
   },
-  { label: 'Clinical Workshops', href: '/clinical-workshops' },
+  {
+    label: 'Doctor Readiness',
+    children: [
+      { label: 'Clinical Workshops', href: '/clinical-workshops' },
+      { label: 'MBBS Coaching', href: 'https://mbbsportal.abhaglobaleducare.com', external: true },
+    ],
+  },
   {
     label: 'NEET Zone',
     children: [
-      { label: 'NEET 2026 Result Analysis 🆕', href: '/neet-zone/neet-2026-result-analysis' },
-      { label: 'NEET 2025 Validity — Abroad MBBS ✅', href: '/neet-zone/neet-2025-validity-abroad' },
       { label: 'NEET Excellence Pathway', href: '/scholarship' },
       { label: 'NEET Portal', href: 'https://neet.abhaglobaleducare.com', external: true },
     ],
   },
   {
-    label: 'MBBS Coaching',
-    href: 'https://mbbsportal.abhaglobaleducare.com',
-    external: true,
+    label: 'Current Updates',
+    children: [
+      { label: 'All Updates', href: '/current-updates' },
+      { label: 'NEET 2026 Result Analysis 🆕', href: '/neet-zone/neet-2026-result-analysis' },
+      { label: 'NEET 2025 Validity — Abroad MBBS ✅', href: '/neet-zone/neet-2025-validity-abroad' },
+    ],
   },
   { label: 'Gallery & Reviews', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
