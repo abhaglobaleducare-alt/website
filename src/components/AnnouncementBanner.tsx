@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowRight } from 'lucide-react';
+// ArrowRight kept for the inline link hint on each banner tile.
 import { getActiveAnnouncements, type Announcement } from '@/data/announcements';
 
 /**
@@ -88,8 +89,6 @@ function BannerCard({
   // CTA is a non-interactive affordance — clicks anywhere on the tile navigate.
   const overlayClass =
     'absolute inset-0 z-10 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6962E] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1A35]';
-  const ctaClass =
-    'mt-4 inline-flex items-center gap-2 whitespace-nowrap rounded-xl px-5 py-2.5 text-sm font-bold shadow-gold transition-transform duration-300 group-hover:-translate-y-0.5';
 
   return (
     <motion.div
@@ -98,7 +97,7 @@ function BannerCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.3 }}
-      className="group relative cursor-pointer overflow-hidden rounded-2xl p-5 pr-11 shadow-card transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-card-hover"
+      className="group relative cursor-pointer overflow-hidden rounded-2xl p-4 pr-10 shadow-card transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-card-hover"
       style={theme.card}
     >
       {/* Gold border pulse for the 'urgent' theme */}
@@ -143,14 +142,17 @@ function BannerCard({
         <div className="min-w-0">
           <p className="font-playfair text-base font-bold leading-snug text-white sm:text-[1.05rem]">
             {a.headline}
+            {/* Inline arrow hints the whole tile is clickable (no separate button) */}
+            <ArrowRight
+              size={15}
+              aria-hidden="true"
+              className="ml-1.5 inline-block flex-shrink-0 align-[-2px] transition-transform duration-300 group-hover:translate-x-1"
+              style={{ color: '#C6962E' }}
+            />
           </p>
           {a.subtext && (
             <p className="mt-1 text-xs leading-relaxed text-white/70 sm:text-sm">{a.subtext}</p>
           )}
-          {/* Visual CTA only — the whole tile is the actual link */}
-          <span aria-hidden="true" className={ctaClass} style={theme.cta}>
-            {a.ctaLabel} <ArrowRight size={15} />
-          </span>
         </div>
       </div>
 
