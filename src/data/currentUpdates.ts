@@ -19,6 +19,17 @@ export type CurrentUpdate = {
 
 export const currentUpdates: CurrentUpdate[] = [
   {
+    id: 'neet-2026-maharashtra-counselling',
+    icon: '📊',
+    title: 'NEET UG 2026 (Re-NEET) — Score → AIR → College Chart',
+    summary:
+      'Maharashtra MBBS counselling reference — marks→AIR चार्ट, MCC vs MH CET Cell registration, GMC closing marks (2025 indicative) व score-band route guide.',
+    date: '17 July 2026',
+    dateISO: '2026-07-17',
+    href: '/neet-zone/neet-2026-maharashtra-counselling',
+    tag: 'Wall Chart',
+  },
+  {
     id: 'neet-2025-validity-abroad',
     icon: '✅',
     title: 'NEET 2025 Validity for Abroad MBBS — Repeater Students Guide',

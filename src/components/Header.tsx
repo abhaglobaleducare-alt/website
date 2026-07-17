@@ -46,6 +46,7 @@ const navItems: NavItem[] = [
     label: 'Current Updates',
     children: [
       { label: 'All Updates', href: '/current-updates' },
+      { label: 'NEET 2026 Score → College Chart 📊', href: '/neet-zone/neet-2026-maharashtra-counselling' },
       { label: 'NEET 2026 Result Analysis 🆕', href: '/neet-zone/neet-2026-result-analysis' },
       { label: 'NEET 2025 Validity — Abroad MBBS ✅', href: '/neet-zone/neet-2025-validity-abroad' },
     ],
