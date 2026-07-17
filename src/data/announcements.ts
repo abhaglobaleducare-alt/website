@@ -26,7 +26,25 @@ export type Announcement = {
   endDate?: string; // ISO date (IST) — banner hidden after this day
 };
 
+// NOTE: only ONE banner shows at a time — the first entry that is `active` AND
+// inside its date window. The three Current Updates banners below each carry a
+// 3-month validity window (17 Jul → 17 Oct 2026) so they auto-hide. The top one
+// (Maharashtra chart) shows now; to feature a different one, reorder the entries
+// or set the ones above it to active:false.
 export const announcements: Announcement[] = [
+  {
+    id: 'neet-2026-maharashtra-counselling',
+    active: true,
+    icon: '📊',
+    headline: 'NEET 2026 Score → College Chart तयार! — तुमचा rank व Maharashtra cutoff बघा',
+    subtext:
+      'Marks→AIR, MCC vs MH CET Cell registration आणि GMC closing marks — संपूर्ण counselling chart',
+    ctaLabel: 'संपूर्ण chart वाचा',
+    ctaHref: '/neet-zone/neet-2026-maharashtra-counselling',
+    theme: 'gold',
+    startDate: '2026-07-17',
+    endDate: '2026-10-17',
+  },
   {
     id: 'neet-2025-validity-abroad',
     active: true,
@@ -37,16 +55,20 @@ export const announcements: Announcement[] = [
     ctaLabel: 'संपूर्ण माहिती वाचा',
     ctaHref: '/neet-zone/neet-2025-validity-abroad',
     theme: 'gold',
+    startDate: '2026-07-17',
+    endDate: '2026-10-17',
   },
   {
     id: 'neet-2026-result',
-    active: false,
+    active: true,
     icon: '🩺',
     headline: 'NEET UG 2026 निकाल जाहीर — 11.21 लाख qualified!',
     subtext: 'तुमचा score कुठे उभा आहे? महाराष्ट्र cutoff विश्लेषण वाचा',
     ctaLabel: 'संपूर्ण विश्लेषण वाचा',
     ctaHref: '/neet-zone/neet-2026-result-analysis',
     theme: 'gold',
+    startDate: '2026-07-17',
+    endDate: '2026-10-17',
   },
 
   // ── EXAMPLE: festival greeting (copy → edit → set active: true) ──────────
