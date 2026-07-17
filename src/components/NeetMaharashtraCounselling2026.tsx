@@ -415,10 +415,9 @@ export default function NeetMaharashtraCounselling2026() {
           </p>
           <p
             className="inline-block rounded-full px-4 py-2 text-xs sm:text-sm font-semibold"
-            style={{ background: 'rgba(198,150,46,0.12)', color: '#C6962E', border: '1px solid rgba(198,150,46,0.25)' }}
+            style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.15)' }}
           >
-            AGEST 2026 Scholarship Test — Reg. <s className="opacity-60">₹1,111</s> ₹111 • Grant $3,000+
-            (up to $6,000, merit-ranked, conditional)
+            AGEST 2026 Scholarship Test — NEET 2026 साठी नोंदणी आता बंद · Registration Ended
           </p>
         </div>
       </section>

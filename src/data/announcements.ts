@@ -26,11 +26,10 @@ export type Announcement = {
   endDate?: string; // ISO date (IST) — banner hidden after this day
 };
 
-// NOTE: only ONE banner shows at a time — the first entry that is `active` AND
-// inside its date window. The three Current Updates banners below each carry a
-// 3-month validity window (17 Jul → 17 Oct 2026) so they auto-hide. The top one
-// (Maharashtra chart) shows now; to feature a different one, reorder the entries
-// or set the ones above it to active:false.
+// NOTE: EVERY active entry inside its date window renders — the banner lays them
+// out two-per-row (wrapping to a new row for a 3rd/4th). The three Current Updates
+// banners below each carry a 3-month validity window (17 Jul → 17 Oct 2026) so they
+// auto-hide. Array order = display order (left-to-right, top-to-bottom).
 export const announcements: Announcement[] = [
   {
     id: 'neet-2026-maharashtra-counselling',
@@ -105,13 +104,21 @@ function istInstant(iso: string, endOfDay: boolean): Date {
   return new Date(`${iso}T${endOfDay ? '23:59:59' : '00:00:00'}+05:30`);
 }
 
-/** The single announcement to render: first active entry inside its date window. */
+/** True when an announcement is active and inside its (optional) date window. */
+function isLive(a: Announcement, now: Date): boolean {
+  if (!a.active) return false;
+  if (a.startDate && now < istInstant(a.startDate, false)) return false;
+  if (a.endDate && now > istInstant(a.endDate, true)) return false;
+  return true;
+}
+
+/** All announcements to render — every active entry inside its date window,
+ *  in array order. The banner lays these out two-per-row (wrapping). */
+export function getActiveAnnouncements(now: Date = new Date()): Announcement[] {
+  return announcements.filter((a) => isLive(a, now));
+}
+
+/** The first announcement to render (kept for convenience). */
 export function getActiveAnnouncement(now: Date = new Date()): Announcement | null {
-  for (const a of announcements) {
-    if (!a.active) continue;
-    if (a.startDate && now < istInstant(a.startDate, false)) continue;
-    if (a.endDate && now > istInstant(a.endDate, true)) continue;
-    return a;
-  }
-  return null;
+  return getActiveAnnouncements(now)[0] ?? null;
 }
