@@ -83,13 +83,13 @@ function BannerCard({
   const theme = THEMES[a.theme ?? 'gold'];
   const isExternal = a.ctaHref.startsWith('http');
 
+  // The whole tile is the link (a stretched overlay). The dismiss button sits
+  // above it (higher z-index) so it stays independently clickable. The visible
+  // CTA is a non-interactive affordance — clicks anywhere on the tile navigate.
+  const overlayClass =
+    'absolute inset-0 z-10 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C6962E] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1A35]';
   const ctaClass =
-    'mt-4 inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl px-5 py-2.5 text-sm font-bold shadow-gold transition-transform duration-300 hover:-translate-y-0.5 sm:w-auto';
-  const ctaInner = (
-    <>
-      {a.ctaLabel} <ArrowRight size={15} />
-    </>
-  );
+    'mt-4 inline-flex items-center gap-2 whitespace-nowrap rounded-xl px-5 py-2.5 text-sm font-bold shadow-gold transition-transform duration-300 group-hover:-translate-y-0.5';
 
   return (
     <motion.div
@@ -98,16 +98,14 @@ function BannerCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.3 }}
-      className="relative overflow-hidden rounded-2xl p-5 pr-11 shadow-card"
+      className="group relative cursor-pointer overflow-hidden rounded-2xl p-5 pr-11 shadow-card transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-card-hover"
       style={theme.card}
-      role="region"
-      aria-label="Announcement"
     >
       {/* Gold border pulse for the 'urgent' theme */}
       {theme.pulse && (
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 rounded-2xl"
+          className="pointer-events-none absolute inset-0 z-0 rounded-2xl"
           animate={{
             boxShadow: [
               'inset 0 0 0 rgba(198,150,46,0)',
@@ -117,6 +115,19 @@ function BannerCard({
           }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
         />
+      )}
+
+      {/* Whole-tile clickable overlay */}
+      {isExternal ? (
+        <a
+          href={a.ctaHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={a.headline}
+          className={overlayClass}
+        />
+      ) : (
+        <Link href={a.ctaHref} aria-label={a.headline} className={overlayClass} />
       )}
 
       <div className="relative flex items-start gap-3.5">
@@ -136,15 +147,10 @@ function BannerCard({
           {a.subtext && (
             <p className="mt-1 text-xs leading-relaxed text-white/70 sm:text-sm">{a.subtext}</p>
           )}
-          {isExternal ? (
-            <a href={a.ctaHref} target="_blank" rel="noopener noreferrer" className={ctaClass} style={theme.cta}>
-              {ctaInner}
-            </a>
-          ) : (
-            <Link href={a.ctaHref} className={ctaClass} style={theme.cta}>
-              {ctaInner}
-            </Link>
-          )}
+          {/* Visual CTA only — the whole tile is the actual link */}
+          <span aria-hidden="true" className={ctaClass} style={theme.cta}>
+            {a.ctaLabel} <ArrowRight size={15} />
+          </span>
         </div>
       </div>
 
@@ -152,7 +158,7 @@ function BannerCard({
         type="button"
         onClick={() => onDismiss(a.id)}
         aria-label="Dismiss announcement"
-        className="absolute right-2 top-2 rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+        className="absolute right-2 top-2 z-20 rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
       >
         <X size={16} />
       </button>
