@@ -28,8 +28,19 @@ export type Announcement = {
 
 export const announcements: Announcement[] = [
   {
-    id: 'neet-2026-result',
+    id: 'neet-2025-validity-abroad',
     active: true,
+    icon: '✅',
+    headline: 'NEET 2025 Qualified? 2026 मध्ये नाही? — तरीही Abroad MBBS शक्य!',
+    subtext:
+      'तुमचं 2025 qualification जून 2028 पर्यंत वैध — कायदेशीर आधारासह संपूर्ण chart वाचा',
+    ctaLabel: 'संपूर्ण माहिती वाचा',
+    ctaHref: '/neet-zone/neet-2025-validity-abroad',
+    theme: 'gold',
+  },
+  {
+    id: 'neet-2026-result',
+    active: false,
     icon: '🩺',
     headline: 'NEET UG 2026 निकाल जाहीर — 11.21 लाख qualified!',
     subtext: 'तुमचा score कुठे उभा आहे? महाराष्ट्र cutoff विश्लेषण वाचा',

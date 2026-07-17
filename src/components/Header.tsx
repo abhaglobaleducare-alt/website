@@ -33,6 +33,7 @@ const navItems: NavItem[] = [
     label: 'NEET Zone',
     children: [
       { label: 'NEET 2026 Result Analysis 🆕', href: '/neet-zone/neet-2026-result-analysis' },
+      { label: 'NEET 2025 Validity — Abroad MBBS ✅', href: '/neet-zone/neet-2025-validity-abroad' },
       { label: 'NEET Excellence Pathway', href: '/scholarship' },
       { label: 'NEET Portal', href: 'https://neet.abhaglobaleducare.com', external: true },
     ],
