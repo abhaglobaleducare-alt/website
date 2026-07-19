@@ -38,6 +38,7 @@ const navItems: NavItem[] = [
   {
     label: 'NEET Zone',
     children: [
+      { label: 'NEET Admission Analyzer 🎯', href: '/neet-analyzer' },
       { label: 'NEET Excellence Pathway', href: '/scholarship' },
       { label: 'NEET Portal', href: 'https://neet.abhaglobaleducare.com', external: true },
     ],
