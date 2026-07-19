@@ -4,6 +4,7 @@ import Link from 'next/link';
 import LeadGate from '@/components/LeadGate';
 import { motion } from 'framer-motion';
 import { GraduationCap, Globe, Shield, MapPin } from 'lucide-react';
+import { waLinkEncoded } from '@/data/contacts';
 
 const trustPoints = [
   { icon: Shield, text: 'NMC & WHO Eligible medical universities' },
@@ -72,7 +73,7 @@ export default function Hero() {
           </a>
           <LeadGate action="whatsapp_appointment" mode="newTab">
             <a
-              href="https://wa.me/917447552878?text=Hi%2C+I'm+interested+in+booking+a+FREE+counseling+appointment+for+studying+abroad."
+              href={waLinkEncoded("Hi%2C+I'm+interested+in+booking+a+FREE+counseling+appointment+for+studying+abroad.")}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-xl bg-[#25D366] px-6 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:bg-[#1ebe5d]"

@@ -2,6 +2,8 @@
  * ABHA Global Educare - Site Constants
  */
 
+import { KOLHAPUR, CSN, BOISAR, GEORGIA_OFFICE, WHATSAPP, type OfficeContact } from '@/data/contacts';
+
 export const SITE_CONFIG = {
   name: 'ABHA Global Educare LLP',
   shortName: 'ABHA Educare',
@@ -23,35 +25,24 @@ export const COMPANY_INFO = {
   registeredAddress: '203, Lotus Plaza, Venus Corner, Shahupuri, Kolhapur - 416001, Maharashtra, India',
 };
 
+// CONTACT_INFO is derived from the single source of truth in @/data/contacts.
+// Never hardcode a phone number here — edit src/data/contacts.ts instead.
+const toContactInfo = (o: OfficeContact) => ({
+  label: o.label,
+  address: o.address,
+  phone: o.phoneDisplay,
+  phoneRaw: `+${o.phoneRaw}`,
+  email: o.email,
+  mapUrl: o.mapUrl,
+  timings: o.hours,
+  ...(o.companyName ? { companyName: o.companyName } : {}),
+});
+
 export const CONTACT_INFO = {
-  kolhapur: {
-    label: 'Kolhapur Office (Head Office)',
-    address: '203, Lotus Plaza, Venus Corner, Shahupuri, Kolhapur - 416001, Maharashtra, India',
-    phone: '+91 74475 52878',
-    phoneRaw: '+917447552878',
-    email: 'kolhapur@abhaglobaleducare.com',
-    mapUrl: 'https://maps.google.com/?q=203,+Lotus+Plaza,+Venus+Corner,+Shahupuri,+Kolhapur',
-    timings: 'Mon - Sat: 10:00 AM - 7:00 PM',
-  },
-  csn: {
-    label: 'Chatrapati Sambhajinagar Office',
-    address: 'Office No. 01, Plot No. B-1, Aliza Mazil, Osmanpura, Chatrapati Sambhajinagar, Maharashtra, India',
-    phone: '+91 76207 07088',
-    phoneRaw: '+917620707088',
-    email: 'csn@abhaglobaleducare.com',
-    mapUrl: 'https://maps.google.com/?q=Aliza+Mazil,+Osmanpura,+Chatrapati+Sambhajinagar',
-    timings: 'Mon - Sat: 10:00 AM - 7:00 PM',
-  },
-  georgia: {
-    label: 'Georgia Office (International)',
-    companyName: 'ABHA Global Services LLC',
-    address: '37 Raphael Agladze Street, Tbilisi, Georgia',
-    phone: '+995 591 717122',
-    phoneRaw: '+995591717122',
-    email: 'georgia@abhaglobaleducare.com',
-    mapUrl: 'https://maps.google.com/?q=37+Raphael+Agladze+Street,+Tbilisi,+Georgia',
-    timings: 'Mon - Fri: 10:00 AM - 6:00 PM (Georgia Time)',
-  },
+  kolhapur: toContactInfo(KOLHAPUR),
+  csn: toContactInfo(CSN),
+  boisar: toContactInfo(BOISAR),
+  georgia: toContactInfo(GEORGIA_OFFICE),
 };
 
 export const SOCIAL_LINKS = {
@@ -60,7 +51,7 @@ export const SOCIAL_LINKS = {
   linkedin: 'https://linkedin.com/company/abhaglobaleducare',
   youtube: 'https://youtube.com/@abhaglobaleducare',
   twitter: 'https://twitter.com/abhaeducare',
-  whatsapp: 'https://wa.me/917447552878',
+  whatsapp: WHATSAPP.link,
 };
 
 export const NAV_LINKS = [

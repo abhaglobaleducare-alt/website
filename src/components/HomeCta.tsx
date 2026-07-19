@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import LeadGate from '@/components/LeadGate';
 import { ArrowRight, Phone } from 'lucide-react';
+import { KOLHAPUR, waLinkEncoded } from '@/data/contacts';
 
 export default function HomeCta() {
   return (
@@ -50,16 +51,16 @@ export default function HomeCta() {
                 Book ONLINE / OFFLINE FREE Counselling <ArrowRight size={18} />
               </Link>
               <a
-                href="tel:+917447552878"
+                href={KOLHAPUR.tel}
                 className="inline-flex items-center gap-2 text-white/70 font-semibold text-base hover:text-white transition-colors"
               >
-                <Phone size={18} /> or call +91 74475 52878
+                <Phone size={18} /> or call {KOLHAPUR.phoneDisplay}
               </a>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <LeadGate action="whatsapp_appointment" mode="newTab">
               <a
-                href="https://wa.me/917447552878?text=Hi%2C+I'm+interested+in+booking+a+FREE+counseling+appointment+for+MBBS+Abroad."
+                href={waLinkEncoded("Hi%2C+I'm+interested+in+booking+a+FREE+counseling+appointment+for+MBBS+Abroad.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 hover:bg-[#1ebe5d]"

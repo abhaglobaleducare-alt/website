@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Phone, Download, AlertTriangle, Compass, ListChecks, Building2, Calculator } from 'lucide-react';
+import { WHATSAPP, waLink } from '@/data/contacts';
 
 /* ---------- Chart data (faithful to ABHA_Wall_Chart_NEET2026_Maharashtra.pdf) ---------- */
 
@@ -105,9 +106,9 @@ function WhatsAppIcon() {
   );
 }
 
-const WA_HREF = `https://wa.me/917447552878?text=${encodeURIComponent(
+const WA_HREF = waLink(
   'नमस्कार, NEET 2026 Maharashtra counselling व माझ्या score नुसार मार्गदर्शन हवं आहे.',
-)}`;
+);
 
 export default function NeetMaharashtraCounselling2026() {
   return (
@@ -446,7 +447,7 @@ export default function NeetMaharashtraCounselling2026() {
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:opacity-90"
               style={{ background: '#25D366' }}
             >
-              <WhatsAppIcon /> WhatsApp: +91 74475 52878
+              <WhatsAppIcon /> WhatsApp: {WHATSAPP.display}
             </a>
             <Link
               href="/contact"

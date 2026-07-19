@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import { Providers } from '@/providers';
 import { SITE_CONFIG } from '@/lib/constants';
+import { KOLHAPUR, ALL_OFFICES } from '@/data/contacts';
 import './globals.css';
 
 const inter = Manrope({
@@ -210,24 +211,23 @@ export default async function RootLayout({
               url: SITE_CONFIG.url,
               logo: `${SITE_CONFIG.url}/images/logo.png`,
               email: SITE_CONFIG.email,
-              telephone: '+91-74475-52878',
-              address: [
-                {
-                  '@type': 'PostalAddress',
-                  streetAddress: '203, Lotus Plaza, Venus Corner, Shahupuri',
-                  addressLocality: 'Kolhapur',
-                  addressRegion: 'Maharashtra',
-                  postalCode: '416001',
-                  addressCountry: 'IN',
-                },
-                {
-                  '@type': 'PostalAddress',
-                  streetAddress: 'Office No. 01, Plot No. B-1, Aliza Mazil, Osmanpura',
-                  addressLocality: 'Chatrapati Sambhajinagar',
-                  addressRegion: 'Maharashtra',
-                  addressCountry: 'IN',
-                },
-              ],
+              // Org-level phone = Kolhapur Head Office (from single source of truth).
+              telephone: `+${KOLHAPUR.phoneRaw}`,
+              address: ALL_OFFICES.map((o) => ({
+                '@type': 'PostalAddress',
+                streetAddress: o.streetAddress,
+                addressLocality: o.addressLocality,
+                ...(o.addressRegion ? { addressRegion: o.addressRegion } : {}),
+                ...(o.postalCode ? { postalCode: o.postalCode } : {}),
+                addressCountry: o.addressCountry,
+              })),
+              contactPoint: ALL_OFFICES.map((o) => ({
+                '@type': 'ContactPoint',
+                telephone: `+${o.phoneRaw}`,
+                contactType: o.isHeadOffice ? 'customer service' : 'office',
+                name: o.label,
+                areaServed: o.addressCountry,
+              })),
               sameAs: [
                 'https://facebook.com/abhaglobaleducare',
                 'https://instagram.com/abhaglobaleducare',

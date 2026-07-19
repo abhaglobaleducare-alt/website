@@ -3,9 +3,9 @@ import Scholarship from '@/components/Scholarship';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'NEET Excellence Pathway — AGEST 2026 Grant for MBBS in Georgia',
+  title: 'Offers & Scholarships — Free iPad Early Bird Offer & AGEST 2026 | ABHA Global Educare',
   description:
-    'ABHA NEET Excellence Pathway — AGEST 2026. Assured $3,000+ (up to $6,000 for top rankers) education grant for MBBS in Tbilisi, Georgia via the Bapusaheb Patil (Sagaon) Global Education Support Grant. Just ₹111. NEET pattern. Register by 10 July 2026.',
+    'Register for MBBS Abroad with ABHA Global Educare and get a FREE iPad upon admission confirmation (limited-period Early Bird offer). Plus AGEST 2026 — successfully conducted: India’s first consistency-based scholarship test, top 300 scholars selected, offering the Bapusaheb Patil (Sagaon) Global Education Support Grant ($3,000–$6,000) for NMC & WHO Eligible MBBS in Tbilisi, Georgia.',
 };
 
 export default function ScholarshipPage() {

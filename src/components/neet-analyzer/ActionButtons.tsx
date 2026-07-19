@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Phone, MessageCircle, RotateCcw, CalendarCheck } from 'lucide-react';
+import { KOLHAPUR, waLink } from '@/data/contacts';
 
 interface Props {
   onReset?: () => void;
@@ -9,10 +10,8 @@ interface Props {
   summary?: string;
 }
 
-const WHATSAPP_RAW = '917447552878'; // Kolhapur head office
-
 export default function ActionButtons({ onReset, summary }: Props) {
-  const waText = encodeURIComponent(
+  const waHref = waLink(
     summary
       ? `Hi ABHA Global Educare, I just used the NEET Admission Analyzer. ${summary} I'd like free counselling on my options.`
       : 'Hi ABHA Global Educare, I used the NEET Admission Analyzer and would like free counselling on my options.',
@@ -37,7 +36,7 @@ export default function ActionButtons({ onReset, summary }: Props) {
             <CalendarCheck className="h-5 w-5 text-primary-gold" /> Book Free Counselling
           </Link>
           <a
-            href={`https://wa.me/${WHATSAPP_RAW}?text=${waText}`}
+            href={waHref}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-transform hover:-translate-y-0.5"
@@ -45,7 +44,7 @@ export default function ActionButtons({ onReset, summary }: Props) {
             <MessageCircle className="h-5 w-5" /> WhatsApp Us
           </a>
           <a
-            href="tel:+917447552878"
+            href={KOLHAPUR.tel}
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-navy-200 bg-white px-6 py-3.5 text-sm font-bold text-primary-navy transition-transform hover:-translate-y-0.5"
           >
             <Phone className="h-5 w-5 text-primary-gold" /> Call Now

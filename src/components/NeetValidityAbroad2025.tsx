@@ -11,6 +11,7 @@ import {
   CalendarClock,
   ArrowRight,
 } from 'lucide-react';
+import { WHATSAPP, waLinkEncoded } from '@/data/contacts';
 
 /* ---------- Chart data (faithful to ABHA_Chart_NEET2025_Validity_Abroad.pdf) ---------- */
 
@@ -88,8 +89,9 @@ const cautions = [
 const thClass = 'px-4 py-3.5 font-semibold';
 const tdClass = 'px-4 py-3.5 align-top text-sm';
 
-const WA_HREF =
-  'https://wa.me/917447552878?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%2C%20NEET%202025%20validity%20%E0%A4%AC%E0%A4%A6%E0%A5%8D%E0%A4%A6%E0%A4%B2%20%E0%A4%AE%E0%A4%BE%E0%A4%B9%E0%A4%BF%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A4%B5%E0%A5%80%20%E0%A4%86%E0%A4%B9%E0%A5%87';
+const WA_HREF = waLinkEncoded(
+  '%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A4%BE%E0%A4%B0%2C%20NEET%202025%20validity%20%E0%A4%AC%E0%A4%A6%E0%A5%8D%E0%A4%A6%E0%A4%B2%20%E0%A4%AE%E0%A4%BE%E0%A4%B9%E0%A4%BF%E0%A4%A4%E0%A5%80%20%E0%A4%B9%E0%A4%B5%E0%A5%80%20%E0%A4%86%E0%A4%B9%E0%A5%87',
+);
 
 function WhatsAppIcon() {
   return (
@@ -367,7 +369,7 @@ export default function NeetValidityAbroad2025() {
               className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:opacity-90"
               style={{ background: '#25D366' }}
             >
-              <WhatsAppIcon /> WhatsApp: +91 74475 52878
+              <WhatsAppIcon /> WhatsApp: {WHATSAPP.display}
             </a>
             <Link
               href="/contact"

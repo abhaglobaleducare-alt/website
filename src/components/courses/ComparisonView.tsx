@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 import type { Course } from '@/data/courses';
 import { courseId } from '@/data/courses';
 import { RATE_NOTE, ABHA_SERVICE_CHARGES } from '@/data/config';
+import { waLink } from '@/data/contacts';
 import { MessageCircle } from 'lucide-react';
 import {
   useCompare,
@@ -21,11 +22,9 @@ function scheduleText(c: Course, format: (v: string | number) => string): string
   return parts.length ? parts.map(format).join('  /  ') : '—';
 }
 
-const WHATSAPP_NUMBER = '917447552878';
-
 function whatsappHref(course: Course): string {
   const msg = `Namaste ABHA! I want details about ${course.name} at ${course.university} (${STREAM_LABELS[course.stream]}). Please share fees and admission guidance.`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  return waLink(msg);
 }
 
 export default function ComparisonView() {

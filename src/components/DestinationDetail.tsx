@@ -5,7 +5,9 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ArrowRight, Info, Phone, MapPin } from 'lucide-react';
 import type { DestinationDetailData } from '@/data/destinations';
+import { KOLHAPUR, GEORGIA_SUPPORT_LINE } from '@/data/contacts';
 import UniversityExplorer from '@/components/UniversityExplorer';
+import IpadOfferCard from '@/components/IpadOfferCard';
 
 function initials(name: string): string {
   return name
@@ -234,13 +236,27 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
                 View MBBS / MD Courses <ArrowRight size={18} />
               </Link>
               <a
-                href="tel:+917447552878"
+                href={KOLHAPUR.tel}
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-300 hover:border-[#C6962E] hover:text-[#C6962E]"
               >
-                <Phone size={16} /> +91 74475 52878
+                <Phone size={16} /> {KOLHAPUR.phoneDisplay}
               </a>
             </div>
+
+            {/* Georgia on-ground office — trust signal on the Georgia page */}
+            {/Georgia/i.test(data.name) && (
+              <p className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#C6962E]/40 bg-white/5 px-4 py-2 text-sm font-semibold text-[#F7EDD7]">
+                <MapPin size={15} className="text-[#C6962E]" /> {GEORGIA_SUPPORT_LINE}
+              </p>
+            )}
           </div>
+        </div>
+      </section>
+
+      {/* iPad Early Bird offer — abroad registration incentive */}
+      <section className="bg-light-gray px-4 py-14 sm:px-8">
+        <div className="mx-auto max-w-4xl">
+          <IpadOfferCard />
         </div>
       </section>
     </>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, Newspaper, Phone } from 'lucide-react';
 import { currentUpdates } from '@/data/currentUpdates';
+import { KOLHAPUR } from '@/data/contacts';
 
 export default function CurrentUpdates() {
   const updates = [...currentUpdates].sort((a, b) => (a.dateISO < b.dateISO ? 1 : -1));
@@ -114,11 +115,11 @@ export default function CurrentUpdates() {
               Book Counselling →
             </Link>
             <a
-              href="tel:+917447552878"
+              href={KOLHAPUR.tel}
               className="inline-flex items-center gap-2 rounded-xl border px-6 py-3.5 text-base font-semibold transition-colors hover:bg-primary-gold/5"
               style={{ borderColor: 'rgba(198,150,46,0.4)', color: '#0B1A35' }}
             >
-              <Phone className="w-4 h-4" style={{ color: '#C6962E' }} /> +91 74475 52878
+              <Phone className="w-4 h-4" style={{ color: '#C6962E' }} /> {KOLHAPUR.phoneDisplay}
             </a>
           </div>
         </div>

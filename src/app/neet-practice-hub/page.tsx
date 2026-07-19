@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 export const metadata = {
   title: 'ABHA NEET Practice Hub 2026 — Full NEET Mock Tests & Score Analysis',
   description:
-    'ABHA NEET Practice Hub — full-length 180-question NEET mock tests with +4/−1 marking, personalised subject-wise score analysis, and MCQ practice sets. AGEST introductory offer ₹111. NEET 2026 aspirants only. Register now.',
+    'ABHA NEET Practice Hub — full-length 180-question NEET mock tests with +4/−1 marking, personalised subject-wise score analysis, and MCQ practice sets for NEET 2026 aspirants.',
   keywords: [
     'NEET full mock test online 2026', 'NEET practice test 180 questions', 'NEET score analysis',
     'AGEST NEET mock test', 'NEET practice hub India', 'NEET MCQ practice online',

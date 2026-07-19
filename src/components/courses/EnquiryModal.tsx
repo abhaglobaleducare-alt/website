@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { X, MessageCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { useEnquiry } from './context';
+import { waLink } from '@/data/contacts';
 
 const NEET_OPTIONS = [
   'Appearing 2026',
@@ -10,8 +11,6 @@ const NEET_OPTIONS = [
   'Not Appeared',
   'Parent Enquiry',
 ] as const;
-
-const WHATSAPP_NUMBER = '917447552878';
 
 function buildWhatsAppLink(fields: {
   course: string;
@@ -25,7 +24,7 @@ function buildWhatsAppLink(fields: {
   ];
   if (fields.neetStatus) parts.push(`My NEET status: ${fields.neetStatus}.`);
   if (fields.name) parts.push(`Name: ${fields.name}`);
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(parts.join(' '))}`;
+  return waLink(parts.join(' '));
 }
 
 export default function EnquiryModal() {

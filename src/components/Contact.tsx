@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LeadGate from '@/components/LeadGate';
 import { COURSE_OPTIONS } from '@/data/streams';
+import { ALL_OFFICES, KOLHAPUR, WHATSAPP, waLinkEncoded } from '@/data/contacts';
 import {
   MapPin,
   Phone,
@@ -15,40 +16,27 @@ import {
   Globe,
 } from 'lucide-react';
 
-const offices = [
-  {
-    icon: Building2,
-    title: 'Kolhapur — Head Office',
-    address: '203, Lotus Plaza, Venus Corner, Shahupuri, Kolhapur — 416001, Maharashtra',
-    phone: '+91 74475 52878',
-    phoneHref: 'tel:+917447552878',
-    hours: 'Mon–Sat, 10 AM – 7 PM',
-  },
-  {
-    icon: Building2,
-    title: 'Chatrapati Sambhajinagar — Branch Office',
-    address: 'Office No. 01, Plot B-1, Aliza Mazil, Osmanpura, CSN, Maharashtra',
-    phone: '+91 76207 07088',
-    phoneHref: 'tel:+917620707088',
-    hours: 'Mon–Sat, 10 AM – 7 PM',
-  },
-  {
-    icon: Building2,
-    title: 'Boisar — Branch Office',
-    address: 'Mahavir Nischay, A6, Flat no 201, Mahavir Nagar, Boisar, pin 401501, Maharashtra',
-    phone: '+91 72494 09376',
-    phoneHref: 'tel:+917249409376',
-    hours: 'Mon–Sat, 10 AM – 7 PM',
-  },
-  {
+// Display metadata; phone/address/hours come from the single source of truth.
+const officeMeta: Record<string, { icon: typeof Building2; title: string; note?: string }> = {
+  kolhapur: { icon: Building2, title: 'Kolhapur — Head Office' },
+  csn: { icon: Building2, title: 'Chhatrapati Sambhajinagar — Branch Office' },
+  boisar: { icon: Building2, title: 'Boisar — Branch Office' },
+  georgia: {
     icon: Globe,
     title: 'Tbilisi, Georgia — Abroad Office',
-    address: 'ABHA Global Services LLC, 37 Raphael Agladze Street, Tbilisi',
-    phone: '+995 57 910 4926 / +995 591 717122',
-    phoneHref: 'tel:+995579104926',
     note: 'On-ground support + OneWindow Services hostel',
   },
-];
+};
+
+const offices = ALL_OFFICES.map((o) => ({
+  icon: officeMeta[o.key].icon,
+  title: officeMeta[o.key].title,
+  address: o.companyName ? `${o.companyName}, ${o.address}` : o.address,
+  phone: o.phoneDisplay,
+  phoneHref: o.tel,
+  hours: o.hours,
+  note: officeMeta[o.key].note,
+}));
 
 export default function Contact() {
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -317,12 +305,12 @@ export default function Contact() {
                 WhatsApp messages are answered even on Sundays.
               </p>
               <div className="flex flex-col gap-2">
-                <a href="tel:+917447552878" className="inline-flex items-center gap-2 text-[#C6962E] font-semibold text-sm hover:underline">
-                  <Phone size={14} /> +91 74475 52878
+                <a href={KOLHAPUR.tel} className="inline-flex items-center gap-2 text-[#C6962E] font-semibold text-sm hover:underline">
+                  <Phone size={14} /> {KOLHAPUR.phoneDisplay}
                 </a>
                 <LeadGate action="whatsapp_appointment" mode="newTab">
                 <a
-                  href="https://wa.me/917447552878?text=Hi%2C+I'm+interested+in+a+counseling+appointment+for+MBBS+Abroad."
+                  href={waLinkEncoded("Hi%2C+I'm+interested+in+a+counseling+appointment+for+MBBS+Abroad.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-lg font-semibold text-sm transition-all hover:bg-[#1ebe5d] w-fit"

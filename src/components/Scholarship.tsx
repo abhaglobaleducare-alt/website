@@ -3,7 +3,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import LeadGate from '@/components/LeadGate';
+import IpadOfferCard from '@/components/IpadOfferCard';
 import {
   CalendarDays,
   CheckCircle2,
@@ -24,6 +24,7 @@ import {
   ChevronDown,
   ShieldCheck,
 } from 'lucide-react';
+import { KOLHAPUR, WHATSAPP, waLink } from '@/data/contacts';
 
 /* ── Animated count-up number ─────────────────────────────────── */
 function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
@@ -55,21 +56,21 @@ function CountUp({ target, suffix = '' }: { target: number; suffix?: string }) {
 /* ── Ticker items (duplicated for seamless loop) ──────────────── */
 const ticker = [
   '🔥 NEET PATTERN',
-  '💰 JUST ₹111',
-  '🏆 TOP 300 WIN',
+  '✅ AGEST 2026 SUCCESSFULLY CONDUCTED',
+  '🏆 TOP 300 SCHOLARS SELECTED',
   '💵 $6,000 SCHOLARSHIP',
   '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
   '🇬🇪 MBBS IN TBILISI, GEORGIA',
-  '⚡ REGISTER NOW',
+  '🎁 FREE iPad — EARLY BIRD OFFER',
   '🔥 NEET PATTERN',
-  '💰 JUST ₹111',
-  '🏆 TOP 300 WIN',
+  '✅ AGEST 2026 SUCCESSFULLY CONDUCTED',
+  '🏆 TOP 300 SCHOLARS SELECTED',
   '💵 $6,000 SCHOLARSHIP',
   '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
   '🇬🇪 MBBS IN TBILISI, GEORGIA',
-  '⚡ REGISTER NOW',
+  '🎁 FREE iPad — EARLY BIRD OFFER',
 ];
 
 /* ═══════════════════════════════════════════════════════════════
@@ -211,10 +212,10 @@ export default function Scholarship() {
               </Link>
             </div>
             <a
-              href="tel:+917447552878"
+              href={KOLHAPUR.tel}
               className="inline-flex items-center gap-2 border border-white/20 text-white/70 px-6 py-2.5 rounded-xl font-semibold text-sm hover:border-[#C6962E]/60 hover:text-white transition-all duration-300"
             >
-              <Phone size={14} /> +91 74475 52878
+              <Phone size={14} /> {KOLHAPUR.phoneDisplay}
             </a>
           </motion.div>
 
@@ -226,9 +227,9 @@ export default function Scholarship() {
             className="mt-10 flex flex-wrap items-center justify-center gap-3 text-sm text-gray-400"
           >
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#C6962E] animate-pulse" />
-              ⏳ Last date to register:{' '}
-              <strong className="text-white">10 July 2026</strong>
+              <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
+              ✅ AGEST 2026 registration closed{' '}
+              <strong className="text-white">10 July 2026</strong> — exam successfully conducted
             </span>
           </motion.div>
 
@@ -274,7 +275,7 @@ export default function Scholarship() {
       </div>
 
       {/* ══════════════════════════════════════
-          AGEST ₹111 OFFER CARD
+          AGEST 2026 — SUCCESSFULLY CONDUCTED
       ══════════════════════════════════════ */}
       <section
         className="relative py-14 sm:py-16 px-5 sm:px-10 overflow-hidden"
@@ -300,19 +301,19 @@ export default function Scholarship() {
                 >
                   Scholarship Program
                 </span>
-                <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-white/10 text-white/80">
-                  300 Scholarships Available
+                <span className="inline-block text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/25 text-emerald-100 border border-emerald-400/30">
+                  ✅ Successfully Conducted
                 </span>
               </div>
               <h2
                 className="font-playfair font-bold text-white leading-tight mb-2"
                 style={{ fontSize: 'clamp(1.7rem, 3.5vw, 2.6rem)' }}
               >
-                🏆 Bapusaheb Patil (Sagaon) Global Education Support Grant
-                <span className="block" style={{ color: '#FDE68A' }}>AGEST 2026</span>
+                🏆 AGEST 2026 — Successfully Conducted
+                <span className="block" style={{ color: '#FDE68A' }}>India&apos;s First Consistency-Based Scholarship Test</span>
               </h2>
               <p className="text-purple-200 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-5">
-                Merit-based grant · MBBS in Tbilisi, Georgia
+                Bapusaheb Patil (Sagaon) Global Education Support Grant · MBBS in Tbilisi, Georgia
               </p>
 
               {/* Scholarship benefit highlights */}
@@ -340,39 +341,24 @@ export default function Scholarship() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 justify-center lg:justify-start flex-wrap">
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-purple-300 text-[11px] font-semibold uppercase tracking-wide">
-                    Original Value
-                  </span>
-                  <span className="text-purple-300 line-through text-2xl font-semibold">₹2,110</span>
-                </div>
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-yellow-200 text-[11px] font-semibold uppercase tracking-wide">
-                    Only for 2026 NEET Aspirants · Registration Fee
-                  </span>
-                  <span className="font-playfair font-black text-6xl leading-none" style={{ color: '#FDE68A' }}>₹111</span>
-                </div>
-                <span className="text-xs font-black px-3 py-1.5 rounded-full bg-red-500/25 text-red-300 border border-red-500/30">
-                  90% OFF
-                </span>
-              </div>
+              <ul className="space-y-3 max-w-md mx-auto lg:mx-0 text-left">
+                {[
+                  'Registration: Completed (Closed 10 July 2026)',
+                  'Exam: Successfully Conducted',
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-3">
+                    <CheckCircle2 size={20} className="text-emerald-400 shrink-0 mt-0.5" />
+                    <span className="text-white font-semibold text-sm sm:text-base">{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-yellow-200 font-bold text-base sm:text-lg mt-5">
+                AGEST proved that consistency wins, not luck.
+              </p>
             </div>
 
             {/* Right */}
             <div className="flex flex-col gap-3 items-center lg:items-start flex-shrink-0 lg:w-56">
-              <LeadGate action="claim_111" mode="newTab">
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLScfLV7uW_1gEoxj8y8yc_1aVYfZ32k22NcPxwn0fax6ZwPh-g/viewform"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl font-black text-base transition-all hover:-translate-y-0.5 hover:shadow-2xl text-center"
-                style={{ background: '#FDE68A', color: '#1a1a2e' }}
-              >
-                <Zap size={18} />
-                Register for AGEST 2026
-              </a>
-              </LeadGate>
               <a
                 href="https://neet.abhaglobaleducare.com/login"
                 target="_blank"
@@ -382,7 +368,7 @@ export default function Scholarship() {
                 🎓 Student Login — NEET Portal
               </a>
               <p className="text-purple-300 text-xs text-center">
-                Open to all 2026 NEET aspirants · No minimum score to register
+                AGEST 2026 registration is now closed. Selected scholars are notified by WhatsApp on NEET 2026 result day.
               </p>
             </div>
           </motion.div>
@@ -443,6 +429,24 @@ export default function Scholarship() {
             )}
           </div>
         </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          iPad EARLY BIRD OFFER — PRIMARY CTA
+      ══════════════════════════════════════ */}
+      <section className="bg-[#0B1A35] py-14 sm:py-16 px-5 sm:px-10">
+        <div className="max-w-3xl mx-auto text-center mb-8">
+          <span className="inline-block text-[#C6962E] text-xs font-black uppercase tracking-[0.3em] mb-3">
+            What&apos;s Next
+          </span>
+          <h2
+            className="font-playfair font-bold text-white leading-tight"
+            style={{ fontSize: 'clamp(1.7rem, 4vw, 2.6rem)' }}
+          >
+            Take Your MBBS Abroad — Early Bird iPad Offer
+          </h2>
+        </div>
+        <IpadOfferCard className="max-w-3xl mx-auto" />
       </section>
 
       {/* ══════════════════════════════════════
@@ -522,10 +526,10 @@ export default function Scholarship() {
                 border: '#22C55E',
               },
               {
-                icon: <Zap size={28} />,
-                value: '₹111',
-                label: 'One-Time Fee',
-                sub: 'Covers ALL attempts — no extra cost per attempt',
+                icon: <Repeat2 size={28} />,
+                value: 'Best-3-Avg',
+                label: 'Merit Formula',
+                sub: 'Multiple attempts allowed — final score = average of your top 3',
                 color: '#6366F1',
                 bg: '#EEF2FF',
                 border: '#6366F1',
@@ -639,10 +643,10 @@ export default function Scholarship() {
                 <div className="space-y-5">
                   {[
                     {
-                      label: 'Registration Closes',
+                      label: 'Registration Closed',
                       value: '10 July 2026',
-                      emoji: '⚠️',
-                      accent: '#EF4444',
+                      emoji: '✅',
+                      accent: '#22C55E',
                     },
                     {
                       label: 'First Attempt Available',
@@ -679,18 +683,18 @@ export default function Scholarship() {
                 </div>
               </div>
 
-              {/* Registration fee highlight */}
+              {/* Successfully conducted highlight */}
               <div
                 className="rounded-2xl p-6 text-center"
                 style={{ background: 'linear-gradient(135deg, #0B1A35 0%, #152d54 100%)' }}
               >
                 <p className="text-white/60 text-xs font-black uppercase tracking-widest mb-2">
-                  One-time Registration Fee
+                  AGEST 2026
                 </p>
-                <p className="font-black text-[#FFD700] leading-none mb-1" style={{ fontSize: 'clamp(3rem, 8vw, 4.5rem)' }}>
-                  ₹111
+                <p className="font-black text-[#FFD700] leading-none mb-1" style={{ fontSize: 'clamp(1.6rem, 5vw, 2.6rem)' }}>
+                  Successfully Conducted
                 </p>
-                <p className="text-white/60 text-sm">Covers every single attempt you take</p>
+                <p className="text-white/60 text-sm">Top 300 scholars selected on merit</p>
               </div>
             </motion.div>
           </div>
@@ -776,29 +780,17 @@ export default function Scholarship() {
             className="text-center"
           >
             <p className="text-gray-500 text-sm mb-5">
-              WhatsApp <strong className="text-[#0B1A35]">&ldquo;AGEST&rdquo;</strong> to register, or visit our website
+              AGEST 2026 is complete. To learn about MBBS abroad with ABHA, WhatsApp us or visit our website
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <LeadGate action="claim_111" mode="newTab">
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLScfLV7uW_1gEoxj8y8yc_1aVYfZ32k22NcPxwn0fax6ZwPh-g/viewform"
+                href={waLink('AGEST')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-8 py-4 rounded-xl font-black text-base shadow-[0_0_40px_rgba(198,150,46,0.35)] hover:shadow-[0_0_60px_rgba(198,150,46,0.55)] hover:-translate-y-0.5 transition-all duration-300"
               >
-                <Zap size={18} /> Register for AGEST 2026
+                <Phone size={17} /> {WHATSAPP.display}
               </a>
-              </LeadGate>
-              <LeadGate action="claim_111" mode="newTab">
-              <a
-                href="https://wa.me/917249409376?text=AGEST"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 border-2 border-[#C6962E]/60 text-[#0B1A35] px-7 py-4 rounded-xl font-black text-base hover:bg-[#C6962E]/10 hover:border-[#C6962E] transition-all duration-300 hover:-translate-y-0.5"
-              >
-                <Phone size={17} /> +91 72494 09376
-              </a>
-              </LeadGate>
             </div>
             <div className="flex flex-wrap gap-3 justify-center mt-4">
               <a
@@ -831,9 +823,9 @@ export default function Scholarship() {
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
           {[
             {
-              display: '₹999 & ₹1111',
-              label: 'Registration Fee for NEET Excellence Program',
-              sub: 'Less than a Family Dinner 🍕',
+              display: 'AGEST 2026',
+              label: 'Successfully Conducted',
+              sub: "India's first consistency-based test ✅",
               color: '#C6962E',
             },
             {
@@ -928,19 +920,14 @@ export default function Scholarship() {
             className="relative"
           >
             <div className="bg-[#0B1A35] rounded-3xl overflow-hidden shadow-2xl">
-              {/* UPPER PART: Title + registration fee pricing */}
+              {/* UPPER PART: Successfully conducted banner */}
               <div className="bg-gradient-to-r from-[#C6962E] to-[#f5a623] p-4 text-center">
-                <p className="text-[#0B1A35] font-black text-xs sm:text-sm uppercase tracking-widest mb-2">
-                  🏆 Only for 2026 NEET Aspirants · Registration Fee
+                <p className="text-[#0B1A35] font-black text-xs sm:text-sm uppercase tracking-widest mb-1">
+                  🏆 AGEST 2026 · Successfully Conducted
                 </p>
-                <div className="flex items-center justify-center gap-3">
-                  <span className="font-black text-2xl" style={{ color: '#dc2626', textDecoration: 'line-through' }}>
-                    ₹2,110
-                  </span>
-                  <span className="font-black text-3xl" style={{ color: '#14532d' }}>
-                    ₹111
-                  </span>
-                </div>
+                <p className="font-black text-2xl" style={{ color: '#14532d' }}>
+                  Top 300 Scholars Selected
+                </p>
               </div>
 
               {/* Dashed rule */}
@@ -978,7 +965,7 @@ export default function Scholarship() {
               {/* LOWER PART: Bold limited period notice */}
               <div className="bg-white/5 px-6 py-4 text-center border-t border-white/10">
                 <p className="text-white font-black text-xs sm:text-sm uppercase tracking-wide">
-                  ⚡ ONLY FOR LIMITED PERIOD FOR NEET 2026 ASPIRANTS ⚡
+                  ⚡ CONSISTENCY WINS, NOT LUCK ⚡
                 </p>
               </div>
             </div>
@@ -1273,7 +1260,7 @@ export default function Scholarship() {
               {
                 num: '01',
                 heading: 'Real NEET Revision',
-                body: 'Get access to all the finest NEET revision tools and material at an unbelievable cost of ₹999 for a year. Introductory Offer.',
+                body: 'Access to the finest NEET revision tools and material — built for serious 2026 aspirants.',
                 accent: '#FFD770',
                 icon: <Brain size={22} />,
               },
@@ -1391,11 +1378,11 @@ export default function Scholarship() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {[
               {
-                label: 'Last Date to Register',
+                label: 'Registration Closed',
                 date: '10 July 2026',
                 year: '',
                 urgent: true,
-                emoji: '⚠️',
+                emoji: '✅',
               },
               {
                 label: 'Attempt 1',
@@ -1490,7 +1477,7 @@ export default function Scholarship() {
               className="px-8 py-4 rounded-xl"
             >
               <p className="text-[#0B1A35] font-black text-base sm:text-lg text-center">
-                DON&apos;T WAIT FOR THE LAST DATE. 111 RUPEES CAN OPEN DOORS OF YOUR DREAM
+                AGEST 2026 SUCCESSFULLY CONDUCTED — CONSISTENCY WINS, NOT LUCK
               </p>
             </motion.div>
           </motion.div>
@@ -1516,53 +1503,51 @@ export default function Scholarship() {
           <motion.div
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ duration: 2.5, repeat: Infinity }}
-            className="inline-block bg-red-500/20 border border-red-500/30 text-red-400 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-7"
+            className="inline-block bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-7"
           >
-            ⚡ Limited Seats · But YOU can Win
+            ✅ AGEST 2026 · Successfully Conducted
           </motion.div>
 
           <h2
             className="font-playfair font-bold text-white leading-tight mb-5"
             style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
           >
-            ₹111 invested.
+            AGEST proved that
             <br />
-            <span className="text-[#C6962E]">₹5 Lakhs returned.</span>
+            <span className="text-[#C6962E]">consistency wins, not luck.</span>
           </h2>
 
           <p className="text-gray-400 text-lg mb-10">
-            DM{' '}
+            Explore MBBS abroad with{' '}
             <motion.span
               animate={{ color: ['#C6962E', '#FFD770', '#C6962E'] }}
               transition={{ duration: 1.5, repeat: Infinity }}
               className="font-black"
             >
-              &ldquo;AGEST&rdquo;
+              ABHA
             </motion.span>{' '}
-            on WhatsApp or call us right now.
+            — WhatsApp us or call right now.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <LeadGate action="claim_111" mode="newTab">
             <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLScfLV7uW_1gEoxj8y8yc_1aVYfZ32k22NcPxwn0fax6ZwPh-g/viewform"
+              href={waLink('MBBS Abroad')}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-[#C6962E] via-[#e0a830] to-[#FFD770] text-[#0B1A35] px-9 py-5 rounded-xl font-black text-lg shadow-[0_0_50px_rgba(198,150,46,0.35)] hover:shadow-[0_0_70px_rgba(198,150,46,0.55)] hover:-translate-y-1 transition-all duration-300"
             >
               <Zap size={22} />
-              Register for AGEST 2026
+              Explore MBBS Abroad
               <ArrowUpRight
                 size={18}
                 className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
               />
             </a>
-            </LeadGate>
             <a
-              href="tel:+917447552878"
+              href={KOLHAPUR.tel}
               className="inline-flex items-center justify-center gap-2 border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-base hover:border-[#C6962E]/50 hover:text-[#C6962E] transition-all duration-300"
             >
-              <Phone size={17} /> +91 74475 52878
+              <Phone size={17} /> {KOLHAPUR.phoneDisplay}
             </a>
           </div>
         </motion.div>

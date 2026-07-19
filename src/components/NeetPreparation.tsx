@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BookOpen, Brain, PlayCircle, FileText, CheckCircle2, ArrowRight, Loader2, Phone, Mail } from 'lucide-react';
+import { WHATSAPP, KOLHAPUR, waLinkEncoded } from '@/data/contacts';
 
 const features = [
   { icon: BookOpen, title: 'Revision Zone', desc: 'Full NCERT chapter-wise revision — Physics, Chemistry, Botany & Zoology (Class 11 + 12)' },
@@ -62,7 +63,7 @@ export default function NeetPreparation() {
       }
     } catch {
       setFormState('error');
-      setStatusMsg('Network error. Please WhatsApp us at +91 74475 52878.');
+      setStatusMsg(`Network error. Please WhatsApp us at ${WHATSAPP.display}.`);
     }
   }
 
@@ -182,7 +183,7 @@ export default function NeetPreparation() {
                   { label: 'UPI ID', value: 'yespay.mabs0043270ikit0245@yesbankltd' },
                   { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
                   { label: 'Amount', value: '₹999 / year' },
-                  { label: 'WhatsApp', value: '+91 74475 52878' },
+                  { label: 'WhatsApp', value: WHATSAPP.display },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
                     <span className="text-white/50 text-xs">{label}</span>
@@ -209,7 +210,7 @@ export default function NeetPreparation() {
                     Registration Received!
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">{statusMsg}</p>
-                  <a href="https://wa.me/917447552878?text=Hi%2C+I+just+registered+for+NEET+Preparation+Portal"
+                  <a href={waLinkEncoded("Hi%2C+I+just+registered+for+NEET+Preparation+Portal")}
                     target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white"
                     style={{ background: '#25D366' }}>
@@ -319,9 +320,9 @@ export default function NeetPreparation() {
         </div>
         <p className="text-white/50 text-sm mb-4">Questions? We&apos;re here to help.</p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <a href="tel:+917447552878"
+          <a href={KOLHAPUR.tel}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-[#C6962E]/60 transition-colors">
-            <Phone className="w-4 h-4" /> +91 74475 52878
+            <Phone className="w-4 h-4" /> {KOLHAPUR.phoneDisplay}
           </a>
           <a href="mailto:connect@abhaglobaleducare.com"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-[#C6962E]/60 transition-colors">

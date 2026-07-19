@@ -8,6 +8,7 @@ import { Menu, X, Phone, Mail, ChevronDown, ArrowLeft, Home as HomeIcon } from '
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { STREAMS } from '@/data/streams';
+import { KOLHAPUR, WHATSAPP, GEORGIA_OFFICE, CONTACT_EMAIL } from '@/data/contacts';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
 
 type NavChild = { label: string; href: string; external?: boolean };
@@ -39,7 +40,7 @@ const navItems: NavItem[] = [
     label: 'NEET Zone',
     children: [
       { label: 'NEET Admission Analyzer 🎯', href: '/neet-analyzer' },
-      { label: 'NEET Excellence Pathway', href: '/scholarship' },
+      { label: 'Offers & Scholarships', href: '/scholarship' },
       { label: 'NEET Portal', href: 'https://neet.abhaglobaleducare.com', external: true },
     ],
   },
@@ -175,8 +176,8 @@ export default function Header() {
           transition={{ duration: 2, repeat: Infinity }}
           className="inline-block"
         >
-          <span className="sm:hidden">🎓 NEET Excellence Pathway — WhatsApp +91 74475 52878 · Georgia: +995 591 717122</span>
-          <span className="hidden sm:inline">🎓 NEET Excellence Pathway — Scholarships / Gifts / Rewards + NEET Practice Tests | WhatsApp +91 74475 52878 · Georgia: +995 591 717122 · UNIQUE Hands-On Clinical Workshops</span>
+          <span className="sm:hidden">🎓 NEET Excellence Pathway — WhatsApp {WHATSAPP.display} · Georgia: {GEORGIA_OFFICE.phoneDisplay}</span>
+          <span className="hidden sm:inline">🎓 NEET Excellence Pathway — Scholarships / Gifts / Rewards + NEET Practice Tests | WhatsApp {WHATSAPP.display} · Georgia: {GEORGIA_OFFICE.phoneDisplay} · UNIQUE Hands-On Clinical Workshops</span>
         </motion.span>
       </div>
 
@@ -185,22 +186,16 @@ export default function Header() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 flex flex-wrap justify-between items-center gap-1.5 sm:gap-2 text-sm">
           <div className="flex flex-wrap gap-4 lg:gap-8 items-center">
             <a
-              href="tel:+917447552878"
+              href={KOLHAPUR.tel}
               className="flex items-center gap-1.5 text-white hover:text-primary-gold transition-all duration-300 hover:-translate-y-0.5"
             >
-              <Phone size={14} /> Kolhapur: +91 74475 52878
+              <Phone size={14} /> Kolhapur: {KOLHAPUR.phoneDisplay}
             </a>
             <a
-              href="tel:+917620707088"
-              className="flex items-center gap-1.5 text-white hover:text-primary-gold transition-all duration-300 hover:-translate-y-0.5"
-            >
-              <Phone size={14} /> CSN: +91 76207 07088
-            </a>
-            <a
-              href="mailto:connect@abhaglobaleducare.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="hidden sm:flex items-center gap-1.5 text-white hover:text-primary-gold transition-all duration-300 hover:-translate-y-0.5"
             >
-              <Mail size={14} /> connect@abhaglobaleducare.com
+              <Mail size={14} /> {CONTACT_EMAIL}
             </a>
             <a
               href="mailto:abhaglobaleducare@gmail.com"

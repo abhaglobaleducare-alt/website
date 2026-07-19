@@ -1,4 +1,11 @@
 import Link from "next/link";
+import {
+  INDIA_OFFICES,
+  GEORGIA_OFFICE,
+  WHATSAPP,
+  CONTACT_EMAIL,
+  OFFICE_HOURS_INDIA,
+} from "@/data/contacts";
 
 const quickLinks = [
   { label: "MBBS / MD Courses", href: "/courses/medicine" },
@@ -104,52 +111,38 @@ export default function Footer() {
               Contact
             </h3>
             <ul className="mt-4 space-y-3 text-sm">
+              {INDIA_OFFICES.map((office) => (
+                <li key={office.key}>
+                  <a
+                    href={office.tel}
+                    className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
+                  >
+                    {office.phoneDisplay}{" "}
+                    <span className="text-white/50">({office.city})</span>
+                  </a>
+                </li>
+              ))}
               <li>
                 <a
-                  href="tel:+917447552878"
+                  href={GEORGIA_OFFICE.tel}
                   className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
                 >
-                  +91 74475 52878{" "}
-                  <span className="text-white/50">(Kolhapur)</span>
+                  {GEORGIA_OFFICE.phoneDisplay}{" "}
+                  <span className="text-white/50">(Georgia · {GEORGIA_OFFICE.companyName})</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+917620707088"
+                  href={`mailto:${CONTACT_EMAIL}`}
                   className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
                 >
-                  +91 76207 07088{" "}
-                  <span className="text-white/50">(CSN)</span>
+                  {CONTACT_EMAIL}
                 </a>
               </li>
+              <li className="text-white/50">{OFFICE_HOURS_INDIA} (India offices)</li>
               <li>
                 <a
-                  href="tel:+995591717122"
-                  className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
-                >
-                  +995 591 717122{" "}
-                  <span className="text-white/50">(Georgia)</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:connect@abhaglobaleducare.com"
-                  className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
-                >
-                  connect@abhaglobaleducare.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:abhaglobaleducare@gmail.com"
-                  className="text-white/70 transition-colors duration-200 hover:text-[#C6962E]"
-                >
-                  abhaglobaleducare@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://wa.me/917447552878"
+                  href={WHATSAPP.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-white/70 transition-colors duration-200 hover:text-[#C6962E]"

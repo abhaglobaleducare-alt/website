@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 import { sendLeadToCRM } from "@/lib/crm";
+import { KOLHAPUR, WHATSAPP, waLinkEncoded } from "@/data/contacts";
 
 // Validation schema for contact form
 const contactSchema = z.object({
@@ -137,14 +138,14 @@ function buildAutoReplyEmail(name: string, source?: string): string {
           </div>
           <p>For faster activation, send your payment screenshot on WhatsApp:</p>
           <p>
-            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878?text=Hi+I+just+registered+for+NEET+Preparation+Portal" style="color: #C6962E;">+91 74475 52878</a><br>
-            <strong>Phone:</strong> +91 74475 52878<br>
+            <strong>WhatsApp:</strong> <a href="${waLinkEncoded('Hi+I+just+registered+for+NEET+Preparation+Portal')}" style="color: #C6962E;">${WHATSAPP.display}</a><br>
+            <strong>Phone:</strong> ${KOLHAPUR.phoneDisplay}<br>
             <strong>Email:</strong> abhaglobaleducare@gmail.com
           </p>`
     : isNeetHub
       ? `
           <h2>Registration Received, ${name}!</h2>
-          <p>Thank you for registering for the <strong>ABHA NEET Practice Hub (₹1,111/year)</strong>.</p>
+          <p>Thank you for registering for the <strong>ABHA NEET Practice Hub (₹2,110/year)</strong>.</p>
           <div class="highlight">
             <strong>What happens next?</strong>
             <ul>
@@ -155,8 +156,8 @@ function buildAutoReplyEmail(name: string, source?: string): string {
           </div>
           <p>For faster activation, send your payment screenshot on WhatsApp:</p>
           <p>
-            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878?text=Hi+I+just+registered+for+NEET+Practice+Hub" style="color: #C6962E;">+91 74475 52878</a><br>
-            <strong>Phone:</strong> +91 74475 52878<br>
+            <strong>WhatsApp:</strong> <a href="${waLinkEncoded('Hi+I+just+registered+for+NEET+Practice+Hub')}" style="color: #C6962E;">${WHATSAPP.display}</a><br>
+            <strong>Phone:</strong> ${KOLHAPUR.phoneDisplay}<br>
             <strong>Email:</strong> abhaglobaleducare@gmail.com
           </p>`
       : `
@@ -172,9 +173,9 @@ function buildAutoReplyEmail(name: string, source?: string): string {
           </div>
           <p>In the meantime, feel free to reach us at:</p>
           <p>
-            <strong>Phone:</strong> +91 74475 52878<br>
+            <strong>Phone:</strong> ${KOLHAPUR.phoneDisplay}<br>
             <strong>Email:</strong> abhaglobaleducare@gmail.com<br>
-            <strong>WhatsApp:</strong> <a href="https://wa.me/917447552878" style="color: #C6962E;">Chat with us</a>
+            <strong>WhatsApp:</strong> <a href="${WHATSAPP.link}" style="color: #C6962E;">Chat with us</a>
           </p>`;
 
   return `

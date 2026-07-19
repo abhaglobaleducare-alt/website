@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Star, Quote, Play, Users, Camera, MessageSquare, Expand, X } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
+import { WHATSAPP } from '@/data/contacts';
 
 /* ── Review data ─────────────────────────────────────────────── */
 const reviews = [
@@ -540,7 +541,7 @@ export default function Gallery() {
               Book Free Counselling →
             </a>
             <a
-              href="https://wa.me/917447552878"
+              href={WHATSAPP.link}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-[#0B1A35] px-8 py-3.5 rounded-full font-bold text-sm hover:bg-white/90 transition-all duration-300 hover:-translate-y-1"

@@ -4,7 +4,7 @@ import StreamCards from '@/components/StreamCards';
 import MbbsIntro from '@/components/MbbsIntro';
 import Stats from '@/components/Stats';
 import WhyAbha from '@/components/WhyAbha';
-import AgestOfferBanner from '@/components/AgestOfferBanner';
+import IpadOfferCard from '@/components/IpadOfferCard';
 import HomeCta from '@/components/HomeCta';
 import Footer from '@/components/Footer';
 
@@ -18,7 +18,11 @@ export default function Home() {
         <MbbsIntro />
         <Stats />
         <WhyAbha />
-        <AgestOfferBanner />
+        <section className="bg-light-gray px-4 py-16 sm:px-8">
+          <div className="mx-auto max-w-5xl">
+            <IpadOfferCard />
+          </div>
+        </section>
         <HomeCta />
       </main>
       <Footer />

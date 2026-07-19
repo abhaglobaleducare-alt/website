@@ -18,6 +18,7 @@ import {
   Volume2,
   VolumeX,
 } from 'lucide-react';
+import { WHATSAPP } from '@/data/contacts';
 
 /* ── FAQ data ────────────────────────────────────────────────── */
 const faqs = [
@@ -55,7 +56,7 @@ const faqs = [
   },
   {
     q: 'What is the AGEST Scholarship?',
-    a: 'AGEST (ABHA Global Education Scholarship Test) is a scholarship exam designed in NEET MCQ format. Top 300 scorers win up to $6,000 in tuition scholarships for MBBS in Georgia. Registration fee is just ₹111. Next exam dates: 26 Apr & 14 May.',
+    a: "AGEST (ABHA Global Education Scholarship Test) is ABHA's consistency-based scholarship exam in NEET MCQ format. AGEST 2026 was successfully conducted, with the top 300 scholars selected for up to $6,000 in tuition scholarships towards MBBS in Georgia.",
   },
   {
     q: 'How do Clinical Workshops help with NEXT/FMGE?',
@@ -650,7 +651,7 @@ export default function Educate() {
                 Book Free Counselling
               </a>
               <a
-                href="https://wa.me/917447552878"
+                href={WHATSAPP.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#0B1A35] text-white px-7 py-3 rounded-full font-bold text-sm hover:-translate-y-0.5 transition-all duration-300 hover:bg-[#193769]"

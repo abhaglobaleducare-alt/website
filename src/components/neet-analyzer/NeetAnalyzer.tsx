@@ -21,7 +21,7 @@ import SeatAvailability from './SeatAvailability';
 import ExplanationCard from './ExplanationCard';
 import ActionButtons from './ActionButtons';
 import Disclaimer from './Disclaimer';
-import AgestPromo from './AgestPromo';
+import IpadOfferCard from '@/components/IpadOfferCard';
 
 interface Props {
   heroTitle?: string;
@@ -127,6 +127,13 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                 <RecommendationRoadmap recommendation={analysis.recommendation} roadmap={analysis.roadmap} />
               </Section>
 
+              {/* 2b. iPad Early Bird — PRIMARY placement for scores under 550 */}
+              {analysis.inputs.score < 550 && (
+                <Section delay={0.05}>
+                  <IpadOfferCard score={analysis.inputs.score} />
+                </Section>
+              )}
+
               {/* 3. Route-by-route chances */}
               <Section delay={0.05}>
                 <div>
@@ -148,10 +155,10 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                 </div>
               </Section>
 
-              {/* 4b. AGEST scholarship promo — only when Govt is unlikely / re-attempt */}
-              {analysis.recommendation.tone === 'action' && (
+              {/* 4b. iPad Early Bird — secondary "Special Offer" placement for 550+ */}
+              {analysis.inputs.score >= 550 && (
                 <Section delay={0.05}>
-                  <AgestPromo />
+                  <IpadOfferCard score={analysis.inputs.score} variant="compact" />
                 </Section>
               )}
 

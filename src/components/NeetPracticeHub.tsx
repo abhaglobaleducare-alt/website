@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LeadGate from '@/components/LeadGate';
 import { Target, BarChart3, Clock, Trophy, CheckCircle2, ArrowRight, Loader2, Phone, Mail, Zap } from 'lucide-react';
+import { WHATSAPP, KOLHAPUR, waLink, waLinkEncoded } from '@/data/contacts';
 
 const features = [
   { icon: Target, title: 'Full NEET Mock Tests', desc: '180 questions · 3 hours · Physics, Chemistry & Biology — exact NEET exam pattern every time' },
@@ -25,7 +26,7 @@ const included = [
 
 const steps = [
   { n: '01', t: 'Fill the registration form', d: 'Enter your details below. Takes under 2 minutes.' },
-  { n: '02', t: 'Pay ₹111 via UPI (Introductory Offer)', d: 'Send ₹111 to the UPI ID shown. Regular price ₹2,110. Screenshot your transaction.' },
+  { n: '02', t: 'Pay ₹2,110 via UPI', d: 'Send ₹2,110 to the UPI ID shown. Screenshot your transaction.' },
   { n: '03', t: 'Enter your UTR number', d: 'Add your UPI Transaction ID in the form so our team can verify payment.' },
   { n: '04', t: 'Admin verifies & activates', d: 'We verify your payment and set up your account within 24 hours.' },
   { n: '05', t: 'Start practising immediately', d: 'Receive login credentials via WhatsApp/Email. Full portal access begins.' },
@@ -51,8 +52,8 @@ export default function NeetPracticeHub() {
           city: fd.get('city'),
           neetStatus: fd.get('neetStatus'),
           neetScore: fd.get('neetScore'),
-          course: 'NEET Practice Hub — ₹111 Introductory Offer',
-          message: `NEET Practice Hub Registration — ₹111 Introductory Offer. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
+          course: 'NEET Practice Hub — ₹2,110/year',
+          message: `NEET Practice Hub Registration — ₹2,110/year. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
           source: 'neet-practice-hub-registration',
         }),
       });
@@ -67,7 +68,7 @@ export default function NeetPracticeHub() {
       }
     } catch {
       setFormState('error');
-      setStatusMsg('Network error. Please WhatsApp us at +91 74475 52878.');
+      setStatusMsg(`Network error. Please WhatsApp us at ${WHATSAPP.display}.`);
     }
   }
 
@@ -77,20 +78,18 @@ export default function NeetPracticeHub() {
       {/* INTRODUCTORY OFFER BANNER */}
       <div className="py-3 px-4 text-center" style={{ background: 'linear-gradient(90deg, #5B21B6, #7C3AED, #6D28D9)' }}>
         <p className="text-white text-sm font-bold">
-          <span className="inline-block bg-yellow-400 text-purple-900 text-xs font-black px-2 py-0.5 rounded-full mr-2 uppercase tracking-wide">Introductory Offer</span>
-          NEET Practice Hub — Full Mock Tests at{' '}
-          <span className="line-through text-purple-200 mr-1">₹2,110</span>
-          <span className="text-yellow-300 text-base">₹111 only</span>
+          NEET Practice Hub — Full Mock Tests ·{' '}
+          <span className="text-yellow-300 text-base">₹2,110 / year</span>
           {' '}·{' '}
           <span className="text-purple-200">NEET 2026 Aspirants</span>
           {' '}·{' '}
-          <LeadGate action="claim_111" mode="newTab">
+          <LeadGate action="register_practice_hub" mode="newTab">
           <a
-            href="https://wa.me/917447552878?text=I%20want%20to%20register%20for%20the%20NEET%20Practice%20Hub%20at%20%E2%82%B9111%20%28introductory%20offer%29"
+            href={waLink('I want to register for the NEET Practice Hub')}
             target="_blank" rel="noopener noreferrer"
             className="underline text-yellow-300 hover:text-yellow-100 transition-colors"
           >
-            Claim via WhatsApp →
+            Register via WhatsApp →
           </a>
           </LeadGate>
         </p>
@@ -124,12 +123,11 @@ export default function NeetPracticeHub() {
             className="inline-flex flex-col items-center gap-2 rounded-2xl px-8 py-5"
             style={{ background: 'rgba(124,58,237,0.2)', border: '2px solid rgba(124,58,237,0.5)' }}
           >
-            <div className="flex items-center gap-3">
-              <span className="text-slate-400 line-through text-xl">₹2,110</span>
-              <span className="font-playfair font-black text-5xl" style={{ color: '#C6962E' }}>₹111</span>
-              <span className="text-xs font-black px-2.5 py-1 rounded-full" style={{ background: '#7C3AED', color: '#FDE68A' }}>90% OFF</span>
+            <div className="flex items-baseline gap-2">
+              <span className="font-playfair font-black text-5xl" style={{ color: '#C6962E' }}>₹2,110</span>
+              <span className="text-purple-200 text-sm font-semibold">/ year</span>
             </div>
-            <span className="text-purple-300 text-xs font-semibold uppercase tracking-widest">Introductory Offer · NEET 2026 Aspirants Only</span>
+            <span className="text-purple-300 text-xs font-semibold uppercase tracking-widest">NEET 2026 Aspirants Only</span>
             <span className="text-slate-400 text-xs">Unlimited Tests · Full Portal Access · 1 Year</span>
           </motion.div>
         </div>
@@ -168,9 +166,8 @@ export default function NeetPracticeHub() {
               Everything Included
             </p>
             <div className="flex items-center justify-center gap-2 mb-6">
-              <span className="text-gray-400 line-through text-sm">₹2,110/year</span>
-              <span className="font-black text-lg" style={{ color: '#7C3AED' }}>₹111</span>
-              <span className="text-xs font-bold px-2 py-0.5 rounded-full text-white" style={{ background: '#7C3AED' }}>Introductory Offer</span>
+              <span className="font-black text-lg" style={{ color: '#7C3AED' }}>₹2,110</span>
+              <span className="text-gray-500 text-sm">/ year</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {included.map((item) => (
@@ -226,29 +223,28 @@ export default function NeetPracticeHub() {
               <div className="mb-4">
                 <p className="font-bold text-sm" style={{ color: '#C6962E' }}>💳 Scan & Pay via UPI</p>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-white/40 text-xs line-through">₹2,110</span>
-                  <span className="text-yellow-300 font-black text-lg">₹111</span>
-                  <span className="text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: '#7C3AED', color: '#FDE68A' }}>Introductory Offer</span>
+                  <span className="text-yellow-300 font-black text-lg">₹2,110</span>
+                  <span className="text-white/50 text-xs">/ year</span>
                 </div>
               </div>
               <div className="flex justify-center mb-4">
-                <div className="bg-white p-3 rounded-xl">
-                  <img
-                    src="/images/qr-neet-hub-1111.png.jpeg"
-                    alt="UPI QR Code — ₹1,111 NEET Practice Hub"
-                    width={180}
-                    height={180}
-                    style={{ display: 'block' }}
-                  />
+                <div
+                  className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-center"
+                  style={{ width: 180, height: 180 }}
+                >
+                  <span className="text-white/60 text-xs font-semibold px-4 leading-relaxed">
+                    UPI QR code<br />updating soon
+                  </span>
+                  <span className="text-white/40 text-[11px] mt-1 px-4">Pay to the UPI ID below</span>
                 </div>
               </div>
-              <p className="text-white/50 text-xs text-center mb-4">Scan with any UPI app — Google Pay, PhonePe, Paytm, BHIM</p>
+              <p className="text-white/50 text-xs text-center mb-4">Pay ₹2,110 to the UPI ID below via any UPI app — Google Pay, PhonePe, Paytm, BHIM</p>
               <div className="space-y-2">
                 {[
                   { label: 'UPI ID', value: 'yespay.bizsbiz175213@yesbankltd' },
                   { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
-                  { label: 'Amount', value: '₹111 (Intro Offer)' },
-                  { label: 'WhatsApp', value: '+91 74475 52878' },
+                  { label: 'Amount', value: '₹2,110 / year' },
+                  { label: 'WhatsApp', value: WHATSAPP.display },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
                     <span className="text-white/50 text-xs">{label}</span>
@@ -275,7 +271,7 @@ export default function NeetPracticeHub() {
                     Registration Received!
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">{statusMsg}</p>
-                  <a href="https://wa.me/917447552878?text=Hi%2C+I+just+registered+for+NEET+Practice+Hub"
+                  <a href={waLinkEncoded("Hi%2C+I+just+registered+for+NEET+Practice+Hub")}
                     target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white"
                     style={{ background: '#25D366' }}>
@@ -289,7 +285,7 @@ export default function NeetPracticeHub() {
                   <h3 className="font-playfair font-bold text-2xl mb-1" style={{ color: '#0B1A35' }}>
                     Register Now
                   </h3>
-                  <p className="text-gray-400 text-xs mb-6">NEET Practice Hub · <span className="font-bold" style={{ color: '#7C3AED' }}>₹111 Introductory Offer</span> · NEET 2026 Aspirants Only</p>
+                  <p className="text-gray-400 text-xs mb-6">NEET Practice Hub · <span className="font-bold" style={{ color: '#7C3AED' }}>₹2,110 / year</span> · NEET 2026 Aspirants Only</p>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -343,7 +339,7 @@ export default function NeetPracticeHub() {
                       <label className="block text-xs font-semibold mb-1.5" style={{ color: '#0B1A35' }}>
                         UPI Transaction ID (UTR) *
                       </label>
-                      <input name="utr" type="text" required placeholder="Enter UTR after paying ₹111" disabled={formState === 'loading'}
+                      <input name="utr" type="text" required placeholder="Enter UTR after paying ₹2,110" disabled={formState === 'loading'}
                         className="w-full px-3 py-2.5 rounded-xl border text-sm focus:outline-none focus:border-[#C6962E] transition-colors"
                         style={{ borderColor: '#E2E8F0', color: '#0B1A35' }} />
                       <p className="text-gray-400 text-xs mt-1">Found in your UPI app under transaction history</p>
@@ -385,9 +381,9 @@ export default function NeetPracticeHub() {
         </div>
         <p className="text-white/50 text-sm mb-4">Questions? We&apos;re here to help.</p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <a href="tel:+917447552878"
+          <a href={KOLHAPUR.tel}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-[#C6962E]/60 transition-colors">
-            <Phone className="w-4 h-4" /> +91 74475 52878
+            <Phone className="w-4 h-4" /> {KOLHAPUR.phoneDisplay}
           </a>
           <a href="mailto:connect@abhaglobaleducare.com"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white border border-white/20 hover:border-[#C6962E]/60 transition-colors">
