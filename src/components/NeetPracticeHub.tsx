@@ -228,17 +228,17 @@ export default function NeetPracticeHub() {
                 </div>
               </div>
               <div className="flex justify-center mb-4">
-                <div
-                  className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-white/20 bg-white/5 text-center"
-                  style={{ width: 180, height: 180 }}
-                >
-                  <span className="text-white/60 text-xs font-semibold px-4 leading-relaxed">
-                    UPI QR code<br />updating soon
-                  </span>
-                  <span className="text-white/40 text-[11px] mt-1 px-4">Pay to the UPI ID below</span>
+                <div className="bg-white p-3 rounded-xl">
+                  <img
+                    src="/images/qr-neet-hub-2110.jpeg"
+                    alt="UPI QR Code — ABHA Global Educare LLP (pay ₹2,110)"
+                    width={180}
+                    height={180}
+                    style={{ display: 'block' }}
+                  />
                 </div>
               </div>
-              <p className="text-white/50 text-xs text-center mb-4">Pay ₹2,110 to the UPI ID below via any UPI app — Google Pay, PhonePe, Paytm, BHIM</p>
+              <p className="text-white/50 text-xs text-center mb-4">Scan &amp; pay ₹2,110 with any UPI app — Google Pay, PhonePe, Paytm, BHIM</p>
               <div className="space-y-2">
                 {[
                   { label: 'UPI ID', value: 'yespay.bizsbiz175213@yesbankltd' },
