@@ -69,6 +69,18 @@ export const announcements: Announcement[] = [
     startDate: '2026-07-17',
     endDate: '2026-10-17',
   },
+  {
+    // Evergreen tool — no date window, so it stays live while active:true.
+    id: 'neet-admission-analyzer',
+    active: true,
+    icon: '🎯',
+    headline: 'NEET Admission Decision Engine — Ready! तुमच्या Score व AIR नुसार तपासा',
+    subtext:
+      'Achieved NEET score व All India Rank टाका — Govt / Private / Abroad admission ची शक्यता instant, data-driven विश्लेषणासह पाहा.',
+    ctaLabel: 'Check My Admission Chances',
+    ctaHref: '/neet-analyzer',
+    theme: 'urgent',
+  },
 
   // ── EXAMPLE: festival greeting (copy → edit → set active: true) ──────────
   // {
