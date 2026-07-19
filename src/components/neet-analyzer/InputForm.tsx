@@ -27,7 +27,7 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
     >
       <div className="grid gap-5 sm:grid-cols-2">
         {/* Score */}
-        <div className="sm:col-span-2">
+        <div>
           <label htmlFor="neet-score" className="mb-1.5 block text-sm font-semibold text-primary-navy">
             NEET Score <span className="text-navy-300">(out of {MAX_SCORE})</span>
           </label>
@@ -41,6 +41,26 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
             value={Number.isFinite(value.score) ? value.score : ''}
             onChange={(e) => set('score', Number(e.target.value))}
             placeholder="e.g. 585"
+            className="w-full rounded-xl border border-navy-200 bg-light-gray px-4 py-3 text-lg font-semibold text-primary-navy outline-none transition focus:border-primary-gold focus:ring-2 focus:ring-gold-200"
+          />
+        </div>
+
+        {/* All India Rank (optional) */}
+        <div>
+          <label htmlFor="neet-air" className="mb-1.5 block text-sm font-semibold text-primary-navy">
+            All India Rank <span className="text-navy-300">(optional — if you have it)</span>
+          </label>
+          <input
+            id="neet-air"
+            type="number"
+            inputMode="numeric"
+            min={1}
+            value={value.allIndiaRank && value.allIndiaRank > 0 ? value.allIndiaRank : ''}
+            onChange={(e) => {
+              const air = Number(e.target.value);
+              set('allIndiaRank', air > 0 ? air : undefined);
+            }}
+            placeholder="e.g. 45000"
             className="w-full rounded-xl border border-navy-200 bg-light-gray px-4 py-3 text-lg font-semibold text-primary-navy outline-none transition focus:border-primary-gold focus:ring-2 focus:ring-gold-200"
           />
         </div>

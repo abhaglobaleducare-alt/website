@@ -2,8 +2,9 @@
 
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { runFullAnalysis, formatRank, type PredictorInputs, type FullAnalysis } from '@/lib/neetPredictor';
+import { runFullAnalysis, formatRank, previewLine, type PredictorInputs, type FullAnalysis } from '@/lib/neetPredictor';
 import { CATEGORIES, STATES, type Category, type StateName } from '@/data/neetPredictorData';
+import { trackEvent } from '@/lib/analytics';
 
 import Hero from './Hero';
 import InputForm from './InputForm';
@@ -22,6 +23,12 @@ import ExplanationCard from './ExplanationCard';
 import ActionButtons from './ActionButtons';
 import Disclaimer from './Disclaimer';
 import IpadOfferCard from '@/components/IpadOfferCard';
+import RegistrationWall from './RegistrationWall';
+import RoadmapPromise from './RoadmapPromise';
+import DynamicCta from './DynamicCta';
+import EngagementCards from './EngagementCards';
+import SmartDisclaimer from './SmartDisclaimer';
+import Confetti from './Confetti';
 
 interface Props {
   heroTitle?: string;
@@ -53,6 +60,9 @@ function Section({ children, delay = 0 }: { children: React.ReactNode; delay?: n
 export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
   const [inputs, setInputs] = useState<PredictorInputs>(DEFAULT_INPUTS);
   const [analysis, setAnalysis] = useState<FullAnalysis | null>(null);
+  const [registered, setRegistered] = useState(false);
+  const [registeredName, setRegisteredName] = useState('');
+  const [showConfetti, setShowConfetti] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const summary = useMemo(() => {
@@ -60,9 +70,11 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
     return `My NEET score is ${analysis.inputs.score} (${analysis.inputs.category}, ${analysis.inputs.state}), estimated AIR ~${formatRank(analysis.rank)}.`;
   }, [analysis]);
 
-  const runWith = (next: PredictorInputs, scroll = true) => {
+  const runWith = (next: PredictorInputs, scroll = true, unlocked = false) => {
     if (!Number.isFinite(next.score)) return;
     setAnalysis(runFullAnalysis(next));
+    setRegistered(unlocked);
+    setShowConfetti(false);
     if (scroll) {
       requestAnimationFrame(() => {
         resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -70,43 +82,79 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
     }
   };
 
-  const handleSubmit = () => runWith(inputs);
+  const handleSubmit = () => {
+    trackEvent('analyze_clicked', { score: inputs.score, category: inputs.category, state: inputs.state });
+    runWith(inputs);
+  };
 
-  // Optional deep-link: /neet-analyzer?score=550&category=OBC&state=Uttar%20Pradesh&budget=20&auto=1
-  // Prefills the form and (with auto=1) runs the analysis on mount — shareable results links.
+  const handleUnlock = (name: string) => {
+    setRegisteredName(name);
+    setRegistered(true);
+    if ((analysis?.inputs.score ?? 0) >= 600) {
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 3200);
+    }
+    requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
+
+  // Optional deep-link: ?score=550&category=OBC&state=Uttar%20Pradesh&budget=20&auto=1[&unlock=1]
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (!params.has('score')) return;
-
     const score = Number(params.get('score'));
     if (!Number.isFinite(score)) return;
 
     const catParam = params.get('category');
     const stateParam = params.get('state');
     const budgetLakh = Number(params.get('budget'));
+    const airParam = Number(params.get('air'));
 
     const next: PredictorInputs = {
       score,
       category: CATEGORIES.includes(catParam as Category) ? (catParam as Category) : 'General',
       state: STATES.includes(stateParam as StateName) ? (stateParam as StateName) : 'Maharashtra',
       budget: Number.isFinite(budgetLakh) && budgetLakh > 0 ? budgetLakh * 100_000 : undefined,
+      allIndiaRank: Number.isFinite(airParam) && airParam > 0 ? airParam : undefined,
     };
 
     setInputs(next);
-    if (params.get('auto') === '1') runWith(next, false);
+    if (params.get('auto') === '1') runWith(next, false, params.get('unlock') === '1');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Scroll-depth analytics (fires each threshold once).
+  useEffect(() => {
+    if (!analysis) return;
+    const fired = new Set<number>();
+    const onScroll = () => {
+      const el = document.documentElement;
+      const pct = (el.scrollTop + window.innerHeight) / el.scrollHeight;
+      for (const t of [0.25, 0.5, 0.75, 1]) {
+        if (pct >= t && !fired.has(t)) {
+          fired.add(t);
+          trackEvent('page_scroll_depth', { depth: Math.round(t * 100), score: analysis.inputs.score });
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [analysis]);
+
   const handleReset = () => {
     setAnalysis(null);
+    setRegistered(false);
+    setShowConfetti(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const score = analysis?.inputs.score ?? 0;
+
   return (
     <div className="bg-light-gray pb-24">
+      {showConfetti && <Confetti />}
       <Hero title={heroTitle} subtitle={heroSubtitle} />
-
-      {/* SEO H1 — visually part of the hero flow but a real heading for crawlers */}
       {h1 && <h1 className="sr-only">{h1}</h1>}
 
       <div className="mx-auto -mt-10 max-w-5xl px-4">
@@ -117,79 +165,132 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
         <AnimatePresence>
           {analysis && (
             <div ref={resultsRef} className="scroll-mt-24 space-y-8 pt-10">
-              {/* 1. Score meter */}
+              {/* Smart disclaimer + score meter — always shown */}
               <Section>
+                <SmartDisclaimer />
+              </Section>
+              <Section delay={0.05}>
                 <ScoreMeter score={analysis.inputs.score} rank={analysis.rank} percentile={analysis.percentile} />
               </Section>
 
-              {/* 2. The verdict + roadmap — lead with the decision */}
-              <Section delay={0.05}>
-                <RecommendationRoadmap recommendation={analysis.recommendation} roadmap={analysis.roadmap} />
-              </Section>
+              {!registered ? (
+                /* ---------------- PREVIEW + REGISTRATION WALL ---------------- */
+                <>
+                  <Section delay={0.05}>
+                    <div className="rounded-2xl border border-navy-100 bg-white p-5 text-center shadow-card">
+                      <p className="text-xs font-bold uppercase tracking-wider text-navy-400">Preview</p>
+                      <p className="mx-auto mt-1 max-w-2xl text-lg font-semibold text-primary-navy">{previewLine(analysis)}</p>
+                      <p className="mt-1 text-sm text-navy-500">
+                        {analysis.qualified
+                          ? 'You have cleared the NEET qualifying line for your category ✓'
+                          : 'You are below the qualifying line for your category'}
+                      </p>
+                    </div>
+                  </Section>
 
-              {/* 2b. iPad Early Bird — PRIMARY placement for scores under 550 */}
-              {analysis.inputs.score < 550 && (
-                <Section delay={0.05}>
-                  <IpadOfferCard score={analysis.inputs.score} />
-                </Section>
-              )}
-
-              {/* 3. Route-by-route chances */}
-              <Section delay={0.05}>
-                <div>
-                  <h2 className="mb-4 font-playfair text-3xl font-bold text-primary-navy">Your chances, route by route</h2>
-                  <div className="grid gap-5 md:grid-cols-2">
-                    <GovernmentCard result={analysis.government} />
-                    <StateQuotaCard result={analysis.state} />
-                    <PrivateCard result={analysis.private} variant="private" />
-                    <PrivateCard result={analysis.deemed} variant="deemed" />
+                  <div className="relative">
+                    {/* blurred teaser of locked sections */}
+                    <div
+                      aria-hidden
+                      className="pointer-events-none max-h-[560px] select-none space-y-5 overflow-hidden opacity-50 blur-[7px]"
+                    >
+                      <div className="grid gap-5 md:grid-cols-2">
+                        <GovernmentCard result={analysis.government} />
+                        <StateQuotaCard result={analysis.state} />
+                      </div>
+                      <GeorgiaCard result={analysis.abroad} />
+                    </div>
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-light-gray to-transparent" />
+                    <div className="relative z-10 -mt-28 px-1 sm:-mt-24">
+                      <RegistrationWall analysis={analysis} onUnlock={handleUnlock} />
+                    </div>
                   </div>
-                </div>
-              </Section>
+                </>
+              ) : (
+                /* -------------------- UNLOCKED FULL RESULTS -------------------- */
+                <>
+                  <Section>
+                    <RoadmapPromise
+                      name={registeredName}
+                      score={analysis.inputs.score}
+                      rank={analysis.rank}
+                      rankIsEstimate={!analysis.inputs.allIndiaRank}
+                    />
+                  </Section>
 
-              {/* 4. Flagship abroad cards — Georgia + Timor-Leste */}
-              <Section delay={0.05}>
-                <div className="grid gap-6">
-                  <GeorgiaCard result={analysis.abroad} />
-                  <TimorCard result={analysis.abroad} />
-                </div>
-              </Section>
+                  <Section delay={0.05}>
+                    <DynamicCta score={score} />
+                  </Section>
 
-              {/* 4b. iPad Early Bird — secondary "Special Offer" placement for 550+ */}
-              {analysis.inputs.score >= 550 && (
-                <Section delay={0.05}>
-                  <IpadOfferCard score={analysis.inputs.score} variant="compact" />
-                </Section>
+                  <Section delay={0.05}>
+                    <RecommendationRoadmap recommendation={analysis.recommendation} roadmap={analysis.roadmap} />
+                  </Section>
+
+                  {score < 550 && (
+                    <Section delay={0.05}>
+                      <IpadOfferCard score={score} />
+                    </Section>
+                  )}
+
+                  <Section delay={0.05}>
+                    <div>
+                      <h2 className="mb-4 font-playfair text-3xl font-bold text-primary-navy">Your chances, route by route</h2>
+                      <div className="grid gap-5 md:grid-cols-2">
+                        <GovernmentCard result={analysis.government} />
+                        <StateQuotaCard result={analysis.state} />
+                        <PrivateCard result={analysis.private} variant="private" />
+                        <PrivateCard result={analysis.deemed} variant="deemed" />
+                      </div>
+                    </div>
+                  </Section>
+
+                  <Section delay={0.05}>
+                    <div className="grid gap-6">
+                      <GeorgiaCard result={analysis.abroad} />
+                      <TimorCard result={analysis.abroad} />
+                    </div>
+                  </Section>
+
+                  {score >= 550 && (
+                    <Section delay={0.05}>
+                      <IpadOfferCard score={score} variant="compact" />
+                    </Section>
+                  )}
+
+                  <Section delay={0.05}>
+                    <ComparisonTable comparison={analysis.costComparison} />
+                  </Section>
+                  <Section delay={0.05}>
+                    <CostBreakdown breakdowns={analysis.costBreakdowns} />
+                  </Section>
+
+                  <Section delay={0.05}>
+                    <div className="grid gap-6 lg:grid-cols-2">
+                      <ConfidenceScore confidence={analysis.confidence} />
+                      <SeatAvailability buckets={analysis.seatAvailability} total={analysis.totalSeats} />
+                    </div>
+                  </Section>
+
+                  <Section delay={0.05}>
+                    <ExplanationCard />
+                  </Section>
+
+                  {/* Post-result engagement cards */}
+                  <Section delay={0.05}>
+                    <div>
+                      <h2 className="mb-4 font-playfair text-2xl font-bold text-primary-navy">Keep going — next steps</h2>
+                      <EngagementCards score={score} />
+                    </div>
+                  </Section>
+
+                  <Section delay={0.05}>
+                    <ActionButtons onReset={handleReset} summary={summary} />
+                  </Section>
+                  <Section delay={0.05}>
+                    <Disclaimer />
+                  </Section>
+                </>
               )}
-
-              {/* 5. Cost comparison + breakdown */}
-              <Section delay={0.05}>
-                <ComparisonTable comparison={analysis.costComparison} />
-              </Section>
-              <Section delay={0.05}>
-                <CostBreakdown breakdowns={analysis.costBreakdowns} />
-              </Section>
-
-              {/* 6. Confidence + seat reality */}
-              <Section delay={0.05}>
-                <div className="grid gap-6 lg:grid-cols-2">
-                  <ConfidenceScore confidence={analysis.confidence} />
-                  <SeatAvailability buckets={analysis.seatAvailability} total={analysis.totalSeats} />
-                </div>
-              </Section>
-
-              {/* 7. Explanation */}
-              <Section delay={0.05}>
-                <ExplanationCard />
-              </Section>
-
-              {/* 8. CTA + disclaimer */}
-              <Section delay={0.05}>
-                <ActionButtons onReset={handleReset} summary={summary} />
-              </Section>
-              <Section delay={0.05}>
-                <Disclaimer />
-              </Section>
             </div>
           )}
         </AnimatePresence>

@@ -61,6 +61,7 @@ export interface PredictorInputs {
   category: Category;
   state: StateName;
   budget?: number; // total budget in ₹ for the whole course (optional)
+  allIndiaRank?: number; // actual AIR if the student already has their result (optional)
 }
 
 /* -------------------------------------------------------------------------- */
@@ -624,7 +625,9 @@ export interface FullAnalysis {
 }
 
 export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
-  const rank = estimateRank(inputs.score);
+  // Use the student's actual AIR when provided; otherwise estimate from score.
+  const rank =
+    inputs.allIndiaRank && inputs.allIndiaRank > 0 ? Math.round(inputs.allIndiaRank) : estimateRank(inputs.score);
   const percentile = estimatePercentile(inputs.score);
   const qualified = isQualified(inputs.score, inputs.category);
 
@@ -657,6 +660,37 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
     totalSeats: TOTAL_MBBS_SEATS_INDIA,
     costBreakdowns,
   };
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Legal-safe phrasing (never "guaranteed" / "not possible" / "you will get") */
+/* -------------------------------------------------------------------------- */
+
+export function chancePhrase(chance: Chance): string {
+  switch (chance) {
+    case 'high':
+      return 'a strong likelihood';
+    case 'moderate':
+      return 'a moderate chance';
+    case 'low':
+      return 'a low likelihood';
+    case 'very-low':
+      return 'an unlikely chance based on historical trends';
+    case 'not-qualified':
+    default:
+      return 'no eligibility yet (below the qualifying line)';
+  }
+}
+
+/** One-line teaser shown above the registration wall, before full results. */
+export function previewLine(a: FullAnalysis): string {
+  if (!a.qualified) {
+    return 'Based on your score, you are currently below the NEET qualifying line for your category — but there are still MBBS pathways worth exploring. Unlock the full analysis to see them.';
+  }
+  const best = a.government.probability >= a.state.probability ? a.government : a.state;
+  return `Based on your score, you have ${chancePhrase(
+    best.chance,
+  )} of a Government MBBS seat. Unlock the full analysis for your rank, every route, costs and a personalised roadmap.`;
 }
 
 /* -------------------------------------------------------------------------- */
