@@ -25,10 +25,12 @@ export interface LeadPayload {
 const CRM_TIMEOUT_MS = 4000;
 
 /**
- * Send a lead to the CRM. Resolves silently on success OR failure — callers can
- * `await` it without any risk of it throwing or altering their response.
+ * Send a lead to the CRM. NEVER throws — callers can `await` it safely.
+ * Returns `true` only when the CRM confirmed receipt (HTTP 2xx); returns
+ * `false` when the CRM is not configured, errored, or timed out, so callers
+ * can detect a delivery failure and trace the lead instead of losing it.
  */
-export async function sendLeadToCRM(lead: LeadPayload): Promise<void> {
+export async function sendLeadToCRM(lead: LeadPayload): Promise<boolean> {
   const url = process.env.CRM_INGEST_URL;
   const apiKey = process.env.CRM_API_KEY;
 
@@ -36,7 +38,7 @@ export async function sendLeadToCRM(lead: LeadPayload): Promise<void> {
     console.warn(
       "[CRM] CRM_INGEST_URL or CRM_API_KEY not set — skipping CRM lead send.",
     );
-    return;
+    return false;
   }
 
   const controller = new AbortController();
@@ -65,11 +67,14 @@ export async function sendLeadToCRM(lead: LeadPayload): Promise<void> {
       console.warn(
         `[CRM] Lead ingest responded ${res.status} — lead not stored.`,
       );
+      return false;
     }
+    return true;
   } catch (error) {
     // Network error, timeout/abort, or anything else — swallow it. The form
     // submission and its email flow must continue unaffected.
     console.warn("[CRM] Lead ingest failed (non-blocking):", error);
+    return false;
   } finally {
     clearTimeout(timeout);
   }

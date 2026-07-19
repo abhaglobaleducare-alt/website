@@ -9,6 +9,7 @@ type FbqParams = Record<string, string | number | boolean | undefined>;
 export type NeetEvent =
   | "analyze_clicked"
   | "registration_completed"
+  | "lead_delivery_failed"
   | "whatsapp_cta_clicked"
   | "ipad_offer_clicked"
   | "callback_requested"

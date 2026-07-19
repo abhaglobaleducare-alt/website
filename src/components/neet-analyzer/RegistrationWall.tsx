@@ -134,18 +134,26 @@ export default function RegistrationWall({ analysis, onUnlock }: Props) {
       ...getUtm(),
     };
 
+    // Fail-safe UX: the student ALWAYS unlocks. If delivery isn't confirmed we
+    // still trace the lead (Meta Pixel event + client console) so it is never
+    // silently lost — the server also logs the full lead on its side.
+    trackEvent('registration_completed', { score: inputs.score, category: inputs.category });
     try {
       const res = await fetch('/api/neet-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error('bad response');
-      trackEvent('registration_completed', { score: inputs.score, category: inputs.category });
+      const data: { delivered?: boolean } = await res.json().catch(() => ({}));
+      if (!res.ok || data.delivered === false) {
+        trackEvent('lead_delivery_failed', { score: inputs.score });
+        console.error('[neet-lead] delivery not confirmed — lead (trace, not lost):', payload);
+      }
+    } catch (err) {
+      trackEvent('lead_delivery_failed', { score: inputs.score });
+      console.error('[neet-lead] submit failed — lead (trace, not lost):', payload, err);
+    } finally {
       onUnlock(f.fullName);
-    } catch {
-      setError('Something went wrong saving your details. Please try again, or WhatsApp us and we’ll help.');
-      setSubmitting(false);
     }
   }
 

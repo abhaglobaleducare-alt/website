@@ -81,9 +81,10 @@ function officeEmailHtml(d: LeadData): string {
   </body></html>`;
 }
 
-async function sendOfficeEmail(d: LeadData): Promise<void> {
-  const { SMTP_USER, SMTP_PASSWORD, LEAD_NOTIFY_EMAIL } = process.env;
-  if (!SMTP_USER || !SMTP_PASSWORD) return; // email not configured — skip silently
+/** Returns true only if the office email was actually sent. Never throws. */
+async function sendOfficeEmail(d: LeadData): Promise<boolean> {
+  const { SMTP_USER, SMTP_PASSWORD } = process.env;
+  if (!SMTP_USER || !SMTP_PASSWORD) return false; // email not configured — skip
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || "smtp.gmail.com",
@@ -93,13 +94,16 @@ async function sendOfficeEmail(d: LeadData): Promise<void> {
       tls: { rejectUnauthorized: false },
     });
     await transporter.sendMail({
-      from: SMTP_USER,
-      to: LEAD_NOTIFY_EMAIL || SMTP_USER,
+      from: process.env.SMTP_FROM || `"ABHA Website" <${SMTP_USER}>`,
+      // Reuse the site-wide notify list (comma-separated) used by the contact form.
+      to: process.env.SMTP_TO || "abhaglobaleducare@gmail.com, connect@abhaglobaleducare.com",
       subject: `NEET Analyzer Lead — ${d.fullName} (${d.neetScore})`,
       html: officeEmailHtml(d),
     });
+    return true;
   } catch (e) {
     console.warn("[neet-lead] office email failed (non-blocking):", e);
+    return false;
   }
 }
 
@@ -113,7 +117,7 @@ export async function POST(request: NextRequest) {
     const d = result.data;
 
     // Forward to CRM (structured) and email the office — both non-blocking.
-    await Promise.allSettled([
+    const [crmResult, emailResult] = await Promise.allSettled([
       sendLeadToCRM({
         name: d.fullName,
         email: d.email,
@@ -152,8 +156,30 @@ export async function POST(request: NextRequest) {
       sendOfficeEmail(d),
     ]);
 
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json({ ok: false, message: "Something went wrong." }, { status: 500 });
+    const crmOk = crmResult.status === "fulfilled" && crmResult.value === true;
+    const emailOk = emailResult.status === "fulfilled" && emailResult.value === true;
+    const delivered = crmOk || emailOk;
+
+    // A dropped lead is lost revenue. If NEITHER channel confirmed delivery,
+    // dump the full lead to the server logs (Vercel → Logs) so it is never
+    // silently lost, and tell the client so it can fire `lead_delivery_failed`.
+    if (!delivered) {
+      console.error(
+        "[neet-lead] DELIVERY FAILED — lead not stored in CRM or emailed. Full lead below so it is never lost:",
+        JSON.stringify({
+          ...d,
+          _crmConfigured: Boolean(process.env.CRM_INGEST_URL && process.env.CRM_API_KEY),
+          _smtpConfigured: Boolean(process.env.SMTP_USER && process.env.SMTP_PASSWORD),
+          _receivedAt: new Date().toISOString(),
+        }),
+      );
+    }
+
+    // Always ok:true — the student unlocks regardless. `delivered` is the trace flag.
+    return NextResponse.json({ ok: true, delivered, crmOk, emailOk });
+  } catch (err) {
+    // Unexpected server error AFTER we have the body — still trace what we can.
+    console.error("[neet-lead] unexpected error — lead may be lost:", err);
+    return NextResponse.json({ ok: false, delivered: false, message: "Something went wrong." }, { status: 500 });
   }
 }
