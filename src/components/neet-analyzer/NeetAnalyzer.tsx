@@ -195,7 +195,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
       <Hero title={heroTitle} subtitle={heroSubtitle} />
       {h1 && <h1 className="sr-only">{h1}</h1>}
 
-      <div className="mx-auto -mt-10 max-w-5xl px-4">
+      <div className="relative z-10 mx-auto -mt-10 max-w-5xl px-4">
         <Section>
           <InputForm value={inputs} onChange={setInputs} onSubmit={handleSubmit} />
         </Section>
