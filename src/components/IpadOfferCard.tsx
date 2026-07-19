@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Tablet, Phone, MessageCircle, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Phone, MessageCircle, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { waLink, KOLHAPUR } from '@/data/contacts';
 
 interface Props {
@@ -14,18 +14,69 @@ interface Props {
 
 /**
  * "FREE iPad" Early Bird offer card. Every placement MUST show the
- * "upon admission confirmation" condition + the T&C disclaimer (see below).
+ * "delivered after visa approval" condition + the T&C disclaimer (see below).
  * MBBS quality is primary; the iPad is a bonus incentive — kept professional.
+ *
+ * The iPad visual is a hand-crafted SVG mock (license-safe). To use a real
+ * product photo instead, drop it in /public/images and swap <IpadGraphic/>.
  */
+function IpadGraphic({ className = '' }: { className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, y: 10 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.1 }}
+      className={className}
+      aria-hidden="true"
+    >
+      <motion.svg
+        viewBox="0 0 240 320"
+        fill="none"
+        className="w-full drop-shadow-2xl"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <defs>
+          <linearGradient id="ipadBody" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#3c3c42" />
+            <stop offset="1" stopColor="#17171a" />
+          </linearGradient>
+          <linearGradient id="ipadScreen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#6d40b0" />
+            <stop offset="0.5" stopColor="#1f6feb" />
+            <stop offset="1" stopColor="#C6962E" />
+          </linearGradient>
+          <linearGradient id="ipadGlare" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#ffffff" stopOpacity="0.35" />
+            <stop offset="0.45" stopColor="#ffffff" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        {/* body */}
+        <rect x="8" y="4" width="224" height="312" rx="28" fill="url(#ipadBody)" stroke="#4c4c52" strokeWidth="1.5" />
+        {/* screen */}
+        <rect x="18" y="14" width="204" height="292" rx="18" fill="url(#ipadScreen)" />
+        {/* abstract wallpaper shapes */}
+        <circle cx="66" cy="86" r="58" fill="#ffffff" opacity="0.12" />
+        <circle cx="182" cy="238" r="72" fill="#ffffff" opacity="0.09" />
+        <circle cx="150" cy="70" r="26" fill="#ffffff" opacity="0.10" />
+        {/* glare */}
+        <rect x="18" y="14" width="204" height="292" rx="18" fill="url(#ipadGlare)" />
+        {/* front camera */}
+        <circle cx="120" cy="9" r="2.4" fill="#0c0c0e" />
+      </motion.svg>
+    </motion.div>
+  );
+}
+
 export default function IpadOfferCard({ score, variant = 'full', className = '' }: Props) {
   const waMessage = score
     ? `Hi! I am interested in MBBS Abroad with iPad Early Bird Offer. My NEET Score: ${score}`
     : 'Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer.';
 
   const points = [
-    'Limited Period Early Bird Offer',
     'Only for confirmed MBBS Abroad registrations',
-    'iPad delivered upon admission confirmation',
+    'iPad delivered after Visa Approval',
     'NMC & WHO Eligible universities in Georgia',
     'Transparent MBBS fees — Georgia tuition from ₹21 Lakhs',
   ];
@@ -55,19 +106,19 @@ export default function IpadOfferCard({ score, variant = 'full', className = '' 
           </span>
         </div>
 
-        <div className="relative mt-4 flex items-start gap-4">
-          <span className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-primary-gold sm:flex">
-            <Tablet className="h-7 w-7" />
-          </span>
-          <div>
+        {/* Heading + iPad visual */}
+        <div className="relative mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
+          <div className="flex-1">
             <h3 className="font-playfair text-2xl font-bold text-white sm:text-3xl">
               Register for MBBS Abroad — get a <span className="text-primary-gold">FREE iPad</span>
             </h3>
             <p className="mt-1.5 text-sm text-navy-100">
-              Register for MBBS Abroad with ABHA Global Educare and get a free iPad{' '}
-              <strong className="text-white">upon admission confirmation</strong>.
+              Register for MBBS Abroad with ABHA Global Educare and get a free iPad —{' '}
+              <strong className="text-white">delivered after your visa approval</strong>. Limited
+              Period Early Bird Offer.
             </p>
           </div>
+          <IpadGraphic className="mx-auto w-28 shrink-0 sm:mx-0 sm:w-32 md:w-40" />
         </div>
 
         {/* Points */}
@@ -113,8 +164,8 @@ export default function IpadOfferCard({ score, variant = 'full', className = '' 
 
         {/* Mandatory disclaimer */}
         <p className="relative mt-3 text-[11px] leading-relaxed text-navy-300">
-          * iPad provided upon confirmed admission to a partner university. Limited period offer. Terms &amp; conditions
-          apply.
+          * iPad provided after visa approval, on confirmed admission to a partner university.
+          Limited period offer. Terms &amp; conditions apply.
         </p>
       </motion.div>
     </div>
