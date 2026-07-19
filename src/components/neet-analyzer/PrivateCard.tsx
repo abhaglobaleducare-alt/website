@@ -2,7 +2,8 @@
 
 import { Building2, GraduationCap } from 'lucide-react';
 import type { PredictionResult } from '@/lib/neetPredictor';
-import { formatINR } from '@/lib/neetPredictor';
+import { money } from '@/lib/neetPredictor';
+import { useCurrency } from './currencyContext';
 import { chanceMeta } from './_shared';
 import ProbabilityMeter from './ProbabilityMeter';
 
@@ -14,6 +15,7 @@ export default function PrivateCard({
   result: PredictionResult;
   variant?: 'private' | 'deemed';
 }) {
+  const currency = useCurrency();
   const meta = chanceMeta[result.chance];
   const Icon = variant === 'deemed' ? GraduationCap : Building2;
   return (
@@ -31,7 +33,7 @@ export default function PrivateCard({
         {result.costTotal ? (
           <div className="text-right">
             <p className="text-xs text-navy-400">{result.costLabel}</p>
-            <p className="font-bold text-primary-navy">{formatINR(result.costTotal)}</p>
+            <p className="font-bold text-primary-navy">{money(result.costTotal, currency)}</p>
           </div>
         ) : null}
       </div>

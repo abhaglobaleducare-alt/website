@@ -29,6 +29,7 @@ import DynamicCta from './DynamicCta';
 import EngagementCards from './EngagementCards';
 import SmartDisclaimer from './SmartDisclaimer';
 import Confetti from './Confetti';
+import { CurrencyContext, type Currency } from './currencyContext';
 
 interface Props {
   heroTitle?: string;
@@ -63,6 +64,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
   const [registered, setRegistered] = useState(false);
   const [registeredName, setRegisteredName] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [currency, setCurrency] = useState<Currency>('INR');
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const summary = useMemo(() => {
@@ -99,10 +101,27 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
     });
   };
 
-  // Optional deep-link: ?score=550&category=OBC&state=Uttar%20Pradesh&budget=20&auto=1[&unlock=1]
+  // Restore results on browser Back (e.g. after visiting a linked page) via
+  // sessionStorage, OR from a ?score deep-link. Deep-link wins if present.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (!params.has('score')) return;
+    if (!params.has('score')) {
+      try {
+        const saved = sessionStorage.getItem('neet-analysis-v1');
+        if (saved) {
+          const s = JSON.parse(saved) as { inputs: PredictorInputs; registered: boolean; registeredName: string };
+          if (s.inputs && Number.isFinite(s.inputs.score)) {
+            setInputs(s.inputs);
+            setAnalysis(runFullAnalysis(s.inputs));
+            setRegistered(!!s.registered);
+            setRegisteredName(s.registeredName || '');
+          }
+        }
+      } catch {
+        /* ignore malformed storage */
+      }
+      return;
+    }
     const score = Number(params.get('score'));
     if (!Number.isFinite(score)) return;
 
@@ -123,6 +142,19 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
     if (params.get('auto') === '1') runWith(next, false, params.get('unlock') === '1');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Persist analysis state so browser Back can restore it.
+  useEffect(() => {
+    if (!analysis) return;
+    try {
+      sessionStorage.setItem(
+        'neet-analysis-v1',
+        JSON.stringify({ inputs: analysis.inputs, registered, registeredName }),
+      );
+    } catch {
+      /* storage may be unavailable */
+    }
+  }, [analysis, registered, registeredName]);
 
   // Scroll-depth analytics (fires each threshold once).
   useEffect(() => {
@@ -146,12 +178,18 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
     setAnalysis(null);
     setRegistered(false);
     setShowConfetti(false);
+    try {
+      sessionStorage.removeItem('neet-analysis-v1');
+    } catch {
+      /* ignore */
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const score = analysis?.inputs.score ?? 0;
 
   return (
+    <CurrencyContext.Provider value={currency}>
     <div className="bg-light-gray pb-24">
       {showConfetti && <Confetti />}
       <Hero title={heroTitle} subtitle={heroSubtitle} />
@@ -209,6 +247,25 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
               ) : (
                 /* -------------------- UNLOCKED FULL RESULTS -------------------- */
                 <>
+                  {/* Currency toggle — applies to every cost figure below */}
+                  <div className="flex items-center justify-end gap-2 text-sm">
+                    <span className="font-semibold text-navy-500">Show fees in:</span>
+                    <div className="inline-flex overflow-hidden rounded-full border border-navy-200 bg-white p-0.5">
+                      {(['INR', 'USD'] as const).map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setCurrency(c)}
+                          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition ${
+                            currency === c ? 'bg-primary-navy text-white' : 'text-navy-500 hover:text-primary-navy'
+                          }`}
+                        >
+                          {c === 'INR' ? '₹ INR' : '$ USD'}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
                   <Section>
                     <RoadmapPromise
                       name={registeredName}
@@ -308,5 +365,6 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
         )}
       </div>
     </div>
+    </CurrencyContext.Provider>
   );
 }

@@ -12,6 +12,9 @@
 
   html {
     scroll-behavior: smooth;
+    /* Leave room for the sticky header so anchored/focused content is never
+       hidden behind it (nav is sticky top-0, ~64px). */
+    scroll-padding-top: 5.5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;

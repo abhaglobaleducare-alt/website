@@ -20,8 +20,9 @@ export default function SeatAvailability({
         <Armchair className="h-6 w-6 text-primary-gold" /> Seat Reality Check
       </h3>
       <p className="mt-1 text-sm text-navy-500">
-        Roughly <strong className="text-primary-navy">{formatRank(total)}</strong> total MBBS seats in India for ~20+ lakh
-        aspirants. Knowing the seat matrix is the first step to a realistic plan.
+        Roughly <strong className="text-primary-navy">{formatRank(total)}</strong> total MBBS seats across ~824 colleges
+        (NMC seat matrix, NEET 2026) for ~20+ lakh aspirants. Knowing the seat matrix is the first step to a realistic
+        plan.
       </p>
 
       <div className="mt-5 space-y-4">

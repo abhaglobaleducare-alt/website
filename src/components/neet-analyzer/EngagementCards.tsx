@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ClipboardCheck, BookOpen, ShieldCheck, Gift, ArrowUpRight } from 'lucide-react';
+import { CalendarClock, BookOpen, ShieldCheck, Gift, ArrowUpRight } from 'lucide-react';
 import { waLink } from '@/data/contacts';
 import { trackEvent } from '@/lib/analytics';
 
@@ -11,12 +11,12 @@ export default function EngagementCards({ score }: { score: number }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <Link
-        href="/neet-practice-hub"
+        href="/neet-zone/neet-2026-maharashtra-counselling"
         className="group rounded-2xl border border-navy-100 bg-white p-5 shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
       >
-        <ClipboardCheck className="h-6 w-6 text-accent-blue" />
-        <p className="mt-3 font-semibold text-primary-navy">Take a Free NEET Practice Test</p>
-        <p className="mt-1 text-xs text-navy-500">Full 180-question mock with score analysis.</p>
+        <CalendarClock className="h-6 w-6 text-accent-blue" />
+        <p className="mt-3 font-semibold text-primary-navy">NEET 2026 Counselling Guide</p>
+        <p className="mt-1 text-xs text-navy-500">Score → college chart, cutoffs & counselling steps.</p>
         <span className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-accent-blue">
           Open <ArrowUpRight className="h-3.5 w-3.5" />
         </span>

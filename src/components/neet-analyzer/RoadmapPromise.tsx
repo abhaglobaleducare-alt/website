@@ -13,14 +13,15 @@ interface Props {
   rankIsEstimate: boolean;
 }
 
+// Only things ABHA can actually deliver — no over-promising specific colleges
+// or guaranteed counselling outcomes.
 const INCLUDES = [
-  'Top 10 colleges for your score',
-  'Round-wise counselling strategy',
+  'Realistic options shortlist for your score & budget',
   'Fee comparison: Govt vs Private vs Abroad',
-  'Scholarship opportunities',
-  'Complete document checklist',
-  'Month-wise timeline',
-  'Expert recommendation',
+  'Guidance on scholarships & education loans',
+  'Document checklist for admission & visa',
+  'Step-by-step timeline & next actions',
+  '1-on-1 expert counselling session',
 ];
 
 export default function RoadmapPromise({ name, score, rank, rankIsEstimate }: Props) {

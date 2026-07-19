@@ -3,8 +3,9 @@
 import { motion } from 'framer-motion';
 import { CheckCircle2, Clock, ShieldCheck, Info } from 'lucide-react';
 import type { AbroadOption } from '@/data/neetPredictorData';
-import { formatINR } from '@/lib/neetPredictor';
+import { money } from '@/lib/neetPredictor';
 import SavingsHighlight from './SavingsHighlight';
+import { useCurrency } from './currencyContext';
 
 interface Props {
   option: AbroadOption;
@@ -16,6 +17,7 @@ interface Props {
 
 /** Shared presentation for an abroad destination (Georgia / Timor-Leste). */
 export default function AbroadCard({ option: o, showSavings, eyebrow }: Props) {
+  const currency = useCurrency();
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -45,11 +47,17 @@ export default function AbroadCard({ option: o, showSavings, eyebrow }: Props) {
         </div>
       </div>
 
-      {/* Headline price */}
+      {/* Headline price (currency-aware) */}
       <div className="mt-5 rounded-2xl bg-white/5 p-4 backdrop-blur">
         <p className="text-xs uppercase tracking-wider text-navy-200">Programme fees</p>
-        <p className="text-2xl font-bold text-primary-gold sm:text-3xl">{o.headlineLabel}</p>
-        <p className="mt-1 text-sm font-semibold text-white">All-inclusive: {o.allInclusiveLabel}</p>
+        <p className="text-2xl font-bold text-primary-gold sm:text-3xl">
+          {o.headlinePrefix} {money(o.headlineFromInr, currency)}
+        </p>
+        <p className="mt-1 text-sm font-semibold text-white">
+          All-inclusive: ~{money(o.allInclusiveFromInr, currency)}
+          {o.allInclusiveToInr > o.allInclusiveFromInr ? ` – ${money(o.allInclusiveToInr, currency)}` : ''}{' '}
+          <span className="font-normal text-navy-200">({o.allInclusiveSuffix})</span>
+        </p>
       </div>
 
       {/* Trust line (Timor) */}
@@ -89,7 +97,7 @@ export default function AbroadCard({ option: o, showSavings, eyebrow }: Props) {
                   {l.sub && <p className="mt-0.5 text-xs text-navy-300">{l.sub}</p>}
                 </div>
                 <span className="shrink-0 font-bold text-primary-gold">
-                  {l.amountInr == null ? 'At actuals' : formatINR(l.amountInr)}
+                  {l.amountInr == null ? 'At actuals' : money(l.amountInr, currency)}
                 </span>
               </div>
             </li>

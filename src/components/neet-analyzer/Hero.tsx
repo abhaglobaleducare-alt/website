@@ -31,7 +31,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.05 }}
-          className="mt-5 font-playfair text-4xl font-bold leading-tight sm:text-5xl md:text-6xl"
+          className="mt-5 bg-gradient-to-br from-gold-200 via-primary-gold to-gold-400 bg-clip-text font-playfair text-4xl font-bold leading-tight text-transparent drop-shadow-sm sm:text-5xl md:text-6xl"
         >
           {title}
         </motion.h1>

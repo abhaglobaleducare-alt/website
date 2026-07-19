@@ -3,10 +3,21 @@
 import { useState } from 'react';
 import { ChevronDown, ShieldCheck, Info } from 'lucide-react';
 import type { CostBreakdownEntry } from '@/data/neetPredictorData';
-import { formatINR } from '@/lib/neetPredictor';
+import { money } from '@/lib/neetPredictor';
+import { useCurrency } from './currencyContext';
 
 export default function CostBreakdown({ breakdowns }: { breakdowns: CostBreakdownEntry[] }) {
   const [open, setOpen] = useState<string | null>(breakdowns[0]?.route ?? null);
+  const currency = useCurrency();
+
+  const totalOf = (b: CostBreakdownEntry): string => {
+    if (b.totalFromInr != null) {
+      const from = money(b.totalFromInr, currency);
+      const to = b.totalToInr != null && b.totalToInr > b.totalFromInr ? ` – ${money(b.totalToInr, currency)}` : '';
+      return `~${from}${to}${b.totalSuffix ? ` (${b.totalSuffix})` : ''}`;
+    }
+    return money(b.components.reduce((s, c) => s + (c.amount ?? 0), 0), currency);
+  };
 
   return (
     <div className="rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-8">
@@ -15,8 +26,7 @@ export default function CostBreakdown({ breakdowns }: { breakdowns: CostBreakdow
 
       <div className="mt-5 space-y-3">
         {breakdowns.map((b) => {
-          const numericTotal = b.components.reduce((s, c) => s + (c.amount ?? 0), 0);
-          const totalDisplay = b.totalLabel ?? formatINR(numericTotal);
+          const totalDisplay = totalOf(b);
           const isOpen = open === b.route;
           return (
             <div key={b.route} className="overflow-hidden rounded-2xl border border-navy-100">
@@ -58,7 +68,7 @@ export default function CostBreakdown({ breakdowns }: { breakdowns: CostBreakdow
                           {c.sub && <p className="mt-0.5 text-xs text-navy-400">{c.sub}</p>}
                         </div>
                         <span className="shrink-0 font-semibold text-primary-navy">
-                          {c.amount == null ? 'At actuals' : formatINR(c.amount)}
+                          {c.amount == null ? 'At actuals' : money(c.amount, currency)}
                         </span>
                       </li>
                     ))}

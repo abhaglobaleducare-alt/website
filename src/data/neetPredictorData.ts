@@ -262,6 +262,8 @@ export interface AbroadOption {
   medium: string;
   /** brochure headline, e.g. "Tuition from ₹21 Lakhs" / "Total college fees under ₹20 Lakhs" */
   headlineLabel: string;
+  /** label prefix used when rendering the headline in the selected currency */
+  headlinePrefix: string;
   /** computed ₹ behind the headline (for reference/logic, not display rounding) */
   headlineFromInr: number;
   /** itemised, computed cost lines for the card + breakdown */
@@ -273,6 +275,8 @@ export interface AbroadOption {
   allInclusiveToInr: number;
   /** brochure display copy for the all-inclusive figure */
   allInclusiveLabel: string;
+  /** short suffix shown after the currency-aware all-inclusive range */
+  allInclusiveSuffix: string;
   /** prominent trust line (Timor: fees direct to college) */
   trustLine?: string;
   highlights: string[];
@@ -304,6 +308,7 @@ export const abroadOptions: AbroadOption[] = [
     badges: ['NMC & WHO Eligible'],
     medium: 'English',
     headlineLabel: 'Tuition from ₹21 Lakhs',
+    headlinePrefix: 'Tuition from',
     headlineFromInr: usdToInr(GEO_TUITION_MIN),
     costLines: [
       { label: 'Tuition (6 yrs)', amountInr: usdToInr(GEO_TUITION_MIN), sub: '$1,950–$3,250/sem by university · $23,400–$39,000 total' },
@@ -315,6 +320,7 @@ export const abroadOptions: AbroadOption[] = [
     allInclusiveFromInr: usdToInr(GEO_TUITION_MIN + GEO_SERVICES + GEO_LIVING_Y1 + GEO_LIVING_Y2_6), // $48,799
     allInclusiveToInr: usdToInr(GEO_TUITION_MAX + GEO_SERVICES + GEO_LIVING_Y1 + GEO_LIVING_Y2_6), // $64,399
     allInclusiveLabel: '~₹44L – ₹58L (all-inclusive)',
+    allInclusiveSuffix: 'all-inclusive',
     highlights: [
       'European MBBS (MD) — NMC & WHO Eligible universities',
       'English medium, Indian-food hostels, large Indian community',
@@ -338,6 +344,7 @@ export const abroadOptions: AbroadOption[] = [
     badges: ['NMC FMGL 2021 Compliant', 'NMC & WHO Eligible · WDOMS Listed'],
     medium: 'English',
     headlineLabel: 'Total college fees under ₹20 Lakhs',
+    headlinePrefix: 'Total college fees',
     headlineFromInr: usdToInr(TIM_COLLEGE),
     trustLine: 'All college fees are paid directly to the college bank account — never to any consultancy.',
     costLines: [
@@ -350,6 +357,7 @@ export const abroadOptions: AbroadOption[] = [
     allInclusiveFromInr: usdToInr(TIM_COLLEGE + TIM_HOSTEL_FOOD) + TIM_CONSULTANCY_INR, // ₹35.99L
     allInclusiveToInr: usdToInr(TIM_COLLEGE + TIM_HOSTEL_FOOD) + TIM_CONSULTANCY_INR,
     allInclusiveLabel: '~₹36L (all-inclusive, excl. air ticket)',
+    allInclusiveSuffix: 'all-inclusive · excl. air ticket',
     highlights: [
       'Total college fees below ₹20 Lakhs — most budget-friendly route',
       '5.5-year programme: 4.5 yrs academic + 1 yr internship',
@@ -382,11 +390,13 @@ export interface SeatBucket {
   note: string;
 }
 
+// NMC final MBBS seat matrix for NEET 2026: 1,29,603 seats across 824 colleges
+// (govt incl. AIIMS 63,160 · private & deemed 66,443). EDIT each year.
 export const seatAvailability: SeatBucket[] = [
-  { type: 'Government MBBS', seats: 56_000, note: 'Central + state government colleges' },
-  { type: 'Private MBBS', seats: 52_000, note: 'Private & management-quota colleges' },
+  { type: 'Government MBBS', seats: 60_903, note: 'Central + state government colleges (450 colleges)' },
+  { type: 'Private MBBS', seats: 57_943, note: 'Private & management-quota colleges' },
   { type: 'Deemed Universities', seats: 8_500, note: 'Deemed-to-be universities (MCC)' },
-  { type: 'AIIMS / JIPMER', seats: 2_500, note: 'Institutes of national importance' },
+  { type: 'AIIMS / JIPMER', seats: 2_257, note: 'Institutes of national importance' },
 ];
 
 /** Convenience: total sanctioned MBBS seats in India. */
@@ -412,8 +422,13 @@ export interface CostBreakdownEntry {
   currency: '₹';
   components: CostComponent[];
   note: string;
-  /** overrides the numeric sum in the UI when the real figure is a labelled span */
+  /** overrides the numeric sum in the UI when the real figure is a labelled span (INR copy) */
   totalLabel?: string;
+  /** numeric all-inclusive ₹ range (for currency-aware rendering of the total) */
+  totalFromInr?: number;
+  totalToInr?: number;
+  /** short suffix for the total, e.g. "all-inclusive" */
+  totalSuffix?: string;
   /** prominent trust line under the total (e.g. fees paid direct to college) */
   trustLine?: string;
   footnotes?: string[];
@@ -428,7 +443,7 @@ export const costBreakdowns: CostBreakdownEntry[] = [
       { label: 'Hostel & mess', amount: 300_000 },
       { label: 'Misc. / exams', amount: 100_000 },
     ],
-    note: 'By far the cheapest route — the reason lakhs compete for ~56k seats.',
+    note: 'By far the cheapest route — the reason lakhs compete for ~61k government seats.',
   },
   {
     route: 'Private MBBS (India)',
@@ -463,6 +478,9 @@ export const costBreakdowns: CostBreakdownEntry[] = [
     })),
     note: o.costSummaryNote,
     totalLabel: o.allInclusiveLabel,
+    totalFromInr: o.allInclusiveFromInr,
+    totalToInr: o.allInclusiveToInr,
+    totalSuffix: o.allInclusiveSuffix,
     trustLine: o.trustLine,
     footnotes: o.footnotes,
   })),

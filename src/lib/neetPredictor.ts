@@ -26,6 +26,7 @@ import {
   GEORGIA_SAVINGS_LABEL,
   PRIVATE_INDIA_TYPICAL_INR,
   GEORGIA_TUITION_FROM_INR,
+  EXCHANGE_RATE_INR,
   MAX_SCORE,
   TOTAL_CANDIDATES,
   TOTAL_MBBS_SEATS_INDIA,
@@ -79,13 +80,32 @@ export function formatRank(rank: number): string {
   return rank.toLocaleString('en-IN');
 }
 
-const chanceProbability: Record<Chance, number> = {
-  high: 88,
-  moderate: 60,
-  low: 32,
-  'very-low': 12,
-  'not-qualified': 0,
-};
+/** Currency-aware money formatter. `inr` is the base ₹ amount. */
+export function money(inr: number, currency: 'INR' | 'USD' = 'INR'): string {
+  if (currency === 'USD') {
+    const usd = Math.round(inr / EXCHANGE_RATE_INR);
+    return `$${usd.toLocaleString('en-US')}`;
+  }
+  return formatINR(inr);
+}
+
+/**
+ * Graduated chance + probability from a rank against a "safe" and "possible"
+ * (borderline) rank. Probability decays continuously so a rank far beyond the
+ * cutoff reads ~1–2% (not a flat bucket value). Fixes the "everyone sees 12%"
+ * problem for very low scores.
+ */
+function graduatedChance(rank: number, safeR: number, possibleR: number): { chance: Chance; probability: number } {
+  const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
+  const lerp = (x: number, x0: number, x1: number, y0: number, y1: number) =>
+    y0 + (y1 - y0) * clamp((x - x0) / (x1 - x0 || 1), 0, 1);
+
+  if (rank <= safeR) return { chance: 'high', probability: Math.round(clamp(lerp(rank, 0, safeR, 95, 78), 78, 96)) };
+  if (rank <= possibleR) return { chance: 'moderate', probability: Math.round(lerp(rank, safeR, possibleR, 68, 50)) };
+  if (rank <= possibleR * 1.8) return { chance: 'low', probability: Math.round(lerp(rank, possibleR, possibleR * 1.8, 45, 22)) };
+  if (rank <= possibleR * 4) return { chance: 'very-low', probability: Math.round(lerp(rank, possibleR * 1.8, possibleR * 4, 18, 4)) };
+  return { chance: 'very-low', probability: Math.max(1, Math.round(lerp(rank, possibleR * 4, possibleR * 10, 4, 1))) };
+}
 
 /* -------------------------------------------------------------------------- */
 /*  Core: estimateRank — piecewise linear interpolation                        */
@@ -152,27 +172,20 @@ export function predictGovernmentChance(
   }
 
   const t = governmentThresholds.find((g) => g.category === category)!;
-  let chance: Chance;
-  let headline: string;
-
-  if (rank <= t.safeRank) {
-    chance = 'high';
-    headline = 'Strong chance at a Government seat';
-  } else if (rank <= t.possibleRank) {
-    chance = 'moderate';
-    headline = 'Possible in later rounds';
-  } else if (rank <= t.possibleRank * 1.8) {
-    chance = 'low';
-    headline = 'Unlikely via AIQ — keep as an outside shot';
-  } else {
-    chance = 'very-low';
-    headline = 'AIQ government seat is very unlikely';
-  }
+  const { chance, probability } = graduatedChance(rank, t.safeRank, t.possibleRank);
+  const headline =
+    chance === 'high'
+      ? 'Strong chance at a Government seat'
+      : chance === 'moderate'
+        ? 'Possible in later rounds'
+        : chance === 'low'
+          ? 'Unlikely via AIQ — keep as an outside shot'
+          : 'AIQ government seat is highly unlikely at this rank';
 
   return {
     ...base,
     chance,
-    probability: chanceProbability[chance],
+    probability,
     headline,
     detail: `Your estimated AIR ${formatRank(rank)} vs a ${category} AIQ safe rank around ${formatRank(
       t.safeRank,
@@ -209,27 +222,20 @@ export function predictStateQuota(
 
   const st = stateThresholds.find((s) => s.state === state)!;
   const closing = st.closingRank[category];
-  let chance: Chance;
-  let headline: string;
-
-  if (rank <= closing * 0.7) {
-    chance = 'high';
-    headline = `Strong chance in ${state} state quota`;
-  } else if (rank <= closing) {
-    chance = 'moderate';
-    headline = 'Borderline — likely in later rounds';
-  } else if (rank <= closing * 1.6) {
-    chance = 'low';
-    headline = 'Unlikely unless cutoffs relax';
-  } else {
-    chance = 'very-low';
-    headline = 'State government seat very unlikely';
-  }
+  const { chance, probability } = graduatedChance(rank, closing * 0.7, closing);
+  const headline =
+    chance === 'high'
+      ? `Strong chance in ${state} state quota`
+      : chance === 'moderate'
+        ? 'Borderline — likely in later rounds'
+        : chance === 'low'
+          ? 'Unlikely unless cutoffs relax'
+          : 'State government seat highly unlikely at this rank';
 
   return {
     ...base,
     chance,
-    probability: chanceProbability[chance],
+    probability,
     headline,
     detail: `Estimated AIR ${formatRank(rank)} vs ${state} ${category} closing around ${formatRank(
       closing,
@@ -472,6 +478,10 @@ export interface CostRow {
   total: number;
   /** display string — a brochure label (e.g. "~₹44L – ₹58L") when present, else formatted total */
   displayTotal: string;
+  /** numeric ₹ range for currency-aware rendering (abroad routes) */
+  totalFromInr?: number;
+  totalToInr?: number;
+  totalSuffix?: string;
   withinBudget: boolean | null; // null when no budget given
   note: string;
   trustLine?: string;
@@ -494,6 +504,9 @@ export function generateCostComparison(
       route: c.route,
       total,
       displayTotal: c.totalLabel ?? formatINR(total),
+      totalFromInr: c.totalFromInr,
+      totalToInr: c.totalToInr,
+      totalSuffix: c.totalSuffix,
       withinBudget: budget == null ? null : total <= budget,
       note: c.note,
       trustLine: c.trustLine,
