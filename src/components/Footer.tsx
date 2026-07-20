@@ -48,8 +48,8 @@ export default function Footer() {
               </li>
             </ul>
             <p className="mt-4 text-sm italic text-[#C6962E]/90">
-              &ldquo;Your Complete India + Georgia + Bosnia Support
-              Partner&rdquo;
+              &ldquo;Your Complete India + Georgia + Timor-Leste + Russian
+              Countries Support Partner&rdquo;
             </p>
           </div>
 

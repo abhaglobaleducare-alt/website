@@ -81,43 +81,44 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
       ],
     },
   },
-  bosnia: {
-    slug: 'bosnia',
-    name: 'Bosnia',
-    flag: '🇧🇦',
-    tagline: 'European medical education in the heart of the Balkans',
+  'russian-countries': {
+    slug: 'russian-countries',
+    name: 'Russian Countries',
+    flag: '🇷🇺',
+    tagline: 'MBBS in Russia & the CIS — a long-established route for Indian students',
     intro: [
-      'Bosnia offers English-medium MBBS at accredited public universities, in safe European cities with a growing Indian student community.',
-      'ABHA supports accommodation, settling-in and continuous student guidance so families have a single point of contact throughout.',
+      'The Russian countries — Russia and neighbouring CIS states such as Kyrgyzstan, Kazakhstan and Uzbekistan — are among the oldest and most popular MBBS-abroad destinations for Indian students, with English-medium programmes at established state medical universities.',
+      'ABHA guides you to the right NMC & WHO Eligible university for your budget, and supports admission, accommodation and settling-in so families have a single point of contact throughout.',
+      'University shortlist & fee structures shared at counselling, matched to your NEET score and budget.',
     ],
     facts: [
       { label: 'MBBS Duration', value: '6 Years' },
       { label: 'Medium', value: 'English' },
       { label: 'Recognition', value: 'NMC & WHO Eligible' },
-      { label: 'Campuses', value: 'Sarajevo & Banja Luka' },
+      { label: 'Region', value: 'Russia & CIS countries' },
     ],
-    universities: ['University of East Sarajevo', 'University of Banja Luka'],
+    universities: ['State medical universities across Russia & CIS'],
     universitiesNote:
-      'English-medium MBBS at accredited public universities. Speak to an ABHA counsellor for current intake and fee details.',
+      'ABHA works with NMC & WHO Eligible state medical universities across Russia and the CIS. Speak to an ABHA counsellor for the current list of universities, intake and fee details.',
     highlights: [
-      'English-medium MBBS at accredited public universities',
+      'English-medium MBBS at established state medical universities',
       'Eligible for FMGE / NExT after graduation',
-      'Safe European cities — Sarajevo (capital) & Banja Luka',
-      'Welcoming environment with a growing Indian student presence',
+      'Universities across Russia, Kyrgyzstan, Kazakhstan & Uzbekistan',
+      'One of the largest Indian student communities abroad',
       'ABHA-supported accommodation & settling-in guidance',
       'Indian food options available near campus',
     ],
     compliance:
       'MBBS universities are NMC & WHO Eligible. For practice in India, FMGE/NExT qualification as per NMC norms is mandatory for foreign medical graduates.',
-    seoTitle: 'Study MBBS in Bosnia | ABHA Global Educare',
+    seoTitle: 'Study MBBS in Russia & Russian (CIS) Countries | ABHA Global Educare',
     seoDescription:
-      'English-medium MBBS in Bosnia at accredited public universities in Sarajevo & Banja Luka — NMC & WHO Eligible, eligible for FMGE / NExT. ABHA guides your admission.',
+      'English-medium MBBS in Russia and the CIS countries (Kyrgyzstan, Kazakhstan, Uzbekistan) at established state medical universities — NMC & WHO Eligible, eligible for FMGE / NExT. ABHA guides your admission.',
     images: {
+      // TODO: replace hero with a Russia/CIS photo. Gallery + climate art was
+      // Bosnia-specific and is intentionally omitted until Russia assets exist.
       hero: '/images/destinations/photo-bosnia-sarajevo.webp',
-      climate: '/images/destinations/climate-bosnia.svg',
-      gallery: [
-        { src: '/images/destinations/destination-bosnia.svg', label: 'Sarajevo & Banja Luka — City Views' },
-      ],
+      climate: '',
+      gallery: [],
     },
   },
   'timor-leste': {

@@ -24,8 +24,8 @@ const navItems: NavItem[] = [
     label: 'Destinations',
     children: [
       { label: 'Georgia', href: '/destinations/georgia' },
-      { label: 'Bosnia', href: '/destinations/bosnia' },
       { label: 'Timor-Leste', href: '/destinations/timor-leste' },
+      { label: 'Russian Countries', href: '/destinations/russian-countries' },
       { label: 'Services', href: '/destinations#services' },
     ],
   },

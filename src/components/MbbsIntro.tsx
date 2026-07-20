@@ -45,7 +45,7 @@ export default function MbbsIntro() {
           </h2>
           <p className="mx-auto mt-5 text-base leading-relaxed text-gray-600 sm:text-lg">
             ABHA Global Educare helps Indian students get admitted to NMC &amp; WHO Eligible medical
-            universities in Georgia, Timor-Leste &amp; Bosnia — with our own hostels, Indian meals, and exclusive
+            universities in Georgia, Timor-Leste &amp; the Russian countries — with our own hostels, Indian meals, and exclusive
             hands-on clinical experience.
           </p>
         </div>

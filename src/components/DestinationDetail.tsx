@@ -28,6 +28,7 @@ const TILE_GRADIENTS = [
 ];
 
 export default function DestinationDetail({ data }: { data: DestinationDetailData }) {
+  const hasGlimpse = data.images.gallery.length > 0 || Boolean(data.images.climate);
   return (
     <>
       {/* Hero with destination image */}
@@ -80,6 +81,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
       <UniversityExplorer country={data.name} />
 
       {/* Visual gallery — life in the destination */}
+      {hasGlimpse && (
       <section className="bg-white px-4 pb-16 sm:px-8">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-8 text-center">
@@ -124,6 +126,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
           </div>
 
           {/* Climate & weather banner */}
+          {data.images.climate && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -140,8 +143,10 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
               className="h-auto w-full"
             />
           </motion.div>
+          )}
         </div>
       </section>
+      )}
 
       {/* Universities */}
       <section className="bg-[#F8F9FA] px-4 py-16 sm:px-8 sm:py-20">
@@ -256,7 +261,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
       {/* iPad Early Bird offer — abroad registration incentive */}
       <section className="bg-light-gray px-4 py-14 sm:px-8">
         <div className="mx-auto max-w-4xl">
-          <IpadOfferCard />
+          <IpadOfferCard georgiaContext={data.slug === 'georgia'} />
         </div>
       </section>
     </>

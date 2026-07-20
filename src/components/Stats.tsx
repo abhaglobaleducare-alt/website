@@ -6,15 +6,15 @@ import { IndianRupee, Award, BookOpen, HeartHandshake } from 'lucide-react';
 const stats = [
   {
     icon: IndianRupee,
-    value: '₹25–50L',
-    label: 'Complete MBBS Cost',
-    detail: 'Tuition + hostel + food — all inclusive',
+    value: '₹36–58L',
+    label: 'Complete MBBS Abroad Cost',
+    detail: 'all-inclusive · Timor-Leste ~₹36L · Georgia ₹44–58L (tuition from ₹21L)',
   },
   {
     icon: Award,
     value: 'Up to $6,000',
-    label: 'NEET Excellence Pathway',
-    detail: 'Merit scholarship for top students',
+    label: 'AGEST 2026 Grant',
+    detail: 'Successfully Conducted',
   },
   {
     icon: BookOpen,

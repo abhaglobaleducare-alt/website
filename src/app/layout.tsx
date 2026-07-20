@@ -43,7 +43,12 @@ export const metadata: Metadata = {
     'MBBS abroad',
     'MBBS in Georgia',
     'MBBS in Tbilisi Georgia',
-    'MBBS in Bosnia',
+    'MBBS in Timor-Leste',
+    'MBBS Timor-Leste for Indian students',
+    'Nalanda College of Medicine',
+    'MBBS in Russia',
+    'MBBS in Russian countries for Indian students',
+    'MBBS in CIS countries',
     'medical education abroad for Indian students',
     'NMC and WHO eligible universities',
     'affordable MBBS abroad',
@@ -238,6 +243,8 @@ export default async function RootLayout({
               areaServed: [
                 { '@type': 'Country', name: 'India' },
                 { '@type': 'Country', name: 'Georgia' },
+                { '@type': 'Country', name: 'Timor-Leste' },
+                { '@type': 'Country', name: 'Russia' },
               ],
               hasOfferCatalog: {
                 '@type': 'OfferCatalog',
@@ -248,7 +255,7 @@ export default async function RootLayout({
                     itemOffered: {
                       '@type': 'Service',
                       name: 'MBBS Abroad Admission Guidance',
-                      description: 'End-to-end MBBS abroad admission support for NMC & WHO Eligible universities in Georgia & Bosnia.',
+                      description: 'End-to-end MBBS abroad admission support for NMC & WHO Eligible universities in Georgia, Timor-Leste & the Russian countries.',
                     },
                   },
                   {

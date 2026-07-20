@@ -10,6 +10,12 @@ interface Props {
   /** compact = tighter padding for embedding inside result flows */
   variant?: 'full' | 'compact';
   className?: string;
+  /**
+   * When true, show Georgia-specific proof points (Georgia tuition, Tbilisi
+   * hostel). Set false on non-Georgia destination pages (Timor-Leste, Russian
+   * Countries). Defaults to true to preserve homepage/analyzer/scholarship copy.
+   */
+  georgiaContext?: boolean;
 }
 
 /**
@@ -69,7 +75,7 @@ function IpadGraphic({ className = '' }: { className?: string }) {
   );
 }
 
-export default function IpadOfferCard({ score, variant = 'full', className = '' }: Props) {
+export default function IpadOfferCard({ score, variant = 'full', className = '', georgiaContext = true }: Props) {
   const waMessage = score
     ? `Hi! I am interested in MBBS Abroad with iPad Early Bird Offer. My NEET Score: ${score}`
     : 'Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer.';
@@ -77,8 +83,12 @@ export default function IpadOfferCard({ score, variant = 'full', className = '' 
   const points = [
     'Only for confirmed MBBS Abroad registrations',
     'iPad delivered after Visa Approval',
-    'NMC & WHO Eligible universities in Georgia',
-    'Transparent MBBS fees — Georgia tuition from ₹21 Lakhs',
+    georgiaContext
+      ? 'NMC & WHO Eligible universities in Georgia'
+      : 'NMC & WHO Eligible partner universities',
+    georgiaContext
+      ? 'Transparent MBBS fees — Georgia tuition from ₹21 Lakhs'
+      : 'Transparent fees — full breakdown at counselling',
   ];
 
   return (
@@ -158,7 +168,8 @@ export default function IpadOfferCard({ score, variant = 'full', className = '' 
             <ShieldCheck className="h-4 w-4 text-emerald-400" /> No Hidden Charges
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <ShieldCheck className="h-4 w-4 text-emerald-400" /> Own Hostel in Tbilisi
+            <ShieldCheck className="h-4 w-4 text-emerald-400" />{' '}
+            {georgiaContext ? 'Own Hostel in Tbilisi' : 'On-ground Student Support'}
           </span>
         </div>
 

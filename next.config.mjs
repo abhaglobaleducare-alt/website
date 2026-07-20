@@ -64,6 +64,12 @@ const nextConfig = {
       destination: '/destinations#services',
       permanent: true,
     },
+    {
+      // Bosnia destination renamed → Russian Countries (Russia & CIS).
+      source: '/destinations/bosnia',
+      destination: '/destinations/russian-countries',
+      permanent: true,
+    },
   ],
   poweredByHeader: false,
   compress: true,

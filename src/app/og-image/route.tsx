@@ -61,7 +61,7 @@ export function GET() {
             Study Abroad · NMC &amp; WHO Eligible Universities
           </div>
           <div style={{ display: 'flex', fontSize: 34, fontWeight: 700, color: '#E0B85C', marginTop: 14 }}>
-            Georgia · Bosnia · Timor-Leste
+            Georgia · Timor-Leste · Russian Countries
           </div>
 
           <div style={{ display: 'flex', fontSize: 30, fontWeight: 700, color: '#C6962E', marginTop: 30 }}>

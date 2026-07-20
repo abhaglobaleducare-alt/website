@@ -118,7 +118,7 @@ const topics = [
       'Accommodation: ₹2–3L per year (ABHA-managed hostels)',
       'Food: ₹60K–1.2L per year (Indian mess)',
       'Travel & misc: ₹1–1.5L per year',
-      'Total 6-year cost: ₹25–50L (vs ₹80L–1.5Cr : Accommodation and food expences Extra in India private)',
+      'Total all-inclusive cost: ~₹36L (Timor-Leste) to ₹44–58L (Georgia) — vs ₹80L+ for Indian private (accommodation & food extra there)',
       'AGEST Scholarship can offset $6,000 from tuition',
     ],
   },

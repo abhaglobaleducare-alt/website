@@ -8,7 +8,7 @@ import { waLinkEncoded } from '@/data/contacts';
 
 const trustPoints = [
   { icon: Shield, text: 'NMC & WHO Eligible medical universities' },
-  { icon: MapPin, text: 'Georgia · Bosnia · Timor-Leste' },
+  { icon: MapPin, text: 'Georgia · Timor-Leste · Russian Countries' },
   { icon: GraduationCap, text: '44 programmes across 6 streams' },
 ];
 
@@ -55,7 +55,7 @@ export default function Hero() {
           className="mx-auto mt-6 max-w-[640px] text-base leading-relaxed text-white/80 sm:text-lg"
         >
           ABHA Global Educare helps Indian students get admitted to universities in Georgia,
-          Bosnia &amp; Timor-Leste — across MBBS, dentistry, nursing, business, IT and
+          Timor-Leste &amp; the Russian countries — across MBBS, dentistry, nursing, business, IT and
           postgraduate studies — with our own hostels, Indian meals and on-ground support.
         </motion.p>
 

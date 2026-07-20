@@ -219,7 +219,7 @@ function Inner({ country }: { country: string }) {
  * Interactive University Explorer for destination pages: a "Select University"
  * dropdown → campus gallery (when photos exist) + a per-course fee table with a
  * live USD/INR toggle. Renders nothing for countries whose universities are not
- * in the course data (e.g. Bosnia).
+ * in the course data (e.g. Russian Countries).
  */
 export default function UniversityExplorer({ country }: { country: string }) {
   if (getUniversitiesByCountry(country).length === 0) return null;
