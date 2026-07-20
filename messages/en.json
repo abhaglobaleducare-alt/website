@@ -1,8 +1,8 @@
 {
   "metadata": {
     "title": "ABHA Global Educare - MBBS Abroad Consultancy",
-    "description": "Study MBBS abroad with expert guidance from ABHA Global Educare. Admissions to NMC-approved universities in Georgia, Bosnia & more.",
-    "keywords": "MBBS abroad, MBBS in Georgia, MBBS in Bosnia, medical education abroad, NEET counseling"
+    "description": "Study MBBS abroad with expert guidance from ABHA Global Educare. Admissions to NMC-approved universities in Georgia, Timor-Leste, the Russian countries & more.",
+    "keywords": "MBBS abroad, MBBS in Georgia, MBBS in Timor-Leste, MBBS in Russia, medical education abroad, NEET counseling"
   },
   "nav": {
     "home": "Home",
@@ -117,9 +117,13 @@
         "name": "Georgia",
         "description": "Georgia offers European-standard medical education with English-medium programs. Safe, friendly environment with affordable living costs."
       },
-      "bosnia": {
-        "name": "Bosnia",
-        "description": "European medical education with English-medium programs at universities in Sarajevo and Banja Luka. Safe, welcoming environment in the heart of the Balkans."
+      "timor-leste": {
+        "name": "Timor-Leste",
+        "description": "English-medium MBBS at Nalanda College of Medicine, Dili — structured as per NMC FMGL 2021 norms, with a verified all-inclusive fee structure."
+      },
+      "russian-countries": {
+        "name": "Russian Countries",
+        "description": "English-medium MBBS at established state medical universities across Russia and the CIS (Kyrgyzstan, Kazakhstan, Uzbekistan) — NMC & WHO Eligible, with one of the largest Indian student communities abroad."
       },
       "philippines": {
         "name": "Philippines",
