@@ -169,7 +169,7 @@ export default function NeetPreparation() {
               <div className="flex justify-center mb-4">
                 <div className="bg-white p-3 rounded-xl">
                   <img
-                    src="/images/qr-neet-prep-999.png.jpeg"
+                    src="/images/qr-neet-prep-999.jpeg"
                     alt="UPI QR Code — ₹999 NEET Preparation Portal"
                     width={180}
                     height={180}

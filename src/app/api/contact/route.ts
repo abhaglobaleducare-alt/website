@@ -121,7 +121,7 @@ function buildAutoReplyEmail(name: string, source?: string): string {
   const subject = isNeetPrep
     ? "NEET Preparation Portal"
     : isNeetHub
-      ? "NEET Practice Hub"
+      ? "NEET Coaching Package"
       : "ABHA Global Educare";
 
   const bodyContent = isNeetPrep
@@ -145,18 +145,18 @@ function buildAutoReplyEmail(name: string, source?: string): string {
     : isNeetHub
       ? `
           <h2>Registration Received, ${name}!</h2>
-          <p>Thank you for registering for the <strong>ABHA NEET Practice Hub (₹2,110/year)</strong>.</p>
+          <p>Thank you for registering for the <strong>ABHA NEET Coaching Package (₹2,110/year)</strong> — Preparation Portal + Practice Hub.</p>
           <div class="highlight">
             <strong>What happens next?</strong>
             <ul>
               <li>Our team will verify your UPI payment (UTR) within 24 hours</li>
-              <li>Your Practice Hub account will be activated and login credentials sent via WhatsApp &amp; Email</li>
-              <li>You'll get access to Full NEET Mock Tests, Weekly Tests, Daily MCQs, and performance analytics</li>
+              <li>Your NEET Coaching Package account will be activated and login credentials sent via WhatsApp &amp; Email</li>
+              <li>You'll get the Preparation Portal (quick notes, chapter-wise questions, weekly &amp; monthly tests) plus the Practice Hub (full-length 180-Q NEET mock tests) with performance analytics</li>
             </ul>
           </div>
           <p>For faster activation, send your payment screenshot on WhatsApp:</p>
           <p>
-            <strong>WhatsApp:</strong> <a href="${waLinkEncoded('Hi+I+just+registered+for+NEET+Practice+Hub')}" style="color: #C6962E;">${WHATSAPP.display}</a><br>
+            <strong>WhatsApp:</strong> <a href="${waLinkEncoded('Hi+I+just+registered+for+the+NEET+Coaching+Package')}" style="color: #C6962E;">${WHATSAPP.display}</a><br>
             <strong>Phone:</strong> ${KOLHAPUR.phoneDisplay}<br>
             <strong>Email:</strong> abhaglobaleducare@gmail.com
           </p>`
@@ -309,7 +309,7 @@ export async function POST(request: NextRequest) {
       const replySubject = isNeetPrep
         ? "NEET Preparation Portal — Registration Received"
         : isNeetHub
-          ? "NEET Practice Hub — Registration Received"
+          ? "NEET Coaching Package — Registration Received"
           : "Thank you for your enquiry — ABHA Global Educare";
       await transporter.sendMail({
         from:

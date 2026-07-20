@@ -207,7 +207,7 @@ export default function Scholarship() {
                 href="/neet-practice-hub"
                 className="inline-flex items-center gap-2.5 border-2 border-[#C6962E]/60 text-white px-7 py-4 rounded-xl font-black text-base sm:text-lg hover:bg-[#C6962E]/10 hover:border-[#C6962E] transition-all duration-300 hover:-translate-y-0.5"
               >
-                🎯 NEET Practice Hub
+                🎯 NEET Coaching Package
                 <ArrowUpRight size={17} className="shrink-0" />
               </Link>
             </div>
@@ -1070,7 +1070,7 @@ export default function Scholarship() {
       </section>
 
       {/* ══════════════════════════════════════
-          DUAL CTA — NEET Preparation + NEET Practice Hub
+          DUAL CTA — NEET Preparation + NEET Coaching Package
       ══════════════════════════════════════ */}
       <section className="bg-[#0B1A35] py-14 px-5 sm:px-10 text-center">
         <motion.div
@@ -1093,7 +1093,7 @@ export default function Scholarship() {
               href="/neet-practice-hub"
               className="inline-flex items-center gap-2.5 border-2 border-[#C6962E]/60 text-white px-7 py-4 rounded-xl font-black text-base sm:text-lg hover:bg-[#C6962E]/10 hover:border-[#C6962E] transition-all duration-300 hover:-translate-y-0.5"
             >
-              🎯 NEET Practice Hub
+              🎯 NEET Coaching Package
               <ArrowUpRight size={17} className="shrink-0" />
             </Link>
           </div>

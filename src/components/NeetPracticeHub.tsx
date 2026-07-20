@@ -52,15 +52,15 @@ export default function NeetPracticeHub() {
           city: fd.get('city'),
           neetStatus: fd.get('neetStatus'),
           neetScore: fd.get('neetScore'),
-          course: 'NEET Practice Hub — ₹2,110/year',
-          message: `NEET Practice Hub Registration — ₹2,110/year. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
+          course: 'NEET Coaching Package — ₹2,110/year',
+          message: `NEET Coaching Package (Preparation Portal + Practice Hub) Registration — ₹2,110/year. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
           source: 'neet-practice-hub-registration',
         }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
         setFormState('success');
-        setStatusMsg('Registration received! Our team will verify your payment and activate your Practice Hub account within 24 hours.');
+        setStatusMsg('Registration received! Our team will verify your payment and activate your NEET Coaching Package account within 24 hours.');
         (e.target as HTMLFormElement).reset();
       } else {
         setFormState('error');
@@ -78,14 +78,14 @@ export default function NeetPracticeHub() {
       {/* INTRODUCTORY OFFER BANNER */}
       <div className="py-3 px-4 text-center" style={{ background: 'linear-gradient(90deg, #5B21B6, #7C3AED, #6D28D9)' }}>
         <p className="text-white text-sm font-bold">
-          NEET Practice Hub — Full Mock Tests ·{' '}
+          NEET Coaching Package — Preparation Portal + Practice Hub ·{' '}
           <span className="text-yellow-300 text-base">₹2,110 / year</span>
           {' '}·{' '}
           <span className="text-purple-200">NEET 2026 Aspirants</span>
           {' '}·{' '}
           <LeadGate action="register_practice_hub" mode="newTab">
           <a
-            href={waLink('I want to register for the NEET Practice Hub')}
+            href={waLink('I want to register for the NEET Coaching Package (Preparation Portal + Practice Hub)')}
             target="_blank" rel="noopener noreferrer"
             className="underline text-yellow-300 hover:text-yellow-100 transition-colors"
           >
@@ -110,13 +110,13 @@ export default function NeetPracticeHub() {
             className="font-playfair text-white mb-4 leading-tight"
             style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}
           >
-            NEET Practice Hub
+            NEET Coaching Package
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
             className="text-slate-300 text-lg max-w-2xl mx-auto mb-8 leading-relaxed"
           >
-            Full NEET mock tests, weekly admin-published tests, daily MCQ practice, and performance tracking — all in one place.
+            Preparation Portal + Practice Hub in one plan — quick notes, chapter-wise questions, weekly &amp; monthly tests, plus full-length 180-question NEET mock tests and performance tracking.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
@@ -127,9 +127,105 @@ export default function NeetPracticeHub() {
               <span className="font-playfair font-black text-5xl" style={{ color: '#C6962E' }}>₹2,110</span>
               <span className="text-purple-200 text-sm font-semibold">/ year</span>
             </div>
-            <span className="text-purple-300 text-xs font-semibold uppercase tracking-widest">NEET 2026 Aspirants Only</span>
-            <span className="text-slate-400 text-xs">Unlimited Tests · Full Portal Access · 1 Year</span>
+            <span className="text-purple-300 text-xs font-semibold uppercase tracking-widest">Preparation Portal + Practice Hub</span>
+            <span className="text-slate-400 text-xs">Full Portal Access · 1 Year · NEET 2026 Aspirants</span>
           </motion.div>
+        </div>
+      </section>
+
+      {/* CHOOSE YOUR PLAN */}
+      <section id="plans" className="py-16 px-4 sm:px-8 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <p className="text-xs font-bold uppercase tracking-widest text-center mb-2" style={{ color: '#C6962E' }}>
+            Choose Your Plan
+          </p>
+          <h2 className="font-playfair font-bold text-2xl sm:text-3xl text-center mb-3" style={{ color: '#0B1A35' }}>
+            Full package, or pick one
+          </h2>
+          <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-10">
+            Get both portals together as the NEET Coaching Package, or choose a single portal — pay securely via UPI.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+
+            {/* Card 1 — NEET Coaching Package (Recommended) */}
+            <div className="relative rounded-2xl p-6 flex flex-col" style={{ background: '#0B1A35', border: '2px solid #7C3AED' }}>
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider text-white whitespace-nowrap" style={{ background: '#7C3AED' }}>
+                Recommended · Best Value
+              </span>
+              <h3 className="font-bold text-lg mt-2" style={{ color: '#C6962E' }}>NEET Coaching Package</h3>
+              <p className="text-purple-200 text-xs font-semibold mb-3">Preparation Portal + Practice Hub</p>
+              <div className="flex items-baseline gap-1.5 mb-3">
+                <span className="font-playfair font-black text-4xl text-white">₹2,110</span>
+                <span className="text-white/50 text-sm">/ year</span>
+              </div>
+              <p className="text-white/70 text-xs leading-relaxed mb-5">
+                <span className="font-bold text-white">Includes:</span> Preparation Portal (quick notes, chapter-wise questions, weekly &amp; monthly tests) + Practice Hub (full-length 180-Q NEET mock tests).
+              </p>
+              <div className="mt-auto flex flex-col items-center">
+                <div className="bg-white p-2.5 rounded-xl">
+                  <img
+                    src="/images/qr-neet-hub-2110.jpeg"
+                    alt="Pay ₹2,110 — NEET Coaching Package annual access"
+                    width={150}
+                    height={150}
+                    style={{ display: 'block' }}
+                  />
+                </div>
+                <p className="text-white/50 text-[11px] text-center mt-3">Scan &amp; pay ₹2,110 with any UPI app, then register below ↓</p>
+              </div>
+            </div>
+
+            {/* Card 2 — Preparation Portal only */}
+            <div className="rounded-2xl p-6 flex flex-col bg-[#F5F6FA]" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
+              <h3 className="font-bold text-lg" style={{ color: '#0B1A35' }}>Preparation Portal only</h3>
+              <p className="text-gray-500 text-xs font-semibold mb-3">Notes &amp; practice questions</p>
+              <div className="flex items-baseline gap-1.5 mb-3">
+                <span className="font-playfair font-black text-4xl" style={{ color: '#0B1A35' }}>₹999</span>
+                <span className="text-gray-400 text-sm">/ year</span>
+              </div>
+              <p className="text-gray-500 text-xs leading-relaxed mb-5">
+                Quick notes, chapter-wise questions, and weekly &amp; monthly tests across Physics, Chemistry, Botany &amp; Zoology.
+              </p>
+              <div className="mt-auto flex flex-col items-center">
+                <div className="bg-white p-2.5 rounded-xl" style={{ border: '1px solid rgba(0,0,0,0.06)' }}>
+                  <img
+                    src="/images/qr-neet-prep-999.jpeg"
+                    alt="Pay ₹999 — NEET Preparation Portal annual access"
+                    width={150}
+                    height={150}
+                    style={{ display: 'block' }}
+                  />
+                </div>
+                <p className="text-gray-400 text-[11px] text-center mt-3">Scan &amp; pay ₹999 · <a href="/neet-preparation" className="underline" style={{ color: '#7C3AED' }}>full details &amp; register →</a></p>
+              </div>
+            </div>
+
+            {/* Card 3 — Practice Hub only */}
+            <div className="rounded-2xl p-6 flex flex-col bg-[#F5F6FA]" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
+              <h3 className="font-bold text-lg" style={{ color: '#0B1A35' }}>Practice Hub only</h3>
+              <p className="text-gray-500 text-xs font-semibold mb-3">Full mock tests</p>
+              <div className="flex items-baseline gap-1.5 mb-3">
+                <span className="font-playfair font-black text-4xl" style={{ color: '#0B1A35' }}>₹1,111</span>
+                <span className="text-gray-400 text-sm">/ year</span>
+              </div>
+              <p className="text-gray-500 text-xs leading-relaxed mb-5">
+                Full-length 180-question NEET mock tests with +4/−1 marking and subject-wise performance analysis.
+              </p>
+              <div className="mt-auto flex flex-col items-center justify-center text-center w-full">
+                <a
+                  href={waLink('I want to register for the Practice Hub only plan (₹1,111/year).')}
+                  target="_blank" rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 font-bold text-sm text-white transition-opacity hover:opacity-90"
+                  style={{ background: '#25D366' }}
+                >
+                  Pay via WhatsApp
+                </a>
+                <p className="text-gray-400 text-[11px] mt-3">Payment QR coming soon — pay &amp; confirm on WhatsApp for now.</p>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
@@ -231,7 +327,7 @@ export default function NeetPracticeHub() {
                 <div className="bg-white p-3 rounded-xl">
                   <img
                     src="/images/qr-neet-hub-2110.jpeg"
-                    alt="UPI QR Code — ABHA Global Educare LLP (pay ₹2,110)"
+                    alt="Pay ₹2,110 — NEET Coaching Package annual access"
                     width={180}
                     height={180}
                     style={{ display: 'block' }}
@@ -271,7 +367,7 @@ export default function NeetPracticeHub() {
                     Registration Received!
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">{statusMsg}</p>
-                  <a href={waLinkEncoded("Hi%2C+I+just+registered+for+NEET+Practice+Hub")}
+                  <a href={waLinkEncoded("Hi%2C+I+just+registered+for+the+NEET+Coaching+Package")}
                     target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white"
                     style={{ background: '#25D366' }}>
@@ -285,7 +381,7 @@ export default function NeetPracticeHub() {
                   <h3 className="font-playfair font-bold text-2xl mb-1" style={{ color: '#0B1A35' }}>
                     Register Now
                   </h3>
-                  <p className="text-gray-400 text-xs mb-6">NEET Practice Hub · <span className="font-bold" style={{ color: '#7C3AED' }}>₹2,110 / year</span> · NEET 2026 Aspirants Only</p>
+                  <p className="text-gray-400 text-xs mb-6">NEET Coaching Package · <span className="font-bold" style={{ color: '#7C3AED' }}>₹2,110 / year</span> · Preparation Portal + Practice Hub</p>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
