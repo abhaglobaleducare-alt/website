@@ -142,7 +142,7 @@ export const categoryAnchors: Partial<Record<Category, RankAnchor[]>> = {
 /**
  * Indicative CLOSING All India Ranks for 85% state-quota Govt MBBS seats.
  * State merit lists use domicile + category; these AIR bands are the office's
- * translation of last year's state closing scores back onto AIR.
+ * translation of recent prior-year state closing scores back onto AIR.
  */
 export interface StateThreshold {
   state: StateName;

@@ -10,7 +10,7 @@ interface Props {
 const defaultPoints = [
   {
     q: 'How is my rank estimated?',
-    a: 'We map your score to an All India Rank using piecewise interpolation between last year’s NEET score-vs-rank anchor points — more accurate than a single straight line, especially in the crowded middle band.',
+    a: 'We map your score to an All India Rank using piecewise interpolation between anchor points from the official NEET 2026 result distribution — more accurate than a single straight line, especially in the crowded middle band.',
   },
   {
     q: 'AIQ (15%) vs State Quota (85%) — what’s the difference?',

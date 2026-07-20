@@ -1,9 +1,8 @@
 import { ImageResponse } from 'next/og';
 
 // Dynamic Open Graph / social-preview image (1200×630 PNG). Replaces the old
-// static og-image.jpg, which had outdated countries (Russia/Kazakhstan/Kyrgyzstan)
-// baked in. Rendered at the edge so the courses & countries always match the
-// live site.
+// static og-image.jpg, which had outdated baked-in countries. Rendered at the
+// edge so the courses & countries always match the live site.
 export const runtime = 'edge';
 
 export function GET() {

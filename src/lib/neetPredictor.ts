@@ -467,7 +467,9 @@ export function calculateConfidence(inputs: PredictorInputs): ConfidenceScore {
 
   score = Math.max(45, Math.min(95, score));
   const level: ConfidenceScore['level'] = score >= 80 ? 'High' : score >= 62 ? 'Medium' : 'Low';
-  reasons.push('These are estimates from last year’s cutoffs — final cutoffs move with paper difficulty and seat matrix.');
+  reasons.push(
+    'Rank estimates are calibrated to the official NEET 2026 result distribution; college cutoffs shown are from the latest completed counselling and move with the seat matrix.',
+  );
 
   return { score, level, reasons };
 }
@@ -706,7 +708,7 @@ export function generatePersonalizedRoadmap(
       headline: 'Your two-track roadmap',
       steps: [
         ...common,
-        { order: 3, title: 'Reserve an abroad seat in parallel', detail: 'Begin a Georgia/Kyrgyzstan application now so a confirmed NMC-eligible seat is ready if government rounds miss.', timing: 'Alongside counselling' },
+        { order: 3, title: 'Reserve an abroad seat in parallel', detail: 'Begin a Georgia/Timor-Leste application now so a confirmed NMC-eligible seat is ready if government rounds miss.', timing: 'Alongside counselling' },
         { order: 4, title: 'Decide by the deadline', detail: 'If government seat comes, take it; otherwise proceed with the reserved abroad seat — no gap year.', timing: 'By final round' },
       ],
     };
@@ -715,7 +717,7 @@ export function generatePersonalizedRoadmap(
   return {
     headline: 'Your best-value roadmap',
     steps: [
-      { order: 1, title: 'Run the cost comparison', detail: 'Put Indian private/deemed total cost next to Georgia/Kyrgyzstan — the gap is usually decisive.', timing: 'Today' },
+      { order: 1, title: 'Run the cost comparison', detail: 'Put Indian private/deemed total cost next to Georgia/Timor-Leste — the gap is usually decisive.', timing: 'Today' },
       { order: 2, title: 'Shortlist NMC-eligible abroad universities', detail: 'ABHA filters only NMC & WHO eligible universities so your Indian licence is never at risk.', timing: 'This week' },
       { order: 3, title: 'Book a free counselling session', detail: 'Lock documents, fees and intake so your seat is confirmed for this academic year.', timing: 'Now' },
     ],

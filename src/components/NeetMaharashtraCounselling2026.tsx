@@ -58,7 +58,7 @@ const colleges = [
 
 const collegeNotes = [
   '*TBC = figures under office verification — pencil in after confirming from MH CET Cell 2025 allotment PDFs.',
-  "Ranges are last year's (2025) state-quota closing marks compiled by ABHA office — individual college & round-wise variation applies.",
+  "Ranges are the 2025 state-quota closing marks compiled by the ABHA office — individual college & round-wise variation applies.",
 ];
 
 const routeGuide = [
