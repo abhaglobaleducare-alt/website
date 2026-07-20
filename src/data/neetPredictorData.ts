@@ -427,6 +427,9 @@ export interface CostBreakdownEntry {
   /** numeric all-inclusive ₹ range (for currency-aware rendering of the total) */
   totalFromInr?: number;
   totalToInr?: number;
+  /** ₹ tuition / direct-college fees (below the all-inclusive total) — for the
+   *  "budget covers tuition but not the full total" middle state */
+  tuitionFromInr?: number;
   /** short suffix for the total, e.g. "all-inclusive" */
   totalSuffix?: string;
   /** prominent trust line under the total (e.g. fees paid direct to college) */
@@ -480,6 +483,7 @@ export const costBreakdowns: CostBreakdownEntry[] = [
     totalLabel: o.allInclusiveLabel,
     totalFromInr: o.allInclusiveFromInr,
     totalToInr: o.allInclusiveToInr,
+    tuitionFromInr: o.headlineFromInr,
     totalSuffix: o.allInclusiveSuffix,
     trustLine: o.trustLine,
     footnotes: o.footnotes,

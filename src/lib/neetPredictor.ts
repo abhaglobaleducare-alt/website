@@ -472,6 +472,13 @@ export function generateRecommendation(
 /*  generateCostComparison — rank routes by total cost vs budget              */
 /* -------------------------------------------------------------------------- */
 
+/** Budget assessment against the ALL-INCLUSIVE total:
+ *  - 'yes'     : budget covers the full all-inclusive total
+ *  - 'partial' : budget covers tuition/college fees but NOT the full total
+ *  - 'no'      : budget is below even tuition
+ *  - null      : no budget entered */
+export type BudgetFit = 'yes' | 'partial' | 'no' | null;
+
 export interface CostRow {
   route: string;
   /** numeric all-inclusive ₹ used for sorting & budget-fit (nulls skipped) */
@@ -482,7 +489,12 @@ export interface CostRow {
   totalFromInr?: number;
   totalToInr?: number;
   totalSuffix?: string;
-  withinBudget: boolean | null; // null when no budget given
+  /** ₹ tuition / direct-college fees, when the route has a tuition-vs-total split */
+  tuitionFromInr?: number;
+  /** true only when budget covers the FULL all-inclusive total */
+  withinBudget: boolean | null;
+  /** three-state budget assessment vs the all-inclusive total */
+  budgetFit: BudgetFit;
   note: string;
   trustLine?: string;
 }
@@ -500,6 +512,14 @@ export function generateCostComparison(
 ): CostComparison {
   const rows: CostRow[] = costBreakdowns.map((c) => {
     const total = c.components.reduce((s, x) => s + (x.amount ?? 0), 0);
+    // 3-state assessment vs the ALL-INCLUSIVE total (matches the "enter a TOTAL
+    // budget" ask on the form — never compares a total against tuition alone).
+    let budgetFit: BudgetFit = null;
+    if (budget != null) {
+      if (total <= budget) budgetFit = 'yes';
+      else if (c.tuitionFromInr != null && c.tuitionFromInr <= budget) budgetFit = 'partial';
+      else budgetFit = 'no';
+    }
     return {
       route: c.route,
       total,
@@ -507,7 +527,9 @@ export function generateCostComparison(
       totalFromInr: c.totalFromInr,
       totalToInr: c.totalToInr,
       totalSuffix: c.totalSuffix,
-      withinBudget: budget == null ? null : total <= budget,
+      tuitionFromInr: c.tuitionFromInr,
+      withinBudget: budget == null ? null : budgetFit === 'yes',
+      budgetFit,
       note: c.note,
       trustLine: c.trustLine,
     };
@@ -523,23 +545,33 @@ export function generateCostComparison(
   if (budget == null) {
     verdict = `Cheapest route: ${cheapest.route} at ${cheapest.displayTotal} total. Add a budget above to see what fits.`;
   } else {
-    const within = rows.filter((r) => r.withinBudget);
-    const nonGovWithin = within.filter((r) => r.route !== 'Government MBBS (India)');
+    const nonGovWithin = rows.filter((r) => r.budgetFit === 'yes' && r.route !== 'Government MBBS (India)');
+    // cheapest abroad route the budget at least covers tuition/college fees for
+    const partialAbroad = rows
+      .filter((r) => r.budgetFit === 'partial' && isAbroad(r.route) && r.tuitionFromInr != null)
+      .sort((a, b) => a.total - b.total)[0];
 
     if (nonGovWithin.length) {
-      verdict = `Within your ${formatINR(budget)} budget: ${nonGovWithin.map((r) => r.route).join(', ')}.`;
-    } else if (within.length) {
-      // only the government seat fits
-      verdict = `Only a government seat fits ${formatINR(budget)}${
-        cheapestAbroad ? ` — and an abroad route (from ${cheapestAbroad.displayTotal}) is the next most affordable way to widen your options` : ''
+      verdict = `Your ${formatINR(budget)} total budget covers the all-inclusive cost of: ${nonGovWithin
+        .map((r) => r.route)
+        .join(', ')}.`;
+    } else if (partialAbroad) {
+      // Honest middle: budget covers tuition/college fees but not the full total.
+      verdict = `Your ${formatINR(budget)} budget covers the tuition / college fees for ${partialAbroad.route} (${formatINR(
+        partialAbroad.tuitionFromInr!,
+      )}), but the full all-inclusive total is about ${formatINR(
+        partialAbroad.total,
+      )}. Education-loan & instalment options can be discussed at counselling to bridge the gap.`;
+    } else if (rows.some((r) => r.budgetFit === 'yes')) {
+      verdict = `Only a government seat fits ${formatINR(budget)} in full${
+        cheapestAbroad ? ` — an abroad route (from ${cheapestAbroad.displayTotal}) is the next most affordable way to widen your options` : ''
       }.`;
     } else {
-      // nothing fits, not even a government seat
       const top2 = rows
         .slice(0, 2)
         .map((r) => `${r.route} (${r.displayTotal})`)
         .join(' or ');
-      verdict = `No route fully fits ${formatINR(budget)}. The most affordable paths are ${top2} — worth reviewing your budget in a counselling session.`;
+      verdict = `No route's all-inclusive total fits ${formatINR(budget)}. The most affordable paths are ${top2} — worth reviewing your budget & loan options in a counselling session.`;
     }
   }
 

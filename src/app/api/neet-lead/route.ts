@@ -24,6 +24,7 @@ const leadSchema = z.object({
   preferredCountry: z.string().max(100).optional().or(z.literal("")),
   otherCourse: z.string().max(100).optional().or(z.literal("")),
   budgetRange: z.string().max(60).optional().or(z.literal("")),
+  budgetLakh: z.coerce.number().optional(),
   consentGiven: z.literal(true),
   ipadOfferInterested: z.boolean().optional().default(false),
   // computed analysis snapshot
@@ -58,6 +59,7 @@ function officeEmailHtml(d: LeadData): string {
     ["Preferred Country", d.preferredCountry],
     ["Other Course", d.otherCourse],
     ["Budget Range", d.budgetRange],
+    ["Budget (₹ Lakh)", d.budgetLakh != null ? String(d.budgetLakh) : ""],
     ["iPad Offer Interested", d.ipadOfferInterested ? "Yes" : "No"],
     ["Govt Chance", d.governmentChance],
     ["State Quota Chance", d.stateQuotaChance],
@@ -137,6 +139,7 @@ export async function POST(request: NextRequest) {
           preferredCountry: d.preferredCountry,
           otherCourse: d.otherCourse,
           budgetRange: d.budgetRange,
+          budgetLakh: d.budgetLakh ?? null,
           consentGiven: d.consentGiven,
           ipadOfferInterested: d.ipadOfferInterested,
           estimatedRank: d.estimatedRank ?? null,

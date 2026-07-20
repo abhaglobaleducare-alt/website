@@ -1,6 +1,6 @@
 'use client';
 
-import { Check, X, Minus } from 'lucide-react';
+import { Check, X, Minus, AlertTriangle } from 'lucide-react';
 import type { CostComparison, CostRow } from '@/lib/neetPredictor';
 import { money } from '@/lib/neetPredictor';
 import SavingsHighlight from './SavingsHighlight';
@@ -65,14 +65,25 @@ export default function ComparisonTable({ comparison }: { comparison: CostCompar
                 </td>
                 {comparison.budget != null && (
                   <td className="py-3 px-4 align-top">
-                    {r.withinBudget === null ? (
+                    {r.budgetFit === null ? (
                       <Minus className="h-4 w-4 text-navy-300" />
-                    ) : r.withinBudget ? (
-                      <span className="inline-flex items-center gap-1 text-emerald-600">
+                    ) : r.budgetFit === 'yes' ? (
+                      <span className="inline-flex items-center gap-1 font-semibold text-emerald-600">
                         <Check className="h-4 w-4" /> Yes
                       </span>
+                    ) : r.budgetFit === 'partial' ? (
+                      <span>
+                        <span className="inline-flex items-center gap-1 font-semibold text-amber-600">
+                          <AlertTriangle className="h-4 w-4" /> Partly
+                        </span>
+                        {r.tuitionFromInr != null && (
+                          <span className="mt-1 block text-[11px] leading-snug text-navy-500">
+                            Covers tuition {money(r.tuitionFromInr, currency)}; full total {displayTotal(r)}
+                          </span>
+                        )}
+                      </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 text-rose-500">
+                      <span className="inline-flex items-center gap-1 font-semibold text-rose-500">
                         <X className="h-4 w-4" /> No
                       </span>
                     )}

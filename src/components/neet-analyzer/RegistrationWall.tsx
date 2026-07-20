@@ -123,6 +123,8 @@ export default function RegistrationWall({ analysis, onUnlock }: Props) {
       preferredCountry: interestedIn.includes(OTHER_COUNTRY) ? f.preferredCountry : '',
       otherCourse: interestedIn.includes(OTHER_COURSE) ? f.otherCourse : '',
       budgetRange: f.budgetRange,
+      // exact ₹-Lakh figure typed on the analyzer form (counsellors want the number)
+      budgetLakh: inputs.budget ? Math.round(inputs.budget / 100_000) : undefined,
       consentGiven: true as const,
       ipadOfferInterested: f.ipadOfferInterested,
       estimatedRank: analysis.rank,
