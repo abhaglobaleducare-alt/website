@@ -1,13 +1,38 @@
 'use client';
 
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Info } from 'lucide-react';
 import { CATEGORIES, STATES, MAX_SCORE, type Category, type StateName } from '@/data/neetPredictorData';
 import type { PredictorInputs } from '@/lib/neetPredictor';
+import {
+  BUDGET_LABEL,
+  BUDGET_LABEL_OPTIONAL,
+  BUDGET_HELPER,
+  BUDGET_FORMULA_PARTS,
+  BUDGET_FORMULA_TOTAL,
+  BUDGET_PLACEHOLDER,
+  BUDGET_ADVISORY,
+  BUDGET_ADVISORY_BOLD,
+} from '@/data/advisoryCopy';
 
 interface Props {
   value: PredictorInputs;
   onChange: (next: PredictorInputs) => void;
   onSubmit: () => void;
+}
+
+/** Render `text` with the given phrases wrapped in <strong> (for the advisory). */
+function renderWithBold(text: string, phrases: string[]) {
+  const escaped = phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const re = new RegExp(`(${escaped.join('|')})`, 'g');
+  return text.split(re).map((seg, i) =>
+    phrases.includes(seg) ? (
+      <strong key={i} className="font-bold text-primary-navy">
+        {seg}
+      </strong>
+    ) : (
+      <span key={i}>{seg}</span>
+    ),
+  );
 }
 
 export default function InputForm({ value, onChange, onSubmit }: Props) {
@@ -105,9 +130,31 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
 
         {/* Budget */}
         <div className="sm:col-span-2">
-          <label htmlFor="neet-budget" className="mb-1.5 block text-sm font-semibold text-primary-navy">
-            Family Budget for the full course <span className="text-navy-300">(optional · in ₹ Lakh)</span>
+          {/* Transparency advisory (above the field) */}
+          <div className="mb-4 rounded-xl border-l-4 border-[#C6962E] bg-[#C6962E]/10 p-3.5">
+            <p className="flex gap-2 text-xs leading-relaxed text-navy-600 sm:text-[13px]">
+              <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#C6962E]" />
+              <span>{renderWithBold(BUDGET_ADVISORY, BUDGET_ADVISORY_BOLD)}</span>
+            </p>
+          </div>
+
+          <label htmlFor="neet-budget" className="mb-1 block text-sm font-semibold text-primary-navy">
+            {BUDGET_LABEL} <span className="text-navy-300">({BUDGET_LABEL_OPTIONAL})</span>
           </label>
+          <p className="mb-2 text-xs leading-relaxed text-navy-500">{BUDGET_HELPER}</p>
+
+          {/* Formula strip */}
+          <div className="mb-2.5 flex flex-wrap items-center gap-1.5 text-[11px] font-semibold text-navy-400">
+            {BUDGET_FORMULA_PARTS.map((part, i) => (
+              <span key={part} className="inline-flex items-center gap-1.5">
+                <span className="rounded-md bg-light-gray px-2 py-0.5">{part}</span>
+                {i < BUDGET_FORMULA_PARTS.length - 1 && <span className="text-navy-300">+</span>}
+              </span>
+            ))}
+            <span className="text-navy-300">=</span>
+            <span className="rounded-md bg-gold-50 px-2 py-0.5 font-bold text-gold-700">{BUDGET_FORMULA_TOTAL}</span>
+          </div>
+
           <div className="relative">
             <input
               id="neet-budget"
@@ -120,7 +167,7 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
                 const lakh = Number(e.target.value);
                 set('budget', lakh > 0 ? lakh * 100_000 : undefined);
               }}
-              placeholder="e.g. 40"
+              placeholder={BUDGET_PLACEHOLDER}
               className="w-full rounded-xl border border-navy-200 bg-light-gray px-4 py-3 pr-16 font-medium text-primary-navy outline-none transition focus:border-primary-gold focus:ring-2 focus:ring-gold-200"
             />
             <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm font-semibold text-navy-400">
