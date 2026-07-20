@@ -117,6 +117,8 @@ export default function RegistrationWall({ analysis, onUnlock }: Props) {
       state: inputs.state,
       neetScore: inputs.score,
       allIndiaRank: inputs.allIndiaRank ?? undefined,
+      categoryRank: inputs.categoryRank ?? undefined,
+      airSource: analysis.airSource,
       category: inputs.category,
       currentStatus: f.currentStatus,
       interestedIn,

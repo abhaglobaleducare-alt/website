@@ -59,45 +59,44 @@ export interface RankAnchor {
   air: number;
 }
 
+/*
+ * ⚠️ CALIBRATED TO THE OFFICIAL NEET 2026 RESULT DISTRIBUTION (result declared
+ * 16 July 2026). Any future recalibration MUST match NTA official cumulative
+ * counts: 1,492 candidates ≥650 · 10,160 ≥600 · 90,780 ≥500 (2026). Reject any
+ * source table that contradicts these — e.g. 600→AIR 4,000 is STALE 2025 data
+ * (2026 actual is ~10,160). Grounding: top score 715/720; 138 candidates >690;
+ * 11.21 lakh qualified of ~20 lakh appeared. Anchors dated July 2026.
+ * Update anchors only via a reviewed commit — student data proposes, founder
+ * disposes (see /api/air-calibration-report).
+ */
 export const rankMapping: RankAnchor[] = [
-  { score: 686, air: 1 }, // EDIT — top-tier anchors move most
-  { score: 680, air: 10 },
-  { score: 670, air: 200 },
-  { score: 660, air: 800 },
-  { score: 650, air: 2_000 },
-  { score: 640, air: 4_000 },
-  { score: 630, air: 6_000 },
-  { score: 620, air: 8_500 },
-  { score: 610, air: 12_000 },
-  { score: 600, air: 15_000 },
-  { score: 590, air: 19_000 },
-  { score: 580, air: 23_000 },
-  { score: 570, air: 28_000 },
-  { score: 560, air: 33_000 },
-  { score: 550, air: 38_000 },
-  { score: 540, air: 45_000 },
-  { score: 530, air: 52_000 },
-  { score: 520, air: 60_000 },
-  { score: 510, air: 70_000 },
-  { score: 500, air: 80_000 },
-  { score: 490, air: 92_000 },
-  { score: 480, air: 105_000 },
-  { score: 470, air: 118_000 },
-  { score: 460, air: 132_000 },
-  { score: 450, air: 145_000 },
-  { score: 440, air: 160_000 },
-  { score: 430, air: 178_000 },
-  { score: 420, air: 195_000 },
-  { score: 410, air: 215_000 },
-  { score: 400, air: 240_000 },
-  { score: 380, air: 300_000 },
-  { score: 360, air: 380_000 },
-  { score: 340, air: 470_000 },
-  { score: 300, air: 650_000 },
-  { score: 250, air: 850_000 },
-  { score: 200, air: 1_050_000 },
-  { score: 144, air: 1_236_531 }, // ~General qualifying line
+  { score: 715, air: 1 }, // top scorer 715/720
+  { score: 700, air: 33 },
+  { score: 686, air: 160 }, // 138 candidates > 690
+  { score: 650, air: 1_493 }, // 1,492 candidates ≥ 650
+  { score: 635, air: 2_600 },
+  { score: 601, air: 10_160 }, // 10,160 candidates ≥ 600
+  { score: 562, air: 28_000 }, // ~last AIQ Gen/UR govt seat
+  { score: 559, air: 29_500 },
+  { score: 551, air: 35_000 },
+  { score: 501, air: 90_780 }, // 90,780 candidates ≥ 500
+  { score: 451, air: 140_000 },
+  { score: 401, air: 190_000 },
+  { score: 351, air: 250_000 },
+  { score: 301, air: 330_000 },
+  { score: 251, air: 440_000 },
+  { score: 213, air: 560_000 },
+  // Below 213: qualifying-borderline zone — extend smoothly toward the total
+  // number of qualified candidates (~11.21 lakh) at the Gen qualifying line.
+  { score: 162, air: 1_121_000 }, // ~General qualifying line · total qualified
 ];
+
+/** Total candidates who qualified NEET 2026 (≈ last qualified rank). */
+export const TOTAL_QUALIFIED_2026 = 1_121_000;
+/** Below this score the estimate is "qualifying-borderline" (low precision). */
+export const QUALIFYING_BORDERLINE_SCORE = 213;
+/** Human-facing calibration label — render visibly; it is a selling point. */
+export const CALIBRATION_LABEL = 'Calibrated to the official NEET 2026 result distribution';
 
 /* -------------------------------------------------------------------------- */
 /*  2. GOVERNMENT (AIQ 15%) THRESHOLDS — closing ranks by category            */
@@ -114,12 +113,28 @@ export interface GovThreshold {
 }
 
 export const governmentThresholds: GovThreshold[] = [
-  { category: 'General', safeRank: 15_000, possibleRank: 30_000 }, // EDIT
+  // Gen/UR: last AIQ govt seat closes ~AIR 28,000–29,000 (≈560–562 marks) in 2026.
+  { category: 'General', safeRank: 20_000, possibleRank: 28_000 },
   { category: 'EWS', safeRank: 22_000, possibleRank: 42_000 },
   { category: 'OBC', safeRank: 30_000, possibleRank: 60_000 },
   { category: 'SC', safeRank: 90_000, possibleRank: 150_000 },
   { category: 'ST', safeRank: 130_000, possibleRank: 220_000 },
 ];
+
+/* -------------------------------------------------------------------------- */
+/*  Category-rank estimation scaffold (C3)                                     */
+/* -------------------------------------------------------------------------- */
+/**
+ * Per-category score→Category-Rank anchor curves. INTENTIONALLY EMPTY at launch:
+ * we do NOT fabricate category-rank estimates without data. A curve for a
+ * category is added ONLY after the calibration report shows ≥30 real actual
+ * data points for it (see /api/air-calibration-report) — via a reviewed commit,
+ * never auto-applied. Until then, non-General verdicts use category-relaxed
+ * score thresholds and nudge the student to enter their Category Rank.
+ */
+export const categoryAnchors: Partial<Record<Category, RankAnchor[]>> = {
+  // OBC: [ ... ] // add once ≥30 actual OBC data points are collected & reviewed
+};
 
 /* -------------------------------------------------------------------------- */
 /*  3. STATE QUOTA (85%) THRESHOLDS — closing ranks by state & category       */

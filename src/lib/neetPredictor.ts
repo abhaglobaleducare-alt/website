@@ -27,6 +27,8 @@ import {
   PRIVATE_INDIA_TYPICAL_INR,
   GEORGIA_TUITION_FROM_INR,
   EXCHANGE_RATE_INR,
+  QUALIFYING_BORDERLINE_SCORE,
+  CALIBRATION_LABEL,
   MAX_SCORE,
   TOTAL_CANDIDATES,
   TOTAL_MBBS_SEATS_INDIA,
@@ -36,7 +38,7 @@ import {
   type CostBreakdownEntry,
 } from '@/data/neetPredictorData';
 
-export { PRIVATE_INDIA_TYPICAL_INR, GEORGIA_SAVINGS_INR, GEORGIA_SAVINGS_LABEL, GEORGIA_TUITION_FROM_INR };
+export { PRIVATE_INDIA_TYPICAL_INR, GEORGIA_SAVINGS_INR, GEORGIA_SAVINGS_LABEL, GEORGIA_TUITION_FROM_INR, CALIBRATION_LABEL };
 
 /* -------------------------------------------------------------------------- */
 /*  Shared result types                                                       */
@@ -63,6 +65,16 @@ export interface PredictorInputs {
   state: StateName;
   budget?: number; // total budget in ₹ for the whole course (optional)
   allIndiaRank?: number; // actual AIR if the student already has their result (optional)
+  categoryRank?: number; // reserved-category rank from the rank card (optional)
+}
+
+export type AirSource = 'actual' | 'estimated';
+
+export interface RankRange {
+  from: number;
+  to: number;
+  /** true when the score is in the low-precision qualifying-borderline zone */
+  borderline: boolean;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -133,6 +145,59 @@ export function estimateRank(score: number): number {
   return last.air;
 }
 
+/** Round to a human-friendly figure (never false precision). */
+function roundNice(n: number): number {
+  if (n < 1_000) return Math.max(1, Math.round(n / 50) * 50);
+  if (n < 20_000) return Math.round(n / 500) * 500;
+  if (n < 100_000) return Math.round(n / 1_000) * 1_000;
+  return Math.round(n / 5_000) * 5_000;
+}
+
+/**
+ * Estimated AIR as a RANGE (± proportional to local anchor spacing) — never a
+ * false-precision single number. e.g. a score between two widely-spaced anchors
+ * gets a wider band. Used for DISPLAY; verdict logic uses the point estimate.
+ */
+export function estimateRankRange(score: number): RankRange {
+  const mid = estimateRank(score);
+  const clamped = Math.max(0, Math.min(MAX_SCORE, score));
+  let span = mid * 0.3; // fallback when beyond the anchor ends
+  for (let i = 0; i < rankMapping.length - 1; i++) {
+    const hi = rankMapping[i];
+    const lo = rankMapping[i + 1];
+    if (clamped <= hi.score && clamped >= lo.score) {
+      span = lo.air - hi.air;
+      break;
+    }
+  }
+  const half = Math.max(200, 0.15 * span);
+  return {
+    from: Math.max(1, roundNice(mid - half)),
+    to: roundNice(mid + half),
+    borderline: score < QUALIFYING_BORDERLINE_SCORE,
+  };
+}
+
+// Dev-only sanity asserts — these MUST hold for the NEET-2026 anchors (see the
+// ⚠️ validation comment above rankMapping). Warns loudly if a future edit drifts.
+if (process.env.NODE_ENV !== 'production') {
+  const checks: Array<[number, number]> = [
+    [600, 10_200],
+    [562, 28_000],
+    [551, 35_000],
+    [501, 90_780],
+    [450, 140_000],
+    [300, 330_000],
+  ];
+  for (const [s, exp] of checks) {
+    const got = estimateRank(s);
+    if (Math.abs(got - exp) / exp > 0.2) {
+      // eslint-disable-next-line no-console
+      console.warn(`[air-calibration] anchor sanity drift: score ${s} -> ${got} (expected ~${exp})`);
+    }
+  }
+}
+
 /** Rough percentile (higher score → higher percentile). */
 export function estimatePercentile(score: number): number {
   const rank = estimateRank(score);
@@ -175,12 +240,12 @@ export function predictGovernmentChance(
   const { chance, probability } = graduatedChance(rank, t.safeRank, t.possibleRank);
   const headline =
     chance === 'high'
-      ? 'Strong chance at a Government seat'
+      ? 'Realistic Government MBBS chance via AIQ'
       : chance === 'moderate'
-        ? 'Possible in later rounds'
+        ? 'Realistic Government chance — likely in later rounds'
         : chance === 'low'
-          ? 'Unlikely via AIQ — keep as an outside shot'
-          : 'AIQ government seat is highly unlikely at this rank';
+          ? 'Government unlikely via AIQ — explore state quota, private & abroad'
+          : 'Government MBBS highly unlikely at this rank — focus on state quota / private / abroad';
 
   return {
     ...base,
@@ -202,6 +267,7 @@ export function predictStateQuota(
   category: Category,
   state: StateName,
   score: number,
+  categoryRank?: number,
 ): PredictionResult {
   const base = {
     key: 'state',
@@ -232,6 +298,16 @@ export function predictStateQuota(
           ? 'Unlikely unless cutoffs relax'
           : 'State government seat highly unlikely at this rank';
 
+  // Reserved-category guidance: use the Category Rank when the student provides
+  // it; otherwise nudge them to add it (we never fabricate a category rank).
+  let reservedNote = '';
+  if (category !== 'General') {
+    reservedNote =
+      categoryRank && categoryRank > 0
+        ? ` Using your ${category} category rank (${formatRank(categoryRank)}) for reserved-seat guidance.`
+        : ` For precise reserved-seat guidance, enter your Category Rank from the rank card.`;
+  }
+
   return {
     ...base,
     chance,
@@ -239,7 +315,7 @@ export function predictStateQuota(
     headline,
     detail: `Estimated AIR ${formatRank(rank)} vs ${state} ${category} closing around ${formatRank(
       closing,
-    )}.${st.note ? ' ' + st.note : ''}`,
+    )}.${st.note ? ' ' + st.note : ''}${reservedNote}`,
   };
 }
 
@@ -653,6 +729,12 @@ export function generatePersonalizedRoadmap(
 export interface FullAnalysis {
   inputs: PredictorInputs;
   rank: number;
+  /** display range for the rank (point value = `rank`) */
+  rankRange: RankRange;
+  /** whether `rank` came from the student's actual AIR or our estimate */
+  airSource: AirSource;
+  /** "Calibrated to the official NEET 2026 result distribution" */
+  calibrationLabel: string;
   percentile: number;
   qualified: boolean;
   government: PredictionResult;
@@ -671,13 +753,17 @@ export interface FullAnalysis {
 
 export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
   // Use the student's actual AIR when provided; otherwise estimate from score.
-  const rank =
-    inputs.allIndiaRank && inputs.allIndiaRank > 0 ? Math.round(inputs.allIndiaRank) : estimateRank(inputs.score);
+  const usingActual = !!(inputs.allIndiaRank && inputs.allIndiaRank > 0);
+  const rank = usingActual ? Math.round(inputs.allIndiaRank!) : estimateRank(inputs.score);
+  const airSource: AirSource = usingActual ? 'actual' : 'estimated';
+  const rankRange: RankRange = usingActual
+    ? { from: rank, to: rank, borderline: false }
+    : estimateRankRange(inputs.score);
   const percentile = estimatePercentile(inputs.score);
   const qualified = isQualified(inputs.score, inputs.category);
 
   const government = predictGovernmentChance(rank, inputs.category, inputs.score);
-  const state = predictStateQuota(rank, inputs.category, inputs.state, inputs.score);
+  const state = predictStateQuota(rank, inputs.category, inputs.state, inputs.score, inputs.categoryRank);
   const priv = predictPrivate(rank, inputs.category, inputs.state, inputs.score);
   const deemed = predictDeemed(rank, inputs.category, inputs.score);
   const abroad = predictAbroad(rank, inputs.score, inputs.category);
@@ -690,6 +776,9 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
   return {
     inputs,
     rank,
+    rankRange,
+    airSource,
+    calibrationLabel: CALIBRATION_LABEL,
     percentile,
     qualified,
     government,

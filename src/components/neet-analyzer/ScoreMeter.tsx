@@ -1,18 +1,33 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { formatRank } from '@/lib/neetPredictor';
+import { BadgeCheck } from 'lucide-react';
+import { formatRank, type RankRange, type AirSource } from '@/lib/neetPredictor';
 import { MAX_SCORE } from '@/data/neetPredictorData';
 
 interface Props {
   score: number;
   rank: number;
+  rankRange: RankRange;
+  airSource: AirSource;
+  calibrationLabel: string;
   percentile: number;
 }
 
-/** Big radial-ish hero readout: score, estimated AIR, and percentile. */
-export default function ScoreMeter({ score, rank, percentile }: Props) {
+/** Big readout: score, AIR (exact when actual / range when estimated), percentile. */
+export default function ScoreMeter({ score, rank, rankRange, airSource, calibrationLabel, percentile }: Props) {
   const pct = Math.max(0, Math.min(100, (score / MAX_SCORE) * 100));
+  const isActual = airSource === 'actual';
+
+  const airHeading = isActual ? 'Your AIR' : 'Estimated AIR';
+  const airValue = isActual
+    ? formatRank(rank)
+    : `${formatRank(rankRange.from)}–${formatRank(rankRange.to)}`;
+  const airSub = isActual
+    ? 'Based on your actual NEET 2026 AIR'
+    : rankRange.borderline
+      ? 'Qualifying-borderline zone — low precision. Enter your actual AIR for exact guidance.'
+      : 'Estimated from the official 2026 result distribution — enter your actual AIR for exact guidance.';
 
   return (
     <div className="rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-8">
@@ -34,9 +49,15 @@ export default function ScoreMeter({ score, rank, percentile }: Props) {
         </div>
 
         <div className="text-center sm:px-6">
-          <p className="text-xs font-bold uppercase tracking-wider text-navy-400">Estimated AIR</p>
-          <p className="mt-1 font-playfair text-5xl font-bold text-accent-blue">{formatRank(rank)}</p>
-          <p className="mt-3 text-xs text-navy-400">All India Rank (approx.)</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-navy-400">{airHeading}</p>
+          <p
+            className={`mt-1 font-playfair font-bold text-accent-blue ${
+              isActual ? 'text-5xl' : 'text-2xl sm:text-3xl'
+            }`}
+          >
+            {isActual ? airValue : `~${airValue}`}
+          </p>
+          <p className="mt-2 text-[11px] leading-snug text-navy-400">{airSub}</p>
         </div>
 
         <div className="text-center sm:pl-6">
@@ -45,6 +66,10 @@ export default function ScoreMeter({ score, rank, percentile }: Props) {
           <p className="mt-3 text-xs text-navy-400">Better than most candidates</p>
         </div>
       </div>
+
+      <p className="mt-5 flex items-center justify-center gap-1.5 border-t border-navy-100 pt-4 text-xs font-semibold text-emerald-700">
+        <BadgeCheck className="h-4 w-4" /> {calibrationLabel}
+      </p>
     </div>
   );
 }

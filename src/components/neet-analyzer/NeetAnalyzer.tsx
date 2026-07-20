@@ -29,6 +29,7 @@ import DynamicCta from './DynamicCta';
 import EngagementCards from './EngagementCards';
 import SmartDisclaimer from './SmartDisclaimer';
 import Confetti from './Confetti';
+import RankCardExplainer from './RankCardExplainer';
 import { CurrencyContext, type Currency } from './currencyContext';
 
 interface Props {
@@ -200,6 +201,12 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
           <InputForm value={inputs} onChange={setInputs} onSubmit={handleSubmit} />
         </Section>
 
+        <Section delay={0.05}>
+          <div className="mt-4">
+            <RankCardExplainer />
+          </div>
+        </Section>
+
         <AnimatePresence>
           {analysis && (
             <div ref={resultsRef} className="scroll-mt-24 space-y-8 pt-10">
@@ -208,7 +215,14 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                 <SmartDisclaimer />
               </Section>
               <Section delay={0.05}>
-                <ScoreMeter score={analysis.inputs.score} rank={analysis.rank} percentile={analysis.percentile} />
+                <ScoreMeter
+                  score={analysis.inputs.score}
+                  rank={analysis.rank}
+                  rankRange={analysis.rankRange}
+                  airSource={analysis.airSource}
+                  calibrationLabel={analysis.calibrationLabel}
+                  percentile={analysis.percentile}
+                />
               </Section>
 
               {!registered ? (

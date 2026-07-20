@@ -1,8 +1,9 @@
 'use client';
 
-import { Sparkles, Info } from 'lucide-react';
+import { useState } from 'react';
+import { Sparkles, Info, BadgeCheck } from 'lucide-react';
 import { CATEGORIES, STATES, MAX_SCORE, type Category, type StateName } from '@/data/neetPredictorData';
-import type { PredictorInputs } from '@/lib/neetPredictor';
+import { CALIBRATION_LABEL, type PredictorInputs } from '@/lib/neetPredictor';
 import {
   BUDGET_LABEL,
   BUDGET_LABEL_OPTIONAL,
@@ -39,6 +40,10 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
   const set = <K extends keyof PredictorInputs>(k: K, v: PredictorInputs[K]) =>
     onChange({ ...value, [k]: v });
 
+  // AIR is required by default; this escape hatch makes it optional and falls
+  // back to the 2026-calibrated estimate.
+  const [airUnknown, setAirUnknown] = useState(false);
+
   // Budget is stored in ₹ internally but entered in ₹ Lakh for convenience.
   const budgetLakh = value.budget ? Math.round(value.budget / 100_000) : '';
 
@@ -70,24 +75,41 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
           />
         </div>
 
-        {/* All India Rank (optional) */}
+        {/* All India Rank (required, with escape hatch) */}
         <div>
           <label htmlFor="neet-air" className="mb-1.5 block text-sm font-semibold text-primary-navy">
-            All India Rank <span className="text-navy-300">(optional — if you have it)</span>
+            All India Rank {airUnknown ? <span className="text-navy-300">(optional)</span> : <span className="text-primary-gold">*</span>}
           </label>
           <input
             id="neet-air"
             type="number"
             inputMode="numeric"
             min={1}
+            required={!airUnknown}
+            disabled={airUnknown}
             value={value.allIndiaRank && value.allIndiaRank > 0 ? value.allIndiaRank : ''}
             onChange={(e) => {
               const air = Number(e.target.value);
               set('allIndiaRank', air > 0 ? air : undefined);
             }}
             placeholder="e.g. 45000"
-            className="w-full rounded-xl border border-navy-200 bg-light-gray px-4 py-3 text-lg font-semibold text-primary-navy outline-none transition focus:border-primary-gold focus:ring-2 focus:ring-gold-200"
+            className="w-full rounded-xl border border-navy-200 bg-light-gray px-4 py-3 text-lg font-semibold text-primary-navy outline-none transition focus:border-primary-gold focus:ring-2 focus:ring-gold-200 disabled:opacity-50"
           />
+          <p className="mt-1 text-xs text-navy-400">
+            Enter the AIR printed on your NEET 2026 rank card (neet.nta.nic.in).
+          </p>
+          <label className="mt-1.5 flex items-center gap-2 text-xs font-medium text-navy-500">
+            <input
+              type="checkbox"
+              checked={airUnknown}
+              onChange={(e) => {
+                setAirUnknown(e.target.checked);
+                if (e.target.checked) set('allIndiaRank', undefined);
+              }}
+              className="h-3.5 w-3.5 accent-primary-gold"
+            />
+            I don&apos;t know my AIR yet
+          </label>
         </div>
 
         {/* Category */}
@@ -127,6 +149,29 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
             ))}
           </select>
         </div>
+
+        {/* Category Rank — reserved categories only */}
+        {value.category !== 'General' && (
+          <div className="sm:col-span-2">
+            <label htmlFor="neet-catrank" className="mb-1.5 block text-sm font-semibold text-primary-navy">
+              Category Rank <span className="text-navy-300">(optional — if on your rank card)</span>
+            </label>
+            <input
+              id="neet-catrank"
+              type="number"
+              inputMode="numeric"
+              min={1}
+              value={value.categoryRank && value.categoryRank > 0 ? value.categoryRank : ''}
+              onChange={(e) => {
+                const cr = Number(e.target.value);
+                set('categoryRank', cr > 0 ? cr : undefined);
+              }}
+              placeholder="e.g. 8500"
+              className="w-full rounded-xl border border-navy-200 bg-light-gray px-4 py-3 font-medium text-primary-navy outline-none transition focus:border-primary-gold focus:ring-2 focus:ring-gold-200"
+            />
+            <p className="mt-1 text-xs text-navy-400">Used for reserved-seat guidance (SC/ST/OBC/EWS).</p>
+          </div>
+        )}
 
         {/* Budget */}
         <div className="sm:col-span-2">
@@ -187,6 +232,9 @@ export default function InputForm({ value, onChange, onSubmit }: Props) {
       </button>
       <p className="mt-3 text-center text-xs text-navy-400">
         Free · instant · no sign-up · results computed in your browser
+      </p>
+      <p className="mt-2 flex items-center justify-center gap-1.5 text-center text-xs font-semibold text-emerald-700">
+        <BadgeCheck className="h-4 w-4" /> {CALIBRATION_LABEL}
       </p>
     </form>
   );

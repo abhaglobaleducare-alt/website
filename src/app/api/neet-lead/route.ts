@@ -18,6 +18,8 @@ const leadSchema = z.object({
   state: z.string().max(60).optional().or(z.literal("")),
   neetScore: z.coerce.number().min(-180).max(720),
   allIndiaRank: z.coerce.number().optional(),
+  categoryRank: z.coerce.number().optional(),
+  airSource: z.enum(["actual", "estimated"]).optional(),
   category: z.string().max(20).optional().or(z.literal("")),
   currentStatus: z.string().max(80).optional().or(z.literal("")),
   interestedIn: z.array(z.string().max(80)).max(30).optional().default([]),
@@ -52,6 +54,8 @@ function officeEmailHtml(d: LeadData): string {
     ["State", d.state],
     ["NEET Score", String(d.neetScore)],
     ["All India Rank", d.allIndiaRank ? String(d.allIndiaRank) : "—"],
+    ["AIR Source", d.airSource || "—"],
+    ["Category Rank", d.categoryRank ? String(d.categoryRank) : "—"],
     ["Estimated Rank", d.estimatedRank ? String(d.estimatedRank) : "—"],
     ["Category", d.category],
     ["Current Status", d.currentStatus],
@@ -118,6 +122,21 @@ export async function POST(request: NextRequest) {
     }
     const d = result.data;
 
+    // Calibration collection: every ACTUAL AIR submission emits one structured
+    // line (Vercel → Logs). The /api/air-calibration-report endpoint reads these
+    // to propose (never auto-apply) tighter anchors. See that route for the loop.
+    if (d.airSource === "actual" && d.allIndiaRank) {
+      console.log(
+        `[air-calibration] ${JSON.stringify({
+          score: d.neetScore,
+          air: d.allIndiaRank,
+          categoryRank: d.categoryRank ?? null,
+          category: d.category || "General",
+          ts: new Date().toISOString(),
+        })}`,
+      );
+    }
+
     // Forward to CRM (structured) and email the office — both non-blocking.
     const [crmResult, emailResult] = await Promise.allSettled([
       sendLeadToCRM({
@@ -133,6 +152,8 @@ export async function POST(request: NextRequest) {
           state: d.state,
           neetScore: d.neetScore,
           allIndiaRank: d.allIndiaRank ?? null,
+          categoryRank: d.categoryRank ?? null,
+          airSource: d.airSource ?? null,
           category: d.category,
           currentStatus: d.currentStatus,
           interestedIn: d.interestedIn,
