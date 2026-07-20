@@ -23,6 +23,9 @@ const contactSchema = z.object({
   city: z.string().max(100).optional().or(z.literal("")),
   district: z.string().max(100).optional().or(z.literal("")),
   course: z.string().max(100).optional().or(z.literal("")),
+  // Selected plan on the NEET Coaching Package page (package / portal / hub)
+  plan: z.string().max(100).optional().or(z.literal("")),
+  amount: z.string().max(20).optional().or(z.literal("")),
   neetStatus: z.string().max(100).optional().or(z.literal("")),
   neetScore: z.string().max(20).optional().or(z.literal("")),
   preferredCountry: z.string().max(100).optional().or(z.literal("")),
@@ -61,6 +64,8 @@ function buildAdminEmail(data: ContactFormData): string {
     { label: "City", value: data.city },
     { label: "District", value: data.district },
     { label: "Course", value: data.course },
+    { label: "Plan", value: data.plan },
+    { label: "Amount", value: data.amount },
     { label: "NEET Status", value: data.neetStatus },
     { label: "NEET Score", value: data.neetScore },
     { label: "Preferred Country", value: data.preferredCountry },
@@ -113,15 +118,36 @@ function buildAdminEmail(data: ContactFormData): string {
   `;
 }
 
+// What each plan unlocks — used in the auto-reply so the student sees exactly
+// what they bought. Keyed by the plan label the form submits.
+const PLAN_BLURBS: Record<string, string> = {
+  "NEET Coaching Package":
+    "the Preparation Portal (quick notes, chapter-wise questions, weekly &amp; monthly tests) plus the Practice Hub (full-length 180-Q NEET mock tests) with performance analytics",
+  "Preparation Portal":
+    "quick notes, chapter-wise questions, and weekly &amp; monthly tests across Physics, Chemistry, Botany &amp; Zoology",
+  "Practice Hub":
+    "full-length 180-question NEET mock tests with +4/−1 marking and subject-wise performance analysis",
+};
+
 // Build the auto-reply email for the student — tailored by registration source
-function buildAutoReplyEmail(name: string, source?: string): string {
+function buildAutoReplyEmail(
+  name: string,
+  source?: string,
+  plan?: string,
+  amount?: string,
+): string {
   const isNeetPrep = source === "neet-preparation-registration";
   const isNeetHub = source === "neet-practice-hub-registration";
+
+  // The Coaching Package page can submit any of the three plans.
+  const planName = plan || "NEET Coaching Package";
+  const planAmount = amount || "₹2,110";
+  const planBlurb = PLAN_BLURBS[planName] || PLAN_BLURBS["NEET Coaching Package"];
 
   const subject = isNeetPrep
     ? "NEET Preparation Portal"
     : isNeetHub
-      ? "NEET Coaching Package"
+      ? planName
       : "ABHA Global Educare";
 
   const bodyContent = isNeetPrep
@@ -145,13 +171,13 @@ function buildAutoReplyEmail(name: string, source?: string): string {
     : isNeetHub
       ? `
           <h2>Registration Received, ${name}!</h2>
-          <p>Thank you for registering for the <strong>ABHA NEET Coaching Package (₹2,110/year)</strong> — Preparation Portal + Practice Hub.</p>
+          <p>Thank you for registering for the <strong>ABHA ${planName} (${planAmount}/year)</strong>.</p>
           <div class="highlight">
             <strong>What happens next?</strong>
             <ul>
               <li>Our team will verify your UPI payment (UTR) within 24 hours</li>
-              <li>Your NEET Coaching Package account will be activated and login credentials sent via WhatsApp &amp; Email</li>
-              <li>You'll get the Preparation Portal (quick notes, chapter-wise questions, weekly &amp; monthly tests) plus the Practice Hub (full-length 180-Q NEET mock tests) with performance analytics</li>
+              <li>Your ${planName} account will be activated and login credentials sent via WhatsApp &amp; Email</li>
+              <li>You'll get ${planBlurb}</li>
             </ul>
           </div>
           <p>For faster activation, send your payment screenshot on WhatsApp:</p>
@@ -246,6 +272,8 @@ export async function POST(request: NextRequest) {
       city: data.city,
       district: data.district,
       course: data.course,
+      plan: data.plan,
+      amount: data.amount,
       neetStatus: data.neetStatus,
       neetScore: data.neetScore,
       preferredCountry: data.preferredCountry,
@@ -309,7 +337,7 @@ export async function POST(request: NextRequest) {
       const replySubject = isNeetPrep
         ? "NEET Preparation Portal — Registration Received"
         : isNeetHub
-          ? "NEET Coaching Package — Registration Received"
+          ? `${data.plan || "NEET Coaching Package"} — Registration Received`
           : "Thank you for your enquiry — ABHA Global Educare";
       await transporter.sendMail({
         from:
@@ -317,7 +345,7 @@ export async function POST(request: NextRequest) {
           `"ABHA Global Educare" <${process.env.SMTP_USER}>`,
         to: data.email,
         subject: replySubject,
-        html: buildAutoReplyEmail(data.name, data.source),
+        html: buildAutoReplyEmail(data.name, data.source, data.plan, data.amount),
       });
     }
 

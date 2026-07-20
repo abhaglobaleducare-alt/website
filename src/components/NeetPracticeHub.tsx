@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import LeadGate from '@/components/LeadGate';
 import { Target, BarChart3, Clock, Trophy, CheckCircle2, ArrowRight, Loader2, Phone, Mail, Zap } from 'lucide-react';
-import { WHATSAPP, KOLHAPUR, waLink, waLinkEncoded } from '@/data/contacts';
+import { WHATSAPP, KOLHAPUR, waLink } from '@/data/contacts';
 
 const features = [
   { icon: Target, title: 'Full NEET Mock Tests', desc: '180 questions · 3 hours · Physics, Chemistry & Biology — exact NEET exam pattern every time' },
@@ -24,9 +24,45 @@ const included = [
   'Admin support & progress tracking',
 ];
 
-const steps = [
-  { n: '01', t: 'Fill the registration form', d: 'Enter your details below. Takes under 2 minutes.' },
-  { n: '02', t: 'Pay ₹2,110 via UPI', d: 'Send ₹2,110 to the UPI ID shown. Screenshot your transaction.' },
+/**
+ * The three purchasable plans. `qr` is null where we don't have a payment QR
+ * yet — those plans fall back to a WhatsApp CTA. UPI IDs are the live merchant
+ * IDs shown on each QR; keep them in sync with the QR images.
+ */
+const PLANS = [
+  {
+    id: 'package',
+    label: 'NEET Coaching Package',
+    tag: 'Preparation Portal + Practice Hub',
+    amount: '₹2,110',
+    qr: '/images/qr-neet-hub-2110.jpeg',
+    upiId: 'yespay.bizsbiz175213@yesbankltd',
+  },
+  {
+    id: 'preparation',
+    label: 'Preparation Portal',
+    tag: 'Notes & practice questions',
+    amount: '₹999',
+    qr: '/images/qr-neet-prep-999.jpeg',
+    upiId: 'yespay.mabs0043270ikit0245@yesbankltd',
+  },
+  {
+    id: 'practice-hub',
+    label: 'Practice Hub',
+    tag: 'Full mock tests',
+    amount: '₹1,111',
+    qr: null,
+    upiId: null,
+  },
+] as const;
+
+type Plan = (typeof PLANS)[number];
+
+const stepsFor = (plan: Plan) => [
+  { n: '01', t: 'Choose your plan & fill the form', d: 'Pick a plan in the form, then enter your details. Takes under 2 minutes.' },
+  plan.qr
+    ? { n: '02', t: `Pay ${plan.amount} via UPI`, d: `Scan the QR and send ${plan.amount}. Screenshot your transaction.` }
+    : { n: '02', t: `Pay ${plan.amount} via WhatsApp`, d: 'Tap "Pay via WhatsApp" and our team will share the payment details.' },
   { n: '03', t: 'Enter your UTR number', d: 'Add your UPI Transaction ID in the form so our team can verify payment.' },
   { n: '04', t: 'Admin verifies & activates', d: 'We verify your payment and set up your account within 24 hours.' },
   { n: '05', t: 'Start practising immediately', d: 'Receive login credentials via WhatsApp/Email. Full portal access begins.' },
@@ -35,6 +71,9 @@ const steps = [
 export default function NeetPracticeHub() {
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [statusMsg, setStatusMsg] = useState('');
+  const [planId, setPlanId] = useState<string>(PLANS[0].id);
+  const plan: Plan = PLANS.find((p) => p.id === planId) ?? PLANS[0];
+  const steps = stepsFor(plan);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -52,15 +91,17 @@ export default function NeetPracticeHub() {
           city: fd.get('city'),
           neetStatus: fd.get('neetStatus'),
           neetScore: fd.get('neetScore'),
-          course: 'NEET Coaching Package — ₹2,110/year',
-          message: `NEET Coaching Package (Preparation Portal + Practice Hub) Registration — ₹2,110/year. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
+          course: `${plan.label} — ${plan.amount}/year`,
+          plan: plan.label,
+          amount: plan.amount,
+          message: `${plan.label} (${plan.tag}) Registration — ${plan.amount}/year. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
           source: 'neet-practice-hub-registration',
         }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
         setFormState('success');
-        setStatusMsg('Registration received! Our team will verify your payment and activate your NEET Coaching Package account within 24 hours.');
+        setStatusMsg(`Registration received! Our team will verify your payment and activate your ${plan.label} account within 24 hours.`);
         (e.target as HTMLFormElement).reset();
       } else {
         setFormState('error');
@@ -317,40 +358,79 @@ export default function NeetPracticeHub() {
             </div>
             <div className="rounded-2xl p-6" style={{ background: '#0B1A35' }}>
               <div className="mb-4">
-                <p className="font-bold text-sm" style={{ color: '#C6962E' }}>💳 Scan & Pay via UPI</p>
+                <p className="font-bold text-sm" style={{ color: '#C6962E' }}>
+                  {plan.qr ? '💳 Scan & Pay via UPI' : '💬 Pay via WhatsApp'}
+                </p>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="text-yellow-300 font-black text-lg">₹2,110</span>
-                  <span className="text-white/50 text-xs">/ year</span>
+                  <span className="text-yellow-300 font-black text-lg">{plan.amount}</span>
+                  <span className="text-white/50 text-xs">/ year · {plan.label}</span>
                 </div>
               </div>
-              <div className="flex justify-center mb-4">
-                <div className="bg-white p-3 rounded-xl">
-                  <img
-                    src="/images/qr-neet-hub-2110.jpeg"
-                    alt="Pay ₹2,110 — NEET Coaching Package annual access"
-                    width={180}
-                    height={180}
-                    style={{ display: 'block' }}
-                  />
-                </div>
-              </div>
-              <p className="text-white/50 text-xs text-center mb-4">Scan &amp; pay ₹2,110 with any UPI app — Google Pay, PhonePe, Paytm, BHIM</p>
-              <div className="space-y-2">
-                {[
-                  { label: 'UPI ID', value: 'yespay.bizsbiz175213@yesbankltd' },
-                  { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
-                  { label: 'Amount', value: '₹2,110 / year' },
-                  { label: 'WhatsApp', value: WHATSAPP.display },
-                ].map(({ label, value }) => (
-                  <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
-                    <span className="text-white/50 text-xs">{label}</span>
-                    <span className="text-white font-bold text-xs">{value}</span>
+
+              {plan.qr ? (
+                <>
+                  <div className="flex justify-center mb-4">
+                    <div className="bg-white p-3 rounded-xl">
+                      <img
+                        src={plan.qr}
+                        alt={`Pay ${plan.amount} — ${plan.label} annual access`}
+                        width={180}
+                        height={180}
+                        style={{ display: 'block' }}
+                      />
+                    </div>
                   </div>
-                ))}
-              </div>
-              <p className="text-white/40 text-xs mt-4 leading-relaxed">
-                After payment, enter your UTR (transaction ID) in the form below and share your screenshot on WhatsApp.
-              </p>
+                  <p className="text-white/50 text-xs text-center mb-4">
+                    Scan &amp; pay {plan.amount} with any UPI app — Google Pay, PhonePe, Paytm, BHIM
+                  </p>
+                  <div className="space-y-2">
+                    {[
+                      { label: 'UPI ID', value: plan.upiId as string },
+                      { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
+                      { label: 'Amount', value: `${plan.amount} / year` },
+                      { label: 'WhatsApp', value: WHATSAPP.display },
+                    ].map(({ label, value }) => (
+                      <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
+                        <span className="text-white/50 text-xs">{label}</span>
+                        <span className="text-white font-bold text-xs">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-white/40 text-xs mt-4 leading-relaxed">
+                    After payment, enter your UTR (transaction ID) in the form and share your screenshot on WhatsApp.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="text-white/60 text-xs leading-relaxed mb-4">
+                    We don&apos;t have a payment QR for the {plan.label} plan yet. Tap below and our
+                    team will share the payment details on WhatsApp right away.
+                  </p>
+                  <a
+                    href={waLink(`I want to register for the ${plan.label} plan (${plan.amount}/year). Please share the payment details.`)}
+                    target="_blank" rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-3.5 font-bold text-sm text-white transition-opacity hover:opacity-90"
+                    style={{ background: '#25D366' }}
+                  >
+                    Pay via WhatsApp
+                  </a>
+                  <div className="space-y-2 mt-4">
+                    {[
+                      { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
+                      { label: 'Amount', value: `${plan.amount} / year` },
+                      { label: 'WhatsApp', value: WHATSAPP.display },
+                    ].map(({ label, value }) => (
+                      <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
+                        <span className="text-white/50 text-xs">{label}</span>
+                        <span className="text-white font-bold text-xs">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-white/40 text-xs mt-4 leading-relaxed">
+                    Already paid on WhatsApp? Enter the UTR in the form — or leave it blank and we&apos;ll confirm with you.
+                  </p>
+                </>
+              )}
             </div>
           </div>
 
@@ -367,7 +447,7 @@ export default function NeetPracticeHub() {
                     Registration Received!
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">{statusMsg}</p>
-                  <a href={waLinkEncoded("Hi%2C+I+just+registered+for+the+NEET+Coaching+Package")}
+                  <a href={waLink(`Hi, I just registered for the ${plan.label} (${plan.amount}/year).`)}
                     target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm text-white"
                     style={{ background: '#25D366' }}>
@@ -381,8 +461,40 @@ export default function NeetPracticeHub() {
                   <h3 className="font-playfair font-bold text-2xl mb-1" style={{ color: '#0B1A35' }}>
                     Register Now
                   </h3>
-                  <p className="text-gray-400 text-xs mb-6">NEET Coaching Package · <span className="font-bold" style={{ color: '#7C3AED' }}>₹2,110 / year</span> · Preparation Portal + Practice Hub</p>
+                  <p className="text-gray-400 text-xs mb-5">{plan.label} · <span className="font-bold" style={{ color: '#7C3AED' }}>{plan.amount} / year</span> · {plan.tag}</p>
                   <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Plan selector — drives the QR shown on the left and the payload */}
+                    <div>
+                      <label className="block text-xs font-semibold mb-2" style={{ color: '#0B1A35' }}>Select Your Plan *</label>
+                      <div className="space-y-2">
+                        {PLANS.map((p) => (
+                          <label
+                            key={p.id}
+                            className="flex items-center gap-3 rounded-xl border px-3 py-2.5 cursor-pointer transition-colors"
+                            style={{
+                              borderColor: planId === p.id ? '#7C3AED' : '#E2E8F0',
+                              background: planId === p.id ? 'rgba(124,58,237,0.05)' : 'transparent',
+                            }}
+                          >
+                            <input
+                              type="radio"
+                              name="plan"
+                              value={p.id}
+                              checked={planId === p.id}
+                              onChange={() => setPlanId(p.id)}
+                              disabled={formState === 'loading'}
+                              style={{ accentColor: '#7C3AED' }}
+                            />
+                            <span className="flex-1">
+                              <span className="block text-sm font-semibold" style={{ color: '#0B1A35' }}>{p.label}</span>
+                              <span className="block text-[11px] text-gray-400">{p.tag}</span>
+                            </span>
+                            <span className="font-black text-sm" style={{ color: '#7C3AED' }}>{p.amount}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs font-semibold mb-1.5" style={{ color: '#0B1A35' }}>Full Name *</label>
@@ -433,12 +545,21 @@ export default function NeetPracticeHub() {
                     </div>
                     <div>
                       <label className="block text-xs font-semibold mb-1.5" style={{ color: '#0B1A35' }}>
-                        UPI Transaction ID (UTR) *
+                        UPI Transaction ID (UTR) {plan.qr ? '*' : <span className="text-gray-400 font-normal">(optional)</span>}
                       </label>
-                      <input name="utr" type="text" required placeholder="Enter UTR after paying ₹2,110" disabled={formState === 'loading'}
+                      <input
+                        name="utr"
+                        type="text"
+                        required={Boolean(plan.qr)}
+                        placeholder={plan.qr ? `Enter UTR after paying ${plan.amount}` : 'Leave blank if not paid yet'}
+                        disabled={formState === 'loading'}
                         className="w-full px-3 py-2.5 rounded-xl border text-sm focus:outline-none focus:border-[#C6962E] transition-colors"
                         style={{ borderColor: '#E2E8F0', color: '#0B1A35' }} />
-                      <p className="text-gray-400 text-xs mt-1">Found in your UPI app under transaction history</p>
+                      <p className="text-gray-400 text-xs mt-1">
+                        {plan.qr
+                          ? 'Found in your UPI app under transaction history'
+                          : `No QR for ${plan.label} yet — submit the form and pay via WhatsApp; we'll confirm your UTR there.`}
+                      </p>
                     </div>
                     <AnimatePresence>
                       {statusMsg && formState === 'error' && (
