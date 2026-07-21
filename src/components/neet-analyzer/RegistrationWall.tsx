@@ -39,7 +39,7 @@ const INTEREST_GROUPS: { group: string; options: string[] }[] = [
   },
   {
     group: 'MBBS Abroad',
-    options: ['MBBS Abroad — Georgia 🇬🇪', 'MBBS Abroad — Timor-Leste 🇹🇱', 'MBBS Abroad — Other Country'],
+    options: ['MBBS Abroad — Georgia 🇬🇪', 'MBBS Abroad — Timor-Leste 🇹🇱', 'Dentistry (DMD) — Georgia 🇬🇪', 'MBBS Abroad — Other Country'],
   },
   {
     group: 'Other Courses',

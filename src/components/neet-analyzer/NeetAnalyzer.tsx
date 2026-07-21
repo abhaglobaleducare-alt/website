@@ -14,6 +14,7 @@ import StateQuotaCard from './StateQuotaCard';
 import PrivateCard from './PrivateCard';
 import GeorgiaCard from './GeorgiaCard';
 import TimorCard from './TimorCard';
+import BdsBamsCard from './BdsBamsCard';
 import ComparisonTable from './ComparisonTable';
 import CostBreakdown from './CostBreakdown';
 import RecommendationRoadmap from './RecommendationRoadmap';
@@ -321,6 +322,13 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                       <TimorCard result={analysis.abroad} />
                     </div>
                   </Section>
+
+                  {/* Alternative courses (BDS/BAMS/nursing) — lower score bands only */}
+                  {score <= 480 && (
+                    <Section delay={0.05}>
+                      <BdsBamsCard />
+                    </Section>
+                  )}
 
                   {score >= 550 && (
                     <Section delay={0.05}>
