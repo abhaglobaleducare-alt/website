@@ -50,12 +50,6 @@ const coachingPoints = [
   'ABHA चे स्वतःचे MBBS-qualified faculty',
 ];
 
-const incredocPoints = [
-  '24/7 instructional videos व workbooks',
-  'Revision guides व supplementary modules',
-  'University lectures ला complement करणारं वेळापत्रक',
-];
-
 const galleryPhotos = ['image-25', 'image-27', 'image-29', 'image-40'];
 
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -95,8 +89,9 @@ export default function ApplyPage() {
         <div className="relative mx-auto grid max-w-[1200px] items-start gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Left — headline + image */}
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#C6962E]/40 bg-[#C6962E]/10 px-4 py-1.5 text-sm font-semibold text-[#E0B85C]">
-              <Sparkles size={14} /> MBBS Coaching — ABHA package मध्येच included
+            <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#C6962E]/40 bg-[#C6962E]/10 px-4 py-1.5 text-xs font-semibold text-[#E0B85C] sm:text-sm">
+              <Sparkles size={14} className="flex-shrink-0" />
+              <span className="min-w-0">MBBS Coaching — ABHA package मध्येच included</span>
             </span>
             <h1 className="mt-5 font-playfair text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.75rem]">
               MBBS Abroad — फक्त प्रवेश नाही,{' '}
@@ -104,7 +99,7 @@ export default function ApplyPage() {
             </h1>
             <p className="mt-5 max-w-[560px] text-base leading-relaxed text-white/75 sm:text-lg">
               AGDRP — ABHA Global Doctor Readiness Program: Hands-on Clinical Workshops + MBBS
-              Coaching Portal + INCREDOC Digital Workspace.
+              Coaching Portal — दोन्ही ABHA package मध्येच.
             </p>
 
             <div className="relative mt-8 aspect-[16/10] w-full overflow-hidden rounded-2xl border border-white/10">
@@ -126,21 +121,22 @@ export default function ApplyPage() {
         </div>
       </section>
 
-      {/* ── SECTION 2 — AGDRP: तीन स्तंभ ─────────────────────────────── */}
+      {/* ── SECTION 2 — AGDRP: दोन स्तंभ ─────────────────────────────── */}
       <section className="bg-white px-4 py-16 sm:px-8 sm:py-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-12 text-center">
-            <Kicker>AGDRP — तीन स्तंभ</Kicker>
+            <Kicker>AGDRP — दोन स्तंभ</Kicker>
             <h2 className="font-playfair text-3xl leading-tight text-[#0B1A35] sm:text-4xl">
               डॉक्टर बनवण्याची संपूर्ण तयारी
             </h2>
           </div>
 
-          {/* स्तंभ 1 — Hands-On Clinical Workshops */}
-          <div className="mb-8 rounded-3xl border border-gray-100 bg-[#F8F9FA] p-6 shadow-card sm:p-8">
-            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#1B7C9E]/12 text-[#1B7C9E]">
+          {/* Two pillars, side-by-side with equal visual weight */}
+          <div className="grid items-stretch gap-6 lg:grid-cols-2">
+            {/* स्तंभ 1 — Hands-On Clinical Workshops */}
+            <div className="flex h-full flex-col rounded-3xl border border-gray-100 bg-[#F8F9FA] p-6 shadow-card sm:p-8">
+              <div className="mb-6 flex items-center gap-3">
+                <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[#1B7C9E]/12 text-[#1B7C9E]">
                   <Microscope size={24} />
                 </span>
                 <div>
@@ -150,91 +146,86 @@ export default function ApplyPage() {
                   </h3>
                 </div>
               </div>
-              <span className="rounded-full bg-[#0B1A35] px-4 py-1.5 text-sm font-semibold text-white">
+
+              <span className="mb-5 inline-flex w-fit items-center rounded-full bg-[#0B1A35] px-4 py-1.5 text-sm font-semibold text-white">
                 10 Clinical Workshops Conducted
               </span>
-            </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              {specimens.map((s) => (
-                <div
-                  key={s.name}
-                  className="rounded-2xl border border-gray-100 bg-white p-5 shadow-card"
-                >
-                  <div className="mb-2 text-3xl">{s.emoji}</div>
-                  <h4 className="font-bold text-[#0B1A35]">{s.name}</h4>
-                  <p className="mt-0.5 text-sm text-gray-600">{s.en}</p>
-                  <p className="mt-0.5 text-sm text-[#85611C]">{s.note}</p>
-                </div>
-              ))}
-            </div>
+              <div className="grid grid-cols-2 gap-3">
+                {specimens.map((s) => (
+                  <div
+                    key={s.name}
+                    className="rounded-2xl border border-gray-100 bg-white p-4 shadow-card"
+                  >
+                    <div className="mb-1.5 text-2xl">{s.emoji}</div>
+                    <h4 className="text-sm font-bold text-[#0B1A35]">{s.name}</h4>
+                    <p className="mt-0.5 text-xs text-gray-600">{s.en}</p>
+                    <p className="mt-0.5 text-xs text-[#85611C]">{s.note}</p>
+                  </div>
+                ))}
+              </div>
 
-            <p className="mt-5 text-center text-sm font-semibold text-[#0B1A35]">
-              One Organ Specimen per Student — expert faculty च्या देखरेखीखाली
-            </p>
+              <p className="mt-5 text-center text-sm font-semibold text-[#0B1A35]">
+                One Organ Specimen per Student — expert faculty च्या देखरेखीखाली
+              </p>
 
-            <div className="mt-6 rounded-2xl border border-[#C6962E]/25 bg-[#C6962E]/5 p-5">
-              <div className="flex items-start gap-3">
-                <Activity size={20} className="mt-0.5 flex-shrink-0 text-[#C6962E]" />
-                <div>
-                  <p className="mb-2 font-semibold text-[#0B1A35]">Procedural Skills</p>
-                  <div className="grid gap-2 sm:grid-cols-2">
-                    {proceduralSkills.map((p) => (
-                      <p key={p} className="flex items-start gap-2 text-sm text-gray-700">
-                        <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0 text-[#C6962E]" />
-                        {p}
-                      </p>
-                    ))}
+              <div className="mt-5 rounded-2xl border border-[#C6962E]/25 bg-[#C6962E]/5 p-5">
+                <div className="flex items-start gap-3">
+                  <Activity size={20} className="mt-0.5 flex-shrink-0 text-[#C6962E]" />
+                  <div>
+                    <p className="mb-2 font-semibold text-[#0B1A35]">Procedural Skills</p>
+                    <div className="grid gap-2">
+                      {proceduralSkills.map((p) => (
+                        <p key={p} className="flex items-start gap-2 text-sm text-gray-700">
+                          <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0 text-[#C6962E]" />
+                          {p}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
+
+              <p className="mt-auto pt-6 text-center font-playfair text-lg font-bold italic text-[#85611C]">
+                ABHA × Praxis | “Practice. Master. Excel.”
+              </p>
             </div>
 
-            <p className="mt-5 text-center font-playfair text-lg font-bold italic text-[#85611C]">
-              ABHA × Praxis | “Practice. Master. Excel.”
-            </p>
-          </div>
-
-          {/* स्तंभ 2 — MBBS Coaching Portal (HERO USP) */}
-          <div className="mb-8 overflow-hidden rounded-3xl border-2 border-[#C6962E]/40 bg-gradient-to-br from-[#0B1A35] to-[#112545] p-6 shadow-navy sm:p-8">
-            <div className="grid items-center gap-8 lg:grid-cols-2">
-              <div>
-                <div className="mb-4 flex items-center gap-3">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#C6962E]/15 text-[#C6962E]">
-                    <BookOpen size={24} />
-                  </span>
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-[#E0B85C]">
-                      स्तंभ 2 · 📚 ⭐ मुख्य USP
-                    </p>
-                    <h3 className="font-playfair text-2xl font-bold text-white">
-                      MBBS Coaching Portal
-                    </h3>
-                  </div>
+            {/* स्तंभ 2 — MBBS Coaching Portal (HERO USP) */}
+            <div className="flex h-full flex-col overflow-hidden rounded-3xl border-2 border-[#C6962E]/40 bg-gradient-to-br from-[#0B1A35] to-[#112545] p-6 shadow-navy sm:p-8">
+              <div className="mb-6 flex items-center gap-3">
+                <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[#C6962E]/15 text-[#C6962E]">
+                  <BookOpen size={24} />
+                </span>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-[#E0B85C]">
+                    स्तंभ 2 · 📚 ⭐ मुख्य USP
+                  </p>
+                  <h3 className="font-playfair text-2xl font-bold text-white">MBBS Coaching Portal</h3>
                 </div>
+              </div>
 
-                <div className="mb-5 inline-flex items-center gap-2 rounded-lg bg-[#C6962E] px-4 py-2 text-sm font-bold text-[#0B1A35]">
-                  ABHA package मध्येच included — वेगळी fee नाही
-                </div>
+              <div className="mb-5 inline-flex w-fit max-w-full items-center gap-2 rounded-lg bg-[#C6962E] px-4 py-2 text-sm font-bold text-[#0B1A35]">
+                ABHA package मध्येच included — वेगळी fee नाही
+              </div>
 
-                <ul className="space-y-3">
-                  {coachingPoints.map((p) => (
-                    <li key={p} className="flex items-start gap-3 text-[0.95rem] text-white/85">
-                      <CheckCircle2 size={18} className="mt-0.5 flex-shrink-0 text-[#C6962E]" />
-                      {p}
-                    </li>
-                  ))}
-                </ul>
+              <ul className="space-y-3">
+                {coachingPoints.map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-[0.95rem] text-white/85">
+                    <CheckCircle2 size={18} className="mt-0.5 flex-shrink-0 text-[#C6962E]" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
 
-                <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#C6962E]/40 bg-[#C6962E]/10 px-4 py-1.5 text-sm font-semibold text-[#E0B85C]">
-                  <GraduationCap size={15} /> 2026 मध्ये नव्याने सुरू — पहिली batch
-                </div>
+              <div className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-[#C6962E]/40 bg-[#C6962E]/10 px-4 py-1.5 text-sm font-semibold text-[#E0B85C]">
+                <GraduationCap size={15} /> 2026 मध्ये नव्याने सुरू — पहिली batch
               </div>
 
               {/* Device mockup placeholder frame */}
-              <div className="mx-auto w-full max-w-[360px]">
+              <div className="mt-auto pt-8">
                 <div className="rounded-[1.75rem] border-4 border-white/15 bg-[#071122] p-3 shadow-2xl">
-                  <div className="flex aspect-[4/3] flex-col items-center justify-center rounded-xl border border-dashed border-white/15 bg-white/[0.03] text-center">
+                  <div className="flex aspect-[16/10] flex-col items-center justify-center rounded-xl border border-dashed border-white/15 bg-white/[0.03] text-center">
                     <MonitorPlay size={40} className="text-[#C6962E]/70" />
                     <p className="mt-3 px-6 text-sm text-white/50">
                       Coaching Portal — screenshot लवकरच
@@ -242,32 +233,6 @@ export default function ApplyPage() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* स्तंभ 3 — INCREDOC Digital Workspace */}
-          <div className="rounded-3xl border border-gray-100 bg-[#F8F9FA] p-6 shadow-card sm:p-8">
-            <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#0B1A35]/8 text-[#0B1A35]">
-                <MonitorPlay size={24} />
-              </span>
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#C6962E]">स्तंभ 3 · 💻</p>
-                <h3 className="font-playfair text-2xl font-bold text-[#0B1A35]">
-                  INCREDOC Digital Workspace
-                </h3>
-              </div>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {incredocPoints.map((p) => (
-                <p
-                  key={p}
-                  className="flex items-start gap-2 rounded-2xl border border-gray-100 bg-white p-4 text-sm text-gray-700 shadow-card"
-                >
-                  <CheckCircle2 size={16} className="mt-0.5 flex-shrink-0 text-[#1B7C9E]" />
-                  {p}
-                </p>
-              ))}
             </div>
           </div>
         </div>

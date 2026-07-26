@@ -9,13 +9,14 @@ import { waLink } from '@/data/contacts';
  * City, optional NEET status. Submits to the shared /api/contact endpoint with
  * source = 'google_ads_apply' (→ CRM trigger_action / web_lead_source), then
  * shows an INLINE thank-you + WhatsApp deep link. Never redirects — the page
- * stays put so the ads conversion pixel fires reliably.
+ * stays put so the ads conversion pixel + gtag conversion fire reliably.
  */
 
 // Kept out of render so the reference is stable.
 declare global {
   interface Window {
     fbq?: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -54,7 +55,10 @@ export default function ApplyLeadForm() {
       // CRM auto-routes district → nearest office; city is our best signal here.
       district: city,
       neetStatus,
-      // web_lead_source discriminator for the ABHA CRM.
+      // Site-wide lead-source convention: `source` → /api/contact maps it to the
+      // CRM's trigger_action (stored as web_lead_source in the CRM). Same key the
+      // homepage EligibilityForm uses — do NOT rename to web_lead_source here, the
+      // API's schema strips unknown keys and attribution would be lost.
       source: 'google_ads_apply',
     };
 
@@ -68,10 +72,17 @@ export default function ApplyLeadForm() {
 
       if (res.ok && data.success) {
         setFormState('success');
-        // Fire the Meta Pixel Lead event for ads conversion tracking.
+        // Meta Pixel Lead event (fires only if the pixel is present).
         if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
           window.fbq('track', 'Lead', { source: 'google_ads_apply' });
         }
+        // Google Ads conversion — fires only if gtag is loaded, silently skips
+        // otherwise. The conversion target is injected via env at deploy time
+        // (NEXT_PUBLIC_GOOGLE_ADS_ID, e.g. "AW-XXXXXXXXX/AbC-D_efgh").
+        window.gtag?.('event', 'conversion', {
+          send_to: process.env.NEXT_PUBLIC_GOOGLE_ADS_ID,
+          event_label: 'google_ads_apply',
+        });
         form.reset();
       } else {
         setFormState('error');

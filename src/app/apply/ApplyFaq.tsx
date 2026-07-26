@@ -6,7 +6,7 @@ import { ChevronDown } from 'lucide-react';
 const faqs = [
   {
     q: 'AGDRP म्हणजे काय?',
-    a: 'AGDRP — ABHA Global Doctor Readiness Program. हा ABHA चा एकत्रित कार्यक्रम आहे ज्यात Hands-On Clinical Workshops, MBBS Coaching Portal आणि INCREDOC Digital Workspace यांचा समावेश आहे. उद्देश एकच — फक्त प्रवेश नाही, तर डॉक्टर बनवण्याची संपूर्ण तयारी.',
+    a: 'AGDRP — ABHA Global Doctor Readiness Program. हा ABHA चा एकत्रित कार्यक्रम आहे ज्यात Hands-On Clinical Workshops आणि MBBS Coaching Portal या दोन स्तंभांचा समावेश आहे. उद्देश एकच — फक्त प्रवेश नाही, तर डॉक्टर बनवण्याची संपूर्ण तयारी.',
   },
   {
     q: 'Coaching चा वेगळा खर्च आहे का?',
