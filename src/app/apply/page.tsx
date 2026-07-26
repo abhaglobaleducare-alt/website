@@ -3,7 +3,6 @@ import Image from 'next/image';
 import {
   Microscope,
   BookOpen,
-  MonitorPlay,
   CheckCircle2,
   ShieldCheck,
   Building2,
@@ -50,6 +49,14 @@ const coachingPoints = [
   'ABHA चे स्वतःचे MBBS-qualified faculty',
 ];
 
+/* Feature tiles standing in for the portal screenshot (until it's ready). */
+const portalFeatures = [
+  { emoji: '📄', label: 'Notes' },
+  { emoji: '📝', label: 'Test Series' },
+  { emoji: '❓', label: 'Doubt Solving' },
+  { emoji: '🎯', label: 'FMGE Focus' },
+];
+
 const galleryPhotos = ['image-25', 'image-27', 'image-29', 'image-40'];
 
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -93,8 +100,11 @@ export default function ApplyPage() {
               <Sparkles size={14} className="flex-shrink-0" />
               <span className="min-w-0">MBBS Coaching — ABHA package मध्येच included</span>
             </span>
-            <h1 className="mt-5 font-playfair text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.75rem]">
-              MBBS Abroad — फक्त प्रवेश नाही,{' '}
+            {/* font-sans keeps Latin "MBBS Abroad" and the Devanagari in one
+                harmonised family; the Marathi clause is nowrap so it never
+                breaks mid-phrase. */}
+            <h1 className="mt-5 font-sans text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.75rem]">
+              MBBS Abroad — <span className="whitespace-nowrap">फक्त प्रवेश नाही,</span>{' '}
               <span className="text-[#C6962E]">डॉक्टर बनवण्याची संपूर्ण तयारी</span>
             </h1>
             <p className="mt-5 max-w-[560px] text-base leading-relaxed text-white/75 sm:text-lg">
@@ -222,16 +232,19 @@ export default function ApplyPage() {
                 <GraduationCap size={15} /> 2026 मध्ये नव्याने सुरू — पहिली batch
               </div>
 
-              {/* Device mockup placeholder frame */}
-              <div className="mt-auto pt-8">
-                <div className="rounded-[1.75rem] border-4 border-white/15 bg-[#071122] p-3 shadow-2xl">
-                  <div className="flex aspect-[16/10] flex-col items-center justify-center rounded-xl border border-dashed border-white/15 bg-white/[0.03] text-center">
-                    <MonitorPlay size={40} className="text-[#C6962E]/70" />
-                    <p className="mt-3 px-6 text-sm text-white/50">
-                      Coaching Portal — screenshot लवकरच
-                    </p>
+              {/* Portal feature tiles — stand in for the screenshot until it's ready */}
+              <div className="mt-auto grid grid-cols-2 gap-3 pt-8">
+                {portalFeatures.map((f) => (
+                  <div
+                    key={f.label}
+                    className="flex flex-col items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] p-5 text-center"
+                  >
+                    <span className="text-3xl" aria-hidden="true">
+                      {f.emoji}
+                    </span>
+                    <p className="mt-2 text-sm font-semibold text-white">{f.label}</p>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
