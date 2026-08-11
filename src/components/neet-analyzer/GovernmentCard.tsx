@@ -6,6 +6,7 @@ import { money } from '@/lib/neetPredictor';
 import { useCurrency } from './currencyContext';
 import { chanceMeta } from './_shared';
 import ProbabilityMeter from './ProbabilityMeter';
+import CutoffSource from './CutoffSource';
 
 export default function GovernmentCard({ result }: { result: PredictionResult }) {
   const currency = useCurrency();
@@ -36,6 +37,8 @@ export default function GovernmentCard({ result }: { result: PredictionResult })
       <div className="mt-4">
         <ProbabilityMeter value={result.probability} chance={result.chance} label="Chance of a seat" />
       </div>
+
+      {result.cutoffSource ? <CutoffSource result={result} /> : null}
     </div>
   );
 }

@@ -346,7 +346,11 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                   <Section delay={0.05}>
                     <div className="grid gap-6 lg:grid-cols-2">
                       <ConfidenceScore confidence={analysis.confidence} />
-                      <SeatAvailability buckets={analysis.seatAvailability} total={analysis.totalSeats} />
+                      <SeatAvailability
+                        buckets={analysis.seatAvailability}
+                        total={analysis.totalSeats}
+                        seatReality={analysis.seatReality}
+                      />
                     </div>
                   </Section>
 

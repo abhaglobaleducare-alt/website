@@ -43,8 +43,22 @@ export type StateName = (typeof STATES)[number];
 /** Maximum possible NEET score (720 in the 200-question / 180-scored era). */
 export const MAX_SCORE = 720; // EDIT if NTA changes the paper pattern
 
-/** Approx. total candidates who appeared — used for percentile framing. */
-export const TOTAL_CANDIDATES = 2_200_000; // EDIT each year
+/** Approx. total candidates who APPEARED — used for percentile framing. */
+export const TOTAL_CANDIDATES = 2_000_000; // NEET 2026: ~20 lakh appeared — EDIT each year
+
+/**
+ * Official NTA NEET 2026 category-wise QUALIFIED counts (press release, 16 Jul
+ * 2026; total 11.21 lakh). These are the honest denominators behind every
+ * "how many people are ahead of me in my category" statement the engine makes —
+ * never estimate them.
+ */
+export const CATEGORY_QUALIFIED_2026: Record<Category, number> = {
+  General: 291_000, // 2.91 lakh
+  EWS: 95_026,
+  OBC: 512_000, // OBC-NCL, 5.12 lakh
+  SC: 159_000, // 1.59 lakh
+  ST: 63_716,
+};
 
 /* -------------------------------------------------------------------------- */
 /*  1. RANK MAPPING — piecewise linear interpolation anchors                  */
@@ -97,6 +111,11 @@ export const TOTAL_QUALIFIED_2026 = 1_121_000;
 export const QUALIFYING_BORDERLINE_SCORE = 213;
 /** Human-facing calibration label — render visibly; it is a selling point. */
 export const CALIBRATION_LABEL = 'Calibrated to the official NEET 2026 result distribution';
+/** Where the college cutoffs (as opposed to the rank curve) come from. */
+export const CUTOFF_BASIS_LABEL =
+  'College cutoffs from the last completed counselling (MCC & state authorities, 2025), uplifted for the 9,911 new MBBS seats in the NMC 2026 matrix';
+/** The counselling cycle this build is aimed at. */
+export const COUNSELLING_YEAR = 2026;
 
 /* -------------------------------------------------------------------------- */
 /*  2. GOVERNMENT (AIQ 15%) THRESHOLDS — closing ranks by category            */
@@ -106,19 +125,55 @@ export const CALIBRATION_LABEL = 'Calibrated to the official NEET 2026 result di
  * MBBS colleges (MCC counselling). "Safe" = comfortably in; "possible" = only
  * in later/stray rounds or borderline colleges.
  */
+/**
+ * Provenance of a cutoff row. Rendered to the student and used by
+ * `calculateConfidence` — an unverified row must never read as verified.
+ *  - 'verified' : traced to a published closing rank from the last COMPLETED
+ *                 counselling (NEET 2025 / MCC / state authority).
+ *  - 'modelled' : ABHA office estimate; no published closing rank sourced yet.
+ */
+export type DataQuality = 'verified' | 'modelled';
+
+/**
+ * NEET 2026 seat-growth allowance. The NMC 2026 matrix added 9,911 MBBS seats
+ * (1,27,028 → 1,36,939; government 63,296). Closing ranks are driven by the
+ * SEAT COUNT, not by the mark distribution, so more seats push every closing
+ * rank slightly deeper. We uplift the verified NEET 2025 closing ranks by this
+ * factor rather than inventing 2026 numbers before counselling concludes.
+ *
+ * ⚠️ Closing MARKS moved far more than closing RANKS between 2025 and 2026
+ * (500 marks = AIR 52,437 in 2025 but AIR ~90,780 in 2026). Never carry a
+ * marks-based cutoff across years — only ranks.
+ */
+export const SEAT_GROWTH_UPLIFT_2026 = 1.05;
+
 export interface GovThreshold {
   category: Category;
   safeRank: number; // strong chance at a decent Govt college via AIQ
   possibleRank: number; // borderline — later rounds / less-preferred colleges
+  /** published AIQ closing AIR from the last COMPLETED counselling (2025) */
+  closingRank2025?: number;
+  dataQuality: DataQuality;
 }
 
+/*
+ * Verified against MCC 2025 Round-3 AIQ government MBBS closing ranks:
+ *   UR 26,178 · OBC-NCL 26,231 · SC ~1,36,445 · ST ~1,62,975.
+ * KEY CORRECTION (Aug 2026): OBC-NCL closes essentially LEVEL WITH UR in the
+ * All India Quota — the old 30k/60k OBC row was far too generous and told OBC
+ * students they were safe when they were not. In AIQ the OBC pool is huge
+ * (5.12 lakh qualified in 2026) relative to its 27% of only ~9.5k AIQ seats.
+ * `possibleRank` = verified 2025 closing × SEAT_GROWTH_UPLIFT_2026, rounded.
+ * `safeRank` ≈ 0.7 × possible — a decent college, not the last stray seat.
+ */
 export const governmentThresholds: GovThreshold[] = [
-  // Gen/UR: last AIQ govt seat closes ~AIR 28,000–29,000 (≈560–562 marks) in 2026.
-  { category: 'General', safeRank: 20_000, possibleRank: 28_000 },
-  { category: 'EWS', safeRank: 22_000, possibleRank: 42_000 },
-  { category: 'OBC', safeRank: 30_000, possibleRank: 60_000 },
-  { category: 'SC', safeRank: 90_000, possibleRank: 150_000 },
-  { category: 'ST', safeRank: 130_000, possibleRank: 220_000 },
+  { category: 'General', safeRank: 19_000, possibleRank: 27_500, closingRank2025: 26_178, dataQuality: 'verified' },
+  // EWS: MCC does not publish a single headline EWS closing rank; band taken
+  // from counselling-tracker consensus (AIR ~30k–34k) — flagged as modelled.
+  { category: 'EWS', safeRank: 24_000, possibleRank: 34_000, dataQuality: 'modelled' },
+  { category: 'OBC', safeRank: 19_500, possibleRank: 27_500, closingRank2025: 26_231, dataQuality: 'verified' },
+  { category: 'SC', safeRank: 100_000, possibleRank: 143_000, closingRank2025: 136_445, dataQuality: 'verified' },
+  { category: 'ST', safeRank: 120_000, possibleRank: 171_000, closingRank2025: 162_975, dataQuality: 'verified' },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -149,49 +204,98 @@ export interface StateThreshold {
   /** closing AIR per category — beyond this, Govt state seat is unlikely */
   closingRank: Record<Category, number>;
   note?: string;
+  /** 'verified' only where a published state closing rank was traced */
+  dataQuality: DataQuality;
+  /** which authority published the figures / would publish them */
+  authority: string;
+  /** the last COMPLETED counselling the row is traced to (verified rows only) */
+  sourceYear?: number;
 }
 
+/*
+ * MAHARASHTRA IS VERIFIED (MH CET Cell 2025 government MBBS closing AIRs):
+ *   Open   R1 ~42,000 → R3 47,500 → final/stray 52,437 (500 marks)
+ *   OBC    R3 ~48,000
+ *   EWS    R1 66,192 → R3 69,260
+ *   SC     R1 1,52,122 → R3 1,60,759
+ *   ST     R1 3,33,988 → R3 3,43,334
+ * Stored values = last-round closing × SEAT_GROWTH_UPLIFT_2026, rounded.
+ *
+ * TWO CORRECTIONS this fixes for Maharashtra students:
+ *   1. Open was modelled at 35,000 — the real 2025 seat closed at 52,437. The
+ *      old table was telling Kolhapur/Pune open-category students a govt seat
+ *      was out of reach when it was still live.
+ *   2. EWS and OBC were INVERTED. In Maharashtra OBC closes near Open (~48k)
+ *      because SEBC is a separate bucket, while EWS closes far later (~69k).
+ *
+ * Every other state stays 'modelled': no published state closing rank has been
+ * traced for it, so the UI and the confidence score must say so out loud. The
+ * Open/EWS bands were widened in line with the Maharashtra evidence (the old
+ * office model was systematically too tight on open-category state quota);
+ * OBC/SC/ST keep the office estimates because Maharashtra's SEBC split does not
+ * generalise. Replace a row with 'verified' only once its authority's closing
+ * rank is sourced — never by analogy.
+ */
 export const stateThresholds: StateThreshold[] = [
   {
     state: 'Maharashtra', // EDIT — ABHA's home state, keep most current
-    closingRank: { General: 35_000, EWS: 45_000, OBC: 70_000, SC: 200_000, ST: 320_000 },
-    note: 'MH CET Cell counselling — domicile & caste-validity documents decisive.',
+    closingRank: { General: 55_000, EWS: 72_000, OBC: 50_000, SC: 169_000, ST: 360_000 },
+    note: 'MH CET Cell counselling — domicile & caste-validity documents decisive. In Maharashtra OBC closes close to Open, while EWS closes much later.',
+    dataQuality: 'verified',
+    authority: 'MH CET Cell',
+    sourceYear: 2025,
   },
   {
     state: 'Karnataka',
-    closingRank: { General: 40_000, EWS: 52_000, OBC: 85_000, SC: 230_000, ST: 340_000 },
+    closingRank: { General: 60_000, EWS: 78_000, OBC: 85_000, SC: 230_000, ST: 340_000 },
     note: 'KEA counselling — Kannada domicile / eligibility clauses apply.',
+    dataQuality: 'modelled',
+    authority: 'KEA',
   },
   {
     state: 'Uttar Pradesh',
-    closingRank: { General: 42_000, EWS: 55_000, OBC: 88_000, SC: 260_000, ST: 400_000 },
+    closingRank: { General: 63_000, EWS: 82_000, OBC: 88_000, SC: 260_000, ST: 400_000 },
+    dataQuality: 'modelled',
+    authority: 'UP DGME',
   },
   {
     state: 'Bihar',
-    closingRank: { General: 40_000, EWS: 52_000, OBC: 82_000, SC: 250_000, ST: 380_000 },
+    closingRank: { General: 60_000, EWS: 78_000, OBC: 82_000, SC: 250_000, ST: 380_000 },
     note: 'BCECEB counselling — domicile & category certificates decisive.',
+    dataQuality: 'modelled',
+    authority: 'BCECEB',
   },
   {
     state: 'Rajasthan',
-    closingRank: { General: 38_000, EWS: 50_000, OBC: 78_000, SC: 220_000, ST: 300_000 },
+    closingRank: { General: 57_000, EWS: 75_000, OBC: 78_000, SC: 220_000, ST: 300_000 },
+    dataQuality: 'modelled',
+    authority: 'RajUHS',
   },
   {
     state: 'Gujarat',
-    closingRank: { General: 44_000, EWS: 56_000, OBC: 90_000, SC: 250_000, ST: 350_000 },
+    closingRank: { General: 66_000, EWS: 84_000, OBC: 90_000, SC: 250_000, ST: 350_000 },
+    dataQuality: 'modelled',
+    authority: 'Gujarat ACPUGMEC',
   },
   {
     state: 'Madhya Pradesh',
-    closingRank: { General: 40_000, EWS: 52_000, OBC: 82_000, SC: 240_000, ST: 330_000 },
+    closingRank: { General: 60_000, EWS: 78_000, OBC: 82_000, SC: 240_000, ST: 330_000 },
+    dataQuality: 'modelled',
+    authority: 'MP DME',
   },
   {
     state: 'Tamil Nadu',
-    closingRank: { General: 45_000, EWS: 58_000, OBC: 95_000, SC: 270_000, ST: 380_000 },
+    closingRank: { General: 68_000, EWS: 87_000, OBC: 95_000, SC: 270_000, ST: 380_000 },
     note: '7.5% govt-school reservation & strong state board weightage.',
+    dataQuality: 'modelled',
+    authority: 'TN MCC (Selection Committee)',
   },
   {
     state: 'Other',
-    closingRank: { General: 40_000, EWS: 52_000, OBC: 85_000, SC: 240_000, ST: 350_000 },
+    closingRank: { General: 60_000, EWS: 78_000, OBC: 85_000, SC: 240_000, ST: 350_000 },
     note: 'Generic all-India average — check your state counselling authority.',
+    dataQuality: 'modelled',
+    authority: 'your state counselling authority',
   },
 ];
 
@@ -405,17 +509,77 @@ export interface SeatBucket {
   note: string;
 }
 
-// NMC final MBBS seat matrix for NEET 2026: 1,29,603 seats across 824 colleges
-// (govt incl. AIIMS 63,160 · private & deemed 66,443). EDIT each year.
+/**
+ * OFFICIAL NMC MBBS seat matrix for NEET 2026 (released for 2026-27 admissions):
+ *   1,36,939 seats across 823 colleges = 63,296 government (441 colleges)
+ *   + 73,643 private & deemed (382 colleges). That is 9,911 NEW seats (+7.8%)
+ *   over 2025's 1,27,028 — and 78.7% of the new seats are private.
+ * AIIMS (~2,257) and JIPMER (243) are Institutes of National Importance and sit
+ * OUTSIDE the 1,36,939 matrix, so they are added as their own bucket here.
+ * Deemed universities (~58 NMC-approved, ~11,500 MBBS seats) are a SUBSET of the
+ * NMC "private" figure — split out below so the buckets still sum correctly.
+ * EDIT each year.
+ */
+export const NMC_TOTAL_MBBS_SEATS_2026 = 136_939;
+export const NMC_GOVT_MBBS_SEATS_2026 = 63_296;
+export const NMC_PRIVATE_AND_DEEMED_SEATS_2026 = 73_643;
+export const NMC_MEDICAL_COLLEGES_2026 = 823;
+export const NMC_NEW_SEATS_2026 = 9_911;
+const DEEMED_MBBS_SEATS_2026 = 11_500; // subset of NMC_PRIVATE_AND_DEEMED_SEATS_2026
+
 export const seatAvailability: SeatBucket[] = [
-  { type: 'Government MBBS', seats: 60_903, note: 'Central + state government colleges (450 colleges)' },
-  { type: 'Private MBBS', seats: 57_943, note: 'Private & management-quota colleges' },
-  { type: 'Deemed Universities', seats: 8_500, note: 'Deemed-to-be universities (MCC)' },
-  { type: 'AIIMS / JIPMER', seats: 2_257, note: 'Institutes of national importance' },
+  { type: 'Government MBBS', seats: NMC_GOVT_MBBS_SEATS_2026, note: 'Central + state government colleges (441 colleges) — the cheapest seats, and the hardest' },
+  {
+    type: 'Private MBBS',
+    seats: NMC_PRIVATE_AND_DEEMED_SEATS_2026 - DEEMED_MBBS_SEATS_2026,
+    note: 'Private & management-quota colleges (NMC lists private + deemed together as 73,643)',
+  },
+  { type: 'Deemed Universities', seats: DEEMED_MBBS_SEATS_2026, note: '~58 deemed-to-be universities — 100% filled through MCC, no domicile bar' },
+  { type: 'AIIMS / JIPMER', seats: 2_500, note: 'Institutes of national importance (AIIMS ~2,257 + JIPMER 243) — counted outside the NMC matrix' },
 ];
 
-/** Convenience: total sanctioned MBBS seats in India. */
+/** Convenience: total sanctioned MBBS seats in India (NMC matrix + INIs). */
 export const TOTAL_MBBS_SEATS_INDIA = seatAvailability.reduce((s, b) => s + b.seats, 0);
+
+/* -------------------------------------------------------------------------- */
+/*  7b. SEAT REALITY — why 63,296 govt seats still needs a rank under ~26,000  */
+/* -------------------------------------------------------------------------- */
+/**
+ * The single most-asked question on this tool: "there are 63,000 government
+ * seats, so why do I need AIR 26,000?" The answer is arithmetic, not opinion —
+ * quota split first, then reservation. Everything here is derived, not typed,
+ * so it can never drift from the seat matrix above.
+ *
+ *  1. Every state government seat splits 15% All India Quota / 85% State Quota.
+ *  2. Within each quota, reservation applies: SC 15% · ST 7.5% · OBC-NCL 27% ·
+ *     EWS 10% — leaving 40.5% unreserved. (PwD 5% is horizontal, i.e. carved
+ *     out of each vertical category, so it is not subtracted again here.)
+ *  3. So an open-category student is not competing for 63,296 seats. They are
+ *     competing for the ~40.5% that are unreserved — and within AIQ that is a
+ *     few thousand seats nationally, which is exactly why the last AIQ UR seat
+ *     closed at AIR 26,178.
+ */
+export const AIQ_SHARE = 0.15;
+export const STATE_QUOTA_SHARE = 0.85;
+
+/** Vertical reservation shares applied inside each quota. */
+export const RESERVATION_SHARE: Record<Category, number> = {
+  General: 0.405, // unreserved remainder
+  EWS: 0.10,
+  OBC: 0.27, // OBC-NCL
+  SC: 0.15,
+  ST: 0.075,
+};
+
+/** Government MBBS seats in the 15% All India Quota (indicative). */
+export const AIQ_GOVT_SEATS = Math.round(NMC_GOVT_MBBS_SEATS_2026 * AIQ_SHARE);
+/** Government MBBS seats in the 85% home-state quota (indicative). */
+export const STATE_GOVT_SEATS = NMC_GOVT_MBBS_SEATS_2026 - AIQ_GOVT_SEATS;
+
+/** Government seats realistically open to a given category, across both quotas. */
+export function govtSeatsForCategory(category: Category): number {
+  return Math.round(NMC_GOVT_MBBS_SEATS_2026 * RESERVATION_SHARE[category]);
+}
 
 /* -------------------------------------------------------------------------- */
 /*  8. COST BREAKDOWNS — detailed components per route (₹, whole course)      */
@@ -461,7 +625,7 @@ export const costBreakdowns: CostBreakdownEntry[] = [
       { label: 'Hostel & mess', amount: 300_000 },
       { label: 'Misc. / exams', amount: 100_000 },
     ],
-    note: 'By far the cheapest route — the reason lakhs compete for ~61k government seats.',
+    note: 'By far the cheapest route — the reason lakhs compete for ~63k government seats.',
   },
   {
     route: 'Private MBBS (India)',

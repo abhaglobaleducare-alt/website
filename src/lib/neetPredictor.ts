@@ -29,16 +29,27 @@ import {
   EXCHANGE_RATE_INR,
   QUALIFYING_BORDERLINE_SCORE,
   CALIBRATION_LABEL,
+  CUTOFF_BASIS_LABEL,
   MAX_SCORE,
   TOTAL_CANDIDATES,
   TOTAL_MBBS_SEATS_INDIA,
+  CATEGORY_QUALIFIED_2026,
+  NMC_GOVT_MBBS_SEATS_2026,
+  NMC_TOTAL_MBBS_SEATS_2026,
+  NMC_MEDICAL_COLLEGES_2026,
+  NMC_NEW_SEATS_2026,
+  AIQ_GOVT_SEATS,
+  STATE_GOVT_SEATS,
+  RESERVATION_SHARE,
+  govtSeatsForCategory,
   type Category,
   type StateName,
   type AbroadOption,
   type CostBreakdownEntry,
+  type DataQuality,
 } from '@/data/neetPredictorData';
 
-export { PRIVATE_INDIA_TYPICAL_INR, GEORGIA_SAVINGS_INR, GEORGIA_SAVINGS_LABEL, GEORGIA_TUITION_FROM_INR, CALIBRATION_LABEL };
+export { PRIVATE_INDIA_TYPICAL_INR, GEORGIA_SAVINGS_INR, GEORGIA_SAVINGS_LABEL, GEORGIA_TUITION_FROM_INR, CALIBRATION_LABEL, CUTOFF_BASIS_LABEL };
 
 /* -------------------------------------------------------------------------- */
 /*  Shared result types                                                       */
@@ -57,6 +68,10 @@ export interface PredictionResult {
   /** indicative fee/cost line for cards that need it (₹ total course) */
   costTotal?: number;
   costLabel?: string;
+  /** provenance of the cutoff behind this verdict — shown to the student */
+  dataQuality?: DataQuality;
+  /** one-line citation of the cutoff used, e.g. "MCC 2025 Round 3: AIR 26,178" */
+  cutoffSource?: string;
 }
 
 export interface PredictorInputs {
@@ -217,6 +232,7 @@ export function predictGovernmentChance(
   rank: number,
   category: Category,
   score: number,
+  airSource: AirSource = 'estimated',
 ): PredictionResult {
   const base = {
     key: 'government',
@@ -247,15 +263,33 @@ export function predictGovernmentChance(
           ? 'Government unlikely via AIQ — explore state quota, private & abroad'
           : 'Government MBBS highly unlikely at this rank — focus on state quota / private / abroad';
 
+  // Ground the verdict in the published closing rank rather than a bare number.
+  const cutoffSource = t.closingRank2025
+    ? `MCC 2025 Round 3 · ${category === 'General' ? 'UR' : category} government MBBS closed at AIR ${formatRank(
+        t.closingRank2025,
+      )}`
+    : `${category} AIQ band — ABHA office estimate, not a published MCC closing rank`;
+
   return {
     ...base,
     chance,
     probability,
     headline,
-    detail: `Your estimated AIR ${formatRank(rank)} vs a ${category} AIQ safe rank around ${formatRank(
+    dataQuality: t.dataQuality,
+    cutoffSource,
+    detail: `Your ${airLabel(airSource)} AIR ${formatRank(rank)} vs a ${category} AIQ safe rank around ${formatRank(
       t.safeRank,
-    )} (borderline ~${formatRank(t.possibleRank)}). Fill all MCC choices and attend every round.`,
+    )} (borderline ~${formatRank(t.possibleRank)}). ${cutoffSource}; we uplift it for the ${formatRank(
+      NMC_NEW_SEATS_2026,
+    )} new MBBS seats in the NMC 2026 matrix. The 15% AIQ is only about ${formatRank(
+      AIQ_GOVT_SEATS,
+    )} government seats nationally — fill all MCC choices and attend every round.`,
   };
+}
+
+/** Copy helper so we never call a student's real AIR an "estimate". */
+function airLabel(source: AirSource): string {
+  return source === 'actual' ? 'actual' : 'estimated';
 }
 
 /* -------------------------------------------------------------------------- */
@@ -268,6 +302,7 @@ export function predictStateQuota(
   state: StateName,
   score: number,
   categoryRank?: number,
+  airSource: AirSource = 'estimated',
 ): PredictionResult {
   const base = {
     key: 'state',
@@ -308,14 +343,29 @@ export function predictStateQuota(
         : ` For precise reserved-seat guidance, enter your Category Rank from the rank card.`;
   }
 
+  // Provenance: only Maharashtra is traced to a published state closing rank.
+  const cutoffSource =
+    st.dataQuality === 'verified'
+      ? `${st.authority} ${st.sourceYear} government MBBS ${category} closing rank, uplifted for the 2026 seat matrix`
+      : `${st.authority} has not published a closing rank we could trace — this ${state} band is an ABHA office estimate, so treat it as directional`;
+
+  // The 85% state quota is where most government seats actually are — say so.
+  const quotaNote = ` The 85% state quota holds roughly ${formatRank(
+    STATE_GOVT_SEATS,
+  )} of India's ${formatRank(NMC_GOVT_MBBS_SEATS_2026)} government MBBS seats, so domicile is usually your strongest card.`;
+
   return {
     ...base,
     chance,
     probability,
     headline,
-    detail: `Estimated AIR ${formatRank(rank)} vs ${state} ${category} closing around ${formatRank(
-      closing,
-    )}.${st.note ? ' ' + st.note : ''}${reservedNote}`,
+    dataQuality: st.dataQuality,
+    cutoffSource,
+    detail: `${airLabel(airSource) === 'actual' ? 'Actual' : 'Estimated'} AIR ${formatRank(
+      rank,
+    )} vs ${state} ${category} closing around ${formatRank(closing)} (${cutoffSource}).${quotaNote}${
+      st.note ? ' ' + st.note : ''
+    }${reservedNote}`,
   };
 }
 
@@ -430,6 +480,63 @@ export function predictAbroad(rank: number, score: number, category: Category): 
 }
 
 /* -------------------------------------------------------------------------- */
+/*  generateSeatReality — "63,296 seats, so why do I need AIR 26,000?"        */
+/* -------------------------------------------------------------------------- */
+/**
+ * The most-asked question on the tool, answered with arithmetic instead of
+ * opinion: quota split first, then reservation. Every figure is derived from
+ * the NMC 2026 seat matrix, so this can never contradict the Seat Reality Check.
+ */
+export interface SeatReality {
+  headline: string;
+  /** government MBBS seats realistically open to THIS student's category */
+  categorySeats: number;
+  categorySharePct: number;
+  aiqSeats: number;
+  stateSeats: number;
+  /** candidates who qualified NEET 2026 in this category (official NTA) */
+  categoryQualified: number;
+  /** how many qualified candidates chase each open government seat */
+  competitionRatio: number;
+  points: string[];
+}
+
+export function generateSeatReality(category: Category): SeatReality {
+  const categorySeats = govtSeatsForCategory(category);
+  const categoryQualified = CATEGORY_QUALIFIED_2026[category];
+  const competitionRatio = Math.round(categoryQualified / categorySeats);
+  const sharePct = Math.round(RESERVATION_SHARE[category] * 1000) / 10;
+  const catLabel = category === 'General' ? 'unreserved (open)' : category;
+
+  return {
+    headline: `${formatRank(
+      NMC_GOVT_MBBS_SEATS_2026,
+    )} government MBBS seats exist — but only about ${formatRank(categorySeats)} of them are ${catLabel}`,
+    categorySeats,
+    categorySharePct: sharePct,
+    aiqSeats: AIQ_GOVT_SEATS,
+    stateSeats: STATE_GOVT_SEATS,
+    categoryQualified,
+    competitionRatio,
+    points: [
+      `India has ${formatRank(NMC_TOTAL_MBBS_SEATS_2026)} MBBS seats across ${NMC_MEDICAL_COLLEGES_2026} colleges in the NMC 2026 matrix — ${formatRank(
+        NMC_GOVT_MBBS_SEATS_2026,
+      )} of them government. That is ${formatRank(NMC_NEW_SEATS_2026)} more seats than 2025.`,
+      `Every government seat splits two ways first: 15% All India Quota (~${formatRank(
+        AIQ_GOVT_SEATS,
+      )} seats, open to any state) and 85% State Quota (~${formatRank(
+        STATE_GOVT_SEATS,
+      )} seats, for domicile candidates only).`,
+      `Reservation then applies inside each quota — SC 15%, ST 7.5%, OBC-NCL 27%, EWS 10%, leaving 40.5% unreserved. As a ${catLabel} candidate you are competing for roughly ${sharePct}% of those seats, not 100%.`,
+      `${formatRank(categoryQualified)} candidates qualified NEET 2026 in your category — about ${competitionRatio} qualified candidates for every ${catLabel} government seat.`,
+      `That ratio, not the headline seat count, is why the last ${
+        category === 'General' ? 'General' : category
+      } AIQ government seat closes where it does.`,
+    ],
+  };
+}
+
+/* -------------------------------------------------------------------------- */
 /*  calculateConfidence — how reliable is this prediction                     */
 /* -------------------------------------------------------------------------- */
 
@@ -457,18 +564,39 @@ export function calculateConfidence(inputs: PredictorInputs): ConfidenceScore {
     reasons.push('Reserved-category seats also depend on caste-validity & domicile documents we cannot verify here.');
   }
 
-  // State-specific rules add uncertainty.
-  if (inputs.state !== 'Maharashtra') {
-    score -= 5;
-    reasons.push(`${inputs.state} counselling rules are modelled at all-India average — confirm with the state authority.`);
+  // State-specific rules add uncertainty — driven by real provenance, not by a
+  // hardcoded state name, so adding a verified state automatically lifts this.
+  const st = stateThresholds.find((s) => s.state === inputs.state)!;
+  if (st.dataQuality === 'verified') {
+    reasons.push(
+      `${inputs.state} closing ranks are traced to published ${st.authority} ${st.sourceYear} results — our best-sourced state.`,
+    );
   } else {
-    reasons.push('Maharashtra data is the most current in our dataset.');
+    score -= 10;
+    reasons.push(
+      `${inputs.state} closing ranks are an ABHA office estimate, not a published ${st.authority} figure — confirm with the state authority.`,
+    );
+  }
+
+  // AIQ provenance for the student's own category (EWS is modelled, not published).
+  const gov = governmentThresholds.find((g) => g.category === inputs.category)!;
+  if (gov.dataQuality === 'verified' && gov.closingRank2025) {
+    reasons.push(
+      `Your ${inputs.category} All India Quota band is anchored to the published MCC 2025 closing rank (AIR ${formatRank(
+        gov.closingRank2025,
+      )}).`,
+    );
+  } else {
+    score -= 6;
+    reasons.push(
+      `MCC does not publish a single headline ${inputs.category} AIQ closing rank — that band is estimated, so read it as a range.`,
+    );
   }
 
   score = Math.max(45, Math.min(95, score));
   const level: ConfidenceScore['level'] = score >= 80 ? 'High' : score >= 62 ? 'Medium' : 'Low';
   reasons.push(
-    'Rank estimates are calibrated to the official NEET 2026 result distribution; college cutoffs shown are from the latest completed counselling and move with the seat matrix.',
+    `Rank estimates are calibrated to the official NEET 2026 result distribution. ${CUTOFF_BASIS_LABEL}.`,
   );
 
   return { score, level, reasons };
@@ -737,6 +865,10 @@ export interface FullAnalysis {
   airSource: AirSource;
   /** "Calibrated to the official NEET 2026 result distribution" */
   calibrationLabel: string;
+  /** where the college cutoffs (not the rank curve) are sourced from */
+  cutoffBasisLabel: string;
+  /** the quota + reservation arithmetic behind the seat count */
+  seatReality: SeatReality;
   percentile: number;
   qualified: boolean;
   government: PredictionResult;
@@ -764,8 +896,8 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
   const percentile = estimatePercentile(inputs.score);
   const qualified = isQualified(inputs.score, inputs.category);
 
-  const government = predictGovernmentChance(rank, inputs.category, inputs.score);
-  const state = predictStateQuota(rank, inputs.category, inputs.state, inputs.score, inputs.categoryRank);
+  const government = predictGovernmentChance(rank, inputs.category, inputs.score, airSource);
+  const state = predictStateQuota(rank, inputs.category, inputs.state, inputs.score, inputs.categoryRank, airSource);
   const priv = predictPrivate(rank, inputs.category, inputs.state, inputs.score);
   const deemed = predictDeemed(rank, inputs.category, inputs.score);
   const abroad = predictAbroad(rank, inputs.score, inputs.category);
@@ -781,6 +913,8 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
     rankRange,
     airSource,
     calibrationLabel: CALIBRATION_LABEL,
+    cutoffBasisLabel: CUTOFF_BASIS_LABEL,
+    seatReality: generateSeatReality(inputs.category),
     percentile,
     qualified,
     government,
