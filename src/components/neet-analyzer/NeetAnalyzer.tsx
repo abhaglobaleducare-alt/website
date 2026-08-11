@@ -304,18 +304,21 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                       <h2 className="mb-4 font-playfair text-3xl font-bold text-primary-navy">
                         The seats on the table
                       </h2>
+                      {/* Left column carries the two national/state seat tables;
+                          the taller seat-access panel sits on the right so the
+                          columns end up roughly level instead of one running long. */}
                       <div className="grid items-start gap-6 lg:grid-cols-2">
-                        <SeatAvailability
-                          buckets={analysis.seatAvailability}
-                          total={analysis.totalSeats}
-                          seatReality={analysis.seatReality}
-                        />
                         <div className="grid gap-6">
-                          <SeatAccess access={analysis.seatAccess} />
+                          <SeatAvailability
+                            buckets={analysis.seatAvailability}
+                            total={analysis.totalSeats}
+                            seatReality={analysis.seatReality}
+                          />
                           {analysis.stateSeatMatrix ? (
                             <StateSeatMatrix matrix={analysis.stateSeatMatrix} />
                           ) : null}
                         </div>
+                        <SeatAccess access={analysis.seatAccess} />
                       </div>
                     </div>
                   </Section>

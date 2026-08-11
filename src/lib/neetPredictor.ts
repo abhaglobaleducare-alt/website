@@ -47,6 +47,8 @@ import {
   stateReservation,
   MH_STATE_QUOTA_SHARE,
   MH_VJNT_SBC_SHARE,
+  MH_2026_CAP_RULE,
+  MH_2026_SEAT_BLOCKING_RULE,
   govtSeatsForCategory,
   type Category,
   type StateName,
@@ -889,12 +891,12 @@ export function generateStateSeatMatrix(state: StateName, category: Category): S
           govtTotal - govtStateQuota,
         )} जागा All India Quota मध्ये जातात, आणि private मधील ${formatRank(
           privateTotal - privateStateQuota,
-        )} जागा institutional / management / NRI quota च्या आहेत — या दोन्हींना राज्याचं आरक्षण लागू होत नाही.`
+        )} जागा management / NRI quota च्या आहेत — या दोन्हींना जातनिहाय आरक्षण लागू होत नाही. ${MH_2026_CAP_RULE}`
       : `The remaining ${formatRank(govtTotal - govtStateQuota)} government seats go to the All India Quota and ${formatRank(
           privateTotal - privateStateQuota,
         )} private seats are institutional/management/NRI — state reservation does not apply to either.`,
     footnote: mr
-      ? 'Maharashtra चं आरक्षण केंद्राच्या टक्केवारीपेक्षा वेगळं आहे — SC 13% · ST 7% · OBC 19% · EWS 10% · VJ/NT/SBC 13% · Open ~38%. Private जागांचं शुल्क खूप जास्त असतं; जागा उपलब्ध असणं म्हणजे ती परवडणं नव्हे.'
+      ? `Maharashtra चं आरक्षण केंद्राच्या टक्केवारीपेक्षा वेगळं आहे — SC 13% · ST 7% · OBC 19% · EWS 10% · VJ/NT/SBC 13% · Open ~38%. Private जागांचं शुल्क खूप जास्त असतं; जागा उपलब्ध असणं म्हणजे ती परवडणं नव्हे. ${MH_2026_SEAT_BLOCKING_RULE}`
       : 'State reservation percentages differ from the central schedule. Private seats carry far higher fees — availability is not affordability.',
   };
 }

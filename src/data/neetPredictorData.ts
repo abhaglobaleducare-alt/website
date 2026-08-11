@@ -645,6 +645,26 @@ export const MH_VJNT_SBC_SHARE = 0.13;
  */
 export const MH_STATE_QUOTA_SHARE = 0.85;
 
+/**
+ * Maharashtra Medical Education & Drugs Dept GR, 23 July 2026 — the INSTITUTIONAL
+ * ROUND is abolished for private medical & dental colleges. Every admission,
+ * including stray-vacancy rounds, now runs through the CET Cell's CAP; seats left
+ * vacant after the CAP cut-off simply stay vacant.
+ *
+ * ⚠️ Do NOT restate this as "the management quota is abolished" — a very common
+ * misreading. What ended is the college-run ROUND that sat outside CAP. The
+ * management and NRI seat CATEGORIES still exist, still carry their own (much
+ * higher) fees, and still carry no caste reservation; they are simply allotted
+ * by the CET Cell on merit now instead of by the college. No source supports the
+ * stronger claim, so the copy must not make it.
+ */
+export const MH_2026_CAP_RULE =
+  '2026 पासून private colleges चा institutional round बंद — stray vacancy सह सर्व जागा CET Cell च्या CAP मधूनच भरल्या जातात. Management/NRI हे seat category म्हणून कायम आहेत, फक्त आता college नव्हे तर CET Cell merit वर allotment करते.';
+
+/** Same GR: declining a seat in the FINAL CAP round now costs two years. */
+export const MH_2026_SEAT_BLOCKING_RULE =
+  'शेवटच्या CAP round मध्ये जागा मिळूनही नाकारली, तर पुढील दोन शैक्षणिक वर्षं Maharashtra च्या UG medical/dental प्रवेशांना मुकावं लागतं. पहिल्या round नंतर मात्र free exit आहे.';
+
 /** Per-state reservation schedules. Only states whose schedule we have actually
  *  sourced appear here — the state seat-matrix table renders only for those. */
 export const stateReservation: Partial<Record<StateName, Record<Category, number>>> = {
