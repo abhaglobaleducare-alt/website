@@ -495,7 +495,21 @@
     /* A4 explicitly — the browser would otherwise default to US Letter in some
        locales and reflow the whole report. */
     size: A4;
-    margin: 12mm;
+    /* Generous top margin: the browser prints its own date/title line inside
+       the top margin, and at 12mm the content landed immediately under it, so
+       every page from the third onward read as cramped. Bottom is smaller
+       because the browser's URL/page-number line needs less clearance. */
+    margin: 20mm 13mm 15mm;
+  }
+
+  /* The cover page carries its own heading block, so it needs less headroom. */
+  @page :first {
+    margin-top: 12mm;
+  }
+
+  /* Cards that land at the top of a page get a little air above them. */
+  #analysis-report > * {
+    margin-top: 2mm;
   }
 }
 
