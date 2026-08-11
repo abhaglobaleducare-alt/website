@@ -399,6 +399,85 @@
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
+
+  /* Framer Motion animates in with an inline `opacity: 0` that is only cleared
+     once an element scrolls into view. When printing, everything below the fold
+     has never been in view, so without this the PDF comes out mostly blank.
+     A stylesheet !important beats a non-important inline style, so this wins. */
+  * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* When an #analysis-report exists, print ONLY that. Hiding site chrome
+     selector-by-selector never holds — the header, hero, input form and
+     floating CTAs all leaked into the first PDF. Inverting it (hide everything,
+     re-show one subtree) is exhaustive by construction. `visibility` rather
+     than `display` so the report's own descendants can opt back in. */
+  body:has(#analysis-report)
+    *:not(#analysis-report, #analysis-report *, :has(#analysis-report)) {
+    display: none !important;
+  }
+
+  /* Ancestors stay in the flow so the report keeps its place, but their screen
+     spacing must go — the analyzer's wrapper carries a -mt-10 that would crop
+     the cover off the top of page 1, and a max-width that wastes the page. */
+  body:has(#analysis-report) :has(#analysis-report) {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  body:has(#analysis-report) #analysis-report {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Interactive controls carry no meaning on paper. */
+  button,
+  [role='button'] {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  /* Don't slice a card across two pages. */
+  .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Reclaim the screen layout's outer spacing for paper. */
+  main,
+  section {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .shadow-card,
+  [class*='shadow-'] {
+    box-shadow: none !important;
+  }
+
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 9px;
+    color: #666;
+    word-break: break-all;
+  }
+
+  @page {
+    margin: 12mm;
+  }
+}
+
+/* Hidden on screen, revealed only in the printed/PDF copy. */
+.print-only {
+  display: none;
 }
 
 /* Reduced motion */

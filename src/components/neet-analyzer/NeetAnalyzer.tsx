@@ -34,6 +34,7 @@ import EngagementCards from './EngagementCards';
 import SmartDisclaimer from './SmartDisclaimer';
 import Confetti from './Confetti';
 import RankCardExplainer from './RankCardExplainer';
+import PrintHeader from './PrintHeader';
 import { CurrencyContext, type Currency } from './currencyContext';
 
 interface Props {
@@ -50,9 +51,18 @@ const DEFAULT_INPUTS: PredictorInputs = {
   budget: undefined,
 };
 
-function Section({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+function Section({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
   return (
     <motion.div
+      className={className}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -213,7 +223,11 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
 
         <AnimatePresence>
           {analysis && (
-            <div ref={resultsRef} className="scroll-mt-24 space-y-8 pt-10">
+            <div id="analysis-report" ref={resultsRef} className="scroll-mt-24 space-y-8 pt-10">
+              {/* Cover block for the downloaded PDF — hidden on screen, and first
+                  in the document so it opens the saved report. */}
+              <PrintHeader analysis={analysis} name={registeredName} />
+
               {/* Smart disclaimer + score meter — always shown */}
               <Section>
                 <SmartDisclaimer />
@@ -293,7 +307,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                     />
                   </Section>
 
-                  <Section delay={0.05}>
+                  <Section delay={0.05} className="no-print">
                     <DynamicCta score={score} />
                   </Section>
 
@@ -376,7 +390,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
 
                   {/* One placement instead of the old two; the score still picks
                       the variant, so high scorers keep the compact card. */}
-                  <Section delay={0.05}>
+                  <Section delay={0.05} className="no-print">
                     <IpadOfferCard score={score} variant={score >= 550 ? 'compact' : 'full'} />
                   </Section>
 
@@ -389,15 +403,15 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                   </Section>
 
                   {/* Post-result engagement cards */}
-                  <Section delay={0.05}>
+                  <Section delay={0.05} className="no-print">
                     <div>
                       <h2 className="mb-4 font-playfair text-2xl font-bold text-primary-navy">Keep going — next steps</h2>
                       <EngagementCards score={score} />
                     </div>
                   </Section>
 
-                  <Section delay={0.05}>
-                    <ActionButtons onReset={handleReset} summary={summary} />
+                  <Section delay={0.05} className="no-print">
+                    <ActionButtons onReset={handleReset} summary={summary} score={score} />
                   </Section>
                   <Section delay={0.05}>
                     <Disclaimer />

@@ -13,6 +13,7 @@ export type NeetEvent =
   | "whatsapp_cta_clicked"
   | "ipad_offer_clicked"
   | "callback_requested"
+  | "analysis_download_clicked"
   | "page_scroll_depth";
 
 export function trackEvent(event: NeetEvent, params: FbqParams = {}): void {

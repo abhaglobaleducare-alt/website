@@ -1,16 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { Phone, MessageCircle, RotateCcw, CalendarCheck } from 'lucide-react';
+import { Phone, MessageCircle, RotateCcw, CalendarCheck, Download } from 'lucide-react';
 import { KOLHAPUR, waLink } from '@/data/contacts';
+import { trackEvent } from '@/lib/analytics';
 
 interface Props {
   onReset?: () => void;
   /** prefilled context for the WhatsApp message */
   summary?: string;
+  /** NEET score, for download analytics only */
+  score?: number;
 }
 
-export default function ActionButtons({ onReset, summary }: Props) {
+export default function ActionButtons({ onReset, summary, score }: Props) {
+  /* The browser's own print dialog is the download: every desktop and mobile
+     browser offers "Save as PDF" there. It keeps the report as real text —
+     selectable, searchable and accessible — which a canvas-to-image PDF would
+     not, and it adds no dependency to the bundle. */
+  const handleDownload = () => {
+    trackEvent('analysis_download_clicked', { score });
+    window.print();
+  };
+
   const waHref = waLink(
     summary
       ? `Hi ABHA Global Educare, I just used the NEET Admission Analyzer. ${summary} I'd like free counselling on my options.`
@@ -50,6 +62,19 @@ export default function ActionButtons({ onReset, summary }: Props) {
             <Phone className="h-5 w-5 text-primary-gold" /> Call Now
           </a>
         </div>
+
+        <button
+          type="button"
+          onClick={handleDownload}
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl border-2 border-primary-navy bg-white px-6 py-3.5 text-sm font-bold text-primary-navy transition-transform hover:-translate-y-0.5 sm:w-auto"
+        >
+          <Download className="h-5 w-5 text-primary-gold" /> Download this analysis (PDF)
+        </button>
+        <p className="mt-2 max-w-md text-xs text-navy-400">
+          Opens your browser&apos;s print dialog — choose <strong>&ldquo;Save as PDF&rdquo;</strong> as the
+          destination. The saved copy carries the full estimate along with a note that these figures are assumptions
+          drawn from past seat allotments.
+        </p>
 
         {onReset && (
           <button

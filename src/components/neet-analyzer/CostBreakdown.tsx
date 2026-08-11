@@ -42,7 +42,9 @@ export default function CostBreakdown({ breakdowns }: { breakdowns: CostBreakdow
                   <ChevronDown className={`h-4 w-4 text-navy-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                 </span>
               </button>
-              {isOpen && (
+              {/* Rendered even when collapsed so the printed PDF carries every
+                  route, not just the one the student happened to expand. */}
+              <div className={isOpen ? undefined : 'hidden print:block'}>
                 <div className="px-5 py-4">
                   {b.trustLine && (
                     <p className="mb-3 flex items-start gap-2 rounded-lg border border-emerald-200 bg-emerald-50 p-2.5 text-xs font-semibold text-emerald-800">
@@ -89,7 +91,7 @@ export default function CostBreakdown({ breakdowns }: { breakdowns: CostBreakdow
                     </div>
                   )}
                 </div>
-              )}
+              </div>
             </div>
           );
         })}

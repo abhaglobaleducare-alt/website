@@ -19,7 +19,7 @@ export default function SmartDisclaimer() {
         </span>
         <ChevronDown className={`h-4 w-4 shrink-0 text-navy-400 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
-      {open && (
+      <div className={open ? undefined : 'hidden print:block'}>
         <p className="border-t border-navy-100 px-5 py-4 text-xs leading-relaxed text-navy-500">
           This analysis is based on NEET 2025 counselling data from NTA, MCC, and state authorities. These are{' '}
           <strong className="text-navy-600">indicative</strong> predictions based on historical trends. Actual 2026
@@ -30,7 +30,7 @@ export default function SmartDisclaimer() {
           </a>{' '}
           and your state counselling authority.
         </p>
-      )}
+      </div>
     </div>
   );
 }
