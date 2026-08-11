@@ -280,7 +280,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                 /* -------------------- UNLOCKED FULL RESULTS -------------------- */
                 <>
                   {/* Currency toggle — applies to every cost figure below */}
-                  <div className="flex items-center justify-end gap-2 text-sm">
+                  <div className="no-print flex items-center justify-end gap-2 text-sm">
                     <span className="font-semibold text-navy-500">Show fees in:</span>
                     <div className="inline-flex overflow-hidden rounded-full border border-navy-200 bg-white p-0.5">
                       {(['INR', 'USD'] as const).map((c) => (
@@ -298,7 +298,8 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                     </div>
                   </div>
 
-                  <Section>
+                  {/* CTA block, not analysis — keep it off the saved report */}
+                  <Section className="no-print">
                     <RoadmapPromise
                       name={registeredName}
                       score={analysis.inputs.score}

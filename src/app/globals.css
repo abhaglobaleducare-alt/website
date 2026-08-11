@@ -445,10 +445,33 @@
     display: block !important;
   }
 
-  /* Don't slice a card across two pages. */
-  .print-avoid-break {
+  /* Don't slice a card across two pages. Browsers ignore `avoid` on anything
+     taller than a page, so this is safe to apply broadly — the seat-access and
+     rule-change cards were being split mid-panel across A4 boundaries. */
+  .print-avoid-break,
+  #analysis-report .rounded-2xl,
+  #analysis-report li,
+  #analysis-report tr {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+  /* NOT the big .rounded-3xl section panels: forcing those whole onto a page
+     pushed the report from 13 pages to 16 with half-empty pages behind each
+     one. Keeping the rule to card-sized elements fixes the mid-panel splits
+     without the padding. */
+
+  /* Never strand a heading at the foot of a page. */
+  #analysis-report h1,
+  #analysis-report h2,
+  #analysis-report h3,
+  #analysis-report h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Repeat table headers when a long table does span pages. */
+  #analysis-report thead {
+    display: table-header-group;
   }
 
   /* Reclaim the screen layout's outer spacing for paper. */
@@ -463,14 +486,15 @@
     box-shadow: none !important;
   }
 
-  a[href^='http']::after {
-    content: ' (' attr(href) ')';
-    font-size: 9px;
-    color: #666;
-    word-break: break-all;
-  }
+  /* Deliberately NOT expanding link hrefs. The first build appended
+     `(href)` to every link, which dumped 200-character encoded WhatsApp URLs
+     on top of the CTA buttons and made those blocks unreadable. Any link worth
+     following in the PDF spells its destination out in the visible copy. */
 
   @page {
+    /* A4 explicitly — the browser would otherwise default to US Letter in some
+       locales and reflow the whole report. */
+    size: A4;
     margin: 12mm;
   }
 }
