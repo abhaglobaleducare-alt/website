@@ -210,6 +210,12 @@ export interface StateThreshold {
   authority: string;
   /** the last COMPLETED counselling the row is traced to (verified rows only) */
   sourceYear?: number;
+  /**
+   * Government MBBS seats physically located in this state (NMC 2026 matrix).
+   * null for 'Other', which is not a single state — we must not invent a number
+   * for a student whose state we do not know.
+   */
+  govtSeats: number | null;
 }
 
 /*
@@ -239,6 +245,7 @@ export interface StateThreshold {
 export const stateThresholds: StateThreshold[] = [
   {
     state: 'Maharashtra', // EDIT — ABHA's home state, keep most current
+    govtSeats: 6_000,
     closingRank: { General: 55_000, EWS: 72_000, OBC: 50_000, SC: 169_000, ST: 360_000 },
     note: 'MH CET Cell counselling — domicile & caste-validity documents decisive. In Maharashtra OBC closes close to Open, while EWS closes much later.',
     dataQuality: 'verified',
@@ -247,6 +254,7 @@ export const stateThresholds: StateThreshold[] = [
   },
   {
     state: 'Karnataka',
+    govtSeats: 4_400,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 85_000, SC: 230_000, ST: 340_000 },
     note: 'KEA counselling — Kannada domicile / eligibility clauses apply.',
     dataQuality: 'modelled',
@@ -254,12 +262,14 @@ export const stateThresholds: StateThreshold[] = [
   },
   {
     state: 'Uttar Pradesh',
+    govtSeats: 5_700,
     closingRank: { General: 63_000, EWS: 82_000, OBC: 88_000, SC: 260_000, ST: 400_000 },
     dataQuality: 'modelled',
     authority: 'UP DGME',
   },
   {
     state: 'Bihar',
+    govtSeats: 1_710,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 82_000, SC: 250_000, ST: 380_000 },
     note: 'BCECEB counselling — domicile & category certificates decisive.',
     dataQuality: 'modelled',
@@ -267,24 +277,28 @@ export const stateThresholds: StateThreshold[] = [
   },
   {
     state: 'Rajasthan',
+    govtSeats: 4_480,
     closingRank: { General: 57_000, EWS: 75_000, OBC: 78_000, SC: 220_000, ST: 300_000 },
     dataQuality: 'modelled',
     authority: 'RajUHS',
   },
   {
     state: 'Gujarat',
+    govtSeats: 4_250,
     closingRank: { General: 66_000, EWS: 84_000, OBC: 90_000, SC: 250_000, ST: 350_000 },
     dataQuality: 'modelled',
     authority: 'Gujarat ACPUGMEC',
   },
   {
     state: 'Madhya Pradesh',
+    govtSeats: 3_020,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 82_000, SC: 240_000, ST: 330_000 },
     dataQuality: 'modelled',
     authority: 'MP DME',
   },
   {
     state: 'Tamil Nadu',
+    govtSeats: 5_349,
     closingRank: { General: 68_000, EWS: 87_000, OBC: 95_000, SC: 270_000, ST: 380_000 },
     note: '7.5% govt-school reservation & strong state board weightage.',
     dataQuality: 'modelled',
@@ -292,6 +306,7 @@ export const stateThresholds: StateThreshold[] = [
   },
   {
     state: 'Other',
+    govtSeats: null,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 85_000, SC: 240_000, ST: 350_000 },
     note: 'Generic all-India average — check your state counselling authority.',
     dataQuality: 'modelled',
@@ -526,6 +541,9 @@ export const NMC_PRIVATE_AND_DEEMED_SEATS_2026 = 73_643;
 export const NMC_MEDICAL_COLLEGES_2026 = 823;
 export const NMC_NEW_SEATS_2026 = 9_911;
 const DEEMED_MBBS_SEATS_2026 = 11_500; // subset of NMC_PRIVATE_AND_DEEMED_SEATS_2026
+/** Institutes of National Importance — AIIMS ~2,257 + JIPMER 243. All-India
+ *  merit through MCC: no domicile requirement, reachable from any state. */
+export const INI_MBBS_SEATS_2026 = 2_500;
 
 export const seatAvailability: SeatBucket[] = [
   { type: 'Government MBBS', seats: NMC_GOVT_MBBS_SEATS_2026, note: 'Central + state government colleges (441 colleges) — the cheapest seats, and the hardest' },
@@ -535,7 +553,7 @@ export const seatAvailability: SeatBucket[] = [
     note: 'Private & management-quota colleges (NMC lists private + deemed together as 73,643)',
   },
   { type: 'Deemed Universities', seats: DEEMED_MBBS_SEATS_2026, note: '~58 deemed-to-be universities — 100% filled through MCC, no domicile bar' },
-  { type: 'AIIMS / JIPMER', seats: 2_500, note: 'Institutes of national importance (AIIMS ~2,257 + JIPMER 243) — counted outside the NMC matrix' },
+  { type: 'AIIMS / JIPMER', seats: INI_MBBS_SEATS_2026, note: 'Institutes of national importance (AIIMS ~2,257 + JIPMER 243) — counted outside the NMC matrix' },
 ];
 
 /** Convenience: total sanctioned MBBS seats in India (NMC matrix + INIs). */

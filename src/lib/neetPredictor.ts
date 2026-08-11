@@ -40,6 +40,8 @@ import {
   NMC_NEW_SEATS_2026,
   AIQ_GOVT_SEATS,
   STATE_GOVT_SEATS,
+  STATE_QUOTA_SHARE,
+  INI_MBBS_SEATS_2026,
   RESERVATION_SHARE,
   govtSeatsForCategory,
   type Category,
@@ -537,6 +539,118 @@ export function generateSeatReality(category: Category): SeatReality {
 }
 
 /* -------------------------------------------------------------------------- */
+/*  generateSeatAccess — which government seats this student can actually reach */
+/* -------------------------------------------------------------------------- */
+/**
+ * Splits the government seat pool into the two halves a domicile student
+ * actually experiences: seats at home (won on the 85% state quota) and seats
+ * anywhere in India (won on all-India merit, no domicile needed).
+ *
+ * The arithmetic that matters and is easy to get wrong: a state's own 15% AIQ
+ * contribution is INSIDE the national AIQ pool, not additional to it. So a
+ * Maharashtra student's home-state AIQ seats are counted once, in the all-India
+ * bucket — never added twice. AIIMS/JIPMER sit outside the NMC matrix entirely
+ * and are pure all-India merit, so they always land in the second bucket even
+ * though some campuses (e.g. AIIMS Nagpur) are physically in the home state.
+ */
+export interface SeatAccessLine {
+  label: string;
+  seats: number;
+  detail: string;
+}
+
+export interface SeatAccess {
+  state: StateName;
+  category: Category;
+  /** null when the student's state is unknown ('Other') */
+  homeStateGovtSeats: number | null;
+  /** 85% domicile-only seats in the home state */
+  stateQuotaSeats: number;
+  /** the home state's own 15% contribution to the national AIQ pool */
+  homeStateAiqSeats: number;
+  /** national AIQ pool (includes the home state's contribution) */
+  aiqSeats: number;
+  /** AIQ seats located outside the home state */
+  aiqOutsideHomeSeats: number;
+  iniSeats: number;
+  /** every government seat the student can compete for, across both routes */
+  totalReachable: number;
+  /** the share of that pool left after reservation, for this category */
+  categoryReachable: number;
+  inside: SeatAccessLine[];
+  outside: SeatAccessLine[];
+  footnote: string;
+}
+
+export function generateSeatAccess(state: StateName, category: Category): SeatAccess {
+  const st = stateThresholds.find((s) => s.state === state)!;
+  const home = st.govtSeats;
+  const stateQuotaSeats = home == null ? 0 : Math.round(home * STATE_QUOTA_SHARE);
+  const homeStateAiqSeats = home == null ? 0 : home - stateQuotaSeats;
+  const aiqOutsideHomeSeats = Math.max(0, AIQ_GOVT_SEATS - homeStateAiqSeats);
+  const totalReachable = stateQuotaSeats + AIQ_GOVT_SEATS + INI_MBBS_SEATS_2026;
+  const categoryReachable = Math.round(totalReachable * RESERVATION_SHARE[category]);
+  // "As an open-category candidate" reads correctly; "After General reservation"
+  // does not — General IS the unreserved remainder, not a reserved bucket.
+  const catPhrase = category === 'General' ? 'an open-category' : `an ${category}`;
+
+  const inside: SeatAccessLine[] =
+    home == null
+      ? []
+      : [
+          {
+            label: `${state} state quota (85%)`,
+            seats: stateQuotaSeats,
+            detail: `Of ${formatRank(home)} government seats in ${state}, 85% are reserved for domicile candidates. This is your strongest route.`,
+          },
+        ];
+
+  const outside: SeatAccessLine[] = [
+    {
+      label: 'All India Quota (15%) — every state',
+      seats: AIQ_GOVT_SEATS,
+      detail:
+        home == null
+          ? '15% of every state\'s government seats, pooled nationally and open to any domicile through MCC.'
+          : `15% of every state's government seats, pooled nationally through MCC. About ${formatRank(
+              aiqOutsideHomeSeats,
+            )} of these are outside ${state}, and ${formatRank(
+              homeStateAiqSeats,
+            )} are ${state}'s own AIQ share — you can win those on merit without using your domicile.`,
+    },
+    {
+      label: 'AIIMS & JIPMER',
+      seats: INI_MBBS_SEATS_2026,
+      detail:
+        'Institutes of National Importance — pure all-India merit through MCC, no domicile requirement anywhere in the country.',
+    },
+  ];
+
+  return {
+    state,
+    category,
+    homeStateGovtSeats: home,
+    stateQuotaSeats,
+    homeStateAiqSeats,
+    aiqSeats: AIQ_GOVT_SEATS,
+    aiqOutsideHomeSeats,
+    iniSeats: INI_MBBS_SEATS_2026,
+    totalReachable,
+    categoryReachable,
+    inside,
+    outside,
+    footnote:
+      home == null
+        ? `Your home state was not specified, so only the all-India routes are counted here — pick your state to add the 85% domicile quota you also qualify for. As ${catPhrase} candidate, roughly ${formatRank(
+            categoryReachable,
+          )} of these seats are yours to compete for after reservation.`
+        : `A state's own 15% sits inside the All India Quota pool, so it is counted once, not twice. As ${catPhrase} candidate, roughly ${formatRank(
+            categoryReachable,
+          )} of these ${formatRank(totalReachable)} seats are yours to compete for after reservation.`,
+  };
+}
+
+/* -------------------------------------------------------------------------- */
 /*  calculateConfidence — how reliable is this prediction                     */
 /* -------------------------------------------------------------------------- */
 
@@ -869,6 +983,8 @@ export interface FullAnalysis {
   cutoffBasisLabel: string;
   /** the quota + reservation arithmetic behind the seat count */
   seatReality: SeatReality;
+  /** home-state vs all-India government seats this student can reach */
+  seatAccess: SeatAccess;
   percentile: number;
   qualified: boolean;
   government: PredictionResult;
@@ -915,6 +1031,7 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
     calibrationLabel: CALIBRATION_LABEL,
     cutoffBasisLabel: CUTOFF_BASIS_LABEL,
     seatReality: generateSeatReality(inputs.category),
+    seatAccess: generateSeatAccess(inputs.state, inputs.category),
     percentile,
     qualified,
     government,

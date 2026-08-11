@@ -20,6 +20,7 @@ import CostBreakdown from './CostBreakdown';
 import RecommendationRoadmap from './RecommendationRoadmap';
 import ConfidenceScore from './ConfidenceScore';
 import SeatAvailability from './SeatAvailability';
+import SeatAccess from './SeatAccess';
 import ExplanationCard from './ExplanationCard';
 import ActionButtons from './ActionButtons';
 import Disclaimer from './Disclaimer';
@@ -344,8 +345,11 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                   </Section>
 
                   <Section delay={0.05}>
-                    <div className="grid gap-6 lg:grid-cols-2">
-                      <ConfidenceScore confidence={analysis.confidence} />
+                    <div className="grid items-start gap-6 lg:grid-cols-2">
+                      <div className="grid gap-6">
+                        <ConfidenceScore confidence={analysis.confidence} />
+                        <SeatAccess access={analysis.seatAccess} />
+                      </div>
                       <SeatAvailability
                         buckets={analysis.seatAvailability}
                         total={analysis.totalSeats}
