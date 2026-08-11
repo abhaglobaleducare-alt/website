@@ -407,7 +407,7 @@ export interface AbroadOption {
 const GEO_TUITION_MIN = 23_400; // East West $1,950/sem × 12
 const GEO_TUITION_MAX = 39_000; // UoG $3,250/sem × 12
 const GEO_SERVICES = 6_199; // All Services package (application → on-ground), one-time
-const GEO_LIVING_Y1 = 4_200; // $350/mo × 12 — mandatory ABHA Study & Stay
+const GEO_LIVING_Y1 = 4_200; // $350/mo × 12 — mandatory Year-1 hostel accommodation & food
 const GEO_LIVING_Y2_6 = 15_000; // $250/mo × 12 × 5
 
 /* Timor-Leste USD inputs (Nalanda College official fee sheet) */
@@ -432,7 +432,7 @@ export const abroadOptions: AbroadOption[] = [
     costLines: [
       { label: 'Tuition (6 yrs)', amountInr: usdToInr(GEO_TUITION_MIN), sub: '$1,950–$3,250/sem by university · $23,400–$39,000 total' },
       { label: 'All Services — from application to on-ground', amountInr: usdToInr(GEO_SERVICES), oneTime: true, sub: 'One-time $6,199 — application, admission, documentation, travel & on-ground support' },
-      { label: 'Living — Year 1 (ABHA Study & Stay)', amountInr: usdToInr(GEO_LIVING_Y1), sub: '$350/mo × 12 — Indian food, 24×7 security, own hostel' },
+      { label: 'Hostel Accommodation and Food — Year 1', amountInr: usdToInr(GEO_LIVING_Y1), sub: '$350/mo × 12 — Indian food, 24×7 security, own hostel' },
       { label: 'Living — Years 2–6 (private apartment)', amountInr: usdToInr(GEO_LIVING_Y2_6), sub: '~$250/mo self-cooking · $250 × 12 × 5' },
     ],
     costSummaryNote: 'All-inclusive: tuition + All Services package + Year-1 hostel + Years 2–6 living.',
@@ -447,7 +447,7 @@ export const abroadOptions: AbroadOption[] = [
       'FMGE / NExT preparation support through ABHA',
     ],
     footnotes: [
-      'Living costs are realistic estimates; actuals vary by lifestyle & room-sharing. Year-1 hostel per ABHA Study & Stay contract.',
+      'Living costs are realistic estimates; actuals vary by lifestyle & room-sharing. Year-1 hostel accommodation & food is a mandatory package.',
       'INR indicative at ₹90/USD — actual bank rate at transfer applies.',
     ],
     minScoreRecommended: 200,
