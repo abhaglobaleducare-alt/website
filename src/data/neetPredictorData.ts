@@ -665,6 +665,37 @@ export const MH_2026_CAP_RULE =
 export const MH_2026_SEAT_BLOCKING_RULE =
   'शेवटच्या CAP round मध्ये जागा मिळूनही नाकारली, तर पुढील दोन शैक्षणिक वर्षं Maharashtra च्या UG medical/dental प्रवेशांना मुकावं लागतं. पहिल्या round नंतर मात्र free exit आहे.';
 
+/**
+ * The full Maharashtra 2026 rule-change note, rendered as a prominent callout on
+ * the analyzer and the Marathi NEET Zone pages.
+ *
+ * The `myth` block is the point of the whole note. The news was widely reported
+ * as "management quota abolished", which is wrong and would change what a family
+ * decides — a parent who believes the quota is gone stops planning for its fees.
+ * What ended is the college-run round outside CAP. Keep the correction attached
+ * to the announcement wherever the announcement appears; never ship one without
+ * the other.
+ */
+export const MH_2026_RULE_CHANGE = {
+  title: 'Maharashtra 2026 — admission rule change',
+  source: 'वैद्यकीय शिक्षण व औषधी द्रव्ये विभाग, शासन निर्णय — २३ जुलै २०२६',
+  confirmed: [
+    'Private medical / dental colleges चा institutional round पूर्णपणे बंद.',
+    'Stray vacancy सह 100% जागा आता CET Cell च्या CAP मधूनच भरल्या जातील.',
+    'CAP cut-off नंतर जागा रिकाम्या राहिल्या तर त्या रिकाम्याच राहतील — कॉलेजला त्या स्वतः भरता येणार नाहीत.',
+    'शेवटच्या CAP round मध्ये जागा मिळूनही नाकारली, तर पुढील दोन शैक्षणिक वर्षं Maharashtra च्या UG medical/dental प्रवेशांना मुकावं लागेल. पहिल्या round नंतर मात्र free exit आहे.',
+  ],
+  mythTitle: 'गैरसमज टाळा',
+  myth: '"Management quota बंद झाला"',
+  truth:
+    'हे बरोबर नाही. बंद झाला तो round — म्हणजे CAP बाहेर कॉलेज स्वतः चालवत असलेली प्रवेश प्रक्रिया. Management आणि NRI या seat categories तशाच आहेत, त्यांचं वेगळं (खूप जास्त) शुल्कही तसंच आहे, आणि त्यांना जातनिहाय आरक्षणही लागू नाही. फरक एवढाच की आता allotment कॉलेज नव्हे तर CET Cell merit वर करते.',
+  practicalTitle: 'पालक विचारतील तेव्हा',
+  practical:
+    '"Management quota गेला का?" — उत्तर: नाही. पण आता donation किंवा direct admission शक्य नाही; सर्व जागा CAP मधून merit वर मिळतात.',
+  caution:
+    'हा शासन निर्णय CAP सुरू होण्याच्या अगदी आधीचा आहे. अंमलबजावणीचे तपशील — विशेषतः रिकाम्या NRI जागांचं काय होतं — CET Cell च्या information brochure मध्ये स्पष्ट होतील; प्रवेशाचा निर्णय घेण्यापूर्वी ते एकदा पडताळून घ्या.',
+} as const;
+
 /** Per-state reservation schedules. Only states whose schedule we have actually
  *  sourced appear here — the state seat-matrix table renders only for those. */
 export const stateReservation: Partial<Record<StateName, Record<Category, number>>> = {

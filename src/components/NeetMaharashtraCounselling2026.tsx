@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Phone, Download, AlertTriangle, Compass, ListChecks, Building2, Calculator } from 'lucide-react';
 import { WHATSAPP, waLink } from '@/data/contacts';
 import SeatSplitExplainer from '@/components/SeatSplitExplainer';
+import MhRuleChange2026 from '@/components/MhRuleChange2026';
 
 /* ---------- Chart data (faithful to ABHA_Wall_Chart_NEET2026_Maharashtra.pdf) ---------- */
 
@@ -378,6 +379,9 @@ export default function NeetMaharashtraCounselling2026() {
       <section className="py-14 px-4 sm:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <SeatSplitExplainer state="Maharashtra" />
+          <div className="mt-8">
+            <MhRuleChange2026 />
+          </div>
         </div>
       </section>
 

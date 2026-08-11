@@ -22,6 +22,7 @@ import ConfidenceScore from './ConfidenceScore';
 import SeatAvailability from './SeatAvailability';
 import SeatAccess from './SeatAccess';
 import StateSeatMatrix from './StateSeatMatrix';
+import MhRuleChange2026 from '@/components/MhRuleChange2026';
 import ExplanationCard from './ExplanationCard';
 import ActionButtons from './ActionButtons';
 import Disclaimer from './Disclaimer';
@@ -320,6 +321,14 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                         </div>
                         <SeatAccess access={analysis.seatAccess} />
                       </div>
+
+                      {/* Full-width so the correction cannot be missed. Shown only
+                          to Maharashtra students — it is a state GR, not national. */}
+                      {analysis.inputs.state === 'Maharashtra' ? (
+                        <div className="mt-6">
+                          <MhRuleChange2026 />
+                        </div>
+                      ) : null}
                     </div>
                   </Section>
 

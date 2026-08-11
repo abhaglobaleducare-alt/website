@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { WHATSAPP, KOLHAPUR, waLinkEncoded } from '@/data/contacts';
 import SeatSplitExplainer from '@/components/SeatSplitExplainer';
+import MhRuleChange2026 from '@/components/MhRuleChange2026';
 
 /* ---------- Report data ---------- */
 
@@ -224,6 +225,9 @@ export default function NeetResultAnalysis2026() {
       <section className="py-14 px-4 sm:px-8 bg-white">
         <div className="max-w-4xl mx-auto">
           <SeatSplitExplainer state="Maharashtra" />
+          <div className="mt-8">
+            <MhRuleChange2026 />
+          </div>
         </div>
       </section>
 
