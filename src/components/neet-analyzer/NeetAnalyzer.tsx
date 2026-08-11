@@ -332,15 +332,15 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                     </div>
                   </Section>
 
+                  {/* Cost follows the seat tables directly: once a student knows
+                      which seats they can reach, the next question is what each
+                      route costs. */}
                   <Section delay={0.05}>
-                    <RecommendationRoadmap recommendation={analysis.recommendation} roadmap={analysis.roadmap} />
+                    <ComparisonTable comparison={analysis.costComparison} />
                   </Section>
-
-                  {score < 550 && (
-                    <Section delay={0.05}>
-                      <IpadOfferCard score={score} />
-                    </Section>
-                  )}
+                  <Section delay={0.05}>
+                    <CostBreakdown breakdowns={analysis.costBreakdowns} />
+                  </Section>
 
                   <Section delay={0.05}>
                     <div>
@@ -368,17 +368,16 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                     </Section>
                   )}
 
-                  {score >= 550 && (
-                    <Section delay={0.05}>
-                      <IpadOfferCard score={score} variant="compact" />
-                    </Section>
-                  )}
-
+                  {/* Verdict now closes the report rather than opening it — it
+                      lands after the seats, costs and route cards it rests on. */}
                   <Section delay={0.05}>
-                    <ComparisonTable comparison={analysis.costComparison} />
+                    <RecommendationRoadmap recommendation={analysis.recommendation} roadmap={analysis.roadmap} />
                   </Section>
+
+                  {/* One placement instead of the old two; the score still picks
+                      the variant, so high scorers keep the compact card. */}
                   <Section delay={0.05}>
-                    <CostBreakdown breakdowns={analysis.costBreakdowns} />
+                    <IpadOfferCard score={score} variant={score >= 550 ? 'compact' : 'full'} />
                   </Section>
 
                   <Section delay={0.05}>
