@@ -48,30 +48,39 @@ function Group({
 }
 
 export default function SeatAccess({ access }: { access: SeatAccessType }) {
-  const { state, totalReachable, categoryReachable, category, inside, outside, footnote } = access;
+  const {
+    state,
+    totalReachable,
+    categoryReachable,
+    category,
+    inside,
+    outside,
+    footnote,
+    intro,
+    insideSubtitle,
+    outsideSubtitle,
+  } = access;
   const catPct = totalReachable ? Math.round((categoryReachable / totalReachable) * 100) : 0;
 
   return (
     <div className="rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-8">
+      {/* Headings stay English by design; descriptions localise (Marathi for MH). */}
       <h3 className="font-playfair text-2xl font-bold text-primary-navy">
         Government seats you can reach{state !== 'Other' ? ` from ${state}` : ''}
       </h3>
-      <p className="mt-1 text-sm text-navy-500">
-        Your domicile does not limit you to your own state. These are the two routes open to you, and how many
-        government MBBS seats sit behind each.
-      </p>
+      <p className="mt-1 text-sm text-navy-500">{intro}</p>
 
       <div className="mt-6 space-y-6">
         <Group
           title="In your home state"
-          subtitle="Domicile required — your strongest route"
+          subtitle={insideSubtitle}
           icon={<Home className="h-4 w-4 text-emerald-700" />}
           lines={inside}
           accent="bg-emerald-50"
         />
         <Group
           title="Anywhere in India"
-          subtitle="All-India merit — no domicile needed"
+          subtitle={outsideSubtitle}
           icon={<Globe2 className="h-4 w-4 text-accent-blue" />}
           lines={outside}
           accent="bg-blue-50"

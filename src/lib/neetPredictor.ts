@@ -562,6 +562,13 @@ export interface SeatAccessLine {
 export interface SeatAccess {
   state: StateName;
   category: Category;
+  /** intro paragraph under the heading (Marathi for Maharashtra students) */
+  intro: string;
+  /** group subtitles — localised alongside the line details */
+  insideSubtitle: string;
+  outsideSubtitle: string;
+  /** true when the descriptive copy is rendered in Marathi */
+  marathi: boolean;
   /** null when the student's state is unknown ('Other') */
   homeStateGovtSeats: number | null;
   /** 85% domicile-only seats in the home state */
@@ -594,6 +601,16 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
   // does not — General IS the unreserved remainder, not a reserved bucket.
   const catPhrase = category === 'General' ? 'an open-category' : `an ${category}`;
 
+  /*
+   * Maharashtra students get the DESCRIPTIONS in Marathi while every heading,
+   * label and number stays in English — matching the house style used across
+   * the site (Marathi prose, English technical terms in Latin script: rank,
+   * counselling, domicile, merit). Headings stay English so the panel still
+   * scans identically for a parent reading over the student's shoulder.
+   */
+  const mr = state === 'Maharashtra';
+  const catPhraseMr = category === 'General' ? 'Open category उमेदवार म्हणून' : `${category} उमेदवार म्हणून`;
+
   const inside: SeatAccessLine[] =
     home == null
       ? []
@@ -601,7 +618,11 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
           {
             label: `${state} state quota (85%)`,
             seats: stateQuotaSeats,
-            detail: `Of ${formatRank(home)} government seats in ${state}, 85% are reserved for domicile candidates. This is your strongest route.`,
+            detail: mr
+              ? `${state} मधील ${formatRank(
+                  home,
+                )} government जागांपैकी 85% जागा domicile असलेल्या उमेदवारांसाठी राखीव आहेत. हाच तुमचा सर्वात मजबूत मार्ग आहे.`
+              : `Of ${formatRank(home)} government seats in ${state}, 85% are reserved for domicile candidates. This is your strongest route.`,
           },
         ];
 
@@ -609,9 +630,14 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
     {
       label: 'All India Quota (15%) — every state',
       seats: AIQ_GOVT_SEATS,
-      detail:
-        home == null
-          ? '15% of every state\'s government seats, pooled nationally and open to any domicile through MCC.'
+      detail: mr
+        ? `प्रत्येक राज्याच्या government जागांपैकी 15% जागा MCC मार्फत देशपातळीवर एकत्र केल्या जातात. यांपैकी सुमारे ${formatRank(
+            aiqOutsideHomeSeats,
+          )} जागा ${state} बाहेर आहेत, आणि ${formatRank(
+            homeStateAiqSeats,
+          )} जागा हा ${state} चा स्वतःचा AIQ वाटा आहे — त्या तुम्ही domicile न वापरता merit वर मिळवू शकता.`
+        : home == null
+          ? "15% of every state's government seats, pooled nationally and open to any domicile through MCC."
           : `15% of every state's government seats, pooled nationally through MCC. About ${formatRank(
               aiqOutsideHomeSeats,
             )} of these are outside ${state}, and ${formatRank(
@@ -621,14 +647,21 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
     {
       label: 'AIIMS & JIPMER',
       seats: INI_MBBS_SEATS_2026,
-      detail:
-        'Institutes of National Importance — pure all-India merit through MCC, no domicile requirement anywhere in the country.',
+      detail: mr
+        ? 'Institutes of National Importance — पूर्णपणे all-India merit वर, MCC मार्फत. देशात कुठेही domicile ची अट नाही.'
+        : 'Institutes of National Importance — pure all-India merit through MCC, no domicile requirement anywhere in the country.',
     },
   ];
 
   return {
     state,
     category,
+    marathi: mr,
+    intro: mr
+      ? 'तुमचं domicile तुम्हाला फक्त तुमच्याच राज्यापुरतं मर्यादित ठेवत नाही. तुमच्यासाठी खुले असलेले दोन मार्ग, आणि प्रत्येक मार्गामागे किती government MBBS जागा आहेत — ते इथे बघा.'
+      : 'Your domicile does not limit you to your own state. These are the two routes open to you, and how many government MBBS seats sit behind each.',
+    insideSubtitle: mr ? 'Domicile आवश्यक — तुमचा सर्वात मजबूत मार्ग' : 'Domicile required — your strongest route',
+    outsideSubtitle: mr ? 'All-India merit — domicile ची अट नाही' : 'All-India merit — no domicile needed',
     homeStateGovtSeats: home,
     stateQuotaSeats,
     homeStateAiqSeats,
@@ -639,8 +672,11 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
     categoryReachable,
     inside,
     outside,
-    footnote:
-      home == null
+    footnote: mr
+      ? `राज्याचा स्वतःचा 15% वाटा All India Quota मध्येच येतो, त्यामुळे तो एकदाच मोजला जातो — दोनदा नाही. ${catPhraseMr} या ${formatRank(
+          totalReachable,
+        )} जागांपैकी आरक्षणानंतर साधारण ${formatRank(categoryReachable)} जागांसाठी तुम्ही स्पर्धा करू शकता.`
+      : home == null
         ? `Your home state was not specified, so only the all-India routes are counted here — pick your state to add the 85% domicile quota you also qualify for. As ${catPhrase} candidate, roughly ${formatRank(
             categoryReachable,
           )} of these seats are yours to compete for after reservation.`
