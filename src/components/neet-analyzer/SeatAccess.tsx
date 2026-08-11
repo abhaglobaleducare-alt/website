@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Home, Globe2, Info } from 'lucide-react';
 import type { SeatAccess as SeatAccessType, SeatAccessLine } from '@/lib/neetPredictor';
 import { formatRank } from '@/lib/neetPredictor';
+import SeatSplitExplainer from '../SeatSplitExplainer';
 
 function Group({
   title,
@@ -69,6 +70,11 @@ export default function SeatAccess({ access }: { access: SeatAccessType }) {
         Government seats you can reach{state !== 'Other' ? ` from ${state}` : ''}
       </h3>
       <p className="mt-1 text-sm text-navy-500">{intro}</p>
+
+      {/* Compact where/how summary first, then the detailed groups below. */}
+      <div className="mt-5">
+        <SeatSplitExplainer state={state} variant="bare" showHeading={false} />
+      </div>
 
       <div className="mt-6 space-y-6">
         <Group

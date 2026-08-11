@@ -13,6 +13,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 import { WHATSAPP, KOLHAPUR, waLinkEncoded } from '@/data/contacts';
+import SeatSplitExplainer from '@/components/SeatSplitExplainer';
 
 /* ---------- Report data ---------- */
 
@@ -216,6 +217,13 @@ export default function NeetResultAnalysis2026() {
             Borderline scores ना Mop-up/Stray rounds मधली expert counseling लागते. अंतिम
             cutoffs seat matrix नुसार बदलतील.
           </p>
+        </div>
+      </section>
+
+      {/* SEAT SPLIT — derived from the NMC 2026 seat matrix, never hand-typed */}
+      <section className="py-14 px-4 sm:px-8 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <SeatSplitExplainer state="Maharashtra" />
         </div>
       </section>
 

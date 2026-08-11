@@ -697,6 +697,80 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
 }
 
 /* -------------------------------------------------------------------------- */
+/*  generateSeatSplit — the compact "कुठे / किती / कसं" explainer              */
+/* -------------------------------------------------------------------------- */
+/**
+ * A four-row summary of where a domicile student's government seats actually
+ * sit. Deliberately category-independent so it can be dropped on marketing and
+ * SEO pages where no student inputs exist.
+ *
+ * Every figure derives from the seat matrix — nothing here is retyped, so the
+ * homepage, the NEET Zone pages and the analyzer can never drift apart. The
+ * national AIQ pool is deliberately shown as TWO rows (outside the home state,
+ * and the home state's own share) because that is the distinction students get
+ * wrong: they assume their state's 15% is lost to them, when it is winnable on
+ * merit without spending domicile.
+ */
+export interface SeatSplitRow {
+  where: string;
+  seats: number;
+  how: string;
+}
+
+export interface SeatSplit {
+  state: StateName;
+  marathi: boolean;
+  heading: string;
+  intro: string;
+  rows: SeatSplitRow[];
+  total: number;
+  footnote: string;
+}
+
+export function generateSeatSplit(state: StateName): SeatSplit | null {
+  const st = stateThresholds.find((s) => s.state === state)!;
+  if (st.govtSeats == null) return null;
+
+  const stateQuota = Math.round(st.govtSeats * STATE_QUOTA_SHARE);
+  const ownAiq = st.govtSeats - stateQuota;
+  const otherAiq = Math.max(0, AIQ_GOVT_SEATS - ownAiq);
+  const total = stateQuota + AIQ_GOVT_SEATS + INI_MBBS_SEATS_2026;
+  const mr = state === 'Maharashtra';
+
+  const rows: SeatSplitRow[] = mr
+    ? [
+        { where: `${state} state quota`, seats: stateQuota, how: 'Domicile' },
+        { where: 'इतर राज्यांतील AIQ', seats: otherAiq, how: 'All-India merit' },
+        { where: `${state} चा स्वतःचा AIQ वाटा`, seats: ownAiq, how: 'All-India merit' },
+        { where: 'AIIMS / JIPMER', seats: INI_MBBS_SEATS_2026, how: 'All-India merit, कुठेही' },
+      ]
+    : [
+        { where: `${state} state quota`, seats: stateQuota, how: 'Domicile' },
+        { where: 'AIQ in other states', seats: otherAiq, how: 'All-India merit' },
+        { where: `${state}'s own AIQ share`, seats: ownAiq, how: 'All-India merit' },
+        { where: 'AIIMS / JIPMER', seats: INI_MBBS_SEATS_2026, how: 'All-India merit, anywhere' },
+      ];
+
+  return {
+    state,
+    marathi: mr,
+    rows,
+    heading: `Government MBBS seats a ${state} student can reach`,
+    intro: mr
+      ? `${state} च्या विद्यार्थ्याला फक्त राज्यातल्या जागाच नाहीत — देशभरातील government colleges चा 15% All India Quota आणि AIIMS/JIPMER सुद्धा merit वर खुले आहेत. एकूण ${formatRank(
+          total,
+        )} government जागांसाठी तुम्ही स्पर्धा करू शकता.`
+      : `A ${state} student is not limited to seats inside the state — the 15% All India Quota of every state's government colleges, plus AIIMS/JIPMER, is open on merit. That is ${formatRank(
+          total,
+        )} government seats in all.`,
+    total,
+    footnote: mr
+      ? '15% All India Quota फक्त government colleges ना लागू आहे. इतर राज्यांच्या private colleges चा state quota तिथल्या domicile विद्यार्थ्यांसाठीच असतो; फक्त त्यांचा management / NRI quota खुला असतो. Deemed universities (~11,500 जागा) मात्र 100% MCC मार्फत, domicile शिवाय — पण सर्वात महाग.'
+      : 'The 15% All India Quota applies to government colleges only. Other states\' private colleges keep their state quota for local domicile; only management/NRI seats are open. Deemed universities (~11,500) are 100% MCC with no domicile bar — but the costliest route.',
+  };
+}
+
+/* -------------------------------------------------------------------------- */
 /*  generateStateSeatMatrix — the home-state seat table, category by category  */
 /* -------------------------------------------------------------------------- */
 /**
