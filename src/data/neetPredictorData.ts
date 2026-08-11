@@ -216,6 +216,8 @@ export interface StateThreshold {
    * for a student whose state we do not know.
    */
   govtSeats: number | null;
+  /** Private + deemed MBBS seats located in this state (NMC 2026 matrix). */
+  privateSeats: number | null;
 }
 
 /*
@@ -246,6 +248,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Maharashtra', // EDIT — ABHA's home state, keep most current
     govtSeats: 6_000,
+    privateSeats: 7_099,
     closingRank: { General: 55_000, EWS: 72_000, OBC: 50_000, SC: 169_000, ST: 360_000 },
     note: 'MH CET Cell counselling — domicile & caste-validity documents decisive. In Maharashtra OBC closes close to Open, while EWS closes much later.',
     dataQuality: 'verified',
@@ -255,6 +258,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Karnataka',
     govtSeats: 4_400,
+    privateSeats: 10_995,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 85_000, SC: 230_000, ST: 340_000 },
     note: 'KEA counselling — Kannada domicile / eligibility clauses apply.',
     dataQuality: 'modelled',
@@ -263,6 +267,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Uttar Pradesh',
     govtSeats: 5_700,
+    privateSeats: 8_300,
     closingRank: { General: 63_000, EWS: 82_000, OBC: 88_000, SC: 260_000, ST: 400_000 },
     dataQuality: 'modelled',
     authority: 'UP DGME',
@@ -270,6 +275,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Bihar',
     govtSeats: 1_710,
+    privateSeats: 2_450,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 82_000, SC: 250_000, ST: 380_000 },
     note: 'BCECEB counselling — domicile & category certificates decisive.',
     dataQuality: 'modelled',
@@ -278,6 +284,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Rajasthan',
     govtSeats: 4_480,
+    privateSeats: 3_600,
     closingRank: { General: 57_000, EWS: 75_000, OBC: 78_000, SC: 220_000, ST: 300_000 },
     dataQuality: 'modelled',
     authority: 'RajUHS',
@@ -285,6 +292,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Gujarat',
     govtSeats: 4_250,
+    privateSeats: 3_500,
     closingRank: { General: 66_000, EWS: 84_000, OBC: 90_000, SC: 250_000, ST: 350_000 },
     dataQuality: 'modelled',
     authority: 'Gujarat ACPUGMEC',
@@ -292,6 +300,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Madhya Pradesh',
     govtSeats: 3_020,
+    privateSeats: 3_000,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 82_000, SC: 240_000, ST: 330_000 },
     dataQuality: 'modelled',
     authority: 'MP DME',
@@ -299,6 +308,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Tamil Nadu',
     govtSeats: 5_349,
+    privateSeats: 8_650,
     closingRank: { General: 68_000, EWS: 87_000, OBC: 95_000, SC: 270_000, ST: 380_000 },
     note: '7.5% govt-school reservation & strong state board weightage.',
     dataQuality: 'modelled',
@@ -307,6 +317,7 @@ export const stateThresholds: StateThreshold[] = [
   {
     state: 'Other',
     govtSeats: null,
+    privateSeats: null,
     closingRank: { General: 60_000, EWS: 78_000, OBC: 85_000, SC: 240_000, ST: 350_000 },
     note: 'Generic all-India average — check your state counselling authority.',
     dataQuality: 'modelled',
@@ -598,6 +609,47 @@ export const STATE_GOVT_SEATS = NMC_GOVT_MBBS_SEATS_2026 - AIQ_GOVT_SEATS;
 export function govtSeatsForCategory(category: Category): number {
   return Math.round(NMC_GOVT_MBBS_SEATS_2026 * RESERVATION_SHARE[category]);
 }
+
+/* -------------------------------------------------------------------------- */
+/*  7c. STATE-LEVEL RESERVATION — Maharashtra's split is NOT the central one   */
+/* -------------------------------------------------------------------------- */
+/**
+ * ⚠️ The 85% state quota does NOT use the central 15/7.5/27/10 split. Maharashtra
+ * runs its own schedule through the CET Cell:
+ *   SC 13% · ST 7% · OBC 19% · EWS 10% · VJ-A 3% · NT-B 2.5% · NT-C 3.5% ·
+ *   NT-D 2% · SBC 2%  →  open/unreserved ≈ 38%
+ * Applying the central percentages to a state-quota pool overstates OBC (27 vs
+ * 19) and understates the open category (40.5 vs 38) — the same class of error
+ * as the old OBC AIQ row. Only add a state here once its schedule is sourced.
+ *
+ * VJ/NT/SBC (13% combined) are real Maharashtra categories that the analyzer's
+ * five-way selector does not model; they are surfaced as a labelled residual so
+ * the column still sums honestly instead of silently vanishing.
+ */
+export const MH_STATE_RESERVATION: Record<Category, number> = {
+  General: 0.38, // open/unreserved after MH's schedule + EWS
+  EWS: 0.1,
+  OBC: 0.19,
+  SC: 0.13,
+  ST: 0.07,
+};
+/** VJ-A + NT-B + NT-C + NT-D + SBC — Maharashtra-only categories, 13% combined. */
+export const MH_VJNT_SBC_SHARE = 0.13;
+
+/**
+ * Share of seats run through the CET Cell state quota (where the state
+ * reservation schedule applies) in BOTH government and private colleges in
+ * Maharashtra. The other 15% is All India Quota in government colleges and
+ * institutional/management/NRI in private ones — neither follows the state
+ * schedule, so category rows must never be computed on the full college total.
+ */
+export const MH_STATE_QUOTA_SHARE = 0.85;
+
+/** Per-state reservation schedules. Only states whose schedule we have actually
+ *  sourced appear here — the state seat-matrix table renders only for those. */
+export const stateReservation: Partial<Record<StateName, Record<Category, number>>> = {
+  Maharashtra: MH_STATE_RESERVATION,
+};
 
 /* -------------------------------------------------------------------------- */
 /*  8. COST BREAKDOWNS — detailed components per route (₹, whole course)      */

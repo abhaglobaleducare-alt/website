@@ -43,6 +43,10 @@ import {
   STATE_QUOTA_SHARE,
   INI_MBBS_SEATS_2026,
   RESERVATION_SHARE,
+  CATEGORIES,
+  stateReservation,
+  MH_STATE_QUOTA_SHARE,
+  MH_VJNT_SBC_SHARE,
   govtSeatsForCategory,
   type Category,
   type StateName,
@@ -596,7 +600,13 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
   const homeStateAiqSeats = home == null ? 0 : home - stateQuotaSeats;
   const aiqOutsideHomeSeats = Math.max(0, AIQ_GOVT_SEATS - homeStateAiqSeats);
   const totalReachable = stateQuotaSeats + AIQ_GOVT_SEATS + INI_MBBS_SEATS_2026;
-  const categoryReachable = Math.round(totalReachable * RESERVATION_SHARE[category]);
+  // The two pools reserve differently and must not share one percentage: the
+  // state quota follows its own state schedule (Maharashtra SC 13/ST 7/OBC 19),
+  // while AIQ and the INIs follow the central 15/7.5/27/10.
+  const stateSchedule = stateReservation[state];
+  const categoryReachable =
+    Math.round(stateQuotaSeats * (stateSchedule ?? RESERVATION_SHARE)[category]) +
+    Math.round((AIQ_GOVT_SEATS + INI_MBBS_SEATS_2026) * RESERVATION_SHARE[category]);
   // "As an open-category candidate" reads correctly; "After General reservation"
   // does not — General IS the unreserved remainder, not a reserved bucket.
   const catPhrase = category === 'General' ? 'an open-category' : `an ${category}`;
@@ -683,6 +693,135 @@ export function generateSeatAccess(state: StateName, category: Category): SeatAc
         : `A state's own 15% sits inside the All India Quota pool, so it is counted once, not twice. As ${catPhrase} candidate, roughly ${formatRank(
             categoryReachable,
           )} of these ${formatRank(totalReachable)} seats are yours to compete for after reservation.`,
+  };
+}
+
+/* -------------------------------------------------------------------------- */
+/*  generateStateSeatMatrix — the home-state seat table, category by category  */
+/* -------------------------------------------------------------------------- */
+/**
+ * Government vs private seats inside the student's own state, broken down by
+ * category. Renders ONLY for states whose reservation schedule we have sourced
+ * (`stateReservation`), because the category rows are meaningless without it.
+ *
+ * Two accuracy rules this encodes:
+ *  1. Category rows are computed on the 85% CET Cell state quota ONLY. The other
+ *     15% is All India Quota (government) or institutional/management/NRI
+ *     (private) — neither follows the state reservation schedule, so applying
+ *     it to the full college total would overstate every reserved row.
+ *  2. Maharashtra's schedule (SC 13 · ST 7 · OBC 19 · EWS 10 · open 38) is used,
+ *     NOT the central 15/7.5/27/10. VJ/NT/SBC (13%) are real MH categories the
+ *     five-way selector cannot express, so they appear as a labelled residual
+ *     rather than being silently folded into another row.
+ */
+export interface SeatMatrixRow {
+  category: string;
+  /** true for the student's own selected category — highlighted in the UI */
+  isYours: boolean;
+  govt: number;
+  private: number;
+  sharePct: number;
+}
+
+export interface StateSeatMatrix {
+  state: StateName;
+  /** all MBBS seats physically in the state */
+  govtTotal: number;
+  privateTotal: number;
+  grandTotal: number;
+  /** the 85% CET Cell pools the category rows are computed on */
+  govtStateQuota: number;
+  privateStateQuota: number;
+  /** the 15% that sits outside the state reservation schedule */
+  govtAiq: number;
+  privateManagement: number;
+  rows: SeatMatrixRow[];
+  marathi: boolean;
+  heading: string;
+  intro: string;
+  quotaNote: string;
+  footnote: string;
+}
+
+export function generateStateSeatMatrix(state: StateName, category: Category): StateSeatMatrix | null {
+  const st = stateThresholds.find((s) => s.state === state)!;
+  const schedule = stateReservation[state];
+  if (!schedule || st.govtSeats == null || st.privateSeats == null) return null;
+
+  const govtTotal = st.govtSeats;
+  const privateTotal = st.privateSeats;
+  const govtStateQuota = Math.round(govtTotal * MH_STATE_QUOTA_SHARE);
+  const privateStateQuota = Math.round(privateTotal * MH_STATE_QUOTA_SHARE);
+
+  const mr = state === 'Maharashtra';
+  const catLabelMr: Record<Category, string> = {
+    General: 'Open (खुला)',
+    EWS: 'EWS',
+    OBC: 'OBC',
+    SC: 'SC',
+    ST: 'ST',
+  };
+
+  const rows: SeatMatrixRow[] = CATEGORIES.map((c) => ({
+    category: mr ? catLabelMr[c] : c,
+    isYours: c === category,
+    govt: Math.round(govtStateQuota * schedule[c]),
+    private: Math.round(privateStateQuota * schedule[c]),
+    sharePct: Math.round(schedule[c] * 1000) / 10,
+  }));
+
+  // VJ/NT/SBC exists in Maharashtra but not in our five-way selector. Show it so
+  // the column sums honestly instead of quietly losing 13% of the seats.
+  if (mr) {
+    rows.push({
+      category: 'VJ / NT / SBC',
+      isYours: false,
+      govt: Math.round(govtStateQuota * MH_VJNT_SBC_SHARE),
+      private: Math.round(privateStateQuota * MH_VJNT_SBC_SHARE),
+      sharePct: Math.round(MH_VJNT_SBC_SHARE * 1000) / 10,
+    });
+  }
+
+  // Per-row rounding can leave the column a seat or two short of the pool it is
+  // derived from. Push the residual into the last row so the displayed column
+  // reconciles exactly with the "state quota total" line beneath it.
+  const last = rows[rows.length - 1];
+  last.govt += govtStateQuota - rows.reduce((s, r) => s + r.govt, 0);
+  last.private += privateStateQuota - rows.reduce((s, r) => s + r.private, 0);
+
+  return {
+    state,
+    govtTotal,
+    privateTotal,
+    grandTotal: govtTotal + privateTotal,
+    govtStateQuota,
+    privateStateQuota,
+    govtAiq: govtTotal - govtStateQuota,
+    privateManagement: privateTotal - privateStateQuota,
+    rows,
+    marathi: mr,
+    heading: `MBBS seats in ${state}`,
+    intro: mr
+      ? `${state} मध्ये एकूण ${formatRank(
+          govtTotal + privateTotal,
+        )} MBBS जागा आहेत — ${formatRank(govtTotal)} government आणि ${formatRank(
+          privateTotal,
+        )} private. खालील category-wise आकडे CET Cell च्या 85% state quota वर आधारित आहेत.`
+      : `${state} has ${formatRank(govtTotal + privateTotal)} MBBS seats — ${formatRank(
+          govtTotal,
+        )} government and ${formatRank(privateTotal)} private. Category rows are the 85% state quota.`,
+    quotaNote: mr
+      ? `Government मधील उरलेल्या ${formatRank(
+          govtTotal - govtStateQuota,
+        )} जागा All India Quota मध्ये जातात, आणि private मधील ${formatRank(
+          privateTotal - privateStateQuota,
+        )} जागा institutional / management / NRI quota च्या आहेत — या दोन्हींना राज्याचं आरक्षण लागू होत नाही.`
+      : `The remaining ${formatRank(govtTotal - govtStateQuota)} government seats go to the All India Quota and ${formatRank(
+          privateTotal - privateStateQuota,
+        )} private seats are institutional/management/NRI — state reservation does not apply to either.`,
+    footnote: mr
+      ? 'Maharashtra चं आरक्षण केंद्राच्या टक्केवारीपेक्षा वेगळं आहे — SC 13% · ST 7% · OBC 19% · EWS 10% · VJ/NT/SBC 13% · Open ~38%. Private जागांचं शुल्क खूप जास्त असतं; जागा उपलब्ध असणं म्हणजे ती परवडणं नव्हे.'
+      : 'State reservation percentages differ from the central schedule. Private seats carry far higher fees — availability is not affordability.',
   };
 }
 
@@ -1021,6 +1160,8 @@ export interface FullAnalysis {
   seatReality: SeatReality;
   /** home-state vs all-India government seats this student can reach */
   seatAccess: SeatAccess;
+  /** home-state government vs private seat table (null if state unsourced) */
+  stateSeatMatrix: StateSeatMatrix | null;
   percentile: number;
   qualified: boolean;
   government: PredictionResult;
@@ -1068,6 +1209,7 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
     cutoffBasisLabel: CUTOFF_BASIS_LABEL,
     seatReality: generateSeatReality(inputs.category),
     seatAccess: generateSeatAccess(inputs.state, inputs.category),
+    stateSeatMatrix: generateStateSeatMatrix(inputs.state, inputs.category),
     percentile,
     qualified,
     government,

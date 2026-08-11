@@ -21,6 +21,7 @@ import RecommendationRoadmap from './RecommendationRoadmap';
 import ConfidenceScore from './ConfidenceScore';
 import SeatAvailability from './SeatAvailability';
 import SeatAccess from './SeatAccess';
+import StateSeatMatrix from './StateSeatMatrix';
 import ExplanationCard from './ExplanationCard';
 import ActionButtons from './ActionButtons';
 import Disclaimer from './Disclaimer';
@@ -295,6 +296,30 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                     <DynamicCta score={score} />
                   </Section>
 
+                  {/* Seat reality comes FIRST: how many seats exist, and which of
+                      them this student can actually reach. Every verdict below
+                      is easier to trust once the denominator is on the table. */}
+                  <Section delay={0.05}>
+                    <div>
+                      <h2 className="mb-4 font-playfair text-3xl font-bold text-primary-navy">
+                        The seats on the table
+                      </h2>
+                      <div className="grid items-start gap-6 lg:grid-cols-2">
+                        <SeatAvailability
+                          buckets={analysis.seatAvailability}
+                          total={analysis.totalSeats}
+                          seatReality={analysis.seatReality}
+                        />
+                        <div className="grid gap-6">
+                          <SeatAccess access={analysis.seatAccess} />
+                          {analysis.stateSeatMatrix ? (
+                            <StateSeatMatrix matrix={analysis.stateSeatMatrix} />
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                  </Section>
+
                   <Section delay={0.05}>
                     <RecommendationRoadmap recommendation={analysis.recommendation} roadmap={analysis.roadmap} />
                   </Section>
@@ -345,17 +370,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                   </Section>
 
                   <Section delay={0.05}>
-                    <div className="grid items-start gap-6 lg:grid-cols-2">
-                      <div className="grid gap-6">
-                        <ConfidenceScore confidence={analysis.confidence} />
-                        <SeatAccess access={analysis.seatAccess} />
-                      </div>
-                      <SeatAvailability
-                        buckets={analysis.seatAvailability}
-                        total={analysis.totalSeats}
-                        seatReality={analysis.seatReality}
-                      />
-                    </div>
+                    <ConfidenceScore confidence={analysis.confidence} />
                   </Section>
 
                   <Section delay={0.05}>
