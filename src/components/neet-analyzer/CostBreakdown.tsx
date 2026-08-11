@@ -46,6 +46,11 @@ export default function CostBreakdown({ breakdowns }: { breakdowns: CostBreakdow
                   route, not just the one the student happened to expand. */}
               <div className={isOpen ? undefined : 'hidden print:block'}>
                 <div className="px-5 py-4">
+                  {/* The header above is a <button>, hidden in print — without
+                      this the PDF showed bare number lists with no route name. */}
+                  <p className="print-only mb-2 border-b border-navy-100 pb-1.5 font-semibold text-primary-navy">
+                    {b.route}
+                  </p>
                   {b.trustLine && (
                     <p className="mb-3 flex items-start gap-2 rounded-lg border border-emerald-200 bg-emerald-50 p-2.5 text-xs font-semibold text-emerald-800">
                       <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0" />
@@ -75,7 +80,9 @@ export default function CostBreakdown({ breakdowns }: { breakdowns: CostBreakdow
                       </li>
                     ))}
                     <li className="flex items-center justify-between border-t border-navy-100 pt-2.5 text-sm font-bold text-primary-navy">
-                      <span>Total (all-inclusive)</span>
+                      <span>
+                        Total (all-inclusive) — <span className="text-navy-500">{b.route}</span>
+                      </span>
                       <span>{totalDisplay}</span>
                     </li>
                   </ul>

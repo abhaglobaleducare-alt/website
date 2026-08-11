@@ -808,9 +808,33 @@ export const GOVT_FEES_NATIONAL_INDICATIVE: GovtFeeSchedule = {
   hostelRentPerYear: 12_000,
 };
 
+/**
+ * Per-state government MBBS annual tuition. Only Maharashtra is traced to the
+ * state's own fee notification; the rest come from published state fee
+ * summaries, which is far better than one flat national guess but is NOT an
+ * official document — the copy says so. The spread is the point: Maharashtra
+ * charges roughly 14× what Tamil Nadu does for the same government degree.
+ *
+ * Add a state here only with a figure you can cite. States left out fall back
+ * to GOVT_FEES_NATIONAL_INDICATIVE, which is honest about being a guess.
+ */
+export const STATE_GOVT_TUITION_PER_YEAR: Partial<Record<StateName, number>> = {
+  Maharashtra: 152_100, // official MH CET Cell notification, AY 2025-26
+  Rajasthan: 73_900,
+  Karnataka: 64_350,
+  'Uttar Pradesh': 45_000, // published range ₹36,000–₹54,600 across state colleges
+  Gujarat: 25_000,
+  'Tamil Nadu': 11_000,
+  // Bihar (published range ₹9,000–₹1,00,000) and Madhya Pradesh are too wide or
+  // unsourced to pin — they use the national fallback rather than a made-up number.
+};
+
 export function govtFeeSchedule(state: StateName, category: Category): {
   fees: GovtFeeSchedule;
+  /** traced to the state's own official fee notification */
   verified: boolean;
+  /** the tuition figure belongs to THIS state, not a national average */
+  stateSpecific: boolean;
   note: string;
 } {
   if (state === 'Maharashtra') {
@@ -818,21 +842,37 @@ export function govtFeeSchedule(state: StateName, category: Category): {
     return {
       fees: scSt ? MH_GOVT_FEES_SC_ST : MH_GOVT_FEES_OPEN,
       verified: true,
+      stateSpecific: true,
       note: scSt
         ? 'MH CET Cell notified fees, AY 2025-26. SC & ST tuition is fully waived — you pay ₹10,000 a year in college fees.'
         : 'MH CET Cell notified fees, AY 2025-26: ₹1,62,100 a year for the open category. If you qualify for the MAHADBT scholarship (family income ≤ ₹8 lakh), this drops to ₹10,000 a year — and to ₹86,050 for OBC/EWS male candidates. Confirm your bracket before budgeting.',
     };
   }
+  // A state-specific tuition where we have one — far better than a flat guess,
+  // but still not the state's own notification, so it stays unverified.
+  const stateTuition = STATE_GOVT_TUITION_PER_YEAR[state];
+  if (stateTuition != null) {
+    return {
+      fees: { ...GOVT_FEES_NATIONAL_INDICATIVE, tuitionPerYear: stateTuition },
+      verified: false,
+      stateSpecific: true,
+      note: `${state} government MBBS tuition is about ₹${stateTuition.toLocaleString(
+        'en-IN',
+      )} a year, from published state fee summaries — not ${state}'s own notification, so confirm before budgeting. Reserved categories usually pay less or nothing.`,
+    };
+  }
+
   return {
     fees: GOVT_FEES_NATIONAL_INDICATIVE,
     verified: false,
-    note: `Government fees vary enormously by state — AIIMS is about ₹1,600 for the entire course, Tamil Nadu about ₹13,600 a year, Maharashtra ₹1,52,100 a year. This is an indicative all-India figure; check ${state}'s official fee notification.`,
+    stateSpecific: false,
+    note: `Government fees vary enormously by state — AIIMS is about ₹1,600 for the entire course, Tamil Nadu about ₹11,000 a year, Maharashtra ₹1,52,100 a year. This is an indicative all-India figure; check ${state}'s official fee notification.`,
   };
 }
 
 /** The Government MBBS row, computed for this student rather than hard-coded. */
 export function governmentCostEntry(state: StateName, category: Category): CostBreakdownEntry {
-  const { fees, verified, note } = govtFeeSchedule(state, category);
+  const { fees, verified, stateSpecific, note } = govtFeeSchedule(state, category);
   const y = MBBS_ACADEMIC_YEARS;
   const tuitionTotal = Math.round(fees.tuitionPerYear * y);
   const collegeOther = Math.round(fees.otherRecurringPerYear * y) + fees.oneTime;
@@ -840,7 +880,7 @@ export function governmentCostEntry(state: StateName, category: Category): CostB
   const messTotal = Math.round(MESS_FOOD_PER_YEAR * y);
 
   return {
-    route: verified ? `Government MBBS (${state})` : 'Government MBBS (India)',
+    route: stateSpecific ? `Government MBBS (${state})` : 'Government MBBS (India)',
     currency: '₹',
     components: [
       {
