@@ -406,7 +406,7 @@ export interface AbroadOption {
 /* Georgia USD inputs (brochure-aligned) */
 const GEO_TUITION_MIN = 23_400; // East West $1,950/sem × 12
 const GEO_TUITION_MAX = 39_000; // UoG $3,250/sem × 12
-const GEO_SERVICES = 6_199; // ABHA services package, one-time
+const GEO_SERVICES = 6_199; // All Services package (application → on-ground), one-time
 const GEO_LIVING_Y1 = 4_200; // $350/mo × 12 — mandatory ABHA Study & Stay
 const GEO_LIVING_Y2_6 = 15_000; // $250/mo × 12 × 5
 
@@ -431,11 +431,11 @@ export const abroadOptions: AbroadOption[] = [
     headlineFromInr: usdToInr(GEO_TUITION_MIN),
     costLines: [
       { label: 'Tuition (6 yrs)', amountInr: usdToInr(GEO_TUITION_MIN), sub: '$1,950–$3,250/sem by university · $23,400–$39,000 total' },
-      { label: 'ABHA services package', amountInr: usdToInr(GEO_SERVICES), oneTime: true, sub: 'One-time $6,199 — admission, documentation, on-arrival & support' },
+      { label: 'All Services — from application to on-ground', amountInr: usdToInr(GEO_SERVICES), oneTime: true, sub: 'One-time $6,199 — application, admission, documentation, travel & on-ground support' },
       { label: 'Living — Year 1 (ABHA Study & Stay)', amountInr: usdToInr(GEO_LIVING_Y1), sub: '$350/mo × 12 — Indian food, 24×7 security, own hostel' },
       { label: 'Living — Years 2–6 (private apartment)', amountInr: usdToInr(GEO_LIVING_Y2_6), sub: '~$250/mo self-cooking · $250 × 12 × 5' },
     ],
-    costSummaryNote: 'All-inclusive: tuition + ABHA services + Year-1 hostel + Years 2–6 living.',
+    costSummaryNote: 'All-inclusive: tuition + All Services package + Year-1 hostel + Years 2–6 living.',
     allInclusiveFromInr: usdToInr(GEO_TUITION_MIN + GEO_SERVICES + GEO_LIVING_Y1 + GEO_LIVING_Y2_6), // $48,799
     allInclusiveToInr: usdToInr(GEO_TUITION_MAX + GEO_SERVICES + GEO_LIVING_Y1 + GEO_LIVING_Y2_6), // $64,399
     allInclusiveLabel: '~₹44L – ₹58L (all-inclusive)',
