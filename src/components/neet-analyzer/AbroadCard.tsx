@@ -75,8 +75,10 @@ export default function AbroadCard({ option: o, showSavings, eyebrow }: Props) {
         </div>
       )}
 
-      {/* Cost lines */}
-      <div className="mt-5">
+      {/* Cost lines. Hidden in print: the identical breakdown already appears in
+          the Detailed Cost Breakdown section, and printing it twice cost the
+          saved report a page per country. */}
+      <div className="mt-5 print:hidden">
         <p className="mb-2 text-xs font-bold uppercase tracking-wider text-navy-200">Cost breakdown</p>
         <ul className="space-y-3">
           {o.costLines.map((l) => (

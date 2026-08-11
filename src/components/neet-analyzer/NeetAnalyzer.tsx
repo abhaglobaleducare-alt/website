@@ -316,7 +316,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                       them this student can actually reach. Every verdict below
                       is easier to trust once the denominator is on the table. */}
                   <Section delay={0.05}>
-                    <div>
+                    <div className="print-break-before">
                       <h2 className="mb-4 font-playfair text-3xl font-bold text-primary-navy">
                         The seats on the table
                       </h2>
@@ -331,10 +331,14 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                             seatReality={analysis.seatReality}
                           />
                           {analysis.stateSeatMatrix ? (
-                            <StateSeatMatrix matrix={analysis.stateSeatMatrix} />
+                            <div className="print-break-before">
+                              <StateSeatMatrix matrix={analysis.stateSeatMatrix} />
+                            </div>
                           ) : null}
                         </div>
-                        <SeatAccess access={analysis.seatAccess} />
+                        <div className="print-break-before">
+                          <SeatAccess access={analysis.seatAccess} />
+                        </div>
                       </div>
 
                       {/* Full-width so the correction cannot be missed. Shown only
@@ -350,10 +354,10 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                   {/* Cost follows the seat tables directly: once a student knows
                       which seats they can reach, the next question is what each
                       route costs. */}
-                  <Section delay={0.05}>
+                  <Section delay={0.05} className="print-break-before">
                     <ComparisonTable comparison={analysis.costComparison} />
                   </Section>
-                  <Section delay={0.05}>
+                  <Section delay={0.05} className="print-break-before">
                     <CostBreakdown breakdowns={analysis.costBreakdowns} />
                   </Section>
 
@@ -372,20 +376,22 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                   <Section delay={0.05}>
                     <div className="grid gap-6">
                       <GeorgiaCard result={analysis.abroad} />
-                      <TimorCard result={analysis.abroad} />
+                      <div className="print-break-before">
+                        <TimorCard result={analysis.abroad} />
+                      </div>
                     </div>
                   </Section>
 
                   {/* Alternative courses (BDS/BAMS/nursing) — lower score bands only */}
                   {score <= 480 && (
-                    <Section delay={0.05}>
+                    <Section delay={0.05} className="print-break-before">
                       <BdsBamsCard />
                     </Section>
                   )}
 
                   {/* Verdict now closes the report rather than opening it — it
                       lands after the seats, costs and route cards it rests on. */}
-                  <Section delay={0.05}>
+                  <Section delay={0.05} className="print-break-before">
                     <RecommendationRoadmap recommendation={analysis.recommendation} roadmap={analysis.roadmap} />
                   </Section>
 
@@ -395,7 +401,7 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                     <IpadOfferCard score={score} variant={score >= 550 ? 'compact' : 'full'} />
                   </Section>
 
-                  <Section delay={0.05}>
+                  <Section delay={0.05} className="print-break-before">
                     <ConfidenceScore confidence={analysis.confidence} />
                   </Section>
 
@@ -414,7 +420,9 @@ export default function NeetAnalyzer({ heroTitle, heroSubtitle, h1 }: Props) {
                   <Section delay={0.05} className="no-print">
                     <ActionButtons onReset={handleReset} summary={summary} score={score} />
                   </Section>
-                  <Section delay={0.05}>
+                  {/* Closes the PDF on its own page — the legal note should not
+                      share a sheet with anything else. */}
+                  <Section delay={0.05} className="print-break-before">
                     <Disclaimer />
                   </Section>
                 </>

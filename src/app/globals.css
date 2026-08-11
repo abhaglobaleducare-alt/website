@@ -511,6 +511,36 @@
   #analysis-report > * {
     margin-top: 2mm;
   }
+
+  /* Explicit section-per-page pagination for the saved report. Each marked
+     block opens a new sheet so the PDF reads as chapters rather than a
+     continuous scroll. Applied to wrappers, never to the first block in the
+     report — a break-before on that would emit a blank leading page. */
+  .print-break-before {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* Forcing a break per section costs pages, because each one leaves the tail
+     of the previous sheet unused. Tightening the screen layout's generous
+     padding and vertical rhythm buys most of that back without shrinking any
+     text — everything stays at its normal size and remains legible. */
+  #analysis-report .space-y-8 > * + * {
+    margin-top: 0.5rem !important;
+  }
+
+  #analysis-report .p-6,
+  #analysis-report .p-8,
+  #analysis-report .sm\:p-8 {
+    padding: 12px !important;
+  }
+
+  #analysis-report .py-16,
+  #analysis-report .py-14,
+  #analysis-report .mt-6,
+  #analysis-report .mt-5 {
+    margin-top: 8px !important;
+  }
 }
 
 /* Hidden on screen, revealed only in the printed/PDF copy. */
