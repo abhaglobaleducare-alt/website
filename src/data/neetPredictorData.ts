@@ -737,12 +737,150 @@ export interface CostBreakdownEntry {
   footnotes?: string[];
 }
 
+/* -------------------------------------------------------------------------- */
+/*  8b. GOVERNMENT MBBS FEES — official, and far higher than a flat estimate   */
+/* -------------------------------------------------------------------------- */
+/**
+ * ⚠️ A single flat "government MBBS ≈ ₹6.5L total" figure is wrong, and wrong in
+ * the direction that hurts a family planning a budget. Maharashtra's OPEN-category
+ * TUITION ALONE is ₹1,52,100 a year — about ₹6.8L over the course, more than the
+ * old all-in estimate.
+ *
+ * Official MH CET Cell notification, government medical colleges, AY 2025-26
+ * (per year, ₹):
+ *
+ *   Component            OPEN(>8L)   SC & ST   VJ & NT   OPEN/EWS(≤8L)+OBC/SEBC
+ *                                                          Female      Male
+ *   Tuition               1,52,100        0         0           0      76,050
+ *   Library                  1,000    1,000     1,000       1,000       1,000
+ *   Development              5,000    5,000     5,000       5,000       5,000
+ *   Gymkhana                   500      500       500         500         500
+ *   Admission (one-time)     1,500    1,500     1,500       1,500       1,500
+ *   Library deposit (1×)     2,000    2,000     2,000       2,000       2,000
+ *   TOTAL                 1,62,100   10,000    10,000      10,000      86,050
+ *   Hostel rent              4,000        —     4,000       4,000       4,000
+ *
+ * The analyzer collects neither family income nor gender, so it cannot resolve
+ * the last two columns. SC & ST is unconditional and IS applied. For General,
+ * EWS and OBC we quote the OPEN figure — the most a family could pay — and say
+ * plainly in the copy that a scholarship-eligible candidate may pay ₹10,000 a
+ * year instead. Never silently assume the waiver applies.
+ */
+export const MBBS_ACADEMIC_YEARS = 4.5; // 4.5 academic + 1 internship year
+
+export interface GovtFeeSchedule {
+  /** annual tuition (the component that actually varies) */
+  tuitionPerYear: number;
+  /** library + development + gymkhana, per year */
+  otherRecurringPerYear: number;
+  /** admission fee + library deposit, charged once */
+  oneTime: number;
+  /** notified hostel rent per year (mess/food is separate and not notified) */
+  hostelRentPerYear: number;
+}
+
+export const MH_GOVT_FEES_OPEN: GovtFeeSchedule = {
+  tuitionPerYear: 152_100,
+  otherRecurringPerYear: 6_500,
+  oneTime: 3_500,
+  hostelRentPerYear: 4_000,
+};
+
+/** SC & ST: tuition fully waived — unconditional in the notification. */
+export const MH_GOVT_FEES_SC_ST: GovtFeeSchedule = {
+  tuitionPerYear: 0,
+  otherRecurringPerYear: 6_500,
+  oneTime: 3_500,
+  hostelRentPerYear: 4_000,
+};
+
+/** Mess/food and books are NOT in the notified fee — students pay them directly. */
+export const MESS_FOOD_PER_YEAR = 48_000; // ~₹4,000/month
+export const BOOKS_MISC_TOTAL = 100_000; // instruments, books, exam & misc, whole course
+
+/** National fallback: government fees vary enormously between states (AIIMS is
+ *  ~₹1,600 for the WHOLE course; Tamil Nadu ~₹13,600/yr; Maharashtra ₹1.52L/yr).
+ *  Without a sourced schedule for a state we must not pretend to precision. */
+export const GOVT_FEES_NATIONAL_INDICATIVE: GovtFeeSchedule = {
+  tuitionPerYear: 50_000,
+  otherRecurringPerYear: 6_000,
+  oneTime: 3_500,
+  hostelRentPerYear: 12_000,
+};
+
+export function govtFeeSchedule(state: StateName, category: Category): {
+  fees: GovtFeeSchedule;
+  verified: boolean;
+  note: string;
+} {
+  if (state === 'Maharashtra') {
+    const scSt = category === 'SC' || category === 'ST';
+    return {
+      fees: scSt ? MH_GOVT_FEES_SC_ST : MH_GOVT_FEES_OPEN,
+      verified: true,
+      note: scSt
+        ? 'MH CET Cell notified fees, AY 2025-26. SC & ST tuition is fully waived — you pay ₹10,000 a year in college fees.'
+        : 'MH CET Cell notified fees, AY 2025-26: ₹1,62,100 a year for the open category. If you qualify for the MAHADBT scholarship (family income ≤ ₹8 lakh), this drops to ₹10,000 a year — and to ₹86,050 for OBC/EWS male candidates. Confirm your bracket before budgeting.',
+    };
+  }
+  return {
+    fees: GOVT_FEES_NATIONAL_INDICATIVE,
+    verified: false,
+    note: `Government fees vary enormously by state — AIIMS is about ₹1,600 for the entire course, Tamil Nadu about ₹13,600 a year, Maharashtra ₹1,52,100 a year. This is an indicative all-India figure; check ${state}'s official fee notification.`,
+  };
+}
+
+/** The Government MBBS row, computed for this student rather than hard-coded. */
+export function governmentCostEntry(state: StateName, category: Category): CostBreakdownEntry {
+  const { fees, verified, note } = govtFeeSchedule(state, category);
+  const y = MBBS_ACADEMIC_YEARS;
+  const tuitionTotal = Math.round(fees.tuitionPerYear * y);
+  const collegeOther = Math.round(fees.otherRecurringPerYear * y) + fees.oneTime;
+  const hostelTotal = Math.round(fees.hostelRentPerYear * y);
+  const messTotal = Math.round(MESS_FOOD_PER_YEAR * y);
+
+  return {
+    route: verified ? `Government MBBS (${state})` : 'Government MBBS (India)',
+    currency: '₹',
+    components: [
+      {
+        label: `Tuition (${y} yrs)`,
+        amount: tuitionTotal,
+        sub:
+          fees.tuitionPerYear === 0
+            ? 'Tuition waived for your category'
+            : `₹${fees.tuitionPerYear.toLocaleString('en-IN')} per year`,
+      },
+      {
+        label: 'Library, development, gymkhana & admission',
+        amount: collegeOther,
+        sub: `₹${fees.otherRecurringPerYear.toLocaleString('en-IN')}/yr + ₹${fees.oneTime.toLocaleString('en-IN')} one-time`,
+      },
+      {
+        label: `Hostel rent (${y} yrs)`,
+        amount: hostelTotal,
+        sub: `₹${fees.hostelRentPerYear.toLocaleString('en-IN')} per year${verified ? ' as notified' : ' (indicative)'}`,
+      },
+      { label: `Mess & food (${y} yrs)`, amount: messTotal, sub: '~₹4,000/month — paid to the mess, not part of the notified college fee' },
+      { label: 'Books, instruments, exams & misc.', amount: BOOKS_MISC_TOTAL },
+    ],
+    note: `${verified ? '' : 'Indicative. '}${note} Still by far the cheapest route — the reason lakhs compete for ~63k government seats.`,
+  };
+}
+
+/** Cost table for THIS student: the government row is computed, the rest fixed. */
+export function buildCostBreakdowns(state: StateName, category: Category): CostBreakdownEntry[] {
+  return costBreakdowns.map((c) =>
+    c.route.startsWith('Government MBBS') ? governmentCostEntry(state, category) : c,
+  );
+}
+
 export const costBreakdowns: CostBreakdownEntry[] = [
   {
     route: 'Government MBBS (India)',
     currency: '₹',
     components: [
-      { label: 'Tuition (4.5 yrs)', amount: 250_000 },
+      { label: `Tuition (${MBBS_ACADEMIC_YEARS} yrs)`, amount: 250_000 },
       { label: 'Hostel & mess', amount: 300_000 },
       { label: 'Misc. / exams', amount: 100_000 },
     ],

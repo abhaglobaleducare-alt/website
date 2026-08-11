@@ -21,6 +21,7 @@ import {
   abroadOptions,
   seatAvailability,
   costBreakdowns,
+  buildCostBreakdowns,
   qualifyingScores,
   GEORGIA_SAVINGS_INR,
   GEORGIA_SAVINGS_LABEL,
@@ -241,12 +242,13 @@ export function predictGovernmentChance(
   category: Category,
   score: number,
   airSource: AirSource = 'estimated',
+  costTable: CostBreakdownEntry[] = costBreakdowns,
 ): PredictionResult {
   const base = {
     key: 'government',
     title: 'Government MBBS — All India Quota (15%)',
     costLabel: 'Total course cost',
-    costTotal: sumCost('Government MBBS (India)'),
+    costTotal: sumCost('Government MBBS (India)', costTable),
   };
 
   if (!isQualified(score, category)) {
@@ -311,12 +313,13 @@ export function predictStateQuota(
   score: number,
   categoryRank?: number,
   airSource: AirSource = 'estimated',
+  costTable: CostBreakdownEntry[] = costBreakdowns,
 ): PredictionResult {
   const base = {
     key: 'state',
     title: `Government MBBS — ${state} State Quota (85%)`,
     costLabel: 'Total course cost',
-    costTotal: sumCost('Government MBBS (India)'),
+    costTotal: sumCost('Government MBBS (India)', costTable),
   };
 
   if (!isQualified(score, category)) {
@@ -1079,9 +1082,9 @@ export interface CostComparison {
 
 export function generateCostComparison(
   budget: number | null,
-  _results?: unknown,
+  costTable: CostBreakdownEntry[] = costBreakdowns,
 ): CostComparison {
-  const rows: CostRow[] = costBreakdowns.map((c) => {
+  const rows: CostRow[] = costTable.map((c) => {
     const total = c.components.reduce((s, x) => s + (x.amount ?? 0), 0);
     // 3-state assessment vs the ALL-INCLUSIVE total (matches the "enter a TOTAL
     // budget" ask on the form — never compares a total against tuition alone).
@@ -1116,7 +1119,7 @@ export function generateCostComparison(
   if (budget == null) {
     verdict = `Cheapest route: ${cheapest.route} at ${cheapest.displayTotal} total. Add a budget above to see what fits.`;
   } else {
-    const nonGovWithin = rows.filter((r) => r.budgetFit === 'yes' && r.route !== 'Government MBBS (India)');
+    const nonGovWithin = rows.filter((r) => r.budgetFit === 'yes' && !r.route.startsWith('Government MBBS'));
     // cheapest abroad route the budget at least covers tuition/college fees for
     const partialAbroad = rows
       .filter((r) => r.budgetFit === 'partial' && isAbroad(r.route) && r.tuitionFromInr != null)
@@ -1265,15 +1268,19 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
   const percentile = estimatePercentile(inputs.score);
   const qualified = isQualified(inputs.score, inputs.category);
 
-  const government = predictGovernmentChance(rank, inputs.category, inputs.score, airSource);
-  const state = predictStateQuota(rank, inputs.category, inputs.state, inputs.score, inputs.categoryRank, airSource);
+  // Government fees are state- and category-specific, so the whole cost table
+  // is built for THIS student and shared by the cards and the comparison.
+  const costTable = buildCostBreakdowns(inputs.state, inputs.category);
+
+  const government = predictGovernmentChance(rank, inputs.category, inputs.score, airSource, costTable);
+  const state = predictStateQuota(rank, inputs.category, inputs.state, inputs.score, inputs.categoryRank, airSource, costTable);
   const priv = predictPrivate(rank, inputs.category, inputs.state, inputs.score);
   const deemed = predictDeemed(rank, inputs.category, inputs.score);
   const abroad = predictAbroad(rank, inputs.score, inputs.category);
 
   const confidence = calculateConfidence(inputs);
   const recommendation = generateRecommendation(inputs, { government, state, abroad });
-  const costComparison = generateCostComparison(inputs.budget ?? null);
+  const costComparison = generateCostComparison(inputs.budget ?? null, costTable);
   const roadmap = generatePersonalizedRoadmap(inputs, recommendation);
 
   return {
@@ -1299,7 +1306,7 @@ export function runFullAnalysis(inputs: PredictorInputs): FullAnalysis {
     roadmap,
     seatAvailability,
     totalSeats: TOTAL_MBBS_SEATS_INDIA,
-    costBreakdowns,
+    costBreakdowns: costTable,
   };
 }
 
@@ -1338,7 +1345,7 @@ export function previewLine(a: FullAnalysis): string {
 /*  Internal helpers                                                          */
 /* -------------------------------------------------------------------------- */
 
-function sumCost(route: string): number {
-  const entry = costBreakdowns.find((c) => c.route.startsWith(route.split(' (')[0]));
+function sumCost(route: string, table: CostBreakdownEntry[] = costBreakdowns): number {
+  const entry = table.find((c) => c.route.startsWith(route.split(' (')[0]));
   return entry ? entry.components.reduce((s, x) => s + (x.amount ?? 0), 0) : 0;
 }
