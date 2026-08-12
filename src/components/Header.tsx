@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { STREAMS } from '@/data/streams';
 import { KOLHAPUR, WHATSAPP, GEORGIA_OFFICE, CONTACT_EMAIL } from '@/data/contacts';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
+import NeetEngineSpotlight from '@/components/NeetEngineSpotlight';
 
 type NavChild = { label: string; href: string; external?: boolean };
 type NavItem = { label: string; href?: string; children?: NavChild[]; external?: boolean };
@@ -407,6 +408,11 @@ export default function Header() {
           )}
         </AnimatePresence>
       </header>
+
+      {/* Permanent Decision Engine spotlight — above the announcements so it
+          keeps first position however many time-limited updates are live.
+          Homepage only, matching AnnouncementBanner's placement. */}
+      {pathname === '/' && <NeetEngineSpotlight />}
 
       {/* Data-driven announcement banner — edit src/data/announcements.ts to publish */}
       <AnnouncementBanner />

@@ -96,9 +96,12 @@ export const announcements: Announcement[] = [
     endDate: '2026-10-17',
   },
   {
-    // Evergreen tool — no date window, so it stays live while active:true.
+    // RETIRED as an announcement: the Decision Engine is now a permanent fixture
+    // rendered by <NeetEngineSpotlight /> above these banners. Keeping it here
+    // too would duplicate it, and an announcement can be dismissed forever —
+    // which a standing product must never be.
     id: 'neet-admission-analyzer',
-    active: true,
+    active: false,
     icon: '🎯',
     headline: 'NEET Admission Decision Engine — Ready! तुमच्या Score व AIR नुसार तपासा',
     subtext:
