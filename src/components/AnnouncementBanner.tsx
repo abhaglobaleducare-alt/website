@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowRight } from 'lucide-react';
+import { X, ArrowRight, ChevronDown, EyeOff, RotateCcw } from 'lucide-react';
 // ArrowRight kept for the inline link hint on each banner tile.
 import { getActiveAnnouncements, type Announcement } from '@/data/announcements';
 
@@ -77,9 +77,13 @@ const THEMES: Record<NonNullable<Announcement['theme']>, ThemeConfig> = {
 function BannerCard({
   a,
   onDismiss,
+  onRestore,
 }: {
   a: Announcement;
-  onDismiss: (id: string) => void;
+  onDismiss?: (id: string) => void;
+  /** shown instead of dismiss when the card is being re-displayed from the
+   *  "closed updates" drawer — puts it back in the main row for good */
+  onRestore?: (id: string) => void;
 }) {
   const theme = THEMES[a.theme ?? 'gold'];
   const isExternal = a.ctaHref.startsWith('http');
@@ -156,14 +160,26 @@ function BannerCard({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => onDismiss(a.id)}
-        aria-label="Dismiss announcement"
-        className="absolute right-2 top-2 z-20 rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
-      >
-        <X size={16} />
-      </button>
+      {onRestore ? (
+        <button
+          type="button"
+          onClick={() => onRestore(a.id)}
+          aria-label="Keep this update open"
+          title="पुन्हा वर दाखवा"
+          className="absolute right-2 top-2 z-20 rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+        >
+          <RotateCcw size={15} />
+        </button>
+      ) : onDismiss ? (
+        <button
+          type="button"
+          onClick={() => onDismiss(a.id)}
+          aria-label="Dismiss announcement"
+          className="absolute right-2 top-2 z-20 rounded-lg p-1.5 text-white/50 transition-colors hover:bg-white/10 hover:text-white"
+        >
+          <X size={16} />
+        </button>
+      ) : null}
     </motion.div>
   );
 }
@@ -173,6 +189,9 @@ export default function AnnouncementBanner() {
   // null = not yet hydrated → render all active banners server-side (no layout
   // shift for the common case); dismissed ones collapse right after mount.
   const [dismissed, setDismissed] = useState<string[] | null>(null);
+  // Drawer state is deliberately NOT persisted: the drawer should start closed
+  // on every visit, otherwise dismissing an update would achieve nothing.
+  const [showClosed, setShowClosed] = useState(false);
 
   useEffect(() => {
     setDismissed(readDismissed());
@@ -184,7 +203,12 @@ export default function AnnouncementBanner() {
 
   const visible =
     dismissed === null ? active : active.filter((a) => !dismissed.includes(a.id));
-  if (!visible.length) return null;
+  // Only announcements that are still ACTIVE and inside their date window count
+  // as "closed" — expired ids sitting in localStorage must not inflate the badge.
+  const closed = dismissed === null ? [] : active.filter((a) => dismissed.includes(a.id));
+
+  // Nothing to show at all — not even a drawer to reopen.
+  if (!visible.length && !closed.length) return null;
 
   const handleDismiss = (id: string) => {
     const next = [...(dismissed ?? readDismissed()), id];
@@ -192,18 +216,77 @@ export default function AnnouncementBanner() {
     saveDismissed(next);
   };
 
+  const handleRestore = (id: string) => {
+    const next = (dismissed ?? readDismissed()).filter((d) => d !== id);
+    setDismissed(next);
+    saveDismissed(next);
+  };
+
   // One banner → full width; two or more → two-per-row grid (wraps to new rows).
   const gridCols = visible.length === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2';
+  const closedCols = closed.length === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2';
 
   return (
     <div className="border-b border-gray-100 bg-[#F5F6FA]">
-      <div className={`mx-auto grid max-w-[1400px] gap-3 px-4 py-4 sm:gap-4 sm:px-8 ${gridCols}`}>
-        <AnimatePresence initial={false}>
-          {visible.map((a) => (
-            <BannerCard key={a.id} a={a} onDismiss={handleDismiss} />
-          ))}
-        </AnimatePresence>
-      </div>
+      {visible.length > 0 && (
+        <div className={`mx-auto grid max-w-[1400px] gap-3 px-4 py-4 sm:gap-4 sm:px-8 ${gridCols}`}>
+          <AnimatePresence initial={false}>
+            {visible.map((a) => (
+              <BannerCard key={a.id} a={a} onDismiss={handleDismiss} />
+            ))}
+          </AnimatePresence>
+        </div>
+      )}
+
+      {/* Closed-updates drawer. Dismissing used to hide an update forever, with
+          no way back — this keeps them one tap away instead. */}
+      {closed.length > 0 && (
+        <div className="mx-auto max-w-[1400px] px-4 pb-4 sm:px-8" style={{ paddingTop: visible.length ? 0 : '1rem' }}>
+          <button
+            type="button"
+            onClick={() => setShowClosed((v) => !v)}
+            aria-expanded={showClosed}
+            className="flex w-full items-center justify-between gap-3 rounded-xl border border-navy-200/70 bg-white px-4 py-2.5 text-left transition-colors hover:border-primary-gold/60 hover:bg-white"
+          >
+            <span className="flex items-center gap-2 text-sm font-semibold text-navy-600">
+              <EyeOff size={15} className="shrink-0 text-navy-400" />
+              बंद केलेल्या updates
+              <span className="rounded-full bg-primary-gold/15 px-2 py-0.5 text-xs font-bold text-primary-navy">
+                {closed.length}
+              </span>
+            </span>
+            <span className="flex items-center gap-1.5 text-xs font-semibold text-navy-400">
+              {showClosed ? 'लपवा' : 'पुन्हा बघा'}
+              <ChevronDown
+                size={15}
+                className={`shrink-0 transition-transform duration-300 ${showClosed ? 'rotate-180' : ''}`}
+              />
+            </span>
+          </button>
+
+          <AnimatePresence initial={false}>
+            {showClosed && (
+              <motion.div
+                key="closed-drawer"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.28, ease: 'easeOut' }}
+                className="overflow-hidden"
+              >
+                <div className={`grid gap-3 pt-3 sm:gap-4 ${closedCols}`}>
+                  {closed.map((a) => (
+                    <BannerCard key={a.id} a={a} onRestore={handleRestore} />
+                  ))}
+                </div>
+                <p className="mt-2 text-xs text-navy-400">
+                  ↺ बटण दाबलं की ती update पुन्हा कायमची वर दिसेल.
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
     </div>
   );
 }
