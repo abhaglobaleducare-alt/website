@@ -14,15 +14,23 @@ const stats = [
   { label: 'Highest Score', value: '715 / 720', note: '19 candidates scored 700+' },
   { label: 'Qualifying Cutoff — UR / EWS', value: '715 – 213', note: '50th percentile • highest ever' },
   { label: 'Qualifying Cutoff — OBC / SC / ST', value: '212 – 177', note: '40th percentile' },
-  { label: 'Counselling', value: 'Awaited', note: 'MCC (AIQ 15%) & MH CET Cell (85%) schedules to follow' },
+  { label: 'MCC Round 1', value: '17 Aug 2026', note: 'Seat allotment · registration 5–12 Aug, choices 6–13 Aug' },
 ];
 
+/* Recalibrated to the OFFICIAL NEET 2026 result distribution (NTA, 16 Jul 2026):
+   1,492 candidates scored >=650 · 10,160 >=600 · 90,780 >=500. The earlier bands
+   were pre-result estimates that put 650 at AIR 7,000-11,000 — impossible when
+   only 1,492 candidates cleared that mark, and 5-8x worse than the analyzer said
+   for the same score. These now match /neet-analyzer exactly. */
 const scoreToRank = [
-  { marks: '700+', air: '~1 – 150', outlook: 'Top colleges assured' },
-  { marks: '690 – 699', air: '~150 – 800', outlook: 'Top GMCs, AIQ strong' },
-  { marks: '660 – 689', air: '~800 – 7,000', outlook: 'Strong Govt. chance' },
-  { marks: '650 – 659', air: '~7,000 – 11,000', outlook: 'Govt. possible' },
-  { marks: '630 – 649', air: '~11,000 – 22,000', outlook: 'Govt. in later rounds / reserved cat.' },
+  { marks: '700+', air: '~1 – 35', outlook: 'Top colleges assured' },
+  { marks: '690 – 699', air: '~40 – 125', outlook: 'Top GMCs, AIQ strong' },
+  { marks: '660 – 689', air: '~130 – 1,150', outlook: 'Strong Govt. chance' },
+  { marks: '650 – 659', air: '~1,150 – 1,500', outlook: 'Govt. comfortable' },
+  { marks: '630 – 649', air: '~1,550 – 3,750', outlook: 'Govt. well within reach' },
+  { marks: '600 – 629', air: '~3,750 – 10,200', outlook: 'Govt. realistic — fill all choices' },
+  { marks: '560 – 599', air: '~10,200 – 29,000', outlook: 'AIQ borderline; state quota stronger' },
+  { marks: '500 – 559', air: '~29,000 – 91,000', outlook: 'State quota / later rounds — 2025 open closed ~AIR 52,000' },
 ];
 
 const counsellingTracks = [
@@ -56,11 +64,20 @@ const colleges = [
     sc: '580 – 595',
     st: 'TBC*',
   },
+  {
+    name: 'Newest / least-preferred GMCs — the last seats to fill in the final & stray rounds',
+    gen: '500 – 560',
+    obc: '500 – 555',
+    ews: '470 – 520',
+    sc: '410 – 460',
+    st: '330 – 380',
+  },
 ];
 
 const collegeNotes = [
   '*TBC = figures under office verification — pencil in after confirming from MH CET Cell 2025 allotment PDFs.',
   "Ranges are the 2025 state-quota closing marks compiled by the ABHA office — individual college & round-wise variation applies.",
+  'The bottom row matters: MH CET Cell 2025 closed the last open-category government seat at ~500 marks (AIR 52,437), OBC ~48,000, EWS ~69,260, SC ~1,60,759 and ST ~3,43,334. If your score is in the 500s, government is NOT out of reach — attend every round.',
 ];
 
 const routeGuide = [

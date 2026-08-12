@@ -100,9 +100,9 @@ export const rankMapping: RankAnchor[] = [
   { score: 301, air: 330_000 },
   { score: 251, air: 440_000 },
   { score: 213, air: 560_000 },
-  // Below 213: qualifying-borderline zone — extend smoothly toward the total
-  // number of qualified candidates (~11.21 lakh) at the Gen qualifying line.
-  { score: 162, air: 1_121_000 }, // ~General qualifying line · total qualified
+  // Below 213 (the UR qualifying line) precision collapses — extend smoothly to
+  // the total qualified (~11.21 lakh) at 177, the lowest qualifying mark of all.
+  { score: 177, air: 1_121_000 }, // lowest qualifying mark (OBC/SC/ST) · 11.21 lakh qualified
 ];
 
 /** Total candidates who qualified NEET 2026 (≈ last qualified rank). */
@@ -1022,10 +1022,22 @@ export const costBreakdowns: CostBreakdownEntry[] = [
 /* -------------------------------------------------------------------------- */
 /*  9. QUALIFYING PERCENTILE LINES — for the "did you qualify" check          */
 /* -------------------------------------------------------------------------- */
+/**
+ * OFFICIAL NTA NEET 2026 qualifying cutoffs (declared 16 July 2026):
+ *   General / EWS      50th percentile → 715–213
+ *   OBC / SC / ST      40th percentile → 212–177
+ *   PwBD (UR/EWS)      45th percentile → 212–194
+ *
+ * ⚠️ These gate `isQualified()`, which gates EVERY verdict in the engine. The
+ * previous values (162 / 133) were a year out of date and told candidates
+ * scoring 162–212 that they had qualified when they had not — the single most
+ * damaging error the tool could make. 2025's UR line was 144; 2026 jumped to
+ * 213 because scores inflated. Re-check against the NTA notice every year.
+ */
 export const qualifyingScores: Record<Category, number> = {
-  General: 162, // 50th percentile — EDIT each year
-  EWS: 162,
-  OBC: 133, // 40th percentile
-  SC: 133,
-  ST: 133,
+  General: 213, // 50th percentile — EDIT each year from the NTA notice
+  EWS: 213,
+  OBC: 177, // 40th percentile
+  SC: 177,
+  ST: 177,
 };

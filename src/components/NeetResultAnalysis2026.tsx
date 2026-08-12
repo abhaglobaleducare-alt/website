@@ -33,12 +33,15 @@ const qualifyingScores = [
   { category: 'PwD (Reserved)', percentile: '40th', marks: '193 – 177' },
 ];
 
+/* AIR column recalibrated to the official NEET 2026 distribution — the earlier
+   figures were pre-result estimates roughly 6x too pessimistic and contradicted
+   NTA's own count of 1,492 candidates at >=650. Scores kept as safe bands. */
 const safeScores = [
-  { category: 'General (UR)', score: '~650–680+', air: '8,000–12,000' },
-  { category: 'EWS', score: '~640–670+', air: '10,000–15,000' },
-  { category: 'OBC', score: '~630–660+', air: '12,000–20,000' },
-  { category: 'SC', score: '~560–610', air: '45,000–75,000' },
-  { category: 'ST', score: '~500–560', air: '90,000–1,40,000' },
+  { category: 'General (UR)', score: '~650–680+', air: '~380 – 1,500' },
+  { category: 'EWS', score: '~640–670+', air: '~750 – 2,250' },
+  { category: 'OBC', score: '~630–660+', air: '~1,100 – 3,750' },
+  { category: 'SC', score: '~560–610', air: '~8,000 – 29,000' },
+  { category: 'ST', score: '~500–560', air: '~29,000 – 92,000' },
 ];
 
 const abhaAdvantages = [

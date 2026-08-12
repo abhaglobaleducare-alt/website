@@ -19,6 +19,28 @@ export type CurrentUpdate = {
 
 export const currentUpdates: CurrentUpdate[] = [
   {
+    id: 'mh-2026-admission-rule-change',
+    icon: '⚠️',
+    title: 'Maharashtra 2026 — Institutional Round बंद, 100% जागा CAP मधून',
+    summary:
+      'वैद्यकीय शिक्षण विभागाचा 23 जुलै 2026 चा शासन निर्णय — private colleges चा institutional round रद्द, stray vacancy सह सर्व जागा CET Cell मार्फत, आणि जागा नाकारल्यास 2 वर्षं बंदी. "Management quota बंद झाला" या गैरसमजाचं स्पष्टीकरणही.',
+    date: '12 August 2026',
+    dateISO: '2026-08-12',
+    href: '/neet-zone/neet-2026-maharashtra-counselling',
+    tag: 'Rule Change',
+  },
+  {
+    id: 'nmc-seat-matrix-2026',
+    icon: '🪑',
+    title: 'NMC 2026 Seat Matrix — 1,36,939 MBBS जागा (9,911 नव्या)',
+    summary:
+      'Government 63,296 (441 colleges) + private/deemed 73,643 (382). तुमच्या category व राज्यानुसार प्रत्यक्ष किती जागा उपलब्ध, आणि सरकारी फी किती — Decision Engine मध्ये तपासा.',
+    date: '12 August 2026',
+    dateISO: '2026-08-12',
+    href: '/neet-analyzer',
+    tag: 'Seat Matrix',
+  },
+  {
     id: 'neet-2026-maharashtra-counselling',
     icon: '📊',
     title: 'NEET UG 2026 (Re-NEET) — Score → AIR → College Chart',

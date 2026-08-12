@@ -32,6 +32,32 @@ export type Announcement = {
 // auto-hide. Array order = display order (left-to-right, top-to-bottom).
 export const announcements: Announcement[] = [
   {
+    id: 'mh-2026-cap-rule-change',
+    active: true,
+    icon: '⚠️',
+    headline: 'Maharashtra 2026 — private colleges चा institutional round बंद!',
+    subtext:
+      '100% जागा आता CET Cell च्या CAP मधूनच · शेवटच्या round मध्ये जागा नाकारली तर 2 वर्षं बंदी — पण "management quota बंद झाला" हे मात्र खरं नाही',
+    ctaLabel: 'नेमकं काय बदललं वाचा',
+    ctaHref: '/neet-zone/neet-2026-maharashtra-counselling',
+    theme: 'urgent',
+    startDate: '2026-08-12',
+    endDate: '2026-11-12',
+  },
+  {
+    id: 'nmc-seat-matrix-2026',
+    active: true,
+    icon: '🪑',
+    headline: 'NMC 2026 Seat Matrix — 1,36,939 MBBS जागा, 9,911 नव्या!',
+    subtext:
+      'Government 63,296 · तुमच्या category ला प्रत्यक्ष किती जागा उपलब्ध — analyzer मध्ये तपासा',
+    ctaLabel: 'तुमच्या जागा बघा',
+    ctaHref: '/neet-analyzer',
+    theme: 'gold',
+    startDate: '2026-08-12',
+    endDate: '2026-11-12',
+  },
+  {
     id: 'neet-2026-maharashtra-counselling',
     active: true,
     icon: '📊',
