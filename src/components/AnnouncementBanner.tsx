@@ -154,8 +154,13 @@ function BannerCard({
               style={{ color: '#C6962E' }}
             />
           </p>
+          {/* Phones get the headline only — the subtext pushed the hero far below
+              the fold once several banners stacked. Tablets and up (>=640px)
+              still show it in full. */}
           {a.subtext && (
-            <p className="mt-1 text-xs leading-relaxed text-white/70 sm:text-sm">{a.subtext}</p>
+            <p className="mt-1 hidden text-xs leading-relaxed text-white/70 sm:block sm:text-sm">
+              {a.subtext}
+            </p>
           )}
         </div>
       </div>
