@@ -58,8 +58,10 @@ export const announcements: Announcement[] = [
     endDate: '2026-11-12',
   },
   {
+    // Retired 12 Aug 2026 — superseded by the 'mh-2026-cap-rule-change' banner,
+    // which points at the same page with the newer institutional-round story.
     id: 'neet-2026-maharashtra-counselling',
-    active: true,
+    active: false,
     icon: '📊',
     headline: 'NEET 2026 Score → College Chart तयार! — तुमचा rank व Maharashtra cutoff बघा',
     subtext:
@@ -84,8 +86,11 @@ export const announcements: Announcement[] = [
     endDate: '2026-10-17',
   },
   {
+    // Retired 12 Aug 2026 — the July result story is now carried by the
+    // seat-matrix banner and the permanent Decision Engine spotlight. The page
+    // itself stays reachable from NEET Zone and Current Updates.
     id: 'neet-2026-result',
-    active: true,
+    active: false,
     icon: '🩺',
     headline: 'NEET UG 2026 निकाल जाहीर — 11.21 लाख qualified!',
     subtext: 'तुमचा score कुठे उभा आहे? महाराष्ट्र cutoff विश्लेषण वाचा',
