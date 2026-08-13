@@ -260,20 +260,13 @@ export default async function RootLayout({
                   },
                   {
                     '@type': 'Offer',
+                    price: '2110',
+                    priceCurrency: 'INR',
                     itemOffered: {
                       '@type': 'Course',
-                      name: 'ABHA NEET Preparation Portal',
-                      description: 'Online NEET preparation portal with chapter-wise animated PPTs, quick notes, MCQ practice, and weekly tests.',
-                      url: 'https://neet.abhaglobaleducare.com',
-                      provider: { '@type': 'Organization', name: 'ABHA Global Educare LLP' },
-                    },
-                  },
-                  {
-                    '@type': 'Offer',
-                    itemOffered: {
-                      '@type': 'Course',
-                      name: 'ABHA NEET Practice Hub — AGEST Mock Tests',
-                      description: 'Full 180-question NEET mock tests with +4/−1 marking and personalised score analysis.',
+                      name: 'ABHA NEET Coaching Package — Preparation Portal + Practice Hub',
+                      description:
+                        'Chapter-wise animated PPTs, quick notes and MCQ practice, plus full 180-question NEET mock tests with +4/−1 marking and personalised score analysis. Sold as a single annual package.',
                       url: 'https://neet.abhaglobaleducare.com',
                       provider: { '@type': 'Organization', name: 'ABHA Global Educare LLP' },
                     },

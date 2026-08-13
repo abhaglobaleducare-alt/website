@@ -21,7 +21,7 @@ const subjects = [
 
 const steps = [
   { n: '01', t: 'Fill the registration form', d: 'Enter your details below. Takes under 2 minutes.' },
-  { n: '02', t: 'Pay ₹999 via UPI', d: 'Send payment to the UPI ID shown. Screenshot your transaction.' },
+  { n: '02', t: 'Pay ₹2,110 via UPI', d: 'Send payment to the UPI ID shown. Screenshot your transaction.' },
   { n: '03', t: 'Enter your UTR number', d: 'Add your UPI Transaction ID in the form so our team can verify payment.' },
   { n: '04', t: 'Admin verifies & activates', d: 'We verify your payment and set up your account within 24 hours.' },
   { n: '05', t: 'Start learning immediately', d: 'Receive login credentials via WhatsApp/Email. Unlimited access starts.' },
@@ -47,7 +47,7 @@ export default function NeetPreparation() {
           city: fd.get('city'),
           neetStatus: fd.get('neetStatus'),
           neetScore: fd.get('neetScore'),
-          course: 'NEET Preparation Portal — ₹999/year',
+          course: 'NEET Coaching Package (Preparation + Practice Hub) — ₹2,110/year',
           message: `NEET Preparation Portal Registration. UPI Transaction ID (UTR): ${fd.get('utr') || 'Not provided'}`,
           source: 'neet-preparation-registration',
         }),
@@ -98,7 +98,7 @@ export default function NeetPreparation() {
             className="inline-flex items-center gap-3 rounded-2xl px-6 py-3"
             style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(198,150,46,0.25)' }}
           >
-            <span className="font-playfair font-black text-3xl" style={{ color: '#C6962E' }}>₹999</span>
+            <span className="font-playfair font-black text-3xl" style={{ color: '#C6962E' }}>₹2,110</span>
             <span className="text-slate-400 text-sm">/ year · All 4 Subjects · Unlimited Access</span>
           </motion.div>
         </div>
@@ -165,12 +165,12 @@ export default function NeetPreparation() {
               ))}
             </div>
             <div className="rounded-2xl p-6" style={{ background: '#0B1A35' }}>
-              <p className="font-bold text-sm mb-4" style={{ color: '#C6962E' }}>💳 Scan & Pay ₹999 via UPI</p>
+              <p className="font-bold text-sm mb-4" style={{ color: '#C6962E' }}>💳 Scan &amp; Pay ₹2,110 via UPI</p>
               <div className="flex justify-center mb-4">
                 <div className="bg-white p-3 rounded-xl">
                   <img
-                    src="/images/qr-neet-prep-999.jpeg"
-                    alt="UPI QR Code — ₹999 NEET Preparation Portal"
+                    src="/images/qr-neet-hub-2110.jpeg"
+                    alt="UPI QR Code — ₹2,110 NEET Coaching Package"
                     width={180}
                     height={180}
                     style={{ display: 'block' }}
@@ -180,9 +180,9 @@ export default function NeetPreparation() {
               <p className="text-white/50 text-xs text-center mb-4">Scan with any UPI app — Google Pay, PhonePe, Paytm, BHIM</p>
               <div className="space-y-2">
                 {[
-                  { label: 'UPI ID', value: 'yespay.mabs0043270ikit0245@yesbankltd' },
+                  { label: 'UPI ID', value: 'yespay.bizsbiz175213@yesbankltd' },
                   { label: 'Account', value: 'ABHA GLOBAL EDUCARE LLP' },
-                  { label: 'Amount', value: '₹999 / year' },
+                  { label: 'Amount', value: '₹2,110 / year' },
                   { label: 'WhatsApp', value: WHATSAPP.display },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between items-center py-2 border-b border-white/10 last:border-0">
@@ -224,7 +224,7 @@ export default function NeetPreparation() {
                   <h3 className="font-playfair font-bold text-2xl mb-1" style={{ color: '#0B1A35' }}>
                     Register Now
                   </h3>
-                  <p className="text-gray-400 text-xs mb-6">NEET Preparation Portal · ₹999/year · All 4 subjects</p>
+                  <p className="text-gray-400 text-xs mb-6">NEET Coaching Package · ₹2,110/year · Preparation Portal + Practice Hub</p>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
@@ -278,7 +278,7 @@ export default function NeetPreparation() {
                       <label className="block text-xs font-semibold mb-1.5" style={{ color: '#0B1A35' }}>
                         UPI Transaction ID (UTR) *
                       </label>
-                      <input name="utr" type="text" required placeholder="Enter UTR after paying ₹999" disabled={formState === 'loading'}
+                      <input name="utr" type="text" required placeholder="Enter UTR after paying ₹2,110" disabled={formState === 'loading'}
                         className="w-full px-3 py-2.5 rounded-xl border text-sm focus:outline-none focus:border-[#C6962E] transition-colors"
                         style={{ borderColor: '#E2E8F0', color: '#0B1A35' }} />
                       <p className="text-gray-400 text-xs mt-1">Found in your UPI app under transaction history</p>

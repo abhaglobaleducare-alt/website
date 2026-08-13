@@ -139,7 +139,8 @@ function buildAutoReplyEmail(
   const isNeetPrep = source === "neet-preparation-registration";
   const isNeetHub = source === "neet-practice-hub-registration";
 
-  // The Coaching Package page can submit any of the three plans.
+  // Only the ₹2,110 package is sold now; the two single-portal blurbs stay in
+  // PLAN_BLURBS so auto-replies to older leads still render correctly.
   const planName = plan || "NEET Coaching Package";
   const planAmount = amount || "₹2,110";
   const planBlurb = PLAN_BLURBS[planName] || PLAN_BLURBS["NEET Coaching Package"];
@@ -153,7 +154,7 @@ function buildAutoReplyEmail(
   const bodyContent = isNeetPrep
     ? `
           <h2>Registration Received, ${name}!</h2>
-          <p>Thank you for registering for the <strong>ABHA NEET Preparation Portal (₹999/year)</strong>.</p>
+          <p>Thank you for registering for the <strong>ABHA NEET Coaching Package — Preparation Portal + Practice Hub (₹2,110/year)</strong>.</p>
           <div class="highlight">
             <strong>What happens next?</strong>
             <ul>

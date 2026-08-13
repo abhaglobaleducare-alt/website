@@ -38,22 +38,6 @@ const PLANS = [
     qr: '/images/qr-neet-hub-2110.jpeg',
     upiId: 'yespay.bizsbiz175213@yesbankltd',
   },
-  {
-    id: 'preparation',
-    label: 'Preparation Portal',
-    tag: 'Notes & practice questions',
-    amount: '₹999',
-    qr: '/images/qr-neet-prep-999.jpeg',
-    upiId: 'yespay.mabs0043270ikit0245@yesbankltd',
-  },
-  {
-    id: 'practice-hub',
-    label: 'Practice Hub',
-    tag: 'Full mock tests',
-    amount: '₹1,111',
-    qr: null,
-    upiId: null,
-  },
 ] as const;
 
 type Plan = (typeof PLANS)[number];
@@ -71,8 +55,7 @@ const stepsFor = (plan: Plan) => [
 export default function NeetPracticeHub() {
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [statusMsg, setStatusMsg] = useState('');
-  const [planId, setPlanId] = useState<string>(PLANS[0].id);
-  const plan: Plan = PLANS.find((p) => p.id === planId) ?? PLANS[0];
+  const plan: Plan = PLANS[0];
   const steps = stepsFor(plan);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -181,10 +164,10 @@ export default function NeetPracticeHub() {
             Choose Your Plan
           </p>
           <h2 className="font-playfair font-bold text-2xl sm:text-3xl text-center mb-3" style={{ color: '#0B1A35' }}>
-            Full package, or pick one
+            One package, both portals
           </h2>
           <p className="text-gray-500 text-sm text-center max-w-2xl mx-auto mb-10">
-            Get both portals together as the NEET Coaching Package, or choose a single portal — pay securely via UPI.
+            The Preparation Portal and the Practice Hub come together as one NEET Coaching Package — pay securely via UPI.
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
@@ -217,52 +200,31 @@ export default function NeetPracticeHub() {
               </div>
             </div>
 
-            {/* Card 2 — Preparation Portal only */}
+            {/* The two components of the package, described but NOT separately
+                priced — they are no longer sold on their own. */}
             <div className="rounded-2xl p-6 flex flex-col bg-[#F5F6FA]" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
-              <h3 className="font-bold text-lg" style={{ color: '#0B1A35' }}>Preparation Portal only</h3>
+              <h3 className="font-bold text-lg" style={{ color: '#0B1A35' }}>Included: Preparation Portal</h3>
               <p className="text-gray-500 text-xs font-semibold mb-3">Notes &amp; practice questions</p>
-              <div className="flex items-baseline gap-1.5 mb-3">
-                <span className="font-playfair font-black text-4xl" style={{ color: '#0B1A35' }}>₹999</span>
-                <span className="text-gray-400 text-sm">/ year</span>
-              </div>
               <p className="text-gray-500 text-xs leading-relaxed mb-5">
                 Quick notes, chapter-wise questions, and weekly &amp; monthly tests across Physics, Chemistry, Botany &amp; Zoology.
               </p>
-              <div className="mt-auto flex flex-col items-center">
-                <div className="bg-white p-2.5 rounded-xl" style={{ border: '1px solid rgba(0,0,0,0.06)' }}>
-                  <img
-                    src="/images/qr-neet-prep-999.jpeg"
-                    alt="Pay ₹999 — NEET Preparation Portal annual access"
-                    width={150}
-                    height={150}
-                    style={{ display: 'block' }}
-                  />
-                </div>
-                <p className="text-gray-400 text-[11px] text-center mt-3">Scan &amp; pay ₹999 · <a href="/neet-preparation" className="underline" style={{ color: '#7C3AED' }}>full details &amp; register →</a></p>
+              <div className="mt-auto">
+                <a href="/neet-preparation" className="text-xs font-bold underline" style={{ color: '#7C3AED' }}>
+                  See everything inside →
+                </a>
               </div>
             </div>
 
-            {/* Card 3 — Practice Hub only */}
             <div className="rounded-2xl p-6 flex flex-col bg-[#F5F6FA]" style={{ border: '1px solid rgba(0,0,0,0.08)' }}>
-              <h3 className="font-bold text-lg" style={{ color: '#0B1A35' }}>Practice Hub only</h3>
+              <h3 className="font-bold text-lg" style={{ color: '#0B1A35' }}>Included: Practice Hub</h3>
               <p className="text-gray-500 text-xs font-semibold mb-3">Full mock tests</p>
-              <div className="flex items-baseline gap-1.5 mb-3">
-                <span className="font-playfair font-black text-4xl" style={{ color: '#0B1A35' }}>₹1,111</span>
-                <span className="text-gray-400 text-sm">/ year</span>
-              </div>
               <p className="text-gray-500 text-xs leading-relaxed mb-5">
                 Full-length 180-question NEET mock tests with +4/−1 marking and subject-wise performance analysis.
               </p>
-              <div className="mt-auto flex flex-col items-center justify-center text-center w-full">
-                <a
-                  href={waLink('I want to register for the Practice Hub only plan (₹1,111/year).')}
-                  target="_blank" rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl py-3 font-bold text-sm text-white transition-opacity hover:opacity-90"
-                  style={{ background: '#25D366' }}
-                >
-                  Pay via WhatsApp
-                </a>
-                <p className="text-gray-400 text-[11px] mt-3">Payment QR coming soon — pay &amp; confirm on WhatsApp for now.</p>
+              <div className="mt-auto">
+                <span className="text-xs font-semibold text-gray-400">
+                  Both are part of the single ₹2,110 / year package above.
+                </span>
               </div>
             </div>
 
@@ -463,36 +425,17 @@ export default function NeetPracticeHub() {
                   </h3>
                   <p className="text-gray-400 text-xs mb-5">{plan.label} · <span className="font-bold" style={{ color: '#7C3AED' }}>{plan.amount} / year</span> · {plan.tag}</p>
                   <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* Plan selector — drives the QR shown on the left and the payload */}
-                    <div>
-                      <label className="block text-xs font-semibold mb-2" style={{ color: '#0B1A35' }}>Select Your Plan *</label>
-                      <div className="space-y-2">
-                        {PLANS.map((p) => (
-                          <label
-                            key={p.id}
-                            className="flex items-center gap-3 rounded-xl border px-3 py-2.5 cursor-pointer transition-colors"
-                            style={{
-                              borderColor: planId === p.id ? '#7C3AED' : '#E2E8F0',
-                              background: planId === p.id ? 'rgba(124,58,237,0.05)' : 'transparent',
-                            }}
-                          >
-                            <input
-                              type="radio"
-                              name="plan"
-                              value={p.id}
-                              checked={planId === p.id}
-                              onChange={() => setPlanId(p.id)}
-                              disabled={formState === 'loading'}
-                              style={{ accentColor: '#7C3AED' }}
-                            />
-                            <span className="flex-1">
-                              <span className="block text-sm font-semibold" style={{ color: '#0B1A35' }}>{p.label}</span>
-                              <span className="block text-[11px] text-gray-400">{p.tag}</span>
-                            </span>
-                            <span className="font-black text-sm" style={{ color: '#7C3AED' }}>{p.amount}</span>
-                          </label>
-                        ))}
-                      </div>
+                    {/* Single plan — the Preparation Portal and Practice Hub are no
+                        longer sold separately, so there is nothing to choose. */}
+                    <div
+                      className="flex items-center gap-3 rounded-xl border px-3 py-2.5"
+                      style={{ borderColor: '#7C3AED', background: 'rgba(124,58,237,0.05)' }}
+                    >
+                      <span className="flex-1">
+                        <span className="block text-sm font-semibold" style={{ color: '#0B1A35' }}>{plan.label}</span>
+                        <span className="block text-[11px] text-gray-400">{plan.tag}</span>
+                      </span>
+                      <span className="font-black text-sm" style={{ color: '#7C3AED' }}>{plan.amount}</span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
