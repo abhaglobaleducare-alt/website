@@ -215,10 +215,10 @@ export const SERVICES = [
 ];
 
 export const STATS = [
-  { value: '1000+', label: 'Students Placed', suffix: '' },
+  { value: '1000+', label: 'Trust of Families from India & GCC', suffix: '' },
   { value: '50+', label: 'Universities Where ABHA Assists', suffix: '' },
   { value: '6', label: 'Countries', suffix: '' },
-  { value: '98%', label: 'Visa Success Rate', suffix: '' },
+  { value: '200+', label: 'Own Hostel Beds in Tbilisi', suffix: '' },
 ];
 
 export const TESTIMONIALS = [

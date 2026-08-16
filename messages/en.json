@@ -16,17 +16,17 @@
     "callNow": "Call Now"
   },
   "hero": {
-    "badge": "Trusted by 1000+ Students",
+    "badge": "Trusted by 1000+ Families from India & GCC",
     "title": "Your Gateway to",
     "titleHighlight": "Global Medical Education",
     "subtitle": "Start your journey to become a doctor with MBBS programs at world-renowned, NMC & WHO Eligible universities abroad",
     "cta": "Get Free Counseling",
     "ctaSecondary": "Explore Destinations",
     "stats": {
-      "students": "Students Placed",
+      "students": "Families from India & GCC",
       "universities": "Universities Where ABHA Assists",
       "countries": "Countries",
-      "successRate": "Visa Success Rate"
+      "successRate": "Own Hostel Beds in Tbilisi"
     }
   },
   "about": {
@@ -57,8 +57,8 @@
         "description": "No hidden charges, clear communication, and ethical practices"
       },
       "success": {
-        "title": "High Success Rate",
-        "description": "98% visa success rate with proper documentation guidance"
+        "title": "Careful Visa Support",
+        "description": "Thorough visa application and documentation guidance at every step"
       },
       "network": {
         "title": "Global Network",
@@ -86,7 +86,7 @@
       },
       "visa": {
         "title": "Visa Assistance",
-        "description": "Expert guidance for visa application, documentation, and interview preparation with high success rate."
+        "description": "Expert guidance for visa application, documentation, and interview preparation — support, not a guarantee."
       },
       "travel": {
         "title": "Travel & Accommodation",
