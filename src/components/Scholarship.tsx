@@ -423,8 +423,8 @@ export default function Scholarship() {
                 Sambhajinagar, Boisar) maintains its own AGEST 2026 merit list of 100 seats (300 total). The
                 grant tier is set by merit rank only — never by the order or date of fee payment. Ranks 6–100
                 per office receive $500/year ($3,000 total); the top 5 ranks per office receive higher tiers up
-                to $1,000/year ($6,000 total). Available only for admission to an ABHA partner university in
-                Tbilisi, Georgia (not Batumi/Kutaisi), where ABHA-managed hostel accommodation funds the grant.
+                to $1,000/year ($6,000 total). Available only for admission to universities in
+                Tbilisi, Georgia where ABHA assists admissions (not Batumi/Kutaisi); ABHA-managed hostel accommodation funds the grant.
               </motion.p>
             )}
           </div>
@@ -712,7 +712,7 @@ export default function Scholarship() {
                 <GraduationCap size={20} />
               </span>
               <h3 className="font-playfair font-bold text-white text-xl">
-                Partner Universities &amp; Full Support
+                Admission Assistance &amp; Full Support
               </h3>
             </div>
 
@@ -1016,7 +1016,7 @@ export default function Scholarship() {
                 {[
                   { t: '12th Science students', s: 'Preparing for NEET this year' },
                   { t: 'NEET Droppers', s: 'Retaking NEET or planning abroad' },
-                  { t: 'MBBS Abroad Aspirants', s: 'Planning MBBS at an ABHA partner university in Tbilisi, Georgia' },
+                  { t: 'MBBS Abroad Aspirants', s: 'Planning MBBS at a university in Tbilisi, Georgia where ABHA assists admissions' },
                 ].map(({ t, s }) => (
                   <li key={t} className="flex gap-4">
                     <CheckCircle2

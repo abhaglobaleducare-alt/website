@@ -99,7 +99,7 @@ const routeGuide = [
   {
     band: 'Qualified, <450',
     guidance:
-      'NEET alternatives (BAMS / BHMS / allied health) or MBBS abroad. ABHA partner universities in Tbilisi, Georgia are NMC & WHO Eligible; graduates must clear FMGE / NExT to practise in India — families must know this clearly before deciding.',
+      'NEET alternatives (BAMS / BHMS / allied health) or MBBS abroad. Universities in Tbilisi, Georgia where ABHA assists admissions are NMC & WHO Eligible; graduates must clear FMGE / NExT to practise in India — families must know this clearly before deciding.',
   },
 ];
 

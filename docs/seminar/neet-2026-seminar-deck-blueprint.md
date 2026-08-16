@@ -780,7 +780,7 @@ Rules audited per slide: **R1** "universities where ABHA assists admissions" onl
 | 43 | n/a | n/a | n/a | ✅ | ✅ | ✅ | n/a | PASS |
 | 44 | n/a | n/a | n/a | ✅ | ✅ | ✅ | n/a | PASS |
 
-**Global checks:** Dentistry appears nowhere → R7 not triggered (if any host ad-libs dentistry, the NDC disclaimer must be spoken and shown). AGEST/₹111/₹1,111 appear nowhere. No university is ranked or elevated. No testimonials or invented counts anywhere. "Partner University" appears nowhere in this deck. ⚠️ **Side-flag for ABHA (outside this deck):** the website component `NeetMaharashtraCounselling2026.tsx` currently contains the phrase "ABHA partner universities in Tbilisi" — that public page should be re-worded to "universities where ABHA assists admissions" for consistency with brand rules.
+**Global checks:** Dentistry appears nowhere → R7 not triggered (if any host ad-libs dentistry, the NDC disclaimer must be spoken and shown). AGEST/₹111/₹1,111 appear nowhere. No university is ranked or elevated. No testimonials or invented counts anywhere. "Partner University" appears nowhere in this deck. ✅ **Side-flag resolved on this branch:** all "Partner University" wording site-wide (13 files, both locales) has been re-worded to "universities where ABHA assists admissions," and all "NMC-approved / NMC अनुमोदित" copy in the site locales has been corrected to "NMC & WHO Eligible" with FMGE/NExT-accurate FAQ answers.
 
 ## APPENDIX B — Data Verification Checklist
 

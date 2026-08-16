@@ -444,7 +444,7 @@ const TIM_CONSULTANCY_INR = 147_500; // India-side, incl. 18% GST — declared i
 export const abroadOptions: AbroadOption[] = [
   {
     country: 'Georgia',
-    university: 'ABHA partner universities (SEU · Avicenna · IBSU-SEU · East West · UoG)',
+    university: 'Universities where ABHA assists admissions (SEU · Avicenna · IBSU-SEU · East West · UoG)',
     city: 'Tbilisi',
     flag: '🇬🇪',
     durationLabel: '6 years',

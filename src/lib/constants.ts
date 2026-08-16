@@ -185,7 +185,7 @@ export const SERVICES = [
   {
     id: 'university-selection',
     title: 'University Selection',
-    description: 'We help you choose from our partner universities that are NMC & WHO Eligible and recognized worldwide.',
+    description: 'We help you choose from universities where ABHA assists admissions — NMC & WHO Eligible.',
     icon: 'GraduationCap',
   },
   {
@@ -216,7 +216,7 @@ export const SERVICES = [
 
 export const STATS = [
   { value: '1000+', label: 'Students Placed', suffix: '' },
-  { value: '50+', label: 'Partner Universities', suffix: '' },
+  { value: '50+', label: 'Universities Where ABHA Assists', suffix: '' },
   { value: '6', label: 'Countries', suffix: '' },
   { value: '98%', label: 'Visa Success Rate', suffix: '' },
 ];
@@ -271,7 +271,7 @@ export const FAQS = [
   },
   {
     question: 'Are foreign medical degrees recognized in India?',
-    answer: 'Yes, degrees from NMC & WHO Eligible universities are recognized in India. Students need to clear the FMGE/NEXT exam to practice medicine in India after completing MBBS abroad.',
+    answer: 'Degrees from NMC & WHO Eligible universities open the pathway to practise in India — graduates must clear the FMGE (NExT has not replaced FMGE; it currently stands deferred).',
   },
   {
     question: 'What is the total cost of MBBS abroad?',

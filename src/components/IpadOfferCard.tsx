@@ -85,7 +85,7 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
     'iPad delivered after Visa Approval',
     georgiaContext
       ? 'NMC & WHO Eligible universities in Georgia'
-      : 'NMC & WHO Eligible partner universities',
+      : 'NMC & WHO Eligible universities where ABHA assists admissions',
     georgiaContext
       ? 'Transparent MBBS fees — Georgia tuition from ₹21 Lakhs'
       : 'Transparent fees — full breakdown at counselling',
@@ -175,7 +175,7 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
 
         {/* Mandatory disclaimer */}
         <p className="relative mt-3 text-[11px] leading-relaxed text-navy-300">
-          * iPad provided after visa approval, on confirmed admission to a partner university.
+          * iPad provided after visa approval, on confirmed admission to a university where ABHA assists admissions.
           Limited period offer. Terms &amp; conditions apply.
         </p>
       </motion.div>

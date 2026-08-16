@@ -1,7 +1,7 @@
 {
   "metadata": {
     "title": "ABHA Global Educare - MBBS Abroad Consultancy",
-    "description": "Study MBBS abroad with expert guidance from ABHA Global Educare. Admissions to NMC-approved universities in Georgia, Timor-Leste, the Russian countries & more.",
+    "description": "Study MBBS abroad with expert guidance from ABHA Global Educare. Admissions to NMC & WHO Eligible universities in Georgia, Timor-Leste, the Russian countries & more.",
     "keywords": "MBBS abroad, MBBS in Georgia, MBBS in Timor-Leste, MBBS in Russia, medical education abroad, NEET counseling"
   },
   "nav": {
@@ -19,12 +19,12 @@
     "badge": "Trusted by 1000+ Students",
     "title": "Your Gateway to",
     "titleHighlight": "Global Medical Education",
-    "subtitle": "Start your journey to become a doctor with MBBS programs at world-renowned, NMC-approved universities abroad",
+    "subtitle": "Start your journey to become a doctor with MBBS programs at world-renowned, NMC & WHO Eligible universities abroad",
     "cta": "Get Free Counseling",
     "ctaSecondary": "Explore Destinations",
     "stats": {
       "students": "Students Placed",
-      "universities": "Partner Universities",
+      "universities": "Universities Where ABHA Assists",
       "countries": "Countries",
       "successRate": "Visa Success Rate"
     }
@@ -33,7 +33,7 @@
     "badge": "About ABHA Global Educare",
     "title": "Your Trusted Partner for",
     "titleHighlight": "MBBS Abroad",
-    "description": "ABHA Global Educare LLP is a leading overseas education consultancy specializing in medical education. We help Indian students achieve their dream of becoming doctors by guiding them to top-ranked, NMC-approved medical universities abroad.",
+    "description": "ABHA Global Educare LLP is a leading overseas education consultancy specializing in medical education. We help Indian students achieve their dream of becoming doctors by guiding them to top-ranked, NMC & WHO Eligible medical universities abroad.",
     "mission": "Our Mission",
     "missionText": "To make quality medical education accessible and affordable for every aspiring doctor in India by providing transparent, ethical, and comprehensive guidance for MBBS abroad.",
     "vision": "Our Vision",
@@ -78,7 +78,7 @@
       },
       "universitySelection": {
         "title": "University Selection",
-        "description": "We help you choose from NMC & WHO Eligible partner universities recognized worldwide."
+        "description": "We help you choose from NMC & WHO Eligible universities where ABHA assists admissions."
       },
       "admission": {
         "title": "Admission Processing",
@@ -103,7 +103,7 @@
     "badge": "Study Destinations",
     "title": "Choose Your",
     "titleHighlight": "Dream Destination",
-    "subtitle": "Explore top countries for MBBS abroad with affordable fees, world-class education, and NMC-approved universities",
+    "subtitle": "Explore top countries for MBBS abroad with affordable fees, world-class education, and NMC & WHO Eligible universities",
     "viewAll": "View All Destinations",
     "universities": "Universities",
     "duration": "Duration",
@@ -197,7 +197,7 @@
       },
       "recognition": {
         "question": "Are foreign medical degrees recognized in India?",
-        "answer": "Yes, degrees from NMC-approved universities are recognized in India. Students need to clear the FMGE/NEXT exam to practice medicine in India after completing MBBS abroad."
+        "answer": "Yes, degrees from NMC & WHO Eligible universities open the pathway to practise in India — graduates must clear the FMGE (NExT has not replaced FMGE; it currently stands deferred)."
       },
       "cost": {
         "question": "What is the total cost of MBBS abroad?",
@@ -220,7 +220,7 @@
     "phone": "Or Call Us"
   },
   "footer": {
-    "description": "ABHA Global Educare LLP is a premier overseas education consultancy helping Indian students pursue MBBS at top-ranked, NMC-approved universities abroad.",
+    "description": "ABHA Global Educare LLP is a premier overseas education consultancy helping Indian students pursue MBBS at top-ranked, NMC & WHO Eligible universities abroad.",
     "quickLinks": "Quick Links",
     "destinations": "Popular Destinations",
     "legal": "Legal",

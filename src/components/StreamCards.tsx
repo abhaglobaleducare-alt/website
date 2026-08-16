@@ -22,7 +22,7 @@ export default function StreamCards() {
           </h2>
           <p className="mx-auto mt-4 max-w-[640px] text-lg leading-relaxed text-gray-500">
             From MBBS to MBA, PhD to AI — explore verified programmes and fees across six streams
-            at our partner universities.
+            at universities where ABHA assists admissions.
           </p>
         </div>
 
