@@ -269,7 +269,7 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
         </section>
       )}
 
-      {/* iPad Early Bird offer — abroad registration incentive */}
+      {/* Early Bird study-tablet offer — abroad registration incentive */}
       <section className="bg-light-gray px-4 py-14 sm:px-8">
         <div className="mx-auto max-w-4xl">
           <IpadOfferCard

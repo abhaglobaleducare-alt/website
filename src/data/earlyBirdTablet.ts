@@ -4,8 +4,8 @@
  *
  * The offer is a CHOICE of one device from three, awarded on successful
  * admission to Georgia and visa approval — not simply "a free iPad". The older
- * IpadOfferCard still says iPad only; keep that in mind if the two ever need to
- * agree.
+ * IpadOfferCard now says "study tablet" too; keep the two in step if either
+ * changes.
  *
  * Costs are quoted in USD only, matching the rest of the abroad material.
  */

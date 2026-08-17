@@ -36,7 +36,7 @@ function band(score: number): { emoji: string; headline: string; tone: string; b
       tone: 'from-primary-gold to-gold-600',
       buttons: [
         { label: 'WhatsApp Guidance', kind: 'wa', href: wa(`My NEET score is ${score}. I want guidance on MBBS Abroad vs Indian private.`) },
-        { label: 'FREE iPad Offer', kind: 'wa', href: wa(`Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer. My NEET Score: ${score}`), ipad: true },
+        { label: 'FREE Tablet Offer', kind: 'wa', href: wa(`Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer. My NEET Score: ${score}`), ipad: true },
         { label: 'MBBS Georgia', kind: 'link', href: '/destinations/georgia' },
       ],
     };
@@ -47,7 +47,7 @@ function band(score: number): { emoji: string; headline: string; tone: string; b
       tone: 'from-primary-gold to-gold-600',
       buttons: [
         { label: 'Start Georgia Application', kind: 'link', href: '/contact' },
-        { label: 'FREE iPad Offer', kind: 'wa', href: wa(`Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer. My NEET Score: ${score}`), ipad: true },
+        { label: 'FREE Tablet Offer', kind: 'wa', href: wa(`Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer. My NEET Score: ${score}`), ipad: true },
       ],
     };
   return {
@@ -56,7 +56,7 @@ function band(score: number): { emoji: string; headline: string; tone: string; b
     tone: 'from-primary-navy to-navy-600',
     buttons: [
       { label: 'WhatsApp Now', kind: 'wa', href: waLink(`My NEET score is ${score}. Please guide me on my MBBS options.`) },
-      { label: 'FREE iPad Offer', kind: 'wa', href: waLink(`Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer. My NEET Score: ${score}`), ipad: true },
+      { label: 'FREE Tablet Offer', kind: 'wa', href: waLink(`Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer. My NEET Score: ${score}`), ipad: true },
       { label: 'Call Counsellor', kind: 'tel', href: KOLHAPUR.tel },
     ],
   };

@@ -6,7 +6,7 @@ import { waLink } from '@/data/contacts';
 import { trackEvent } from '@/lib/analytics';
 
 export default function EngagementCards({ score }: { score: number }) {
-  const ipadHref = waLink(`Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer. My NEET Score: ${score}`);
+  const ipadHref = waLink(`Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer. My NEET Score: ${score}`);
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,7 +54,7 @@ export default function EngagementCards({ score }: { score: number }) {
         className="group rounded-2xl border border-gold-300 bg-gradient-to-br from-gold-50 to-white p-5 shadow-card transition hover:-translate-y-0.5 hover:shadow-card-hover"
       >
         <Gift className="h-6 w-6 text-primary-gold" />
-        <p className="mt-3 font-semibold text-primary-navy">🎁 FREE iPad Early Bird Offer</p>
+        <p className="mt-3 font-semibold text-primary-navy">🎁 FREE Study Tablet — Early Bird Offer</p>
         <p className="mt-1 text-xs text-navy-500">On confirmed MBBS Abroad registration. T&amp;C apply.</p>
         <span className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-emerald-600">
           Claim on WhatsApp <ArrowUpRight className="h-3.5 w-3.5" />

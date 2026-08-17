@@ -25,9 +25,10 @@ interface Props {
 }
 
 /**
- * "FREE iPad" Early Bird offer card. Every placement MUST show the
+ * "FREE study tablet" Early Bird offer card — the reward is a CHOICE of one
+ * device from three (see EarlyBirdTabletCard). Every placement MUST show the
  * "delivered after visa approval" condition + the T&C disclaimer (see below).
- * MBBS quality is primary; the iPad is a bonus incentive — kept professional.
+ * MBBS quality is primary; the device is a bonus incentive — kept professional.
  *
  * The iPad visual is a hand-crafted SVG mock (license-safe). To use a real
  * product photo instead, drop it in /public/images and swap <IpadGraphic/>.
@@ -84,12 +85,12 @@ function IpadGraphic({ className = '' }: { className?: string }) {
 export default function IpadOfferCard({ score, variant = 'full', className = '', georgiaContext = true }: Props) {
   const minimal = variant === 'minimal';
   const waMessage = score
-    ? `Hi! I am interested in MBBS Abroad with iPad Early Bird Offer. My NEET Score: ${score}`
-    : 'Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer.';
+    ? `Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer. My NEET Score: ${score}`
+    : 'Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer.';
 
   const points = [
     'Only for confirmed MBBS Abroad registrations',
-    'iPad delivered after Visa Approval',
+    'Study tablet delivered after Visa Approval',
     georgiaContext
       ? 'NMC & WHO Eligible universities in Georgia'
       : 'NMC & WHO Eligible partner universities',
@@ -127,10 +128,10 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
         <div className="relative mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
           <div className="flex-1">
             <h3 className="font-playfair text-2xl font-bold text-white sm:text-3xl">
-              Register for MBBS Abroad — get a <span className="text-primary-gold">FREE iPad</span>
+              Register for MBBS Abroad — get a <span className="text-primary-gold">FREE study tablet</span>
             </h3>
             <p className="mt-1.5 text-sm text-navy-100">
-              Register for MBBS Abroad with ABHA Global Educare and get a free iPad —{' '}
+              Register for MBBS Abroad with ABHA Global Educare and get a free study tablet —{' '}
               <strong className="text-white">delivered after your visa approval</strong>. Limited
               Period Early Bird Offer.
             </p>
@@ -159,7 +160,7 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-transform hover:-translate-y-0.5"
           >
             <MessageCircle className="h-5 w-5" />{' '}
-            {minimal ? 'Claim Your Early Bird Offer' : 'Claim Your iPad Offer — WhatsApp Now'}
+            {minimal ? 'Claim Your Early Bird Offer' : 'Claim Your Early Bird Offer — WhatsApp Now'}
           </a>
           <a
             href={KOLHAPUR.tel}
@@ -187,7 +188,8 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
 
         {/* Mandatory disclaimer */}
         <p className="relative mt-3 text-[11px] leading-relaxed text-navy-300">
-          * iPad provided after visa approval, on confirmed admission to a partner university.
+          * Study tablet (choice of model, subject to availability) provided after visa approval, on
+          confirmed admission to a partner university.
           Limited period offer. Terms &amp; conditions apply.
         </p>
       </motion.div>
