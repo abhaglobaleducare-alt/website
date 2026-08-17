@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import IpadOfferCard from '@/components/IpadOfferCard';
+import CompletePackageCard from '@/components/CompletePackageCard';
 import {
   CalendarDays,
   CheckCircle2,
@@ -446,6 +447,7 @@ export default function Scholarship() {
             Take Your MBBS Abroad — Early Bird iPad Offer
           </h2>
         </div>
+        <CompletePackageCard className="max-w-5xl mx-auto mb-8" />
         <IpadOfferCard className="max-w-3xl mx-auto" />
       </section>
 
