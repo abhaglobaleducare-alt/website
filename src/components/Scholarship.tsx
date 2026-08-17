@@ -448,7 +448,7 @@ export default function Scholarship() {
           </h2>
         </div>
         <EarlyBirdTabletCard className="max-w-6xl mx-auto mb-8" />
-        <IpadOfferCard className="max-w-3xl mx-auto" />
+        <IpadOfferCard variant="minimal" className="max-w-3xl mx-auto" />
       </section>
 
       {/* ══════════════════════════════════════

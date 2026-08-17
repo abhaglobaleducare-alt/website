@@ -272,7 +272,10 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
       {/* iPad Early Bird offer — abroad registration incentive */}
       <section className="bg-light-gray px-4 py-14 sm:px-8">
         <div className="mx-auto max-w-4xl">
-          <IpadOfferCard georgiaContext={data.slug === 'georgia'} />
+          <IpadOfferCard
+            variant={data.slug === 'georgia' ? 'minimal' : 'full'}
+            georgiaContext={data.slug === 'georgia'}
+          />
         </div>
       </section>
     </>
