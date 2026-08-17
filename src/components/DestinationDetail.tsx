@@ -8,7 +8,7 @@ import type { DestinationDetailData } from '@/data/destinations';
 import { KOLHAPUR, GEORGIA_SUPPORT_LINE } from '@/data/contacts';
 import UniversityExplorer from '@/components/UniversityExplorer';
 import IpadOfferCard from '@/components/IpadOfferCard';
-import CompletePackageCard from '@/components/CompletePackageCard';
+import EarlyBirdTabletCard from '@/components/EarlyBirdTabletCard';
 
 function initials(name: string): string {
   return name
@@ -259,13 +259,12 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
         </div>
       </section>
 
-      {/* Complete ABHA Package (brochure p.3) — Georgia only: it quotes twelve
-          months in Tbilisi, TRC support and the AGDRP portal, none of which
-          apply to the other destinations. */}
+      {/* Early Bird study-tablet offer (brochure p.3) — Georgia only: the offer
+          is awarded on successful admission to Georgia specifically. */}
       {data.slug === 'georgia' && (
         <section className="bg-white px-4 py-14 sm:px-8">
-          <div className="mx-auto max-w-5xl">
-            <CompletePackageCard />
+          <div className="mx-auto max-w-6xl">
+            <EarlyBirdTabletCard />
           </div>
         </section>
       )}
