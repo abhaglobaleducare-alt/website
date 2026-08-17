@@ -35,7 +35,7 @@ const destinations = [
     keyFacts: [
       { icon: HomeIcon, text: 'One Window Services — our own 200+ bed (NOT BUNK BED) hostel in Tbilisi' },
       { icon: Utensils, text: 'Daily Indian veg & non-veg meals prepared by Indian cooks' },
-      { icon: Globe2, text: 'Full English-medium curriculum at all partner universities' },
+      { icon: Globe2, text: 'Full English-medium curriculum at universities where ABHA assists admissions' },
       { icon: Shield, text: 'WHO, NMC & WFME Eligible Degrees' },
       { icon: MapPin, text: 'ABHA Global Services LLC office on ground in Tbilisi' },
       { icon: Users, text: "One of Europe's safest countries — ranked higher than many EU nations" },
@@ -180,7 +180,7 @@ export default function Destinations() {
                 {/* Universities */}
                 <div className="mb-7">
                   <h4 className="text-[#0B1A35] font-semibold text-sm uppercase tracking-wider mb-3">
-                    Partner Universities
+                    Universities Where ABHA Assists Admissions
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {dest.universities.map((uni) => (

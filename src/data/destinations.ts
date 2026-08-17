@@ -58,11 +58,11 @@ export const DESTINATION_DETAILS: Record<string, DestinationDetailData> = {
       'IBSU',
     ],
     universitiesNote:
-      'ABHA partner universities plus the fee-listed universities featured across our course pages. Programme availability varies by university.',
+      'Universities where ABHA assists admissions, plus the fee-listed universities featured across our course pages. Programme availability varies by university.',
     highlights: [
       'Our own 200+ bed (not bunk-bed) hostel in Tbilisi',
       'Daily Indian veg & non-veg meals by Indian cooks',
-      'Full English-medium curriculum at partner universities',
+      'Full English-medium curriculum at universities where ABHA assists admissions',
       'ABHA Global Services LLC office on the ground in Tbilisi',
       'One of Europe’s safest countries',
       'Airport pickup and settling-in support',

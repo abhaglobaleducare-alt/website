@@ -147,7 +147,7 @@ const topics = [
       'WFME (World Federation for Medical Education) recognition',
       'ECFMG eligibility (for those aiming for USA residency)',
       'Check university directory for updated status',
-      'All ABHA partner universities meet these criteria',
+      'All universities where ABHA assists admissions meet these criteria',
     ],
   },
 ];

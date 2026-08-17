@@ -116,7 +116,7 @@ export default function PrivacyPolicyPage() {
                 We do <strong>not</strong> sell, rent, or trade your personal
                 information to third parties. We share your information only
                 where it is necessary to deliver our services — for example,
-                with partner universities or institutions you are applying to,
+                with the universities or institutions you are applying to,
                 or with trusted service providers (such as email and hosting
                 providers) who help us operate our website and communicate with
                 you. These parties are permitted to use your information only to

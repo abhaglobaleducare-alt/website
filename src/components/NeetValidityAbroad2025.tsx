@@ -75,7 +75,7 @@ const checklist = [
   'NEET 2025 चे QUALIFIED scorecard (हेच eligibility document — जपून ठेवा, हरवू देऊ नका)',
   '12वी PCB मध्ये किमान 50% गुण (राखीव प्रवर्ग 40%) — GME Regulations 1997',
   'Admission वर्षाच्या 31 December पर्यंत वय किमान 17 वर्षे',
-  'University WDOMS-listed असावी (ABHA partner universities — NMC & WHO Eligible)',
+  'University WDOMS-listed असावी (universities where ABHA assists admissions — NMC & WHO Eligible)',
   'पदवीनंतर India त practice साठी FMGE / NExT pass करावी लागेल — 2025 ची NEET qualification त्यासाठीही ग्राह्य',
 ];
 

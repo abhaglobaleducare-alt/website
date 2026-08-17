@@ -424,8 +424,8 @@ export default function Scholarship() {
                 Sambhajinagar, Boisar) maintains its own AGEST 2026 merit list of 100 seats (300 total). The
                 grant tier is set by merit rank only — never by the order or date of fee payment. Ranks 6–100
                 per office receive $500/year ($3,000 total); the top 5 ranks per office receive higher tiers up
-                to $1,000/year ($6,000 total). Available only for admission to an ABHA partner university in
-                Tbilisi, Georgia (not Batumi/Kutaisi), where ABHA-managed hostel accommodation funds the grant.
+                to $1,000/year ($6,000 total). Available only for admission to universities in
+                Tbilisi, Georgia where ABHA assists admissions (not Batumi/Kutaisi); ABHA-managed hostel accommodation funds the grant.
               </motion.p>
             )}
           </div>
@@ -583,25 +583,25 @@ export default function Scholarship() {
                   {
                     icon: <Repeat2 size={18} />,
                     title: 'Multiple Attempts, One Registration',
-                    desc: 'Appear as many times as you want — no extra cost ever',
+                    desc: 'Scholars could appear as many times as they wanted — no extra cost ever',
                     accent: '#C6962E',
                   },
                   {
                     icon: <Star size={18} />,
                     title: 'Best-3-Average Merit Formula',
-                    desc: 'Your final score = average of your top 3 highest attempts',
+                    desc: 'Final score = average of the top 3 highest attempts',
                     accent: '#FFD770',
                   },
                   {
                     icon: <Clock size={18} />,
                     title: 'Same-Day Results',
-                    desc: 'Every attempt delivers your result on the very same day',
+                    desc: 'Every attempt delivered the result on the very same day',
                     accent: '#60A5FA',
                   },
                   {
                     icon: <CalendarDays size={18} />,
                     title: 'On-Demand Scheduling',
-                    desc: 'Appear whenever you feel prepared — first attempt from Day 3 after registration',
+                    desc: 'Scholars appeared whenever they felt prepared — first attempt from Day 3 after registration',
                     accent: '#34D399',
                   },
                   {
@@ -714,7 +714,7 @@ export default function Scholarship() {
                 <GraduationCap size={20} />
               </span>
               <h3 className="font-playfair font-bold text-white text-xl">
-                Partner Universities &amp; Full Support
+                Admission Assistance &amp; Full Support
               </h3>
             </div>
 
@@ -1018,7 +1018,7 @@ export default function Scholarship() {
                 {[
                   { t: '12th Science students', s: 'Preparing for NEET this year' },
                   { t: 'NEET Droppers', s: 'Retaking NEET or planning abroad' },
-                  { t: 'MBBS Abroad Aspirants', s: 'Planning MBBS at an ABHA partner university in Tbilisi, Georgia' },
+                  { t: 'MBBS Abroad Aspirants', s: 'Planning MBBS at a university in Tbilisi, Georgia where ABHA assists admissions' },
                 ].map(({ t, s }) => (
                   <li key={t} className="flex gap-4">
                     <CheckCircle2
@@ -1253,7 +1253,7 @@ export default function Scholarship() {
               The double advantage
             </span>
             <h2 className="font-playfair font-bold text-white text-3xl sm:text-4xl mt-2">
-              Why take the Pathway Test?
+              Why Scholars Took the Pathway Test
             </h2>
           </motion.div>
 
@@ -1262,21 +1262,21 @@ export default function Scholarship() {
               {
                 num: '01',
                 heading: 'Real NEET Revision',
-                body: 'Access to the finest NEET revision tools and material — built for serious 2026 aspirants.',
+                body: 'Scholars got access to the finest NEET revision tools and material — built for serious 2026 aspirants.',
                 accent: '#FFD770',
                 icon: <Brain size={22} />,
               },
               {
                 num: '02',
                 heading: 'Real NEET Practice',
-                body: 'Same pattern, same pressure. Write AGEST and walk into NEET sharper than anyone else in the room.',
+                body: 'Same pattern, same pressure. Scholars wrote AGEST and walked into NEET sharper than anyone else in the room.',
                 accent: '#C6962E',
                 icon: <BookOpen size={22} />,
               },
               {
                 num: '03',
                 heading: 'Earn Your Scholarship',
-                body: "This isn't charity. Top 300 rankers earn up to $1,000/year off their MBBS fees. Pure merit.",
+                body: "This wasn't charity. The top 300 rankers earned up to $1,000/year off their MBBS fees. Pure merit.",
                 accent: '#22C55E',
                 icon: <Flame size={22} />,
               },
