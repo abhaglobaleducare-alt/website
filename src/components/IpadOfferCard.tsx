@@ -7,8 +7,14 @@ import { waLink, KOLHAPUR } from '@/data/contacts';
 interface Props {
   /** optional NEET score to prefill the WhatsApp message (used on the analyzer) */
   score?: number;
-  /** compact = tighter padding for embedding inside result flows */
-  variant?: 'full' | 'compact';
+  /**
+   * compact = tighter padding for embedding inside result flows.
+   * minimal = headline, one line of copy and the two CTAs only. Used on pages
+   * that already carry the full EarlyBirdTabletCard above it, where the device
+   * image, proof points and trust row would just repeat what the reader has
+   * already seen.
+   */
+  variant?: 'full' | 'compact' | 'minimal';
   className?: string;
   /**
    * When true, show Georgia-specific proof points (Georgia tuition, Tbilisi
@@ -19,9 +25,10 @@ interface Props {
 }
 
 /**
- * "FREE iPad" Early Bird offer card. Every placement MUST show the
+ * "FREE study tablet" Early Bird offer card — the reward is a CHOICE of one
+ * device from three (see EarlyBirdTabletCard). Every placement MUST show the
  * "delivered after visa approval" condition + the T&C disclaimer (see below).
- * MBBS quality is primary; the iPad is a bonus incentive — kept professional.
+ * MBBS quality is primary; the device is a bonus incentive — kept professional.
  *
  * The iPad visual is a hand-crafted SVG mock (license-safe). To use a real
  * product photo instead, drop it in /public/images and swap <IpadGraphic/>.
@@ -76,13 +83,14 @@ function IpadGraphic({ className = '' }: { className?: string }) {
 }
 
 export default function IpadOfferCard({ score, variant = 'full', className = '', georgiaContext = true }: Props) {
+  const minimal = variant === 'minimal';
   const waMessage = score
-    ? `Hi! I am interested in MBBS Abroad with iPad Early Bird Offer. My NEET Score: ${score}`
-    : 'Hi! I am interested in MBBS Abroad with the iPad Early Bird Offer.';
+    ? `Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer. My NEET Score: ${score}`
+    : 'Hi! I am interested in MBBS Abroad with the Early Bird study-tablet offer.';
 
   const points = [
     'Only for confirmed MBBS Abroad registrations',
-    'iPad delivered after Visa Approval',
+    'Study tablet delivered after Visa Approval',
     georgiaContext
       ? 'NMC & WHO Eligible universities in Georgia'
       : 'NMC & WHO Eligible universities where ABHA assists admissions',
@@ -120,26 +128,28 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
         <div className="relative mt-4 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
           <div className="flex-1">
             <h3 className="font-playfair text-2xl font-bold text-white sm:text-3xl">
-              Register for MBBS Abroad — get a <span className="text-primary-gold">FREE iPad</span>
+              Register for MBBS Abroad — get a <span className="text-primary-gold">FREE study tablet</span>
             </h3>
             <p className="mt-1.5 text-sm text-navy-100">
-              Register for MBBS Abroad with ABHA Global Educare and get a free iPad —{' '}
+              Register for MBBS Abroad with ABHA Global Educare and get a free study tablet —{' '}
               <strong className="text-white">delivered after your visa approval</strong>. Limited
               Period Early Bird Offer.
             </p>
           </div>
-          <IpadGraphic className="mx-auto w-28 shrink-0 sm:mx-0 sm:w-32 md:w-40" />
+          {!minimal && <IpadGraphic className="mx-auto w-28 shrink-0 sm:mx-0 sm:w-32 md:w-40" />}
         </div>
 
         {/* Points */}
-        <ul className="relative mt-5 grid gap-2 sm:grid-cols-2">
-          {points.map((p) => (
-            <li key={p} className="flex items-start gap-2 text-sm text-navy-100">
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
+        {!minimal && (
+          <ul className="relative mt-5 grid gap-2 sm:grid-cols-2">
+            {points.map((p) => (
+              <li key={p} className="flex items-start gap-2 text-sm text-navy-100">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* CTAs */}
         <div className="relative mt-6 flex flex-col gap-3 sm:flex-row">
@@ -149,7 +159,8 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-transform hover:-translate-y-0.5"
           >
-            <MessageCircle className="h-5 w-5" /> Claim Your iPad Offer — WhatsApp Now
+            <MessageCircle className="h-5 w-5" />{' '}
+            {minimal ? 'Claim Your Early Bird Offer' : 'Claim Your Early Bird Offer — WhatsApp Now'}
           </a>
           <a
             href={KOLHAPUR.tel}
@@ -160,6 +171,7 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
         </div>
 
         {/* Trust badges */}
+        {!minimal && (
         <div className="relative mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 pt-4 text-xs font-semibold text-navy-100">
           <span className="inline-flex items-center gap-1.5">
             <ShieldCheck className="h-4 w-4 text-emerald-400" /> NMC &amp; WHO Eligible
@@ -172,10 +184,12 @@ export default function IpadOfferCard({ score, variant = 'full', className = '',
             {georgiaContext ? 'Own Hostel in Tbilisi' : 'On-ground Student Support'}
           </span>
         </div>
+        )}
 
         {/* Mandatory disclaimer */}
         <p className="relative mt-3 text-[11px] leading-relaxed text-navy-300">
-          * iPad provided after visa approval, on confirmed admission to a university where ABHA assists admissions.
+          * Study tablet (choice of model, subject to availability) provided after visa approval, on
+          confirmed admission to a university where ABHA assists admissions.
           Limited period offer. Terms &amp; conditions apply.
         </p>
       </motion.div>

@@ -318,7 +318,7 @@ export default function RegistrationWall({ analysis, onUnlock }: Props) {
             onChange={(e) => set('ipadOfferInterested', e.target.checked)}
             className="mt-0.5 h-4 w-4 accent-primary-gold"
           />
-          <span>🎁 I want to know about the <strong>FREE iPad Early Bird Offer</strong> for MBBS Abroad registration.</span>
+          <span>🎁 I want to know about the <strong>FREE study tablet Early Bird Offer</strong> for MBBS Abroad registration.</span>
         </label>
 
         {/* Mandatory consent */}

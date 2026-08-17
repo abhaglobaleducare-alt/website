@@ -8,6 +8,7 @@ import type { DestinationDetailData } from '@/data/destinations';
 import { KOLHAPUR, GEORGIA_SUPPORT_LINE } from '@/data/contacts';
 import UniversityExplorer from '@/components/UniversityExplorer';
 import IpadOfferCard from '@/components/IpadOfferCard';
+import EarlyBirdTabletCard from '@/components/EarlyBirdTabletCard';
 
 function initials(name: string): string {
   return name
@@ -258,10 +259,23 @@ export default function DestinationDetail({ data }: { data: DestinationDetailDat
         </div>
       </section>
 
-      {/* iPad Early Bird offer — abroad registration incentive */}
+      {/* Early Bird study-tablet offer (brochure p.3) — Georgia only: the offer
+          is awarded on successful admission to Georgia specifically. */}
+      {data.slug === 'georgia' && (
+        <section className="bg-white px-4 py-14 sm:px-8">
+          <div className="mx-auto max-w-6xl">
+            <EarlyBirdTabletCard />
+          </div>
+        </section>
+      )}
+
+      {/* Early Bird study-tablet offer — abroad registration incentive */}
       <section className="bg-light-gray px-4 py-14 sm:px-8">
         <div className="mx-auto max-w-4xl">
-          <IpadOfferCard georgiaContext={data.slug === 'georgia'} />
+          <IpadOfferCard
+            variant={data.slug === 'georgia' ? 'minimal' : 'full'}
+            georgiaContext={data.slug === 'georgia'}
+          />
         </div>
       </section>
     </>

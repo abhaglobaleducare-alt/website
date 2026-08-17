@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import IpadOfferCard from '@/components/IpadOfferCard';
+import EarlyBirdTabletCard from '@/components/EarlyBirdTabletCard';
 import {
   CalendarDays,
   CheckCircle2,
@@ -62,7 +63,7 @@ const ticker = [
   '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
   '🇬🇪 MBBS IN TBILISI, GEORGIA',
-  '🎁 FREE iPad — EARLY BIRD OFFER',
+  '🎁 FREE STUDY TABLET — EARLY BIRD OFFER',
   '🔥 NEET PATTERN',
   '✅ AGEST 2026 SUCCESSFULLY CONDUCTED',
   '🏆 TOP 300 SCHOLARS SELECTED',
@@ -70,7 +71,7 @@ const ticker = [
   '🔄 Multiple Attempts',
   '📊 Final Result on NEET Result Day',
   '🇬🇪 MBBS IN TBILISI, GEORGIA',
-  '🎁 FREE iPad — EARLY BIRD OFFER',
+  '🎁 FREE STUDY TABLET — EARLY BIRD OFFER',
 ];
 
 /* ═══════════════════════════════════════════════════════════════
@@ -443,10 +444,11 @@ export default function Scholarship() {
             className="font-playfair font-bold text-white leading-tight"
             style={{ fontSize: 'clamp(1.7rem, 4vw, 2.6rem)' }}
           >
-            Take Your MBBS Abroad — Early Bird iPad Offer
+            Take Your MBBS Abroad — Early Bird Study Tablet Offer
           </h2>
         </div>
-        <IpadOfferCard className="max-w-3xl mx-auto" />
+        <EarlyBirdTabletCard className="max-w-6xl mx-auto mb-8" />
+        <IpadOfferCard variant="minimal" className="max-w-3xl mx-auto" />
       </section>
 
       {/* ══════════════════════════════════════
