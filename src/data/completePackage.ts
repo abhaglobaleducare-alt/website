@@ -6,16 +6,12 @@
  * website and the printed brochure can never drift: change a figure once and
  * every placement follows.
  *
- * ⚠️ EXCHANGE RATE: the brochure prints its own rate of ₹95/USD, while the rest
- * of the site converts at ₹90 (EXCHANGE_RATE_INR in config.ts). We deliberately
- * do NOT run these figures through the site converter — a student holding the
- * printed brochure must see the same ₹12.66 Lakh on screen. The rate is printed
- * next to the number so the basis is never hidden. If the office settles on one
- * rate, change BROCHURE_USD_INR here and reprint, or switch to the shared
- * constant — but never let the two show different totals for the same package.
+ * CURRENCY: USD only, by decision. University and package costs are quoted and
+ * paid in USD, and any rupee figure is stale the day the rate moves — the
+ * brochure's ₹95/USD and the site's ₹90 were already showing ₹12.66L and
+ * ₹11.99L for the identical package. Showing one honest USD number removes the
+ * contradiction. Do not add an INR conversion back here.
  */
-
-export const BROCHURE_USD_INR = 95;
 
 export interface PackageService {
   n: string;
@@ -104,17 +100,15 @@ export const EARLY_BIRD = {
 /** Headline all-inclusive price. */
 export const PACKAGE_PRICE = {
   usd: 13_324,
-  /** ₹ exactly as printed in the brochure (13,324 × 95). */
-  inr: 12_65_780,
-  inrLabel: '≈ ₹12.66 Lakh',
-  rateLabel: '@ ₹95 / USD = ₹12,65,780',
   title: 'All 9 Services + Early-Bird iPad',
   note: 'One payment · no separate service-wise charges',
+  /** Shown under the figure instead of a rupee conversion. */
+  subNote: 'Quoted and payable in USD · bank rate on the day of transfer applies',
 } as const;
 
 /**
  * Costs that fall OUTSIDE the package. Printed prominently in the brochure and
- * reproduced here for the same reason: a family that reads ₹12.66 Lakh as the
+ * reproduced here for the same reason: a family that reads USD 13,324 as the
  * whole six-year cost has been misled, and finds out only after committing.
  */
 export const BEYOND_PACKAGE = {
@@ -125,5 +119,5 @@ export const BEYOND_PACKAGE = {
     { label: 'Expected accommodation & food, remaining 5 years — 60 months × $250', amount: '$15,000' },
   ],
   footnote:
-    'Figures in USD · USD/INR ≈ ₹95/$ · subject to change · for information only, not a guarantee of admission.',
+    'All figures in USD · subject to change · for information only, not a guarantee of admission.',
 } as const;

@@ -48,8 +48,10 @@ const GOLD = '#C6962E';
  * data/completePackage.ts.
  *
  * The "beyond the package" block is carried over deliberately. It is the part a
- * sales page would be tempted to drop, and the one that stops ₹12.66 Lakh being
+ * sales page would be tempted to drop, and the one that stops USD 13,324 being
  * read as the total six-year cost.
+ *
+ * USD only — no rupee conversion anywhere in this card, by decision.
  */
 export default function CompletePackageCard({ className = '' }: { className?: string }) {
   const wa = waLink(
@@ -168,10 +170,7 @@ export default function CompletePackageCard({ className = '' }: { className?: st
           <p className="font-playfair text-3xl font-black leading-none sm:text-4xl" style={{ color: NAVY }}>
             USD {PACKAGE_PRICE.usd.toLocaleString('en-US')}
           </p>
-          <p className="mt-1 text-[11px] font-semibold text-navy-500">{PACKAGE_PRICE.rateLabel}</p>
-          <p className="font-playfair text-lg font-bold" style={{ color: GOLD }}>
-            {PACKAGE_PRICE.inrLabel}
-          </p>
+          <p className="mt-1 text-[11px] font-semibold text-navy-500">{PACKAGE_PRICE.subNote}</p>
         </div>
       </div>
 
